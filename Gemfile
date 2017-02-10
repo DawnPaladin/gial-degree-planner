@@ -49,6 +49,11 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'jazz_fingers'
   gem 'pry-rails'
+  gem 'rspec-rails'
+  gem 'guard-rspec', require: false
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 group :development do
