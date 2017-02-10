@@ -1,0 +1,2 @@
+class CoursesSession < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class CompletedCoursesPlan < ApplicationRecord
+end

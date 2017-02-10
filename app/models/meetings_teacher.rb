@@ -1,0 +1,2 @@
+class MeetingsTeacher < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class ThesisTrack < ApplicationRecord
+end

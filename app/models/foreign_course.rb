@@ -1,0 +1,2 @@
+class ForeignCourse < ApplicationRecord
+end
