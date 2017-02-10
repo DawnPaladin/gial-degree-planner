@@ -1,6 +1,6 @@
-var gial = angular.module('gial', ['ui.router', 'restangular', 'Devise']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise']);
 
-gial.config( ['RestangularProvider', function(RestangularProvider) {
+planner.config( ['RestangularProvider', function(RestangularProvider) {
   RestangularProvider.setBaseUrl('/api/v1');
   RestangularProvider.setRequestSuffix('.json');
   RestangularProvider.setDefaultHttpFields({
@@ -8,11 +8,11 @@ gial.config( ['RestangularProvider', function(RestangularProvider) {
   });
 }]);
 
-gial.run(['$rootScope', function($rootScope){
+planner.run(['$rootScope', function($rootScope){
   $rootScope.$on("$stateChangeError", console.warn.bind(console));
 }]);
 
-gial.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/students');
   $stateProvider
     .state('dashboard', {
