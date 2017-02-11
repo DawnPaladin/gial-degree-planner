@@ -38,9 +38,7 @@ feature 'Advisor log in' do
   context 'When logging in correctly' do
 
     before do
-      fill_in('Email', with: advisor.email)
-      fill_in('Password', with: advisor.password)
-      find('input[type="submit"]').click
+      sign_in(advisor)
     end
 
     scenario 'redirects to root path' do
@@ -71,6 +69,14 @@ feature 'Advisor log in' do
     end
 
   end
+
+
+end
+
+
+
+feature 'Advisor creation' do
+
 
 
 end
