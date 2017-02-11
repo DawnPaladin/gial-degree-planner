@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170210214121) do
+ActiveRecord::Schema.define(version: 20170211034544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,11 @@ ActiveRecord::Schema.define(version: 20170210214121) do
     t.index ["concentration_id"], name: "index_categories_on_concentration_id", using: :btree
   end
 
+  create_table "categories_courses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "completed_courses_plans", force: :cascade do |t|
     t.integer  "plan_id"
     t.integer  "course_id"
@@ -62,11 +67,10 @@ ActiveRecord::Schema.define(version: 20170210214121) do
   end
 
   create_table "course_prerequisites", force: :cascade do |t|
-    t.integer  "course_id"
+    t.integer  "requiring_course_id"
     t.integer  "required_course_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["course_id", "required_course_id"], name: "index_course_prerequisites_on_course_id_and_required_course_id", using: :btree
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -92,6 +96,14 @@ ActiveRecord::Schema.define(version: 20170210214121) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id", "session_id"], name: "index_courses_sessions_on_course_id_and_session_id", using: :btree
+  end
+
+  create_table "degree_course_requirements", force: :cascade do |t|
+    t.integer  "degree_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["degree_id", "course_id"], name: "index_degree_course_requirements_on_degree_id_and_course_id", using: :btree
   end
 
   create_table "degrees", force: :cascade do |t|
@@ -123,14 +135,6 @@ ActiveRecord::Schema.define(version: 20170210214121) do
     t.integer  "units"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "instructor_permissions", force: :cascade do |t|
-    t.integer  "course_id",  null: false
-    t.integer  "teacher_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id", "teacher_id"], name: "index_instructor_permissions_on_course_id_and_teacher_id", using: :btree
   end
 
   create_table "intended_courses_plans", force: :cascade do |t|
@@ -194,6 +198,14 @@ ActiveRecord::Schema.define(version: 20170210214121) do
     t.index ["email"], name: "index_students_on_email", unique: true, using: :btree
   end
 
+  create_table "teacher_permissions", force: :cascade do |t|
+    t.integer  "course_id",  null: false
+    t.integer  "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "teacher_id"], name: "index_teacher_permissions_on_course_id_and_teacher_id", using: :btree
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.string   "title"
     t.string   "first_name"
@@ -215,6 +227,13 @@ ActiveRecord::Schema.define(version: 20170210214121) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["concentration_id"], name: "index_thesis_tracks_on_concentration_id", using: :btree
+  end
+
+  create_table "transferred_units", force: :cascade do |t|
+    t.integer  "plan_id"
+    t.integer  "foreign_course_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
 end
