@@ -17,9 +17,18 @@ before_action :configure_sign_up_params, only: [:create]
     yield resource if block_given?
     if resource.persisted?
       if resource.active_for_authentication?
-        set_flash_message! :notice, :signed_up
-        # Overrides Devise's Automatic Login Upon Creation
+
+        # Custom flash messages
+        if resource.is_admin
+          set_flash_message! :notice, :signed_up_as_admin
+        else
+          set_flash_message! :notice, :signed_up_as_advisor
+        end
+
+
+        # Commented Out to Override Devise's Automatic Login Upon Creation
         # sign_up(resource_name, resource)
+
         respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
