@@ -3,7 +3,7 @@ class Plan < ApplicationRecord
 
   # associations
   belongs_to :student
-  belongs_to :concentration
+  belongs_to :concentration, optional: true
 
   has_many :transferred_units
   has_many :foreign_courses, through: :transferred_units
@@ -16,6 +16,6 @@ class Plan < ApplicationRecord
   
   has_many :enrollments
   has_many :scheduled_classes, through: :enrollments,
-           :class_name: 'Meeting'
+           class_name: 'Meeting'
 
 end

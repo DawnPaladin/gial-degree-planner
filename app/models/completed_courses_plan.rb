@@ -3,5 +3,5 @@ class CompletedCoursesPlan < ApplicationRecord
 
   # associations
   belongs_to :plan
-  belongs_to :completed_course, :foreign_key: :course_id, class_name: 'Course'
+  belongs_to :completed_course, foreign_key: :course_id, class_name: 'Course'
 end

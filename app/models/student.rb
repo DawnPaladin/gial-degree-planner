@@ -4,5 +4,5 @@ class Student < ApplicationRecord
   # associations
   has_one :plan
 
-  has_one :advisor
+  belongs_to :advisor
 end
