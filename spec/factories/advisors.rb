@@ -7,7 +7,7 @@ FactoryGirl.define do
     last_name "Phil"
     email
     password "password"
-    is_admin false
+    is_admin true
   end  
 
 end

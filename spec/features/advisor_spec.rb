@@ -102,7 +102,7 @@ feature 'Advisor creation' do
 
   context 'When signing up a new advisor with correct credentials' do
 
-    let(:new_advisor) { build(:advisor) }
+    let(:new_advisor) { build(:advisor, is_admin: false) }
 
     before do
       sign_up(new_advisor)
@@ -128,7 +128,7 @@ feature 'Advisor creation' do
 
   context 'When signing up a new admin with correct credentials' do
 
-    let(:new_admin) { build(:advisor, is_admin: true) }
+    let(:new_admin) { build(:advisor) }
 
     before do
       sign_up(new_admin)

@@ -15,4 +15,10 @@ class ApplicationController < ActionController::Base
       new_advisor_session_path
     end
 
+    def require_admin
+      unless current_advisor.is_admin
+        redirect_back(fallback_location: root_path)
+      end
+    end
+
 end
