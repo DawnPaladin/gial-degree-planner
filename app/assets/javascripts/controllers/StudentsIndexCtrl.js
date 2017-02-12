@@ -7,6 +7,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scop
   // });
 
   $scope.students = Restangular.all('students').getList().$object;
+  $scope.advisors = Restangular.all('advisors').getList().$object;
 
   Restangular.all('students').getList().then(function(result) {
     console.log(result);
