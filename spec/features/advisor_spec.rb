@@ -84,30 +84,39 @@ feature 'Advisor creation' do
     find('#add-advisor').click
   end
 
+
   context 'When signing up a new advisor with correct credentials' do
 
     let(:new_advisor) { build(:advisor) }
 
     before do
       fill_out_sign_up(new_advisor)
-    end
+    end    
 
     scenario 'it creates a new advisor', js: true do
       expect { click_on('Sign up') }.to change(Advisor, :count).by(1)
     end
 
+  end
+
+
+  context 'When signing up a new advisor with correct credentials' do
+
+    let(:new_advisor) { build(:advisor) }
+
+    before do
+      sign_up(new_advisor)
+    end
+
     scenario 'it redirects to the root path', js: true do
-      click_on('Sign up')
       expect(current_path).to eq(root_path)
     end
 
     scenario 'it renders a flash message', js: true do
-      click_on('Sign up')
       expect(page).to have_css('#flash')
     end
 
     scenario 'it does not log in as the newly signed up advisor', js: true do
-      click_on('Sign up')
       click_on('Edit my account settings')
       email = find_field('Email').value
       expect(email).to_not eq(new_advisor.email)
@@ -122,20 +131,46 @@ feature 'Advisor creation' do
     let(:new_admin) { build(:advisor, is_admin: true) }
 
     before do
-      fill_out_sign_up(new_admin)
+      sign_up(new_admin)
     end
 
     scenario 'it redirects to the root path', js: true do
-      click_on('Sign up')
       expect(current_path).to eq(root_path)
     end
 
     scenario 'it renders a flash message', js: true do
-      click_on('Sign up')
       expect(page).to have_css('#flash')
     end
 
   end
 
+
+end
+
+
+
+feature 'Advisor logout' do
+
+  let(:advisor){ create(:advisor) }
+
+  before do
+    sign_in(advisor)
+  end
+
+  context 'when logging out' do
+
+    before do
+      click_on('Sign Out')
+    end
+
+    scenario 'it redirects to the log in page', js: true do
+      expect(current_path).to eq(new_advisor_session_path)
+    end
+
+    scenario 'it renders a flash message', js: true do
+      expect(page).to have_css('#flash')
+    end
+
+  end
 
 end
