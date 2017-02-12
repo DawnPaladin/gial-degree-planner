@@ -1,9 +1,11 @@
 FactoryGirl.define do
 
+  sequence(:email) { |e| "Email#{e}@email.com" }
+
   factory :advisor do
     first_name "Dr."
     last_name "Phil"
-    email "dr@phil.com"
+    email
     password "password"
     is_admin false
   end  
