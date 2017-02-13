@@ -1,5 +1,10 @@
 var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise']);
 
+planner.config(function(AuthProvider) {
+  AuthProvider.loginPath('/advisors/sign_in.json');
+  AuthProvider.resourceName('advisor');
+});
+
 planner.config( ['RestangularProvider', function(RestangularProvider) {
   RestangularProvider.setBaseUrl('/api/v1');
   RestangularProvider.setRequestSuffix('.json');

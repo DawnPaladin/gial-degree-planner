@@ -8,4 +8,17 @@ class ApplicationController < ActionController::Base
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
     end
+
+  private
+
+    def after_sign_out_path_for(resource_or_scope)
+      new_advisor_session_path
+    end
+
+    def require_admin
+      unless current_advisor.is_admin
+        redirect_back(fallback_location: root_path)
+      end
+    end
+
 end
