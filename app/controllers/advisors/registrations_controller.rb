@@ -31,7 +31,9 @@ before_action :configure_sign_up_params, only: [:create]
         # Commented Out to Override Devise's Automatic Login Upon Creation
         # sign_up(resource_name, resource)
 
-        respond_with resource, location: after_sign_up_path_for(resource)
+        redirect_to advisors_path
+
+        # respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
