@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <h2>Intended Plan of Study for {{ "Jane Doe" }}</h2>
+    <h2>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h2>
     <button class='btn btn-default pull-right'>Export PDF</button>
   </div>
 </div>
@@ -11,17 +11,18 @@
       <span>MA with Major in World Arts -- Concentration: </span>
 
       <select ng-model='concentration'
-              ng-options='concentration.name for concentration in concentrations'>
+              ng-options='concentration as concentration.name for concentration in concentrations'>
         <option value=""></option>        
       </select>
 
       <span>Graduating:</span>
-      <select ng-model='term.name for term in terms'>
+      <select ng-model='term'
+              ng-options='term for term in terms'>
         <option value=""></option>
       </select>
 
       <select ng-model='graduationDate'
-              ng-options='year in possibleYears'>
+              ng-options='year for year in possibleYears'>
         <option value=""></option>
       </select>
     </div>
@@ -32,8 +33,8 @@
   <div class="col-xs-12">
     
     <div class="ips-navigation">
-      <a ui-sref='ips.choose'></a>
-      <a ui-sref='ips.schedule'></a>
+      <a ui-sref='ips.choose'>Choose Courses</a>
+      <a ui-sref='ips.schedule'>Schedule Courses</a>
     </div>
 
     <div class="registered-info">

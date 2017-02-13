@@ -18,7 +18,11 @@ planner.run(['$rootScope', function($rootScope){
 }]);
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+
   $urlRouterProvider.otherwise('/students');
+  // $urlRouterProvider
+  //   .when('/IPS/:student_id', 'IPS/:student_id/choose');
+  
   $stateProvider
     .state('dashboard', {
       url: '',
@@ -58,31 +62,36 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }
       }
     })
+
+    // Intended Plan of Study
     .state('ips', {
-      url: '/IPS',
+      url: '/IPS/:student_id',
       views: {
         'header': {
-          templateUrl: '/templates/ips-header.html'
+          templateUrl: '/templates/ips-header.html',
+          controller: 'IPSHeaderCtrl'
         },
         'main': {
           templateUrl: 'templates/ips-main.html'
         }
+      },
+      resolve: {
+        student: ['Restangular', '$stateParams',
+          function(Restangular, $stateParams) {
+          return Restangular.one('students', $stateParams.student_id).get();
+        }],
+        concentrations: ['Restangular', function(Restangular) {
+          return Restangular.all('concentrations').getList();
+        }]
       }
     })
     .state('ips.choose', {
       url: '/choose',
-      views: {
-        'main@': {
-          templateUrl: '/templates/ips-choose.html'
-        }
-      }
+      templateUrl: '/templates/ips-choose.html',
+      controller: 'IPSChooseCtrl'
     })
     .state('ips.schedule', {
       url: '/schedule',
-      views: {
-        'main@': {
-          templateUrl: '/templates/ips-schedule.html'
-        }
-      }
+      templateUrl: '/templates/ips-schedule.html'
     });
 }]);

@@ -10,10 +10,9 @@ Rails.application.routes.draw do
     scope :v1 do
       resources :students
       resources :advisors
+      resources :concentrations, only: [:index]
     end
   end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'angular_app#index'
 
