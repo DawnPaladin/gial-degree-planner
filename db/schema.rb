@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170211230229) do
+ActiveRecord::Schema.define(version: 20170213172233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,7 +233,7 @@ ActiveRecord::Schema.define(version: 20170211230229) do
     t.index ["concentration_id"], name: "index_thesis_tracks_on_concentration_id", using: :btree
   end
 
-  create_table "transferred_units", force: :cascade do |t|
+  create_table "transferred_courses", force: :cascade do |t|
     t.integer  "plan_id"
     t.integer  "foreign_course_id"
     t.datetime "created_at",        null: false

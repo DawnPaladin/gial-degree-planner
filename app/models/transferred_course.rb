@@ -1,4 +1,4 @@
-class TransferredUnit < ApplicationRecord
+class TransferredCourse < ApplicationRecord
   # validations
 
   # associations

@@ -41,24 +41,26 @@ class Course < ApplicationRecord
   # Class Methods
   #####
   def self.thesis_writing
+    any_term = Term.find_by_name('ANY')
     self.find_or_create_by({
       name: "Thesis Writing",
       number: 'AA5190',
       description: 'Writing course required for thesis track',
       units: 1,
       level: 'graduate',
-      term_id: 4
+      term_id: any_term.id
     })
   end
 
   def self.thesis_course
+    any_term = Term.find_by_name('ANY')
     self.find_or_create_by({
       name: "Thesis",
       number: 'AA5191',
       description: 'Thesis Course',
       units: 1,
       level: 'graduate',
-      term_id: 4
+      term_id: any_term.id
     })
   end
 
