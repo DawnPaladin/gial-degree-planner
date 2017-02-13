@@ -1,2 +1,0 @@
-class InstructorPermission < ApplicationRecord
-end
