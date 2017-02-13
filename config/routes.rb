@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     get 'advisors/sign_out', to: 'advisors/sessions#destroy'
   end
 
+  resources :advisors, only: [:index, :update, :destroy]
+
   scope :api do
     scope :v1 do
       resources :students
@@ -19,6 +21,6 @@ Rails.application.routes.draw do
 
   get 'angular_app/index'
 
-  resources :advisors, only: [:index, :update, :destroy]
+
 
 end

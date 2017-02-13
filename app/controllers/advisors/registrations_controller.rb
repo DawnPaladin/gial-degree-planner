@@ -4,6 +4,7 @@ before_action :configure_sign_up_params, only: [:create]
 
   skip_before_action :require_no_authentication, only: [:new, :create]
   before_action :require_admin, only: [:new, :create]
+  before_action :require_current_advisor, only: [:edit]
 
   # GET /resource/sign_up
   def new
@@ -30,7 +31,9 @@ before_action :configure_sign_up_params, only: [:create]
         # Commented Out to Override Devise's Automatic Login Upon Creation
         # sign_up(resource_name, resource)
 
-        respond_with resource, location: after_sign_up_path_for(resource)
+        redirect_to advisors_path
+
+        # respond_with resource, location: after_sign_up_path_for(resource)
       else
         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
@@ -44,14 +47,14 @@ before_action :configure_sign_up_params, only: [:create]
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # DELETE /resource
   # def destroy

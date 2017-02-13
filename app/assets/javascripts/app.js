@@ -20,6 +20,7 @@ planner.run(['$rootScope', function($rootScope){
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/students');
   $stateProvider
+
     .state('dashboard', {
       url: '',
       views: {
@@ -32,6 +33,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }
       }
     })
+
     .state('dashboard.students', {
       url: '/students',
       resolve: {
@@ -49,6 +51,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }
       }
     })
+
     .state('dashboard.meetings', {
       url: '/classes',
       views: {
@@ -58,4 +61,5 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }
       }
     });
+
 }]);

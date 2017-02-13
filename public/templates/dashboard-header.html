@@ -1,15 +1,9 @@
+<div class="container">
 
-<h1>Welcome, admin_name!</h1>
+  <h2>Dashboard</h2>
 
-<p><a href="/advisors/sign_out">Sign Out</a></p>
-<p><a href="/advisors/edit">Edit my account settings</a></p>
+  <a ui-sref="dashboard.students">Students</a>
+  <a ui-sref="dashboard.meetings">Classes</a>  
+  <a href="/advisors" ng-if="currentAdvisor.is_admin">Advisors</a>  
 
-<div ng-if="currentAdvisor.is_admin">
-  <p><a href="/advisors/sign_up" id="add-advisor">Add new admin or advisor</a></p>
-  <p><a href="/advisors">View advisors</a></p>
 </div>
-
-<h2>Dashboard</h2>
-
-<a ui-sref="dashboard.students">Students</a>
-<a ui-sref="dashboard.meetings">Classes</a>
