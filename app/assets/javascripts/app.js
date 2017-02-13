@@ -22,7 +22,8 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
   $stateProvider
 
     .state('dashboard', {
-      url: '',
+      url: '/students',
+      abstract: true,
       views: {
         'dashboardHeader': {
           templateUrl: '/templates/dashboard-header.html',
@@ -30,12 +31,13 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         },
         'dashboardMain': {
           templateUrl: '/templates/dashboard-main.html',
+          controller: 'StudentsIndexCtrl'
         }
       }
     })
 
     .state('dashboard.students', {
-      url: '/students',
+      url: '',
       resolve: {
         advisors: ['Restangular', function(Restangular) {
           return Restangular.all('advisors').getList();
