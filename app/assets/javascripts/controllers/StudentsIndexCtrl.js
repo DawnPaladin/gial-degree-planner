@@ -23,15 +23,13 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scop
 
   $scope.sortableClasses = function(columnName) {
     var classString = "";
-    if ($scope.property.indexOf(columnName) === -1) {
-      return classString;
-    } else {
-      if ($scope.property[0] === "-") {
-        classString += "reverse ";
-      }
+    if ($scope.property.indexOf(columnName) > -1) {
       classString += "sorted";
-      return classString;
+      if ($scope.property[0] === "-") {
+        classString += " reverse";
+      }
     }
+    return classString;
   };
 
   Restangular.all('students').getList().then(function(result) {
