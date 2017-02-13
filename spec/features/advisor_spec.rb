@@ -192,16 +192,16 @@ feature 'Advisor deletion' do
     end
 
     scenario 'it deletes the advisor', js: true do
-      expect{ click_on('Delete Advisor?') }.to change(Advisor, :count).by(-1)
+      expect{ click_on('Delete') }.to change(Advisor, :count).by(-1)
     end
 
     scenario 'it renders a flash message', js: true do
-      click_on('Delete Advisor?')
+      click_on('Delete')
       expect(page).to have_css('#flash')
     end
 
     scenario 'it remains on the advisors index page', js: true do
-      click_on('Delete Advisor?')
+      click_on('Delete')
       expect(current_path).to eq(advisors_path)
     end
 
@@ -216,8 +216,11 @@ feature 'Advisor deletion' do
       click_on('View advisors')
     end
 
-    scenario 'it does not display a delete link', js: true do
-      expect(page).to_not have_content('Delete Advisor?')
+    scenario 'it does not display a delete link', js: true, test_me: true do
+
+      within(:css, "td:last-child") do
+        expect(page).to_not have_content('Delete')
+      end
     end
 
   end
