@@ -34,6 +34,14 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     })
     .state('dashboard.students', {
       url: '/students',
+      resolve: {
+        advisors: ['Restangular', function(Restangular) {
+          return Restangular.all('advisors').getList();
+        }],
+        students: ['Restangular', function(Restangular) {
+          return Restangular.all('students').getList();
+        }]
+      },
       views: {
         'dashboardMain@': {
           templateUrl: '/templates/students.html',
