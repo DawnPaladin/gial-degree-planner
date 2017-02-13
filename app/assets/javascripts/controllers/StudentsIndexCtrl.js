@@ -1,16 +1,13 @@
-planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors',
-  function($scope, Restangular, advisors) {
+planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students',
+  function($scope, Restangular, advisors, students) {
 
-    // var students = Restangular.all('students');
-    // students.getList().then(function(students) {
-    //   console.log(students);
-    //   $scope.students = students;
-    // });
-
-    // $scope.students = Restangular.all('students').getList().$object;
     $scope.advisors = advisors;
     $scope.property = "last_name";
     $scope.reverse = false;
+
+    students.forEach(function(current) { current.pinned = false; });
+    students[0].pinned = true;
+    $scope.students = students;
 
     $scope.alternate = function(property) {
       if ($scope.property == property) {
@@ -33,13 +30,5 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors',
       return classString;
     };
 
-    Restangular.all('students').getList().then(function(result) {
-      // console.log(result);
-      result[0].pinned = true;
-      result[1].pinned = false;
-      result[2].pinned = false;
-      $scope.students = result;
-      // $scope.students = result;
-    });
   }
 ]);

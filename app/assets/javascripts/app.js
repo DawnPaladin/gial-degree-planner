@@ -37,6 +37,9 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
       resolve: {
         advisors: ['Restangular', function(Restangular) {
           return Restangular.all('advisors').getList();
+        }],
+        students: ['Restangular', function(Restangular) {
+          return Restangular.all('students').getList();
         }]
       },
       views: {
