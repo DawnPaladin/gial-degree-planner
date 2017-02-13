@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-ui-router
-//= require lodash.core
+//= require underscore
 //= require restangular
 //= require bootstrap-sprockets
 //= require angular-devise
