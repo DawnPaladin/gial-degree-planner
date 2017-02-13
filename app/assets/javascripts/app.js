@@ -23,11 +23,11 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('dashboard', {
       url: '',
       views: {
-        'dashboardHeader': {
+        'header': {
           templateUrl: '/templates/dashboard-header.html',
           controller: 'DashboardHeaderCtrl',
         },
-        'dashboardMain': {
+        'main': {
           templateUrl: '/templates/dashboard-main.html',
         }
       }
@@ -35,7 +35,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('dashboard.students', {
       url: '/students',
       views: {
-        'dashboardMain@': {
+        'main@': {
           templateUrl: '/templates/students.html',
           controller: 'StudentsIndexCtrl'
         }
@@ -44,9 +44,36 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('dashboard.meetings', {
       url: '/classes',
       views: {
-        "dashboardMain@": {
+        "main@": {
           templateUrl: '/templates/meetings.html',
           controller: 'MeetingsIndexCtrl',
+        }
+      }
+    })
+    .state('ips', {
+      url: '/IPS',
+      views: {
+        'header': {
+          templateUrl: '/templates/ips-header.html'
+        },
+        'main': {
+          templateUrl: 'templates/ips-main.html'
+        }
+      }
+    })
+    .state('ips.choose', {
+      url: '/choose',
+      views: {
+        'main@': {
+          templateUrl: '/templates/ips-choose.html'
+        }
+      }
+    })
+    .state('ips.schedule', {
+      url: '/schedule',
+      views: {
+        'main@': {
+          templateUrl: '/templates/ips-schedule.html'
         }
       }
     });

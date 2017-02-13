@@ -6,7 +6,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scop
   //   $scope.students = students;
   // });
 
-  // $scope.students = Restangular.all('students').getList().$object;
+  $scope.students = Restangular.all('students').getList().$object;
   $scope.advisors = Restangular.all('advisors').getList().$object;
   $scope.property = "last_name";
   $scope.reverse = false;
