@@ -5,8 +5,8 @@ class Plan < ApplicationRecord
   belongs_to :student
   belongs_to :concentration, optional: true
 
-  has_many :transferred_units
-  has_many :foreign_courses, through: :transferred_units
+  has_many :transferred_courses
+  has_many :foreign_courses, through: :transferred_courses
 
   has_many :completed_courses_plans
   has_many :completed_courses, through: :completed_courses_plans
