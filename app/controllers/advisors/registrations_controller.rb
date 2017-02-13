@@ -4,6 +4,7 @@ before_action :configure_sign_up_params, only: [:create]
 
   skip_before_action :require_no_authentication, only: [:new, :create]
   before_action :require_admin, only: [:new, :create]
+  before_action :require_current_advisor, only: [:edit]
 
   # GET /resource/sign_up
   def new
@@ -44,14 +45,14 @@ before_action :configure_sign_up_params, only: [:create]
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # DELETE /resource
   # def destroy
