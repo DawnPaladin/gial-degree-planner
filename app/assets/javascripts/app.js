@@ -18,18 +18,22 @@ planner.run(['$rootScope', function($rootScope){
 }]);
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+
   $urlRouterProvider.otherwise('/students');
+  
   $stateProvider
 
+
+    // Dashboard
     .state('dashboard', {
       url: '/students',
       abstract: true,
       views: {
-        'dashboardHeader': {
+        'header': {
           templateUrl: '/templates/dashboard-header.html',
           controller: 'DashboardHeaderCtrl',
         },
-        'dashboardMain': {
+        'main': {
           templateUrl: '/templates/dashboard-main.html',
           controller: 'StudentsIndexCtrl'
         }
@@ -47,7 +51,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }]
       },
       views: {
-        'dashboardMain@': {
+        'main@': {
           templateUrl: '/templates/students.html',
           controller: 'StudentsIndexCtrl'
         }
@@ -57,11 +61,44 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('dashboard.meetings', {
       url: '/classes',
       views: {
-        "dashboardMain@": {
+        "main@": {
           templateUrl: '/templates/meetings.html',
           controller: 'MeetingsIndexCtrl',
         }
       }
+    })
+
+    // Intended Plan of Study
+    .state('ips', {
+      url: '/IPS/:student_id',
+      views: {
+        'header': {
+          templateUrl: '/templates/ips-header.html',
+          controller: 'IPSHeaderCtrl'
+        },
+        'main': {
+          templateUrl: 'templates/ips-main.html'
+        }
+      },
+      resolve: {
+        student: ['Restangular', '$stateParams',
+          function(Restangular, $stateParams) {
+          return Restangular.one('students', $stateParams.student_id).get();
+        }]
+        // Student: {student_attrs, plan:{ plan_attrs }, degree{ [concentrations] } }
+        // concentrations: ['Restangular', function(Restangular) {
+        //   return Restangular.all('concentrations').getList();
+        // }]
+      }
+    })
+    .state('ips.choose', {
+      url: '/choose',
+      templateUrl: '/templates/ips-choose.html',
+      controller: 'IPSChooseCtrl'
+    })
+    .state('ips.schedule', {
+      url: '/schedule',
+      templateUrl: '/templates/ips-schedule.html'
     });
 
 }]);

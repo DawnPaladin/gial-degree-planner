@@ -16,7 +16,7 @@
         <select ng-model="student.advisor" ng-options="advisor.id as advisor.first_name for advisor in advisors"></select>
         <span class="glyphicon glyphicon-star" ng-show="student.pinned"></span>
       </td>
-      <td>{{ student.first_name }}</td>
+      <td><a ui-sref="ips.choose({ student_id: student.id })">{{ student.first_name }}</a></td>
       <td>{{ student.last_name }}</td>
       <td>{{ student.concentration }}</td>
       <td>{{ student.thesisStarts }}</td>
