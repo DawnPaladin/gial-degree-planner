@@ -6,7 +6,7 @@
     <th>Last Name</th>
     <th>Email</th>
     <th>Admin Status</th>
-    <th>Delete</th>
+    <th>Delete?</th>
   </tr>
   <% @advisors.each do |advisor| %>
     <tr>
@@ -15,11 +15,17 @@
       <td><%= advisor.email %></td>
       <td>
         <%= advisor_status(advisor) %>
+
       </td>
       <td>
         <%= advisor_deletion(advisor) %>
       </td>
     </tr>
   <% end %>
-</table>
+</table>  
+
+<a href="/advisors/sign_up" id="add-advisor" class="btn btn-primary">Add new admin or advisor</a>
+
+
+
 
