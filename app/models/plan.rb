@@ -18,4 +18,5 @@ class Plan < ApplicationRecord
   has_many :scheduled_classes, through: :enrollments,
            class_name: 'Meeting'
 
+  belongs_to :degree
 end

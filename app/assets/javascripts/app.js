@@ -20,10 +20,10 @@ planner.run(['$rootScope', function($rootScope){
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/students');
-  // $urlRouterProvider
-  //   .when('/IPS/:student_id', 'IPS/:student_id/choose');
   
   $stateProvider
+
+    // Dashboard
     .state('dashboard', {
       url: '',
       views: {
@@ -79,10 +79,11 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         student: ['Restangular', '$stateParams',
           function(Restangular, $stateParams) {
           return Restangular.one('students', $stateParams.student_id).get();
-        }],
-        concentrations: ['Restangular', function(Restangular) {
-          return Restangular.all('concentrations').getList();
         }]
+        // Student: {student_attrs, plan:{ plan_attrs }, degree{ [concentrations] } }
+        // concentrations: ['Restangular', function(Restangular) {
+        //   return Restangular.all('concentrations').getList();
+        // }]
       }
     })
     .state('ips.choose', {

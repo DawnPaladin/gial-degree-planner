@@ -7,7 +7,10 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
-    render json: @student, status: 200
+    @plan = @student.plan
+    @degree = @plan.degree
+    @term = @plan.graduation_term
+    # renders the jbuilder
   end
 
 end

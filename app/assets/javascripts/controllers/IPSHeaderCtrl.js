@@ -1,7 +1,8 @@
-planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'concentrations', function($scope, student, concentrations) {
+planner.controller('IPSHeaderCtrl', ['$scope', 'student', function($scope, student) {
   
-  $scope.concentrations = concentrations;
   $scope.student = student;
+  $scope.concentrations = student.plan.degree.concentrations;
+  $scope.plan = student.plan;
 
   $scope.terms = ['SPRING', 'SUMMER', 'FALL'];
 
@@ -15,4 +16,4 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'concentrations', func
   };
   _populateYears();
 
-}])
+}]);

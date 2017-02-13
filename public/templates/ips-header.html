@@ -10,18 +10,19 @@
     <div class="degree-info">
       <span>MA with Major in World Arts -- Concentration: </span>
 
-      <select ng-model='concentration'
-              ng-options='concentration as concentration.name for concentration in concentrations'>
+      <select ng-model='plan.concentration'
+              ng-options='concentration as concentration.name for concentration in concentrations'
+              ng-change='loadCourses()'>
         <option value=""></option>        
       </select>
 
       <span>Graduating:</span>
-      <select ng-model='term'
+      <select ng-model='plan.graduation_term'
               ng-options='term for term in terms'>
         <option value=""></option>
       </select>
 
-      <select ng-model='graduationDate'
+      <select ng-model='plan.graduation_year'
               ng-options='year for year in possibleYears'>
         <option value=""></option>
       </select>
@@ -40,7 +41,7 @@
     <div class="registered-info">
       <span>IPS Registered</span>
       <input type="checkbox" ng-model='ips.registration_date'>
-      {{ 'Registration information' }}
+      {{ ips.registration_date || 'Not yet registered' }}
     </div>
 
   </div>

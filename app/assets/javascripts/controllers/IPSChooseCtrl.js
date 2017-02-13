@@ -1,6 +1,5 @@
-planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'concentrations', function($scope, $state, student, concentrations) {
+planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', function($scope, $state, student) {
   
   $scope.student = student;
-  $scope.concentrations = concentrations;
 
 }]);

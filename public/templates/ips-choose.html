@@ -1,1 +1,37 @@
-IPS CHOOOOOOCHOOOOOOSE
+<div class="row">
+  <div class="col-xs-12">
+    <p class="tagline">Check the box next to a course to add it to your Intended Courses.</p>
+  </div>
+</div>
+
+<div class="row">
+  
+  <div class="col-xs-6 ips-left-col">
+    <div class="completed-courses">
+      <h3>Completed Courses</h3>
+    </div>
+
+    <div class="intended-courses bordered">
+      <h3>Intended Courses</h3>
+    </div>
+  </div>
+
+  <div class="col-xs-6 ips-right-col">
+    <div class="required-courses">
+      <h3>Required Courses</h3>
+    </div>
+
+    <div class="categories" ng-if='categories.length'>
+      <div class="category bordered" ng-repeat='category in categories'>
+        <h3>{{ category.name }}</h3>
+        <p>{{ Units }}</p>
+        <div class="course-row" ng-repeat='course in category.courses'></div>
+        <p>Units required: {{ category.required_units }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- {{ student }} -->
+
+
+</div>

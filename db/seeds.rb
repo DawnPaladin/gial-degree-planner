@@ -179,9 +179,11 @@ end
 
 puts 'creating plans through students'
 Student.all.each do |student|
+
   plan = student.create_plan({
     graduation_year: 2020,
-    graduation_term: Term.all.sample,
+    graduation_term: 'SPRING',
+    degree_id: degree.id
   })
 
   3.times do |num|
