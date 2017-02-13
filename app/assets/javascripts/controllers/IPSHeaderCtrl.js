@@ -1,4 +1,4 @@
-planner.controller('IPSHeaderCtrl', ['$scope', 'student', function($scope, student) {
+planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', function($scope, student, planService) {
   
   $scope.student = student;
   $scope.concentrations = student.plan.degree.concentrations;
@@ -15,5 +15,12 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', function($scope, stude
     }
   };
   _populateYears();
+
+  $scope.updatePlan = function() {
+    planService.update($scope.plan).then(function(plan) {
+      $scope.plan = plan;
+    });
+  };
+
 
 }]);
