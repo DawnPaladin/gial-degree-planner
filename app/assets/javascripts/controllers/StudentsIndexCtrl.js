@@ -1,4 +1,4 @@
-planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scope, Restangular) {
+planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', function($scope, Restangular, advisors) {
 
   // var students = Restangular.all('students');
   // students.getList().then(function(students) {
@@ -7,7 +7,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scop
   // });
 
   // $scope.students = Restangular.all('students').getList().$object;
-  $scope.advisors = Restangular.all('advisors').getList().$object;
+  $scope.advisors = advisors;
   $scope.property = "last_name";
   $scope.reverse = false;
 
@@ -33,12 +33,11 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scop
   };
 
   Restangular.all('students').getList().then(function(result) {
+    // console.log(result);
     result[0].pinned = true;
     result[1].pinned = false;
     result[2].pinned = false;
-    result[3].pinned = false;
     $scope.students = result;
-    console.log(result);
     // $scope.students = result;
   });
 
