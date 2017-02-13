@@ -174,3 +174,52 @@ feature 'Advisor logout' do
   end
 
 end
+
+
+
+feature 'Advisor deletion' do
+
+  context 'when deleting another advisor' do
+
+    let(:advisor){ create(:advisor) }
+    let(:other_advisor) { create(:advisor) }
+
+    before do
+      sign_in(advisor)
+      other_advisor
+      click_on('View advisors')
+      execute_script('$("a[data-confirm]").removeAttr("data-confirm")');
+    end
+
+    scenario 'it deletes the advisor', js: true do
+      expect{ click_on('Delete Advisor?') }.to change(Advisor, :count).by(-1)
+    end
+
+    scenario 'it renders a flash message', js: true do
+      click_on('Delete Advisor?')
+      expect(page).to have_css('#flash')
+    end
+
+    scenario 'it remains on the advisors index page', js: true do
+      click_on('Delete Advisor?')
+      expect(current_path).to eq(advisors_path)
+    end
+
+  end
+
+  context 'when attempting to delete own account' do
+
+    let(:advisor){ create(:advisor) }
+
+    before do
+      sign_in(advisor)
+      click_on('View advisors')
+    end
+
+    scenario 'it does not display a delete link', js: true do
+      expect(page).to_not have_content('Delete Advisor?')
+    end
+
+  end
+
+end
