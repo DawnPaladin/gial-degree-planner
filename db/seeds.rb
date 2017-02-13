@@ -45,7 +45,7 @@ TERMS.each do |term|
 end
 
 puts 'creating sessions'
-['1', '2', '3', '4'].each do |session|
+['Session 1', 'Session 2', 'Session 3', 'Session 4'].each do |session|
   Session.create({ name: session })
 end
 
