@@ -11,8 +11,11 @@
     <th class="clickable" ng-click="alternate('graduation')">Graduation</th>
   </thead>
   <tbody>
-    <tr ng-repeat="student in students | orderBy: property">
-      <td><select ng-model="student.advisor" ng-options="advisor.id as advisor.first_name for advisor in advisors"></td>
+    <tr ng-repeat="student in students | orderBy: ['-pinned', property]">
+      <td>
+        <select ng-model="student.advisor" ng-options="advisor.id as advisor.first_name for advisor in advisors"></select>
+        <span class="glyphicon glyphicon-star" ng-show="student.pinned"></span>
+      </td>
       <td>{{ student.first_name }}</td>
       <td>{{ student.last_name }}</td>
       <td>{{ student.concentration }}</td>
