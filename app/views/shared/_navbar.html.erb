@@ -1,6 +1,7 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <span class="navbar-brand">GIAL Degree Planner</span>
+    <p class="navbar-text"><%= link_to "Go To Dashboard", root_path, class: "navbar-link" %></p>
     <% if signed_in? %>
       <div class="navbar-right">
         <p class="navbar-text">Welcome, <%= current_advisor.name %>!</p>

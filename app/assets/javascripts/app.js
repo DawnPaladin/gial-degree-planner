@@ -52,16 +52,6 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
           controller: 'MeetingsIndexCtrl',
         }
       }
-    })
-
-    .state('dashboard.advisors', {
-      url: '/advisors',
-      views: {
-        "dashboardMain@": {
-          templateUrl: '/templates/advisors.html',
-          controller: 'AdvisorsIndexCtrl',
-        }
-      }
     });
-    
+
 }]);

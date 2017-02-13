@@ -14,13 +14,11 @@
       <td><%= advisor.last_name %></td>
       <td><%= advisor.email %></td>
       <td>
-        <%= form_for advisor do |f| %>
-          <%= f.check_box :is_admin %>
-          <%= f.submit 'Update' %>
-        <% end %>
+        <%= advisor_status(advisor) %>
+
       </td>
       <td>
-        <%= button_to "Delete", advisor_path(advisor), method: :delete, data: { confirm: "Are you sure you want to delete #{ advisor.name }?"} %>
+        <%= advisor_deletion(advisor) %>
       </td>
     </tr>
   <% end %>
