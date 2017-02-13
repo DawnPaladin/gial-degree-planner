@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
     def require_current_advisor
       unless current_advisor.id == params[:id].to_i
-        redirect_back(fallback_location: root_path)
+        redirect_back(fallback_location: edit_advisor_registration_path(id: current_advisor.id))
       end
     end        
 

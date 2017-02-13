@@ -18,11 +18,11 @@ planner.run(['$rootScope', function($rootScope){
 }]);
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/students');
+  $urlRouterProvider.otherwise('/');
   $stateProvider
 
     .state('dashboard', {
-      url: '/students',
+      url: '/',
       abstract: true,
       views: {
         'dashboardHeader': {
@@ -55,7 +55,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     })
 
     .state('dashboard.meetings', {
-      url: '/classes',
+      url: 'classes',
       views: {
         "dashboardMain@": {
           templateUrl: '/templates/meetings.html',
