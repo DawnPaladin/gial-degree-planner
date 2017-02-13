@@ -1,0 +1,33 @@
+<h1>All Advisors</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Admin Status</th>
+    <th>Delete?</th>
+  </tr>
+  <% @advisors.each do |advisor| %>
+    <tr>
+      <td><%= advisor.first_name %></td>
+      <td><%= advisor.last_name %></td>
+      <td><%= advisor.email %></td>
+      <td>
+        <%= form_for advisor do |f| %>
+          <%= f.check_box :is_admin %>
+          <%= f.submit 'Update' %>
+        <% end %>
+      </td>
+      <td>
+        <%= button_to "Delete", advisor_path(advisor), method: :delete, data: { confirm: "Are you sure you want to delete #{ advisor.name }?"} %>
+      </td>
+    </tr>
+  <% end %>
+</table>  
+
+<a href="/advisors/sign_up" id="add-advisor" class="btn btn-primary">Add new admin or advisor</a>
+
+
+
+

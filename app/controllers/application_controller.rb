@@ -21,4 +21,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def require_current_advisor
+      unless current_advisor.id == params[:id].to_i
+        redirect_back(fallback_location: root_path)
+      end
+    end        
+
 end

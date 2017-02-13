@@ -1,24 +1,9 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <span class="navbar-brand">GIAL Degree Planner</span>
-    <div class="navbar-right">
-      <p class="navbar-text">Welcome, {{ currentAdvisor.first_name }} {{ currentAdvisor.last_name }}!</p>
-      <p class="navbar-text"><a href="/advisors/edit" class="navbar-link">Edit my account settings</a></p>
-      <p class="navbar-text"><a href="/advisors/sign_out" class="navbar-link">Sign Out</a></p>
-    </div>
-  </div>
-</nav>
-
-<div ng-if="currentAdvisor.is_admin">
-  <p><a href="/advisors/sign_up" id="add-advisor">Add new admin or advisor</a></p>
-  <p><a href="/advisors">View advisors</a></p>
-</div>
-
 <div class="container">
 
   <h2>Dashboard</h2>
 
   <a ui-sref="dashboard.students">Students</a>
   <a ui-sref="dashboard.meetings">Classes</a>  
+  <a ui-sref="dashboard.advisors" ng-if="currentAdvisor.is_admin">Advisors</a>  
 
 </div>
