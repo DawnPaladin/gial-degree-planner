@@ -1,5 +1,10 @@
 var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise']);
 
+planner.config(function(AuthProvider) {
+  AuthProvider.loginPath('/advisors/sign_in.json');
+  AuthProvider.resourceName('advisor');
+});
+
 planner.config( ['RestangularProvider', function(RestangularProvider) {
   RestangularProvider.setBaseUrl('/api/v1');
   RestangularProvider.setRequestSuffix('.json');
@@ -29,6 +34,14 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     })
     .state('dashboard.students', {
       url: '/students',
+      resolve: {
+        advisors: ['Restangular', function(Restangular) {
+          return Restangular.all('advisors').getList();
+        }],
+        students: ['Restangular', function(Restangular) {
+          return Restangular.all('students').getList();
+        }]
+      },
       views: {
         'dashboardMain@': {
           templateUrl: '/templates/students.html',

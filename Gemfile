@@ -54,7 +54,12 @@ group :development, :test do
   gem 'guard-rspec', require: false
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'poltergeist'
   gem 'launchy'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 group :development do
