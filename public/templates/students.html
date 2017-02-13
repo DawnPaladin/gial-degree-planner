@@ -2,13 +2,13 @@
 
 <table class="table">
   <thead>
-    <th class="clickable" ng-click="alternate('advisor')">Advisor</th>
-    <th class="clickable" ng-click="alternate('first_name')">First name</th>
-    <th class="clickable" ng-click="alternate('last_name')">Last name</th>
-    <th class="clickable" ng-click="alternate('concentration')">Concentration</th>
-    <th class="clickable" ng-click="alternate('thesis_starts')">Thesis starts</th>
-    <th class="clickable" ng-click="alternate('comp_date')">Comp date</th>
-    <th class="clickable" ng-click="alternate('graduation')">Graduation</th>
+    <th class="sortable" ng-class="sortableClasses('advisor')" ng-click="alternate('advisor')">Advisor</th>
+    <th class="sortable" ng-class="sortableClasses('first_name')" ng-click="alternate('first_name')">First name</th>
+    <th class="sortable" ng-class="sortableClasses('last_name')" ng-click="alternate('last_name')">Last name</th>
+    <th class="sortable" ng-class="sortableClasses('concentration')" ng-click="alternate('concentration')">Concentration</th>
+    <th class="sortable" ng-class="sortableClasses('thesis_starts')" ng-click="alternate('thesis_starts')">Thesis starts</th>
+    <th class="sortable" ng-class="sortableClasses('comp_date')" ng-click="alternate('comp_date')">Comp date</th>
+    <th class="sortable" ng-class="sortableClasses('graduation')" ng-click="alternate('graduation')">Graduation</th>
   </thead>
   <tbody>
     <tr ng-repeat="student in students | orderBy: ['-pinned', property]">

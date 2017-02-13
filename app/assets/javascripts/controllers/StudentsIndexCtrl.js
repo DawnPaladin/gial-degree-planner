@@ -9,12 +9,28 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', function($scop
   // $scope.students = Restangular.all('students').getList().$object;
   $scope.advisors = Restangular.all('advisors').getList().$object;
   $scope.property = "last_name";
+  $scope.reverse = false;
 
   $scope.alternate = function(property) {
     if ($scope.property == property) {
       $scope.property = "-" + property;
+      $scope.reverse = true;
     } else {
       $scope.property = property;
+      $scope.reverse = false;
+    }
+  };
+
+  $scope.sortableClasses = function(columnName) {
+    var classString = "";
+    if ($scope.property.indexOf(columnName) === -1) {
+      return classString;
+    } else {
+      if ($scope.property[0] === "-") {
+        classString += "reverse ";
+      }
+      classString += "sorted";
+      return classString;
     }
   };
 
