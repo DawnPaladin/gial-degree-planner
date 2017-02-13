@@ -52,9 +52,9 @@ before_action :configure_sign_up_params, only: [:create]
   end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  end
 
   # DELETE /resource
   # def destroy
