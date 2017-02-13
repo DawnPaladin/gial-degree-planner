@@ -1,1 +1,1 @@
-<%= link_to "Delete Advisor?", advisor_path(advisor), method: :delete, data: { confirm: "Are you sure you want to delete #{ advisor.name }?" } %>
+<%= button_to "Delete", advisor_path(advisor), method: :delete, data: { confirm: "Are you sure you want to delete #{ advisor.name }?"} %>

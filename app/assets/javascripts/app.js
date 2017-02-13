@@ -23,9 +23,11 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
   
   $stateProvider
 
+
     // Dashboard
     .state('dashboard', {
-      url: '',
+      url: '/students',
+      abstract: true,
       views: {
         'header': {
           templateUrl: '/templates/dashboard-header.html',
@@ -33,11 +35,13 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         },
         'main': {
           templateUrl: '/templates/dashboard-main.html',
+          controller: 'StudentsIndexCtrl'
         }
       }
     })
+
     .state('dashboard.students', {
-      url: '/students',
+      url: '',
       resolve: {
         advisors: ['Restangular', function(Restangular) {
           return Restangular.all('advisors').getList();
@@ -53,6 +57,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }
       }
     })
+
     .state('dashboard.meetings', {
       url: '/classes',
       views: {
@@ -95,4 +100,5 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
       url: '/schedule',
       templateUrl: '/templates/ips-schedule.html'
     });
+
 }]);
