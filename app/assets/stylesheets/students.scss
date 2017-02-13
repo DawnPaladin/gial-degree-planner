@@ -1,0 +1,13 @@
+// Place all the styles related to the Students controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sortable {
+  cursor: pointer;
+}
+.sorted:after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sorted.reverse:after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}

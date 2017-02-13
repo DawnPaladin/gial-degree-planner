@@ -5,6 +5,10 @@ class AdvisorsController < ApplicationController
 
   def index
     @advisors = Advisor.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @advisors, status: 200 }
+    end
   end
 
   def update
@@ -32,5 +36,4 @@ class AdvisorsController < ApplicationController
     def update_params
       params.require(:advisor).permit(:is_admin)
     end
-
 end
