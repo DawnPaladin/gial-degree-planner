@@ -36,7 +36,7 @@
     <div class="required-courses course-section">
       <h3>Required Courses</h3>
       <table>
-        <tr ng-repeat='requirement in concentration.degree.required_courses'
+        <tr ng-repeat='requirement in student.degree.required_courses'
             course-row
             course='requirement'
             checkbox-callback='logCourse(course)'
@@ -53,7 +53,7 @@
           <tr ng-repeat='availableCourse in category.courses'
               course-row
               course='availableCourse'
-              checkbox-callback='logCourse(course)'
+              checkbox-callback='addOrRemoveIntended(course)'
               class='course-row'></tr>
         </table>
         <p class='required-units'>Units required: {{ category.required_units }}</p>

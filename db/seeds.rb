@@ -121,7 +121,7 @@ puts 'creating courses through categories'
 Category.all.each do |category|
   NUM_COURSES.times do |num|
     course = category.courses.create({
-      name: "#{Faker::Music.instrument} Studies",
+      name: "#{Faker::Music.instrument} Studies #{category.id}",
       number: "AA99#{category.id}#{num}",
       description: LOREM,
       units: 3,

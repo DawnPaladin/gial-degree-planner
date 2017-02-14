@@ -30,9 +30,27 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
     });
   };
 
-  var addToIntended = function(course) {
-    _planInfo.plan.intended_courses.push(course);
+  var addOrRemoveIntended = function(course) {
+    if (course.intended) {
+      console.log('adding to intended')
+      _addToIntended(course);
+    } else {
+      console.log('removing from intended')
+      _removeFromIntended(course);
+    }
   }
+
+  var _removeFromIntended = function(course) {
+    for (var i = 0; i < _planInfo.plan.intended_courses.length; i++) {
+      if (_planInfo.plan.intended_courses[i].id === course.id) {
+        _planInfo.plan.intended_courses.splice(i, 1);
+      }
+    }
+  };
+
+  var _addToIntended = function(course) {
+    _planInfo.plan.intended_courses.push(course);
+  };
 
   // populates years in the graduation year dropdown
   var _populateYears = function() {  
@@ -49,7 +67,7 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
     update: update,
-    addToIntended: addToIntended
+    addOrRemoveIntended: addOrRemoveIntended
   };
 
 }]);

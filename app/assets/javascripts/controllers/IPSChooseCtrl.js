@@ -5,7 +5,8 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService
   // Add degree requirements to IPS
   $scope.student.degree.required_courses
     .forEach(function(course) {
-      planService.addToIntended(course);
+      course.intended = true;
+      planService.addOrRemoveIntended(course);
     });
 
   $scope.planInfo = planService.getPlanInfo();
@@ -18,6 +19,12 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService
       scope.concentration = 
         concentrationService.getConcentration(newConcentration)
   }, true);
+
+  // This is a callback for selecting checkboxes
+  // Passed into course-row directives
+  $scope.addOrRemoveIntended = function(course) {
+    planService.addOrRemoveIntended(course);
+  }
 
   $scope.logCourse = function(course) {
     console.log('here')
