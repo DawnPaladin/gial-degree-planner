@@ -10,20 +10,20 @@
     <div class="degree-info">
       <span>MA with Major in World Arts -- Concentration: </span>
 
-      <select ng-model='planInfo.plan.concentration_id'
+      <select ng-model='plan.concentration_id'
               ng-options='concentration.id as concentration.name for concentration in concentrations'
               ng-change='updatePlan()'>
         <option value=""></option>        
       </select>
 
       <span>Graduating:</span>
-      <select ng-model='planInfo.plan.graduation_term'
+      <select ng-model='plan.graduation_term'
               ng-options='term for term in terms'
               ng-change='updatePlan()'>
         <option value=""></option>
       </select>
 
-      <select ng-model='planInfo.plan.graduation_year'
+      <select ng-model='plan.graduation_year'
               ng-options='year for year in planInfo.possibleYears'
               ng-change="updatePlan()">
         <option value=""></option>
