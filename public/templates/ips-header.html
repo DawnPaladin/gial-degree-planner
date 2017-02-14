@@ -18,12 +18,14 @@
 
       <span>Graduating:</span>
       <select ng-model='plan.graduation_term'
-              ng-options='term for term in terms'>
+              ng-options='term for term in terms'
+              ng-change='updatePlan()'>
         <option value=""></option>
       </select>
 
       <select ng-model='plan.graduation_year'
-              ng-options='year for year in possibleYears'>
+              ng-options='year for year in possibleYears'
+              ng-change="updatePlan()">
         <option value=""></option>
       </select>
     </div>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :students
       resources :advisors
       resources :concentrations, only: [:index]
+      resources :plans, only: [:update]
     end
   end
 
