@@ -1,5 +1,5 @@
-planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService',
-  function($scope, student, planService) {
+planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', 'concentrationService',
+  function($scope, student, planService, concentrationService) {
   
   $scope.student = student;
 
@@ -12,6 +12,5 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService',
   $scope.updatePlan = function() {
     planService.update($scope.planInfo.plan);
   };
-
 
 }]);

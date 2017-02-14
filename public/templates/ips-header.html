@@ -10,9 +10,9 @@
     <div class="degree-info">
       <span>MA with Major in World Arts -- Concentration: </span>
 
-      <select ng-model='planInfo.plan.concentration'
-              ng-options='concentration as concentration.name for concentration in concentrations'
-              ng-change='loadCourses()'>
+      <select ng-model='planInfo.plan.concentration_id'
+              ng-options='concentration.id as concentration.name for concentration in concentrations'
+              ng-change='updatePlan()'>
         <option value=""></option>        
       </select>
 
@@ -45,8 +45,6 @@
       <input type="checkbox" ng-model='ips.registration_date'>
       {{ ips.registration_date || 'Not yet registered' }}
     </div>
-
-    {{planInfo}}
 
   </div>
 </div>
