@@ -17,4 +17,8 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', fu
     }
   };
 
+  $scope.handleDrop = function() {
+    console.log('dropped');
+  };
+
 }]);

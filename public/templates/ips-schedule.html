@@ -3,10 +3,14 @@
 
     <h3>Unscheduled Courses</h3>
 
+    <div droppable drop="handleDrop()">
+      Feel free to drop me here too!
+    </div>
+
     <table class="unscheduled-courses">
       <tr ng-repeat="course in planInfo.plan.intended_courses">
         <td>
-          <span class="course-bubble" draggable="true">
+          <span class="course-bubble" id="{{ course.id }}" draggable>
             {{ course.number }} {{ course.term.name }} 
             {{ course.sessions | sessionFilter }}
           </span>
@@ -34,38 +38,38 @@
     <div class="sessions text-center">
       <div>
         1
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
         2
-        <div class="session"></div> 
+        <div class="session" drop="handleDrop()" droppable></div> 
       </div>
       <div>
         3
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
         4
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
         1
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
         2
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
         3
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
       <div>
         4
-        <div class="session"></div>
+        <div class="session" drop="handleDrop()" droppable></div>
       </div>
     </div>
 
