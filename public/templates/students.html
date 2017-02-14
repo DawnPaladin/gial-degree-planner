@@ -8,6 +8,8 @@
     <th class="sortable" ng-class="sortableClasses('concentration')" ng-click="alternate('concentration')">Concentration</th>
     <th class="sortable" ng-class="sortableClasses('thesis_starts')" ng-click="alternate('thesis_starts')">Thesis starts</th>
     <th class="sortable" ng-class="sortableClasses('graduation_date')" ng-click="alternate('graduation_date')">Graduation</th>
+    <th class="sortable" ng-class="sortableClasses('currently_registered')" ng-click="alternate('currently_registered')">Now registered?</th>
+    <th class="sortable" ng-class="sortableClasses('registration_date')" ng-click="alternate('registration_date')">Registration date</th>
   </thead>
   <tbody>
     <tr ng-repeat="student in students | orderBy: ['-pinned', property]">
@@ -20,6 +22,8 @@
       <td>{{ student.concentration }}</td>
       <td>{{ student.thesis_starts }}</td>
       <td>{{ student.graduation_date }}</td>
+      <td>{{ student.currently_registered ? "Yes" : "" }}</td>
+      <td>{{ student.registration_date }}</td>
     </tr>
   </tbody>
 </table>
