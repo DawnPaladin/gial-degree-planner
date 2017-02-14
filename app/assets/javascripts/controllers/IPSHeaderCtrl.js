@@ -1,19 +1,47 @@
-planner.controller('IPSHeaderCtrl', ['$scope', 'student', function($scope, student) {
+planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', 'concentrationService',
+  function($scope, student, planService, concentrationService) {
   
   $scope.student = student;
+
+  // TODO get from plan instead of student
   $scope.concentrations = student.plan.degree.concentrations;
-  $scope.plan = student.plan;
+  $scope.planInfo = planService.getPlanInfo();
 
   $scope.terms = ['SPRING', 'SUMMER', 'FALL'];
 
-  var _populateYears = function() {  
-    $scope.possibleYears = [];
-    var currentYear = new Date().getFullYear();
-    for (var i = 0; i < 10; i++) {
-      var year = currentYear + i;
-      $scope.possibleYears.push(year);
-    }
+  // For all plan updates except for updates to latest_registered and registration_date
+  $scope.updatePlan = function() {
+    planService.update($scope.planInfo.plan).then(function(plan) {
+      $scope.unregisterIPS();
+    });
   };
-  _populateYears();
+
+  // Only for updates to latest_registered and registration_date
+  $scope.updateRegistration = function() {
+    planService.update($scope.planInfo.plan);
+  };
+
+  // Allows user to toggle whether the IPS has been registered or not
+  $scope.toggleRegistration = function() {
+    if ($scope.planInfo.plan.latest_registered) {
+      var date = new Date();
+      var year = date.getFullYear();
+      var month = date.getMonth();
+      var day = date.getDate();
+      $scope.planInfo.plan.registration_date = new Date(year, month, day);
+    }
+    $scope.updateRegistration();
+  };
+
+  // Unregisters the IPS
+  $scope.unregisterIPS = function() {
+    $scope.planInfo.plan.latest_registered = false;
+    $scope.toggleRegistration();
+  }
+
+  $scope.exportIPS = function() {
+    window.print();
+  };
+
 
 }]);

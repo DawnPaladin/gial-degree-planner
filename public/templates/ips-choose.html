@@ -7,31 +7,74 @@
 <div class="row">
   
   <div class="col-xs-6 ips-left-col">
-    <div class="completed-courses">
+    <div class="completed-courses course-section">
       <h3>Completed Courses</h3>
+      <p>currently these are carried on the planInfo obj</p>
+      <p>initially retrieved with getPlan (planservice ln 12)</p>
+      <p>and attached to the plan in rails controller</p>
+      <p>consider Restangularizing and/or extending the collection</p>
+      <table>
+        <tr ng-repeat='completed in planInfo.plan.completed_courses'
+            course-row
+            course='completed'
+            checkbox-callback='logCourse(course)'
+            class='course-row'>
+        </tr>
+      </table>
     </div>
 
-    <div class="intended-courses bordered">
+    <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
+      <p>currently these are carried on the planInfo obj</p>
+      <p>initially retrieved with getPlan (planservice ln 12)</p>
+      <p>and attached to the plan in rails controller</p>
+      <p>consider Restangularizing and/or extending the collection</p>
+      <table>
+        <tr ng-repeat='intended in planInfo.plan.intended_courses'
+            course-row
+            course='intended'
+            checkbox-callback='logCourse(course)'
+            class='course-row'>
+        </tr>
+      </table>
     </div>
   </div>
 
   <div class="col-xs-6 ips-right-col">
-    <div class="required-courses">
+    <div class="required-courses course-section">
       <h3>Required Courses</h3>
+      <table>
+        <tr ng-repeat='requirement in concentration.degree.required_courses'
+            course-row
+            course='requirement'
+            checkbox-callback='logCourse(course)'
+            class='course-row'>
+        </tr>
+      </table>
     </div>
 
-    <div class="categories" ng-if='categories.length'>
-      <div class="category bordered" ng-repeat='category in categories'>
+    <div class="categories" ng-if='concentration.categories.length'>
+      <div class="category bordered course-section" ng-repeat='category in concentration.categories'>
         <h3>{{ category.name }}</h3>
         <p>{{ Units }}</p>
-        <div class="course-row" ng-repeat='course in category.courses'></div>
-        <p>Units required: {{ category.required_units }}</p>
+        <table>
+          <tr ng-repeat='availableCourse in category.courses'
+              course-row
+              course='availableCourse'
+              checkbox-callback='logCourse(course)'
+              class='course-row'></tr>
+        </table>
+        <p class='required-units'>Units required: {{ category.required_units }}</p>
       </div>
     </div>
   </div>
 
   <!-- {{ student }} -->
+  <h2>plan</h2>
+  {{ planInfo.plan }}
+  <h2>concentration</h2>
+  <p>see concentration show jbuilder for structure of object</p>
+  {{concentration}}
 
 
 </div>
