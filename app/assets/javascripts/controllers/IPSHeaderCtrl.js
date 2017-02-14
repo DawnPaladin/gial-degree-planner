@@ -28,7 +28,7 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
   // if only the registration changes,
   // and does not broadcast one
   $scope.$on('planChanged', function(event, args) {
-    $scope.unregisterIPS();
+    $scope._unregisterIPS();
   });
 
   // Allows user to toggle whether the IPS has been registered or not
@@ -43,14 +43,14 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
     $scope.updateRegistration();
   };
 
-  // Unregisters the IPS
-  $scope.unregisterIPS = function() {
-    $scope.planInfo.plan.latest_registered = false;
-    $scope.toggleRegistration();
-  }
-
   $scope.exportIPS = function() {
     $window.print();
   };
+
+  // Unregisters the IPS
+  $scope._unregisterIPS = function() {
+    $scope.planInfo.plan.latest_registered = false;
+    $scope.toggleRegistration();
+  }
 
 }]);

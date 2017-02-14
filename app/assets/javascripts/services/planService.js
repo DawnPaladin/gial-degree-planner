@@ -1,9 +1,6 @@
 planner.factory('planService', ['Restangular', function(Restangular) {
 
   var _planInfo = {};
-  // _planInfo.completedCourses = [];
-  // _planInfo.intendedCourses = [];
-  // _planInfo.scheduledCourses = [];
   
   var getPlanInfo = function() {
     return _planInfo;
@@ -14,6 +11,11 @@ planner.factory('planService', ['Restangular', function(Restangular) {
       .customGET('plan')
       .then(function(response){
         _planInfo.plan = {};
+
+        _extend(response.intended_courses, 'intended', true);
+        _extend(response.completed_courses, 'completed', true);
+        console.log(response)
+
         angular.copy(response, _planInfo.plan);
         return _planInfo;
       }, function(error) {
@@ -29,6 +31,13 @@ planner.factory('planService', ['Restangular', function(Restangular) {
     });
   };
 
+  var _extend = function(array, propName, value) {
+    array.forEach(function(element) {
+      element[propName] = value;
+    })
+  }
+
+  // populates years in the graduation year dropdown
   var _populateYears = function() {  
     _planInfo.possibleYears = [];
     var currentYear = new Date().getFullYear();

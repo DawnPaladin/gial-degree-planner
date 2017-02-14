@@ -1,7 +1,6 @@
 planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService', 'concentrationService', function($scope, $state, student, planService, concentrationService) {
   
   $scope.student = student;
-
   $scope.planInfo = planService.getPlanInfo();
 
   $scope.$watch('planInfo.plan.concentration_id', function(newConcentration, prevConcentration, scope) {
