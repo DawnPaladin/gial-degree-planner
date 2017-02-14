@@ -1,13 +1,21 @@
-planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students',
-  function($scope, Restangular, advisors, students) {
+planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students', 'Auth',
+  function($scope, Restangular, advisors, students, Auth) {
 
     $scope.advisors = advisors;
+    $scope.students = students;
     $scope.property = "last_name";
     $scope.reverse = false;
 
-    students.forEach(function(current) { current.pinned = false; });
-    students[0].pinned = true;
-    $scope.students = students;
+    Auth.currentUser().then(function(advisor) {
+      $scope.currentAdvisor = advisor;
+      $scope.students.forEach(function(student) {
+        updatePinned(student);
+      });
+    });
+
+    var updatePinned = function(student) {
+      student.pinned = student.advisor.id === $scope.currentAdvisor.id;
+    };
 
     $scope.alternate = function(property) {
       if ($scope.property == property) {
@@ -31,11 +39,15 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
     };
 
     $scope.updateAdvisor = function(student) {
-      console.log(student);
+      console.log("Updating advisor", student);
       student.put().then(function(response) {
-        console.log("Success", response);
+        console.log("Response back", response);
+        angular.copy(response, student);
+        console.log("Copied", student);
+        updatePinned(student);
+        console.log("Updated", student);
       }, function(response) {
-        console.warn("Failure", response);
+        console.warn(response);
       });
     };
 

@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
   def update
     @student = Student.find_by_id(params[:id])
     if @student.update_attributes(student_params)
-      render json: @student, status: 200
+      render json: @student.as_json(include: :advisor)
     else
       render json: @student.errors, status: :unprocessable_entity
     end
