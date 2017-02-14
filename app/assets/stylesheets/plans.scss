@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 @media print {
 
   .planner {
@@ -13,3 +14,23 @@
   }
 
 }
+
+.bordered {
+  border: 1px solid #aaa;
+  padding: 15px 20px;
+  padding-top: -15px;
+}
+
+.course-section {
+  margin-bottom: 25px;
+  .required-units {
+    float: right;
+  }
+}
+
+.course-row {
+  td {
+    padding: 5px;
+  }
+}
+
