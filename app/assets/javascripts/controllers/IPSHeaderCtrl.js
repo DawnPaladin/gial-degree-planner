@@ -39,5 +39,9 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService',
     $scope.toggleRegistration();
   }
 
+  $scope.exportIPS = function() {
+    window.print();
+  };
+
 
 }]);
