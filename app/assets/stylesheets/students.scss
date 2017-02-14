@@ -11,3 +11,53 @@
 .sorted.reverse:after {
   content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
 }
+
+// SCHEDULE STYLES
+.unscheduled-courses {
+
+}
+
+.course-bubble {
+  background: #ddd;
+  padding: 6px 15px;
+  display: block;
+  border-radius: 20px;
+  margin: 5px 20px 5px 0;
+  cursor: move;
+}
+
+.prerequisites {
+
+}
+
+.schedule {
+
+  margin-top: 15px;
+
+  .sessions {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin: 10px 0;
+
+    .session {
+      height: 100px;
+      width: 100px;
+      border: 1px solid #ddd;
+    }
+
+  }
+
+  .dates {
+    margin-bottom: 20px;
+  }
+
+  .terms {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+
+
+}

@@ -39,6 +39,14 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', 'concen
     $scope.toggleRegistration();
   }
 
+  $scope.$on('toggle-concentration', function() {
+    if ($scope.concentrationDisabled) {
+      $scope.concentrationDisabled = false;
+    } else {
+      $scope.concentrationDisabled = true;
+    }
+  });
+
   $scope.exportIPS = function() {
     window.print();
   };
