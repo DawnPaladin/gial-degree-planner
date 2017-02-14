@@ -25,7 +25,7 @@ class Plan < ApplicationRecord
   end
 
   def thesis_starts
-    self.scheduled_classes.merge(Course.thesis_writing.meetings).first.friendly_date
+    self.scheduled_classes.merge(Course.thesis_writing.meetings).first
   end
 
 end

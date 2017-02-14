@@ -4,7 +4,7 @@ json.array! @students do |student|
   json.id student.id
   if student.plan && student.plan.concentration
     json.concentration student.plan.concentration.name
-    json.thesis_starts student.plan.thesis_starts
+    json.thesis_starts friendly_date(student.plan.thesis_starts)
     json.graduation_date student.plan.graduation_term.titleize + ' ' + student.plan.graduation_year.to_s
   end
 end
