@@ -24,6 +24,7 @@ class Plan < ApplicationRecord
     self.completed_courses + self.intended_courses
   end
 
+   # TODO More edge case coverage
   def thesis_starts
     unless self.scheduled_classes.empty? || Course.thesis_writing.meetings.empty?
       self.scheduled_classes.merge(Course.thesis_writing.meetings).first
