@@ -1,7 +1,5 @@
 json.array! @students do |student|
-  json.id student.id
-  json.first_name student.first_name
-  json.last_name student.last_name
+  json.extract! student, *student.attributes.keys
   json.advisor student.advisor
   if student.plan.concentration
     json.concentration student.plan.concentration.name

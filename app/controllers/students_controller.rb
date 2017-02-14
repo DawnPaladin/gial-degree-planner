@@ -12,4 +12,18 @@ class StudentsController < ApplicationController
     # renders the jbuilder
   end
 
+  def update
+    @student = Student.find_by_id(params[:id])
+    if @student.update_attributes(student_params)
+      render json: @student, status: 200
+    else
+      render json: @student.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+    def student_params
+      params.require(:student).permit(:id, :advisor_id)
+    end
+
 end

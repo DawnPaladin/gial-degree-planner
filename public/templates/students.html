@@ -14,7 +14,11 @@
   <tbody>
     <tr ng-repeat="student in students | orderBy: ['-pinned', property]">
       <td>
-        <select ng-model="student.advisor" ng-options="advisor.id as advisor.first_name for advisor in advisors"></select>
+        <select
+          ng-model="student.advisor_id"
+          ng-options="advisor.id as advisor.first_name for advisor in advisors"
+          ng-change="updateAdvisor(student)">
+        </select>
         <span class="glyphicon glyphicon-star" ng-show="student.pinned"></span>
       </td>
       <td><a ui-sref="ips.choose({ student_id: student.id })">{{ student.first_name }}</a></td>

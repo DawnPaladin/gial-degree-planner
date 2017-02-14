@@ -30,5 +30,14 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
       return classString;
     };
 
+    $scope.updateAdvisor = function(student) {
+      console.log(student);
+      student.put().then(function(response) {
+        console.log("Success", response);
+      }, function(response) {
+        console.warn("Failure", response);
+      });
+    };
+
   }
 ]);
