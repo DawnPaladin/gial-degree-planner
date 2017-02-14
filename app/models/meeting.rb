@@ -10,4 +10,12 @@ class Meeting < ApplicationRecord
   has_many :teachers, through: :meetings_teachers
 
   belongs_to :course
+
+  def friendly_date
+    if self.term == "ANY"
+      self.year.to_s
+    else
+      self.term.titleize + ' ' + self.year.to_s
+    end
+  end
 end
