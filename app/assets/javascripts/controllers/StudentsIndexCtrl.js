@@ -47,6 +47,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
         Flash.create('success', message);
       }, function(response) {
         console.warn(response);
+        Flash.create('danger', response.statusText);
       });
     };
 
