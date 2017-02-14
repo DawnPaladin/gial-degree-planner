@@ -81,9 +81,14 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }
       },
       resolve: {
-        student: ['Restangular', '$stateParams',
-          function(Restangular, $stateParams) {
-          return Restangular.one('students', $stateParams.student_id).get();
+        student: ['Restangular', '$stateParams', 'helpers',
+          function(Restangular, $stateParams, helpers) {
+          return Restangular.one('students', $stateParams.student_id).get()
+            .then(function(response) {
+              console.log(response)
+              helpers.extendArray(response.degree.required_courses, 'intended', true);
+              return response;
+            });
         }],
         plan: ['planService', '$stateParams',
           function(planService, $stateParams) {

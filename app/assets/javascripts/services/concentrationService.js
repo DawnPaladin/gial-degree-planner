@@ -1,10 +1,10 @@
 planner.factory('concentrationService',
-  ['Restangular', function(Restangular) {
+  ['Restangular', 'helpers', function(Restangular, helpers) {
   
   var getConcentration = function(concentrationId) {
     return Restangular.one('concentrations', concentrationId)
       .get()
-      .$object;
+      .$object
   };
 
   return {

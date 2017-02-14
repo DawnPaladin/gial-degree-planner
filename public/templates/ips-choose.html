@@ -9,10 +9,6 @@
   <div class="col-xs-6 ips-left-col">
     <div class="completed-courses course-section">
       <h3>Completed Courses</h3>
-      <p>currently these are carried on the planInfo obj</p>
-      <p>initially retrieved with getPlan (planservice ln 12)</p>
-      <p>and attached to the plan in rails controller</p>
-      <p>consider Restangularizing and/or extending the collection</p>
       <table>
         <tr ng-repeat='completed in planInfo.plan.completed_courses'
             course-row
@@ -25,10 +21,6 @@
 
     <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
-      <p>currently these are carried on the planInfo obj</p>
-      <p>initially retrieved with getPlan (planservice ln 12)</p>
-      <p>and attached to the plan in rails controller</p>
-      <p>consider Restangularizing and/or extending the collection</p>
       <table>
         <tr ng-repeat='intended in planInfo.plan.intended_courses'
             course-row
@@ -70,11 +62,11 @@
   </div>
 
   <!-- {{ student }} -->
-  <h2>plan</h2>
+<!--   <h2>plan</h2>
   {{ planInfo.plan }}
   <h2>concentration</h2>
   <p>see concentration show jbuilder for structure of object</p>
-  {{concentration}}
+  {{concentration}} -->
 
 
 </div>

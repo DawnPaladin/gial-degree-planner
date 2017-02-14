@@ -133,7 +133,7 @@ Category.all.each do |category|
     prereq = Course.all.sample
     course.required_courses << prereq unless prereq == course
     if num % 4 == 0
-      Degree.all.sample.required_courses << course
+      degree.required_courses << course if degree.required_courses.length < 3
     end
   end
 end
