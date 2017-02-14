@@ -1,29 +1,35 @@
-planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService',
-  function($scope, student, planService) {
+planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student', 'planService',
+  function($scope, $rootScope, $window, student, planService) {
   
-  $scope.student = student;
-
   // All static information comes over
   // on initial load
   // Student + Degree + List of Concentrations
+  $scope.student = student;
   $scope.concentrations = student.degree.concentrations;
-
   $scope.planInfo = planService.getPlanInfo();
   $scope.plan = $scope.planInfo.plan;
-
   $scope.terms = ['SPRING', 'SUMMER', 'FALL'];
 
   // For all plan updates except for updates to latest_registered and registration_date
   $scope.updatePlan = function() {
-    planService.update($scope.planInfo.plan).then(function(plan) {
-      $scope.unregisterIPS();
-    });
+    planService.update($scope.planInfo.plan)
+      .then(function(plan) {
+        $rootScope.$broadcast('planChanged', plan);
+      });
   };
 
   // Only for updates to latest_registered and registration_date
   $scope.updateRegistration = function() {
     planService.update($scope.planInfo.plan);
   };
+
+  // $rootScope will broadcast plan changed
+  // $rootScope does not receive a plan changed event
+  // if only the registration changes,
+  // and does not broadcast one
+  $scope.$on('planChanged', function(event, args) {
+    $scope.unregisterIPS();
+  });
 
   // Allows user to toggle whether the IPS has been registered or not
   $scope.toggleRegistration = function() {
@@ -44,8 +50,7 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService',
   }
 
   $scope.exportIPS = function() {
-    window.print();
+    $window.print();
   };
-
 
 }]);

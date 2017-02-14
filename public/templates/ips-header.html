@@ -43,8 +43,8 @@
 
     <div class="registered-info">
       <span>Has the most recent intended plan of study been registered?</span>
-      <input type="checkbox" ng-model="planInfo.plan.latest_registered" ng-change="toggleRegistration()">
-      <p ng-if="planInfo.plan.registration_date" >An intended plan of study for {{ student.first_name }} was last registered on {{ planInfo.plan.registration_date | date }}</p>
+      <input type="checkbox" ng-model="plan.latest_registered" ng-change="toggleRegistration()">
+      <p ng-if="plan.registration_date" >An intended plan of study for {{ student.first_name }} was last registered on {{ plan.registration_date | date }}</p>
     </div>
 
   </div>
