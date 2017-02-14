@@ -1,1 +1,13 @@
-Classes
+<h2>Classes</h2>
+
+<table class="table">
+  <thead>
+    <th><input placeholder="Filter classes"></th>
+
+  </thead>
+  <tbody>
+    <tr ng-repeat="course in courses">
+      <td>{{ course.number }} {{ course.name }}</td>
+    </tr>
+  </tbody>
+</table>

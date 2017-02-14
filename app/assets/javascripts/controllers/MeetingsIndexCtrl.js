@@ -1,3 +1,6 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', function($scope) {
-  $scope.hello = "Hello World";
-}]);
+planner.controller('MeetingsIndexCtrl', ['$scope', 'courses',
+  function($scope, courses) {
+    console.log(courses);
+    $scope.courses = courses;
+  }
+]);
