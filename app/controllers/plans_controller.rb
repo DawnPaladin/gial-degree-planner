@@ -16,7 +16,7 @@ class PlansController < ApplicationController
   private
 
     def plan_params
-      params.require(:plan).permit(:graduation_term, :graduation_year, :concentration_id)
+      params.require(:plan).permit(:graduation_term, :graduation_year, :concentration_id, :latest_registered, :registration_date)
     end
 
 end

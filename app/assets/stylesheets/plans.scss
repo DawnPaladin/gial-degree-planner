@@ -2,6 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+@media print {
+
+  .planner {
+
+  }
+
+  .print-hide {
+    
+  }
+
+}
+
 .bordered {
   border: 1px solid #aaa;
   padding: 15px 20px;
@@ -20,3 +33,4 @@
     padding: 5px;
   }
 }
+
