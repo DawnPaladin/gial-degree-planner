@@ -1,13 +1,21 @@
-planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students',
-  function($scope, Restangular, advisors, students) {
+planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students', 'Auth', 'Flash',
+  function($scope, Restangular, advisors, students, Auth, Flash) {
 
     $scope.advisors = advisors;
+    $scope.students = students;
     $scope.property = "last_name";
     $scope.reverse = false;
 
-    students.forEach(function(current) { current.pinned = false; });
-    students[0].pinned = true;
-    $scope.students = students;
+    Auth.currentUser().then(function(advisor) {
+      $scope.currentAdvisor = advisor;
+      $scope.students.forEach(function(student) {
+        updatePinned(student);
+      });
+    });
+
+    var updatePinned = function(student) {
+      student.pinned = student.advisor.id === $scope.currentAdvisor.id;
+    };
 
     $scope.alternate = function(property) {
       if ($scope.property == property) {
@@ -28,6 +36,19 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
         }
       }
       return classString;
+    };
+
+    $scope.updateAdvisor = function(student) {
+      student.save().then(function(response) {
+        student.advisor_id = response.advisor_id;
+        student.advisor = response.advisor;
+        updatePinned(student);
+        var message = response.advisor.first_name + ' ' + response.advisor.last_name + " is now the advisor for " + student.first_name + ' ' + student.last_name;
+        Flash.create('success', message);
+      }, function(response) {
+        console.warn(response);
+        Flash.create('danger', response.statusText);
+      });
     };
 
   }

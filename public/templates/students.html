@@ -7,21 +7,27 @@
     <th class="sortable" ng-class="sortableClasses('last_name')" ng-click="alternate('last_name')">Last name</th>
     <th class="sortable" ng-class="sortableClasses('concentration')" ng-click="alternate('concentration')">Concentration</th>
     <th class="sortable" ng-class="sortableClasses('thesis_starts')" ng-click="alternate('thesis_starts')">Thesis starts</th>
-    <th class="sortable" ng-class="sortableClasses('comp_date')" ng-click="alternate('comp_date')">Comp date</th>
-    <th class="sortable" ng-class="sortableClasses('graduation')" ng-click="alternate('graduation')">Graduation</th>
+    <th class="sortable" ng-class="sortableClasses('graduation_date')" ng-click="alternate('graduation_date')">Graduation</th>
+    <th class="sortable" ng-class="sortableClasses('currently_registered')" ng-click="alternate('currently_registered')">Now registered?</th>
+    <th class="sortable" ng-class="sortableClasses('registration_date')" ng-click="alternate('registration_date')">Registration date</th>
   </thead>
   <tbody>
     <tr ng-repeat="student in students | orderBy: ['-pinned', property]">
       <td>
-        <select ng-model="student.advisor" ng-options="advisor.id as advisor.first_name for advisor in advisors"></select>
+        <select
+          ng-model="student.advisor_id"
+          ng-options="advisor.id as (advisor.first_name + ' ' + advisor.last_name) for advisor in advisors"
+          ng-change="updateAdvisor(student)">
+        </select>
         <span class="glyphicon glyphicon-star" ng-show="student.pinned"></span>
       </td>
       <td><a ui-sref="ips.choose({ student_id: student.id })">{{ student.first_name }}</a></td>
       <td>{{ student.last_name }}</td>
       <td>{{ student.concentration }}</td>
-      <td>{{ student.thesisStarts }}</td>
-      <td>{{ student.compDate }}</td>
-      <td>{{ student.graduationDate }}</td>
+      <td>{{ student.thesis_starts }}</td>
+      <td>{{ student.graduation_date }}</td>
+      <td>{{ student.currently_registered ? "Yes" : "" }}</td>
+      <td>{{ student.registration_date }}</td>
     </tr>
   </tbody>
 </table>

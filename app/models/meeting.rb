@@ -10,4 +10,5 @@ class Meeting < ApplicationRecord
   has_many :teachers, through: :meetings_teachers
 
   belongs_to :course
+
 end

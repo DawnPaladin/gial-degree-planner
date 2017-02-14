@@ -2,7 +2,6 @@ class StudentsController < ApplicationController
 
   def index
     @students = Student.all
-    render json: @students, status: 200
   end
 
   def show
@@ -12,5 +11,19 @@ class StudentsController < ApplicationController
     @term = @plan.graduation_term
     # renders the jbuilder
   end
+
+  def update
+    @student = Student.find_by_id(params[:id])
+    if @student.update_attributes(student_params)
+      render json: @student.as_json(include: :advisor)
+    else
+      render json: @student.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+    def student_params
+      params.require(:student).permit(:id, :advisor_id)
+    end
 
 end
