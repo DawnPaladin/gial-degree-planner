@@ -1,5 +1,5 @@
-planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students', 'Auth',
-  function($scope, Restangular, advisors, students, Auth) {
+planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students', 'Auth', 'Flash',
+  function($scope, Restangular, advisors, students, Auth, Flash) {
 
     $scope.advisors = advisors;
     $scope.students = students;
@@ -43,6 +43,8 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
         student.advisor_id = response.advisor_id;
         student.advisor = response.advisor;
         updatePinned(student);
+        var message = response.advisor.first_name + ' ' + response.advisor.last_name + " is now the advisor for " + student.first_name + ' ' + student.last_name;
+        Flash.create('success', message);
       }, function(response) {
         console.warn(response);
       });
