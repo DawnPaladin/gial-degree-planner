@@ -84,11 +84,11 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         student: ['Restangular', '$stateParams',
           function(Restangular, $stateParams) {
           return Restangular.one('students', $stateParams.student_id).get();
-        }]
-        // Student: {student_attrs, plan:{ plan_attrs }, degree{ [concentrations] } }
-        // concentrations: ['Restangular', function(Restangular) {
-        //   return Restangular.all('concentrations').getList();
-        // }]
+        }],
+        plan: ['planService', '$stateParams',
+          function(planService, $stateParams) {
+            return planService.getPlan($stateParams.student_id);
+          }]
       }
     })
     .state('ips.choose', {
