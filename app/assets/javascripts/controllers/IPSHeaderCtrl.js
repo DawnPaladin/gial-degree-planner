@@ -1,5 +1,5 @@
 planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', 'concentrationService',
-  function($scope, student, planService, concentrationService) {
+  function($scope, student, planService) {
   
   $scope.student = student;
 
@@ -12,11 +12,5 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', 'concen
   $scope.updatePlan = function() {
     planService.update($scope.planInfo.plan);
   };
-
-  $scope.$watch('planInfo.plan.concentration_id', function(prevConcentration, newConcentration, scope) {
-    scope.concentration =
-      concentrationService.getConcentration(newConcentration);
-  }, true);
-
 
 }]);

@@ -3,7 +3,7 @@ class PlansController < ApplicationController
 
   def show
     @plan = Student.find(params[:student_id]).plan
-    render json: @plan
+    render json: @plan.to_json(include: [:intended_courses, :completed_courses])
   end
 
   def update

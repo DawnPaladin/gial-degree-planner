@@ -19,4 +19,12 @@ class Plan < ApplicationRecord
            class_name: 'Meeting'
 
   belongs_to :degree
+
+  def courses
+    {
+      'intended_courses': self.intended_courses,
+      'completed_courses': self.completed_courses,
+      'scheduled_classes': self.scheduled_classes
+    }
+  end
 end
