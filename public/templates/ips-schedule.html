@@ -29,14 +29,61 @@
 
 <section class="schedule">
 
-  <div class="sessions">
-  </div>
+  <div ng-repeat="year in years">
 
-  <div class="term">
-  </div>
+    <div class="sessions text-center">
+      <div>
+        1
+        <div class="session"></div>
+      </div>
+      <div>
+        2
+        <div class="session"></div> 
+      </div>
+      <div>
+        3
+        <div class="session"></div>
+      </div>
+      <div>
+        4
+        <div class="session"></div>
+      </div>
+      <div>
+        <div class="session"></div>
+      </div>
+      <div>
+        1
+        <div class="session"></div>
+      </div>
+      <div>
+        2
+        <div class="session"></div>
+      </div>
+      <div>
+        3
+        <div class="session"></div>
+      </div>
+      <div>
+        4
+        <div class="session"></div>
+      </div>
+    </div>
 
-  <div class="new-year text-center">
-    <button class="btn btn-success">Add Additional Year</button>
+    <div class="dates text-center">
+      <div class="terms">
+        <div>Spring</div>
+        <div>Summer</div>
+        <div>Fall</div>
+      </div>
+      {{ year }}
+    </div>
+
+
+
   </div>
 
 </section>
+
+<div class="new-year text-center">
+  <button ng-click="addYear()" class="btn btn-success">Add Additional Year</button>
+</div>

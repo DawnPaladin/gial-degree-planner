@@ -31,4 +31,32 @@
 
 .schedule {
 
+  margin-top: 15px;
+
+  .sessions {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin: 10px 0;
+
+    .session {
+      height: 100px;
+      width: 100px;
+      border: 1px solid #ddd;
+    }
+
+  }
+
+  .dates {
+    margin-bottom: 20px;
+  }
+
+  .terms {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+
+
 }
