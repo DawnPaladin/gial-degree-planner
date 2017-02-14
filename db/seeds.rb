@@ -129,7 +129,16 @@ Category.all.each do |category|
       term_id: Term.all.sample.id
     })
 
-    course.sessions << Session.all.sample
+    if num % 3 == 0
+      2.times do |i|
+        s = Session.all.sample
+        unless course.sessions.include?(s)
+          course.sessions << s
+        end
+      end
+    else
+      course.sessions << Session.all.sample
+    end
     prereq = Course.all.sample
     course.required_courses << prereq unless prereq == course
     if num % 4 == 0
