@@ -13,14 +13,20 @@ planner.factory('planService', ['Restangular', function(Restangular) {
     Restangular.one('students', student_id)
       .customGET('plan')
       .then(function(response){
-
-      console.log(response)
-
-        angular.copy(response, _planInfo);
+        _planInfo.plan = {};
+        angular.copy(response, _planInfo.plan);
         return _planInfo;
       }, function(error) {
         console.error(error);
       });
+  };
+
+  var update = function(plan) {
+    return Restangular.one('students', plan.student_id).customPUT(plan, 'plan').then(function(plan) {
+      return plan;
+    }, function(response) {
+      console.log(response);
+    });
   };
 
   var _populateYears = function() {  
@@ -35,8 +41,8 @@ planner.factory('planService', ['Restangular', function(Restangular) {
 
   return {
     getPlanInfo: getPlanInfo,
-    getPlan: getPlan
+    getPlan: getPlan,
+    update: update
   };
-
 
 }]);

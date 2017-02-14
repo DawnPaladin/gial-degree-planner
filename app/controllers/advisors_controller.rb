@@ -6,7 +6,7 @@ class AdvisorsController < ApplicationController
   def index
     @advisors = Advisor.all
     respond_to do |format|
-      format.html
+      format.html { render 'advisors/index' }
       format.json { render json: @advisors, status: 200 }
     end
   end
