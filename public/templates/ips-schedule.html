@@ -1,27 +1,42 @@
-<section class="schedule">
-  <div class="row">
-    <div class="col-md-6">
+<section class="row">
+  <div class="col-md-6">
 
-      <h3>Unscheduled Courses</h3>
+    <h3>Unscheduled Courses</h3>
 
-      <ul class="unscheduled-courses">
-        <li ng-repeat="course in planInfo.plan.intended_courses">
+    <table class="unscheduled-courses">
+      <tr ng-repeat="course in planInfo.plan.intended_courses">
+        <td>
           <span class="course-bubble" draggable="true">
             {{ course.number }} {{ course.term.name }} 
             {{ course.sessions | sessionFilter }}
           </span>
+        </td>
+        <td>
           {{ course.number}} {{ course.name }}
-        </li>
-      </ul>
-    
-
-    
+        </td>
+      </tr>
+    </table>
+  
+  </div>
+  <div class="col-md-6">
+  
+    <div class="prerequisites">
     </div>
-    <div class="col-md-6">
-    
-      
-    
-    </div>
+  
+  </div>
 
+</section>
+
+<section class="schedule">
+
+  <div class="sessions">
+  </div>
+
+  <div class="term">
+  </div>
+
+  <div class="new-year text-center">
+    <button class="btn btn-success">Add Additional Year</button>
+  </div>
 
 </section>

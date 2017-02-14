@@ -13,19 +13,22 @@
 }
 
 // SCHEDULE STYLES
-.schedule {
-
-}
-
 .unscheduled-courses {
-  list-style-type: none;
-  li {
-    line-height: 3;
-  }
+
 }
 
 .course-bubble {
   background: #ddd;
-  padding: 8px 15px;
+  padding: 6px 15px;
+  display: block;
   border-radius: 20px;
+  margin: 5px 20px 5px 0;
+}
+
+.prerequisites {
+
+}
+
+.schedule {
+
 }
