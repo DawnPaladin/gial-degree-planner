@@ -18,4 +18,5 @@
 //= require restangular
 //= require bootstrap-sprockets
 //= require angular-devise
+//= require angular-flash
 //= require_tree .
