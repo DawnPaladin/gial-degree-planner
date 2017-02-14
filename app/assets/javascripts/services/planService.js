@@ -25,7 +25,7 @@ planner.factory('planService', ['Restangular', function(Restangular) {
     return Restangular.one('students', plan.student_id).customPUT(plan, 'plan').then(function(plan) {
       return plan;
     }, function(response) {
-      console.log(response);
+      console.error(response);
     });
   };
 

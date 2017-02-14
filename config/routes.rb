@@ -14,8 +14,7 @@ Rails.application.routes.draw do
         resource :plan
       end
       resources :advisors
-      resources :concentrations, only: [:index]
-      # resources :plans, only: [:update]
+      resources :concentrations, only: [:index, :show]
     end
   end
 
