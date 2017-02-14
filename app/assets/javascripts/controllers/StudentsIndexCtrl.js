@@ -39,13 +39,10 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
     };
 
     $scope.updateAdvisor = function(student) {
-      console.log("Updating advisor", student);
-      student.put().then(function(response) {
-        console.log("Response back", response);
-        angular.copy(response, student);
-        console.log("Copied", student);
+      student.save().then(function(response) {
+        student.advisor_id = response.advisor_id;
+        student.advisor = response.advisor;
         updatePinned(student);
-        console.log("Updated", student);
       }, function(response) {
         console.warn(response);
       });
