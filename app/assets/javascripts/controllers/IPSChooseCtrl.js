@@ -1,4 +1,4 @@
-planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', function($scope, $state, student) {
+planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService', function($scope, $state, student, planService) {
   
   $scope.student = student;
 

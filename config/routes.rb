@@ -10,9 +10,12 @@ Rails.application.routes.draw do
 
   scope :api do
     scope :v1 do
-      resources :students
+      resources :students do
+        resource :plan
+      end
       resources :advisors
       resources :concentrations, only: [:index]
+      # resources :plans, only: [:update]
     end
   end
 

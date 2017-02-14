@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  # Necessary for APIs?
+  before_action :authenticate_advisor!
+
   protected
 
     def configure_permitted_parameters
@@ -23,7 +26,7 @@ class ApplicationController < ActionController::Base
 
     def require_current_advisor
       unless current_advisor.id == params[:id].to_i
-        redirect_back(fallback_location: root_path)
+        redirect_back(fallback_location: edit_advisor_registration_path(id: current_advisor.id))
       end
     end        
 
