@@ -25,7 +25,9 @@ class Plan < ApplicationRecord
   end
 
   def thesis_starts
-    self.scheduled_classes.merge(Course.thesis_writing.meetings).first
+    unless self.scheduled_classes.empty? || Course.thesis_writing.meetings.empty?
+      self.scheduled_classes.merge(Course.thesis_writing.meetings).first
+    end
   end
 
 end
