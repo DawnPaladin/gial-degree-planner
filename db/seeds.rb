@@ -6,7 +6,7 @@ NUM_MEETINGS = 3
 NUM_CONCENTRATIONS = 2
 NUM_TEACHERS = 4
 NUM_FOREIGN_COURSES = 2
-TERMS = ['SPRING', 'SUMMER', 'FALL', 'ANY']
+TERMS = ['Spring', 'Summer', 'Fall', 'Any']
 LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos reiciendis doloremque, tenetur nulla illo eaque, qui excepturi assumenda aspernatur praesentium quo cumque sint repellat natus.'
 
 puts 'Destroying...'
@@ -97,6 +97,7 @@ NUM_CONCENTRATIONS.times do |num|
     thesis_hours: 6,
     elective_hours: 3
   })
+
   thesis.courses << Course.thesis_writing
   thesis.courses << Course.thesis_course
 

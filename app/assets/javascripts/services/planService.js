@@ -13,10 +13,8 @@ planner.factory('planService', ['Restangular', function(Restangular) {
     Restangular.one('students', student_id)
       .customGET('plan')
       .then(function(response){
-        var thing = Restangular.stripRestangular(response);
         _planInfo.plan = {};
         angular.copy(response, _planInfo.plan);
-        console.log('student plan info', thing);
         return _planInfo;
       }, function(error) {
         console.error(error);

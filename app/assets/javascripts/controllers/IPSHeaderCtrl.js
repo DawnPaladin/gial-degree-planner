@@ -7,7 +7,7 @@ planner.controller('IPSHeaderCtrl', ['$scope', 'student', 'planService', 'concen
   $scope.concentrations = student.plan.degree.concentrations;
   $scope.planInfo = planService.getPlanInfo();
 
-  $scope.terms = ['SPRING', 'SUMMER', 'FALL'];
+  $scope.terms = ['Spring', 'Summer', 'Fall'];
 
   // For all plan updates except for updates to latest_registered and registration_date
   $scope.updatePlan = function() {

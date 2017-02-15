@@ -49,6 +49,13 @@ planner.directive('droppable', function() {
           this.classList.remove('over');
           var item = document.getElementById(e.dataTransfer.getData('Text'));
           this.appendChild(item);
+          
+          if (angular.element(this).hasClass('session')) {
+            angular.element(item).addClass('placed');
+          } else {
+            angular.element(item).removeClass('placed');
+          }
+
           scope.$apply('drop()');
           return false;
         },
