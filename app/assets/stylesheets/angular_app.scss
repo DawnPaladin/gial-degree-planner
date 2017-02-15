@@ -1,7 +1,8 @@
 .flash-container {
-  text-align: right;
-  position: absolute;
-  right: 2em;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  z-index: 100;
   .alert {
     display: inline-block;
   }

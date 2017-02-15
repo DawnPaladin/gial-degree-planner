@@ -1,4 +1,4 @@
-planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', function($scope, $rootScope, planService, $window, $timeout, _) {
+planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', function($scope, $rootScope, planService, $window, $timeout, _, Flash) {
 
   $rootScope.$broadcast('toggle-concentration');
 
@@ -9,12 +9,18 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   $scope.years = [$scope.possibleYears[0]];
 
   var nextYear = 1;
+  var messages = {
+    'newYear': "New year added!",
+    'courseScheduled': "Course scheduled!",
+    'courseUnscheduled': "Course removed from schedule";
+  };
 
   $scope.addYear = function() {
     if ($scope.possibleYears[nextYear]) {
       $timeout(function() {
         $scope.years.push($scope.possibleYears[nextYear]);
         nextYear++;
+        Flash.create('success', messages['newYear']);
       }, 150);
     }
   };
@@ -27,7 +33,7 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
 
   $scope.handleDrop = function() {
-    console.log('dropped');
+    Flash.create('success', messages['courseScheduled']);
   };
 
   var stickyContainer = document.getElementById('sticky-container');
