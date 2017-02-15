@@ -40,6 +40,27 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
     }
   }
 
+  var addOrRemoveCompleted = function(course) {
+    if (course.completed) {
+      console.log('adding to completed')
+      _addToCompleted(course);
+    } else {
+      console.log('removing from completed')
+      _removeFromCompleted(course);
+    }
+  };
+
+
+  // TODO if these remain unchanged
+  // refactor into two functions
+  var _addToIntended = function(course) {
+    _planInfo.plan.intended_courses.push(course);
+  };
+
+  var _addToCompleted = function(course) {
+    _planInfo.plan.completed_courses.push(course);
+  };
+
   var _removeFromIntended = function(course) {
     for (var i = 0; i < _planInfo.plan.intended_courses.length; i++) {
       if (_planInfo.plan.intended_courses[i].id === course.id) {
@@ -48,9 +69,14 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
     }
   };
 
-  var _addToIntended = function(course) {
-    _planInfo.plan.intended_courses.push(course);
+  var _removeFromCompleted = function(course) {
+    for (var i = 0; i < _planInfo.plan.completed_courses.length; i++) {
+      if (_planInfo.plan.completed_courses[i].id === course.id) {
+        _planInfo.plan.completed_courses.splice(i, 1);
+      }
+    }
   };
+
 
   // populates years in the graduation year dropdown
   var _populateYears = function() {  
@@ -67,7 +93,8 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
     update: update,
-    addOrRemoveIntended: addOrRemoveIntended
+    addOrRemoveIntended: addOrRemoveIntended,
+    addOrRemoveCompleted: addOrRemoveCompleted
   };
 
 }]);
