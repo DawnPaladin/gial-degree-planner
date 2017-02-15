@@ -45,7 +45,7 @@ TERMS.each do |term|
 end
 
 puts 'creating sessions'
-['Session 1', 'Session 2', 'Session 3', 'Session 4'].each do |session|
+['1', '2', '3', '4'].each do |session|
   Session.create({ name: session })
 end
 
@@ -78,6 +78,25 @@ NUM_ADVISORS.times do |num|
   })
 end
 
+puts 'creating courses'
+require 'csv'
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'world-arts-courses.csv'))
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
+csv.each do |row|
+  course = Course.create({
+    number: row['Category'] + row['Number'],
+    name: row['Name'],
+    level: row['Course Level'],
+    units: row['Credit Hours'],
+    term: Term.find_by(name: row['Course Term'].upcase),
+  })
+  unless row['Sessions'].nil?
+    session_names = row['Sessions'].split(',')
+    session_names.each do |session_name|
+      course.sessions << Session.find_by(name: session_name)
+    end
+  end
+end
 
 puts 'creating degree'
 degree = Degree.create({
@@ -174,21 +193,21 @@ conc = degree.concentrations.create({
 puts 'creating courses through categories'
 Category.all.each do |category|
   NUM_COURSES.times do |num|
-    course = category.courses.create({
-      name: "#{Faker::Music.instrument} Studies",
-      number: "AA99#{category.id}#{num}",
-      description: LOREM,
-      units: 3,
-      level: ['graduate', 'graduate', 'graduate', 'undergraduate'].sample,
-      term_id: Term.all.sample.id
-    })
+    # course = category.courses.create({
+    #   name: "#{Faker::Music.instrument} Studies",
+    #   number: "AA99#{category.id}#{num}",
+    #   description: LOREM,
+    #   units: 3,
+    #   level: ['graduate', 'graduate', 'graduate', 'undergraduate'].sample,
+    #   term_id: Term.all.sample.id
+    # })
 
-    course.sessions << Session.all.sample
-    prereq = Course.all.sample
-    course.required_courses << prereq unless prereq == course
-    if num % 4 == 0
-      Degree.all.sample.required_courses << course
-    end
+    # course.sessions << Session.all.sample
+    # prereq = Course.all.sample
+    # course.required_courses << prereq unless prereq == course
+    # if num % 4 == 0
+    #   Degree.all.sample.required_courses << course
+    # end
   end
 end
 
