@@ -1,0 +1,17 @@
+Category,Number,Name,Course Level,Credit Hours,Course Term,Course Location,Prerequisites,Corequisites
+AA,5339,Research Methods for World Arts,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None
+AA,5357,Oral Tradition and Literature,Graduate,3,Fall,On-campus,None,None
+AA,5381,Arts for a Better Future (Intensive),Graduate,3,Summer,Intensive,None,None
+AA,5382,Applied Arts,Graduate,3,Fall,On-campus,AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or permission of instructor,None
+AA,5383,Arts and Trauma Healing (Intensive),Graduate,3,Spring,Intensive,None,None
+AA,5384,Expressive Form Analysis,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of instructor,None
+AA,5385,Song Transcription and Analysis,Graduate,3,Spring,On-campus,(1) Six semester hours of college level (western) music theory (or its equivalent) (2) AA5384 Expressive Form Analysis (or its equivalent),None
+AA,5386,Directed Practicum in World Arts (Online),Graduate,3,Spring/Fall,Online,AA5381 Arts for a Better Future or AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or AA5382 Applied Arts,None
+AA,5387,Training Across Cultures,Graduate,3,Spring/Fall,On-campus,AA4370 Cultural Anthropology or AA4505 Second Language and Culture Acquisition,None
+AA,5389,Advanced Form Analysis (Online),Graduate,3,Spring,Online,AA5384 Expressive Form Analysis,None
+WA,3381,Arts for a Better Future (Intensive),Undergraduate,3,Summer,Intensive,None,None
+WA,3384,Theory and Practice of Ethnodoxology,Undergraduate,3,Spring,On-campus,None,None
+WA,3386,World Arts Practicum,Undergraduate,3,Spring,On-campus,None,None
+WA,4322,Video Production and Editing,Undergraduate,3,Spring,On-campus,AA4202 Audio and Video Techniques for Fieldworkers ,None
+WA,4382,Survey of World Arts,Undergraduate,3,Spring,On-campus,None,None
+WA,4387,Area Studies for World Arts,Undergraduate,3,Spring,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None

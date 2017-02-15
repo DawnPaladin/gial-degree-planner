@@ -85,37 +85,91 @@ degree = Degree.create({
   description: LOREM
 })
 
-puts 'creating concentrations'
-NUM_CONCENTRATIONS.times do |num|
-  concentration = degree.concentrations.create({
-    name: "Arts and #{Faker::Hipster.word}",
-    description: LOREM
+puts 'creating concentrations, categories, and thesis/non-thesis tracks'
+conc = degree.concentrations.create({
+  name: "Applied Arts",
+  description: LOREM
+})
+  conc.categories.create({
+    name: "Arts analysis specialization",
+    required_units: 6
   })
-
-  puts 'creating concentration thesis'
-  thesis = concentration.create_thesis_track({
+  conc.categories.create({
+    name: "Application domain courses",
+    required_units: 6
+  })
+  thesis = conc.create_thesis_track({
     thesis_hours: 6,
     elective_hours: 3
   })
   thesis.courses << Course.thesis_writing
   thesis.courses << Course.thesis_course
-
-  puts 'creating concentration non-thesis'
-  non_thesis = concentration.create_non_thesis_track({
+  conc.create_non_thesis_track({
+    elective_hours: 9
+  })
+conc = degree.concentrations.create({
+  name: "Arts & Islam",
+  description: LOREM
+})
+  conc.categories.create({
+    name: "Arts analysis specialization",
+    required_units: 6
+  })
+  conc.categories.create({
+    name: "Application domain courses",
+    required_units: 3
+  })
+  conc.categories.create({
+    name: "Concentration-specific courses",
+    required_units: 6
+  })
+  conc.create_non_thesis_track({
     elective_hours: 6
   })
-end
-
-
-puts 'creating categories through concentrations'
-Concentration.all.each do |concentration|
-  NUM_CATEGORIES.times do |num|
-    concentration.categories.create({
-      name: "Specialization in #{Faker::Space.meteorite}",
-      required_units: [3, 6, 9].sample
-    })
-  end
-end
+conc = degree.concentrations.create({
+  name: "Arts & Scripture Engagement",
+  description: LOREM
+})
+  conc.categories.create({
+    name: "Arts analysis specialization",
+    required_units: 6
+  })
+  conc.categories.create({
+    name: "Application domain courses",
+    required_units: 3
+  })
+  conc.categories.create({
+    name: "Concentration-specific courses",
+    required_units: 9
+  })
+  conc.categories.create({
+    name: "Choose one of the following",
+    required_units: 3
+  })
+  conc.create_non_thesis_track({
+    elective_hours: 6
+  })
+conc = degree.concentrations.create({
+  name: "Linguistics",
+  description: LOREM
+})
+  conc.categories.create({
+    name: "Concentration-specific courses",
+    required_units: 12
+  })
+  conc.categories.create({
+    name: "Choose one of the following",
+    required_units: 3
+  })
+  thesis = conc.create_thesis_track({
+    thesis_hours: 6,
+    elective_hours: 0
+  })
+  thesis.courses << Course.thesis_writing
+  thesis.courses << Course.thesis_course
+  conc.create_non_thesis_track({
+    elective_hours: 6
+  })
 
 puts 'creating courses through categories'
 Category.all.each do |category|
