@@ -1,4 +1,4 @@
-planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', function($scope, $rootScope, planService, $window, $timeout, _, Flash) {
+planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', 'terms', function($scope, $rootScope, planService, $window, $timeout, _, Flash, terms) {
 
   $rootScope.$broadcast('toggle-concentration');
 
@@ -7,6 +7,8 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   $scope.possibleYears = $scope.planInfo.possibleYears;
 
   $scope.years = [$scope.possibleYears[0]];
+
+  $scope.terms = terms;
 
   var nextYear = 1;
   var messages = {

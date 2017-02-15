@@ -17,60 +17,24 @@
 
 </section>
 
-{{ planInfo }}
 
 <section class="schedule">
 
-  <div ng-repeat="year in years">
+  <div ng-repeat="year in years" class="text-center">
 
-    <div class="sessions text-center">
-      <div>
-        1
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
+    <h3>{{ year }}</h3>
+
+    <div class="term" ng-repeat="term in terms">
+
+      <div class="sessions">
+        <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year="year" droppable drop="handleDrop" session="session">
+          {{ sessions.name }}
+        </div>
       </div>
-      <div>
-        2
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div> 
-      </div>
-      <div>
-        3
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
-      <div>
-        4
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
-      <div>
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
-      <div>
-        1
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
-      <div>
-        2
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
-      <div>
-        3
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
-      <div>
-        4
-        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
-      </div>
+
+      <p><strong>{{ term.name }}</strong></p>
+
     </div>
-
-    <div class="dates text-center">
-      <div class="terms">
-        <div>Spring</div>
-        <div>Summer</div>
-        <div>Fall</div>
-      </div>
-      {{ year }}
-    </div>
-
-
 
   </div>
 

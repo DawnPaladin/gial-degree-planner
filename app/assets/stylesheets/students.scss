@@ -60,17 +60,28 @@
 
   margin-top: 15px;
 
+  .term {
+    display: inline-block;
+    text-align: center;
+  }
+
   .sessions {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-    margin: 10px 0;
+    display: inline-block;
+    margin: 0px 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 
     .session {
       height: 100px;
       width: 100px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
+      display: inline-block;
+      float: left;
+      margin: 0 0 -5px 0;
+      border-right: 2px dashed #ddd;
+    }
+
+    .session:last-child {
+      border-right: 0;
     }
 
   }

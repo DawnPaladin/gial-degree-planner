@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       end
       resources :advisors
       resources :concentrations, only: [:index, :show]
+      resources :terms
     end
   end
 
