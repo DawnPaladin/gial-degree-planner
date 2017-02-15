@@ -3,9 +3,9 @@
 
     <h3>Unscheduled Courses</h3>
 
-    <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop()">
+    <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop" bin="bin">
 
-      <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" draggable>
+      <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" draggable draggable-course="course">
         {{ course.number }}<br>
         <span class="truncated">
           {{ course.name }}<br>
@@ -35,38 +35,38 @@
     <div class="sessions text-center">
       <div>
         1
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
         2
-        <div class="session" drop="handleDrop()" droppable></div> 
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div> 
       </div>
       <div>
         3
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
         4
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
         1
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
         2
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
         3
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
       <div>
         4
-        <div class="session" drop="handleDrop()" droppable></div>
+        <div id="{{ bin.id }}" class="session" drop="handleDrop" droppable bin="bin"></div>
       </div>
     </div>
 

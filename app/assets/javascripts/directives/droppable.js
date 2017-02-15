@@ -2,7 +2,8 @@ planner.directive('droppable', function() {
 
   return {
     scope: {
-      drop: '&'
+      drop: '&',
+      bin: '='
     },
     link: function(scope, element) {
 
@@ -47,6 +48,8 @@ planner.directive('droppable', function() {
         function(e) {
           if (e.stopPropagation) e.stopPropagation();
           this.classList.remove('over');
+
+          var binId = this.id;
           var item = document.getElementById(e.dataTransfer.getData('Text'));
           this.appendChild(item);
           
@@ -56,7 +59,12 @@ planner.directive('droppable', function() {
             angular.element(item).removeClass('placed');
           }
 
-          scope.$apply('drop()');
+          scope.$apply(function(scope) {
+            var fn = scope.drop();
+            if ('undefined' !== typeof fn) {
+              fn(item.id, binId);
+            }
+          });
           return false;
         },
         false

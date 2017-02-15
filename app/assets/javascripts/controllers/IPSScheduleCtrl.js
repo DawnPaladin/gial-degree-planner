@@ -12,7 +12,7 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   var messages = {
     'newYear': "New year added!",
     'courseScheduled': "Course scheduled!",
-    'courseUnscheduled': "Course removed from schedule";
+    'courseUnscheduled': "Course removed from schedule"
   };
 
   $scope.addYear = function() {
@@ -32,8 +32,10 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   };
 
 
-  $scope.handleDrop = function() {
+  $scope.handleDrop = function(item, bin) {
     Flash.create('success', messages['courseScheduled']);
+    console.log('item', item);
+    console.log('bin', bin);
   };
 
   var stickyContainer = document.getElementById('sticky-container');
