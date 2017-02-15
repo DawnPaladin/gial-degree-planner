@@ -1,4 +1,4 @@
-planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', function($scope, $rootScope, planService, $window, $timeout) {
+planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', function($scope, $rootScope, planService, $window, $timeout, _) {
 
   $rootScope.$broadcast('toggle-concentration');
 
@@ -51,9 +51,12 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
     }
   };
 
+  var throttledStickyCourses = _.throttle(stickyCourses, 100);
+  var throttledPrepareNewYear = _.throttle(prepareNewYear, 100);
+
   $window.addEventListener('scroll', function(e) {
-    stickyCourses();
-    prepareNewYear();
+    throttledStickyCourses();
+    throttledPrepareNewYear();
   });
 
 
