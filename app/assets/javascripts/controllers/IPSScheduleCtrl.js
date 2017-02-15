@@ -1,4 +1,4 @@
-planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', function($scope, $rootScope, planService, $window) {
+planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', function($scope, $rootScope, planService, $window, $timeout) {
 
   $rootScope.$broadcast('toggle-concentration');
 
@@ -12,8 +12,16 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
   $scope.addYear = function() {
     if ($scope.possibleYears[nextYear]) {
-      $scope.years.push($scope.possibleYears[nextYear]);
-      nextYear++;
+      $timeout(function() {
+        $scope.years.push($scope.possibleYears[nextYear]);
+        nextYear++;
+      }, 150);
+    }
+  };
+
+  var prepareNewYear = function() {
+    if ($window.innerHeight + $window.scrollY >= document.body.scrollHeight) {
+      $scope.addYear();
     }
   };
 
@@ -24,8 +32,8 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
   var stickyContainer = document.getElementById('sticky-container');
   var stickyContainerLocation = stickyContainer.getBoundingClientRect().top;
-  var stickyContainerWidth = stickyContainer.offsetWidth;
   var page = document.getElementById('page');
+  var pageBottom = page.getBoundingClientRect().bottom;
 
   var stuckCourses = function() {
     stickyContainer.setAttribute("style", 'position: fixed; top: 0; left: 0; background: rgba(240, 240, 240, 0.8);');
@@ -36,28 +44,17 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   }
 
   var stickyCourses = function() {
-    console.log(page.scrollTop);
-    console.log(stickyContainerLocation);
     if (page.scrollTop > stickyContainerLocation) {
-      console.log('true');
       stuckCourses();
     } else {
       unstuckCourses();
     }
   };
 
-  $window.addEventListener('load', function() {
-    $window.off();
-    $window.addEventListener('scroll', function(e) {
-      stickyCourses();
-    });
-  });
-
   $window.addEventListener('scroll', function(e) {
-    console.log('scroll');
     stickyCourses();
+    prepareNewYear();
   });
-
 
 
 }]);
