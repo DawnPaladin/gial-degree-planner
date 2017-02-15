@@ -1,20 +1,20 @@
-<h2>Classes</h2>
+<h3>Classes</h3>
 
 <table class="table">
+  <!-- <tr>
+    <td></td>
+    <td colspan="9">2017</td>
+  </tr> -->
   <tr>
     <td></td>
-    <td year-header ng-repeat="year in years">{{ year }}</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td year-header ng-repeat="term in terms">{{ term }}</td>
+    <td year-header ng-repeat="term in terms" colspan="{{term.width}}">{{ term.name }}</td>
   </tr>
   <tr>
     <th><input placeholder="Filter classes"></th>
     <td year-header ng-repeat="session in sessions track by $index">{{ session }}</td>
   </tr>
 
-  <!-- <tr ng-repeat="course in courses">
+  <tr ng-repeat="course in courses">
     <td>{{ course.number }} {{ course.name }}</td>
-  </tr> -->
+  </tr>
 </table>
