@@ -1,4 +1,4 @@
-planner.directive('yearHeader', function() {
+planner.directive('tableRepeat', function() {
   return {
     restrict: "A",
     transclude: true,

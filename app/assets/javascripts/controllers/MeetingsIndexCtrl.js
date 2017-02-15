@@ -14,8 +14,6 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses',
       width: 4,
       sessions: [1,2,3,4]
     }];
-    // $scope.terms = ["2016", "Spring", "S1", "S2", "S3", "S4", "Summer", "Fall", "S1", "S2", "S3", "S4"]
-    // $scope.terms = ["Spring", "Summer", "Fall"];
     $scope.sessions = ["S1", "S2", "S3", "S4", "Summer", "S1", "S2", "S3", "S4"];
 
     var meetings = [];
