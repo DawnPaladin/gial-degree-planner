@@ -9,13 +9,16 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
   var getPlan = function(student_id) {
     Restangular.one('students', student_id)
       .customGET('plan')
-      .then(function(response){
+      .then(function(plan){
         _planInfo.plan = {};
+        
+        plan.intended_courses = Restangular.restangularizeCollection(plan, plan.intended_courses, 'courses')
+        plan.courses = Restangular.restangularizeCollection(plan, plan.completed_courses, 'courses')
+        helpers.extendArray(plan.intended_courses, 'intended', true);
+        helpers.extendArray(plan.completed_courses, 'completed', true);
 
-        helpers.extendArray(response.intended_courses, 'intended', true);
-        helpers.extendArray(response.completed_courses, 'completed', true);
-
-        angular.copy(response, _planInfo.plan);
+        angular.copy(plan, _planInfo.plan);
+        console.log(_planInfo.plan)
         return _planInfo;
       }, function(error) {
         console.error(error);
@@ -23,8 +26,12 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
   };
 
   var update = function(plan) {
-    return Restangular.one('students', plan.student_id).customPUT(plan, 'plan').then(function(plan) {
-      return plan;
+    return Restangular.one('students', plan.student_id)
+      .customPUT(plan, 'plan')
+      .then(function(plan) {
+        plan.completed_id = null;
+        plan.intended_id = null;
+        return plan;
     }, function(response) {
       console.error(response);
     });
@@ -32,28 +39,29 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
 
   var addOrRemoveIntended = function(course) {
     if (course.intended) {
-      console.log('adding to intended')
       _addToIntended(course);
     } else {
-      console.log('removing from intended')
       _removeFromIntended(course);
     }
+    _planInfo.plan.intended_id = course.id;
+    update(_planInfo.plan);
   }
 
   var addOrRemoveCompleted = function(course) {
     if (course.completed) {
-      console.log('adding to completed')
       _addToCompleted(course);
     } else {
-      console.log('removing from completed')
       _removeFromCompleted(course);
     }
+    _planInfo.plan.completed_id = course.id;
+    update(_planInfo.plan);
   };
 
 
   // TODO if these remain unchanged
   // refactor into two functions
   var _addToIntended = function(course) {
+    Restangular.restangularizeElement(_planInfo.plan, course, 'courses');
     _planInfo.plan.intended_courses.push(course);
   };
 
@@ -72,7 +80,10 @@ planner.factory('planService', ['Restangular', 'helpers', function(Restangular, 
   var _removeFromCompleted = function(course) {
     for (var i = 0; i < _planInfo.plan.completed_courses.length; i++) {
       if (_planInfo.plan.completed_courses[i].id === course.id) {
-        _planInfo.plan.completed_courses.splice(i, 1);
+        _planInfo.plan.completed_courses[i].remove()
+          .then(function() {
+            _planInfo.plan.save();
+          });
       }
     }
   };

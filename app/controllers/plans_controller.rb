@@ -8,6 +8,9 @@ class PlansController < ApplicationController
 
   def update
     @plan = Plan.find(params[:plan][:id])
+    completed_course = Course.find_by_id(params[:completed_id])
+    intended_course = Course.find_by_id(params[:intended_id])
+    @plan.add_or_remove_courses(completed: completed_course, intended: intended_course)
     if @plan.update(plan_params)
       render json: @plan, status: 200
     end

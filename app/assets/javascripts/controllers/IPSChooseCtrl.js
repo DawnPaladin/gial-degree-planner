@@ -1,4 +1,4 @@
-planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService', 'concentrationService', function($scope, $state, student, planService, concentrationService) {
+planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student', 'planService', 'concentrationService', function($scope, $state, $rootScope, student, planService, concentrationService) {
   
   $scope.student = student;
 
@@ -11,6 +11,9 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService
     });
 
   $scope.planInfo = planService.getPlanInfo();
+  $scope.concentration =
+    concentrationService
+      .getConcentration($scope.planInfo.plan.concentration_id);
 
 
   // If the concentration of the plan changes,
@@ -20,6 +23,11 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', 'student', 'planService
       scope.concentration = 
         concentrationService.getConcentration(newConcentration)
   }, true);
+
+  // For all plan updates except for updates to latest_registered and registration_date
+  $scope.updatePlan = function(params) {
+    planService.update($scope.planInfo.plan);
+  };
 
   // CHECKBOX CALLBACKS:
   // Passed into course-row directives
