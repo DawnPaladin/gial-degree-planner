@@ -40,13 +40,19 @@ puts 'foreign courses'
 ForeignCourse.destroy_all
 
 puts 'creating terms'
+terms = []
 TERMS.each do |term|
-  Term.create({ name: term })
+  terms << Term.create({ name: term })
 end
 
 puts 'creating sessions'
-['Session 1', 'Session 2', 'Session 3', 'Session 4'].each do |session|
-  Session.create({ name: session })
+['Session 1', 'Session 2', 'Session 3', 'Session 4'].each_with_index do |session, index|
+  new_session = Session.create({ name: session })
+  terms.each do |term|
+    unless term.name == 'Summer' && index > 0
+      term.sessions << new_session
+    end
+  end
 end
 
 puts 'creating admin'
