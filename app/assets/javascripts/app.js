@@ -66,6 +66,16 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
             return Restangular.all('courses').getList();
           }
         ],
+        // terms: ['Restangular',
+        //   function(Restangular) {
+        //     return Restangular.all('terms').getList();
+        //   }
+        // ],
+        // sessions: ['Restangular',
+        //   function(Restangular) {
+        //     return Restangular.all('sessions').getList();
+        //   }
+        // ],
       },
       views: {
         "main@": {

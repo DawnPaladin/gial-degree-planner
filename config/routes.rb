@@ -16,7 +16,8 @@ Rails.application.routes.draw do
       resources :advisors
       resources :concentrations, only: [:index, :show]
       resources :courses, only: [:index, :show]
-      resources :meetings, only: [:index, :show]
+      resources :terms, only: :index
+      resources :sessions, only: :index
     end
   end
 
