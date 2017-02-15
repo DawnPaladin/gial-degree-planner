@@ -5,7 +5,7 @@
 
     <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop()">
 
-      <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" draggable>
+      <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" draggable>
         {{ course.number }}<br>
         <span class="truncated">
           {{ course.name }}<br>
@@ -25,6 +25,8 @@
   </div>
 
 </section>
+
+{{ planInfo }}
 
 <section class="schedule">
 
