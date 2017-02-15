@@ -22,12 +22,18 @@
     <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
       <table>
+<!--         <course-row ng-repeat='requirement in planInfo.plan.required_courses'
+            course='requirement'
+            class='course-row'>
+          <button ng-click='toggleCompleted(requirement)'>Complete</button>
+        </course-row> -->
+
         <course-row ng-repeat='intended in planInfo.plan.intended_courses'
             course='intended'
             checkbox-callback='addOrRemoveIntended(course)'
             class='course-row'>
           <button ng-click='toggleCompleted(intended)'>Complete</button>
-        </course-row>
+        </course-row> 
       </table>
     </div>
   </div>
@@ -37,7 +43,7 @@
     <div class="required-courses course-section">
       <h3>Required Courses</h3>
       <table>
-        <course-row ng-repeat='requirement in student.degree.required_courses'
+        <course-row ng-repeat='requirement in planInfo.plan.required_courses'
             course='requirement'
             class='course-row'>
         </course-row>
@@ -64,6 +70,5 @@
       </div><!-- category directive -->
     </div><!-- categories column -->
   </div><!-- right column -->
-
 
 </div>

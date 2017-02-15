@@ -1,15 +1,6 @@
 planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student', 'planService', 'concentrationService', function($scope, $state, $rootScope, student, planService, concentrationService) {
   
   $scope.student = student;
-
-  // Add degree requirements to IPS
-  $scope.student.degree.required_courses
-    .forEach(function(course) {
-      course.intended = true;
-      course.required = true;
-      planService.addOrRemoveIntended(course);
-    });
-
   $scope.planInfo = planService.getPlanInfo();
   $scope.concentration =
     concentrationService
@@ -21,7 +12,7 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student'
   $scope.$watch('planInfo.plan.concentration_id',
     function(newConcentration, prevConcentration, scope) {
       scope.concentration = 
-        concentrationService.getConcentration(newConcentration)
+        concentrationService.getConcentration(newConcentration);
   }, true);
 
   // For all plan updates except for updates to latest_registered and registration_date

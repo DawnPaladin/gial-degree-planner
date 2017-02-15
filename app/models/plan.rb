@@ -1,4 +1,7 @@
 class Plan < ApplicationRecord
+  # lifecycle
+  before_save :add_required_degrees_courses
+
   # validations
 
   # associations
@@ -19,17 +22,18 @@ class Plan < ApplicationRecord
            class_name: 'Meeting'
 
   belongs_to :degree
+  has_many :required_courses, through: :degree
 
-  def courses
+  def course_groupings
     {
-      'intended_courses': self.intended_courses,
-      'completed_courses': self.completed_courses,
-      'scheduled_classes': self.scheduled_classes
+      intended_courses: self.intended_courses,
+      completed_courses: self.completed_courses,
+      required_courses: self.required_courses,
+      scheduled_classes: self.scheduled_classes
     }
   end
 
   def add_or_remove_courses(opts)
-    puts 'in add or remove'
     add_or_remove_completed(opts[:completed]) if opts[:completed]
     add_or_remove_intended(opts[:intended]) if opts[:intended]
   end
@@ -37,8 +41,11 @@ class Plan < ApplicationRecord
 
   private
 
+    def add_required_degrees_courses
+      self.intended_courses = self.degree.required_courses
+    end
+
     def add_or_remove_intended(course)
-      puts 'in intended'
       if self.intended_courses.include?(course)
         self.intended_courses.delete(course)
       else
@@ -47,7 +54,6 @@ class Plan < ApplicationRecord
     end
 
     def add_or_remove_completed(course)
-      puts 'in completed'
       if self.completed_courses.include?(course)
         self.completed_courses.delete(course)
       else
