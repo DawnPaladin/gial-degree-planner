@@ -16,5 +16,8 @@
 
   <tr ng-repeat="course in courses">
     <td>{{ course.number }} {{ course.name }}</td>
+    <td ng-repeat="attendance in course.attendance.spring track by $index">{{ attendance }}</td>
+    <td ng-repeat="attendance in course.attendance.summer track by $index">{{ attendance }}</td>
+    <td ng-repeat="attendance in course.attendance.fall track by $index">{{ attendance }}</td>
   </tr>
 </table>

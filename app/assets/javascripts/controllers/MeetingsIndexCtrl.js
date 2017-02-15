@@ -18,13 +18,25 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses',
     // $scope.terms = ["Spring", "Summer", "Fall"];
     $scope.sessions = ["S1", "S2", "S3", "S4", "Summer", "S1", "S2", "S3", "S4"];
 
-    $scope.meetings = [];
+    var meetings = [];
     courses.forEach(function(course) {
-      $scope.meetings.push.apply($scope.meetings, course.meetings);
+      meetings.push.apply(meetings, course.meetings);
+      course.attendance = {
+        spring: [0,0,0,0],
+        summer: [0],
+        fall: [0,0,0,0],
+        any: []
+      };
+      course.meetings.forEach(function(meeting) {
+        var term = meeting.term.toLowerCase();
+        var sessionIndex = meeting.session.slice(-1) - 1;
+        if (sessionIndex < 0) { return; }
+        course.attendance[term][sessionIndex] = meeting.enrollments.length;
+      });
     });
 
     $scope.years = [];
-    $scope.meetings.forEach(function(meeting) {
+    meetings.forEach(function(meeting) {
       if ($scope.years.indexOf(meeting.year) === -1) {
         $scope.years.push(meeting.year);
       }
