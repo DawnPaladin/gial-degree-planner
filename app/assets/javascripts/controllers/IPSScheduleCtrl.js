@@ -6,11 +6,11 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
   $scope.possibleYears = $scope.planInfo.possibleYears;
 
-  $scope.years = [$scope.possibleYears[0]];
+  $scope.years = [$scope.possibleYears[0], $scope.possibleYears[1]];
 
   $scope.terms = terms;
 
-  var nextYear = 1;
+  var nextYear = 2;
   var messages = {
     'newYear': "New year added!",
     'courseScheduled': "Course scheduled!",
@@ -22,7 +22,7 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
       $timeout(function() {
         $scope.years.push($scope.possibleYears[nextYear]);
         nextYear++;
-        Flash.create('success', messages['newYear']);
+        Flash.create('success', messages.newYear);
       }, 150);
     }
   };
@@ -34,14 +34,26 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   };
 
 
-  $scope.handleDrop = function(item, bin) {
-    Flash.create('success', messages['courseScheduled']);
-    console.log('item', item);
-    console.log('bin', bin);
+  $scope.handleDrop = function(courseId, meetingData) {
+    if (meetingData.id) { 
+      Flash.create('warning', messages.courseUnscheduled);
+      return false; 
+    }
+    var data = {
+      'course_id': courseId,
+      'meeting_year': meetingData.meetingYear,
+      'meeting_term': meetingData.meetingTerm,
+      'meeting_session': meetingData.meetingSession
+    };
+    planService.updateSchedule(data).then(function(response){
+      Flash.create('success', messages.courseScheduled);
+    });
   };
 
+
+  // TODO Refactor fixed functionality into directive
   var stickyContainer = document.getElementById('sticky-container');
-  var stickyContainerLocation = stickyContainer.getBoundingClientRect().top;
+  var stickyContainerLocation = stickyContainer.getBoundingClientRect().top - 35;
   var page = document.getElementById('page');
   var pageBottom = page.getBoundingClientRect().bottom;
 
@@ -57,6 +69,8 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   }
 
   var stickyCourses = function() {
+    console.log(page.scrollTop);
+    console.log(stickyContainerLocation);
     if (page.scrollTop > stickyContainerLocation) {
       stuckCourses();
     } else {

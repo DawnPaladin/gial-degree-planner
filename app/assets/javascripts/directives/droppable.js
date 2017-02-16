@@ -49,7 +49,13 @@ planner.directive('droppable', function() {
           if (e.stopPropagation) e.stopPropagation();
           this.classList.remove('over');
 
-          var binId = this.id;
+          var meetingData = {
+            id: this.id,
+            meetingYear: this.getAttribute('data-year'),
+            meetingTerm: this.getAttribute('data-term-id'),
+            meetingSession: this.getAttribute('data-session-id')
+          };
+
           var item = document.getElementById(e.dataTransfer.getData('Text'));
           this.appendChild(item);
           
@@ -62,7 +68,7 @@ planner.directive('droppable', function() {
           scope.$apply(function(scope) {
             var fn = scope.drop();
             if ('undefined' !== typeof fn) {
-              fn(item.id, binId);
+              fn(item.id, meetingData);
             }
           });
           return false;

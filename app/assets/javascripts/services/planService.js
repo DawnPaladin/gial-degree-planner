@@ -29,6 +29,15 @@ planner.factory('planService', ['Restangular', function(Restangular) {
     });
   };
 
+  // TODO Refactor
+  var updateSchedule = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
+        return response;
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
   var _populateYears = function() {  
     _planInfo.possibleYears = [];
     var currentYear = new Date().getFullYear();
@@ -42,7 +51,8 @@ planner.factory('planService', ['Restangular', function(Restangular) {
   return {
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
-    update: update
+    update: update,
+    updateSchedule: updateSchedule
   };
 
 }]);

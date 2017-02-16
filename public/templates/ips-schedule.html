@@ -17,6 +17,8 @@
 
 </section>
 
+{{ planInfo }}
+
 
 <section class="schedule">
 
@@ -27,7 +29,7 @@
     <div class="term" ng-repeat="term in terms">
 
       <div class="sessions">
-        <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year="year" droppable drop="handleDrop" session="session">
+        <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year="{{ year }}" droppable drop="handleDrop" session="session">
           {{ sessions.name }}
         </div>
       </div>
