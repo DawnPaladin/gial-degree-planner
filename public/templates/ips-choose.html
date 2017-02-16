@@ -5,15 +5,16 @@
 </div>
 
 <div class="row">
-  
+
   <div class="col-xs-6 ips-left-col">
     <div class="completed-courses course-section">
       <h3>Completed Courses</h3>
       <table>
-        <course-row ng-repeat='completed in completedCourses'
+        <course-row ng-repeat='completed in planInfo.plan.completed_courses'
             course='completed'
             class='course-row'>
 
+          <!-- this button is transcluded -->
           <button ng-click='toggleCompleted(completed)'>UnComplete</button>
         </course-row>
       </table>
@@ -22,11 +23,12 @@
     <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
       <table>
-
-        <course-row ng-repeat='intended in intendedCourses'
+        <course-row ng-repeat='intended in planInfo.plan.intended_courses'
             course='intended'
             checkbox-callback='addOrRemoveIntended(course)'
             class='course-row'>
+
+          <!-- this button is transcluded -->
           <button ng-click='toggleCompleted(intended)'>Complete</button>
         </course-row> 
 
@@ -39,16 +41,17 @@
     <div class="required-courses course-section">
       <h3>Required Courses</h3>
       <table>
-        <course-row ng-repeat='requirement in requiredCourses'
+        <!-- nothing transcluded -->
+        <course-row ng-repeat='requirement in planInfo.plan.required_courses'
                     course='requirement'
-                    class='course-row'>
+                    class='course-row'>      
         </course-row>
       </table>
     </div><!-- required courses -->
 
     <!-- categories and their courses -->
-    <div class="categories" ng-if='coursesByCategory.length'>
-      <div class="category bordered course-section" ng-repeat='category in coursesByCategory'>
+    <div class="categories" ng-if='planInfo.plan.available_courses.length'>
+      <div class="category bordered course-section" ng-repeat='category in planInfo.plan.available_courses'>
 
         <h3>{{ category.name }}</h3>
 
@@ -57,6 +60,7 @@
               course='availableCourse'
               checkbox-callback='addOrRemoveIntended(course)'
               class='course-row'>
+            <!-- text transcluded -->
             {{ availableCourse.units }}
           </course-row>
         </table>
@@ -66,12 +70,10 @@
       </div><!-- category directive -->
     </div><!-- categories column -->
 
-    <div class="bordered friendly-message text-center">
+    <div class="bordered friendly-message text-center" ng-if='!planInfo.plan.available_courses.length'>
       <h4>If you plan to schedule more than the required courses,</h4>
       <h4>Please choose a concentration from the dropdown above!</h4>
     </div>
   </div><!-- right column -->
 
 </div>
-
-{{ planInfo.plan }}
