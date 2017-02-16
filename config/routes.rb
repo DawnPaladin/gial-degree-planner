@@ -15,13 +15,12 @@ Rails.application.routes.draw do
       end
       resources :advisors
       resources :concentrations, only: [:index, :show]
+      resources :courses, only: [:index]
     end
   end
 
   root 'angular_app#index'
 
   get 'angular_app/index'
-
-
 
 end

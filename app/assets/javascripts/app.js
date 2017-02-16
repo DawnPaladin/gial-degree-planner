@@ -64,6 +64,13 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
 
     .state('dashboard.meetings', {
       url: 'classes',
+      resolve: {
+        courses: ['Restangular',
+          function(Restangular) {
+            return Restangular.all('courses').getList();
+          }
+        ],
+      },
       views: {
         "main@": {
           templateUrl: '/templates/meetings.html',
