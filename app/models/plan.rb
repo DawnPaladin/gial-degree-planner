@@ -15,13 +15,14 @@ class Plan < ApplicationRecord
 
   has_many :intended_courses_plans
   has_many :intended_courses, through: :intended_courses_plans
-  
+
   has_many :enrollments
   has_many :scheduled_classes, through: :enrollments,
            class_name: 'Meeting'
 
   belongs_to :degree
   has_many :required_courses, through: :degree
+
 
   def course_groupings
     {
@@ -37,6 +38,16 @@ class Plan < ApplicationRecord
     add_or_remove_intended(opts[:intended]) if opts[:intended]
   end
 
+  def courses
+    self.completed_courses + self.intended_courses
+  end
+
+   # TODO More edge case coverage
+  def thesis_starts
+    unless self.scheduled_classes.empty? || Course.thesis_writing.meetings.empty?
+      self.scheduled_classes.merge(Course.thesis_writing.meetings).first
+    end
+  end
 
   private
 
@@ -55,4 +66,6 @@ class Plan < ApplicationRecord
         self.completed_courses << course
       end
     end
+
+
 end

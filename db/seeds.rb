@@ -215,6 +215,14 @@ Student.all.each do |student|
   plan.foreign_courses << ForeignCourse.all.sample
 end
 
+puts 'creating on-track student'
+on_track = Student.last.plan
+on_track.concentration = Concentration.last
+on_track.completed_courses << Course.thesis_writing
+on_track.scheduled_classes << Course.thesis_writing.meetings.first
+on_track.save
+p on_track
+
 
 # degree
 # terms

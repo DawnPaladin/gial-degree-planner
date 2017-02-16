@@ -1,4 +1,4 @@
-var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash']);
 
 planner.config(function(AuthProvider) {
   AuthProvider.loginPath('/advisors/sign_in.json');
@@ -22,7 +22,7 @@ planner.factory('_', ['$window', function($window) {
 }]);
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  
+
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
