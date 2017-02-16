@@ -39,7 +39,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     var completed = plan.completed_courses;
     plan.coursesById = {};
     
-    // available_courses are preset if
+    // available_courses are present if
     // a concentration has been set
     // if it exists, populate the all-knowing coursesById
     if (plan.available_courses) {
