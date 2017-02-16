@@ -1,4 +1,4 @@
-planner.factory('planService', ['Restangular', 'helpers', '_', function(Restangular, helpers, _) {
+planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
   var _planInfo = {};
   
