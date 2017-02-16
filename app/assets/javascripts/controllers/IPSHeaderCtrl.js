@@ -53,12 +53,13 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
     $scope.toggleRegistration();
   }
 
-  $scope.$on('toggle-concentration', function() {
-    if ($scope.concentrationDisabled) {
-      $scope.concentrationDisabled = false;
+  $scope.$on('toggle-concentration', function(e, args) {
+    if (args.enabled) {
+      $scope.concentrationDisabled = false;      
     } else {
-      $scope.concentrationDisabled = true;
+      $scope.concentrationDisabled = true;      
     }
+
   });
 
 }]);

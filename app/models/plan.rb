@@ -16,7 +16,7 @@ class Plan < ApplicationRecord
   has_many :intended_courses_plans
   has_many :intended_courses, through: :intended_courses_plans
 
-  has_many :enrollments
+  has_many :enrollments, dependent: :destroy
   has_many :scheduled_classes, through: :enrollments,
            class_name: 'Meeting'
 

@@ -1,6 +1,6 @@
 planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', 'terms', function($scope, $rootScope, planService, $window, $timeout, _, Flash, terms) {
 
-  $rootScope.$broadcast('toggle-concentration');
+  $rootScope.$broadcast('toggle-concentration', { enabled: false });
 
   $scope.planInfo = planService.getPlanInfo();
 
@@ -69,8 +69,6 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   }
 
   var stickyCourses = function() {
-    console.log(page.scrollTop);
-    console.log(stickyContainerLocation);
     if (page.scrollTop > stickyContainerLocation) {
       stuckCourses();
     } else {
@@ -81,9 +79,15 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   var throttledStickyCourses = _.throttle(stickyCourses, 100);
   var throttledPrepareNewYear = _.throttle(prepareNewYear, 100);
 
-  $window.addEventListener('scroll', function(e) {
+  var throttledListeners = function() {
     throttledStickyCourses();
     throttledPrepareNewYear();
+  };
+
+  $window.addEventListener('scroll', throttledListeners);
+
+  $rootScope.$on('$stateChangeStart', function() {
+    $window.removeEventListener('scroll', throttledListeners);
   });
 
 
