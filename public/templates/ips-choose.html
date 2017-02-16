@@ -5,76 +5,75 @@
 </div>
 
 <div class="row">
-  
+
   <div class="col-xs-6 ips-left-col">
     <div class="completed-courses course-section">
       <h3>Completed Courses</h3>
-      <p>currently these are carried on the planInfo obj</p>
-      <p>initially retrieved with getPlan (planservice ln 12)</p>
-      <p>and attached to the plan in rails controller</p>
-      <p>consider Restangularizing and/or extending the collection</p>
       <table>
-        <tr ng-repeat='completed in planInfo.plan.completed_courses'
-            course-row
+        <course-row ng-repeat='completed in planInfo.plan.completed_courses'
             course='completed'
-            checkbox-callback='logCourse(course)'
             class='course-row'>
-        </tr>
+
+          <!-- this button is transcluded -->
+          <button ng-click='toggleCompleted(completed)'>UnComplete</button>
+        </course-row>
       </table>
     </div>
 
     <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
-      <p>currently these are carried on the planInfo obj</p>
-      <p>initially retrieved with getPlan (planservice ln 12)</p>
-      <p>and attached to the plan in rails controller</p>
-      <p>consider Restangularizing and/or extending the collection</p>
       <table>
-        <tr ng-repeat='intended in planInfo.plan.intended_courses'
-            course-row
+        <course-row ng-repeat='intended in planInfo.plan.intended_courses'
             course='intended'
-            checkbox-callback='logCourse(course)'
+            checkbox-callback='addOrRemoveIntended(course)'
             class='course-row'>
-        </tr>
+
+          <!-- this button is transcluded -->
+          <button ng-click='toggleCompleted(intended)'>Complete</button>
+        </course-row> 
+
       </table>
     </div>
   </div>
 
+  <!-- right column -->
   <div class="col-xs-6 ips-right-col">
     <div class="required-courses course-section">
       <h3>Required Courses</h3>
       <table>
-        <tr ng-repeat='requirement in concentration.degree.required_courses'
-            course-row
-            course='requirement'
-            checkbox-callback='logCourse(course)'
-            class='course-row'>
-        </tr>
+        <!-- nothing transcluded -->
+        <course-row ng-repeat='requirement in planInfo.plan.required_courses'
+                    course='requirement'
+                    class='course-row'>      
+        </course-row>
       </table>
-    </div>
+    </div><!-- required courses -->
 
-    <div class="categories" ng-if='concentration.categories.length'>
-      <div class="category bordered course-section" ng-repeat='category in concentration.categories'>
+    <!-- categories and their courses -->
+    <div class="categories" ng-if='planInfo.plan.available_courses.length'>
+      <div class="category bordered course-section" ng-repeat='category in planInfo.plan.available_courses'>
+
         <h3>{{ category.name }}</h3>
-        <p>{{ Units }}</p>
+
         <table>
-          <tr ng-repeat='availableCourse in category.courses'
-              course-row
+          <course-row ng-repeat='availableCourse in category.courses'
               course='availableCourse'
-              checkbox-callback='logCourse(course)'
-              class='course-row'></tr>
+              checkbox-callback='addOrRemoveIntended(course)'
+              class='course-row'>
+            <!-- text transcluded -->
+            {{ availableCourse.units }}
+          </course-row>
         </table>
+
         <p class='required-units'>Units required: {{ category.required_units }}</p>
-      </div>
+
+      </div><!-- category directive -->
+    </div><!-- categories column -->
+
+    <div class="bordered friendly-message text-center" ng-if='!planInfo.plan.available_courses.length'>
+      <h4>If you plan to schedule more than the required courses,</h4>
+      <h4>Please choose a concentration from the dropdown above!</h4>
     </div>
-  </div>
-
-  <!-- {{ student }} -->
-  <h2>plan</h2>
-  {{ planInfo.plan }}
-  <h2>concentration</h2>
-  <p>see concentration show jbuilder for structure of object</p>
-  {{concentration}}
-
+  </div><!-- right column -->
 
 </div>

@@ -1,4 +1,6 @@
 class Plan < ApplicationRecord
+  # lifecycle
+
   # validations
 
   # associations
@@ -19,6 +21,22 @@ class Plan < ApplicationRecord
            class_name: 'Meeting'
 
   belongs_to :degree
+  has_many :required_courses, through: :degree
+
+
+  def course_groupings
+    {
+      intended_courses: self.intended_courses,
+      completed_courses: self.completed_courses,
+      required_courses: self.required_courses,
+      scheduled_classes: self.scheduled_classes
+    }
+  end
+
+  def add_or_remove_courses(opts)
+    add_or_remove_completed(opts[:completed]) if opts[:completed]
+    add_or_remove_intended(opts[:intended]) if opts[:intended]
+  end
 
   def courses
     self.completed_courses + self.intended_courses
@@ -30,5 +48,24 @@ class Plan < ApplicationRecord
       self.scheduled_classes.merge(Course.thesis_writing.meetings).first
     end
   end
+
+  private
+
+    def add_or_remove_intended(course)
+      if self.intended_courses.include?(course)
+        self.intended_courses.delete(course)
+      else
+        self.intended_courses << course
+      end
+    end
+
+    def add_or_remove_completed(course)
+      if self.completed_courses.include?(course)
+        self.completed_courses.delete(course)
+      else
+        self.completed_courses << course
+      end
+    end
+
 
 end

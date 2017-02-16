@@ -121,7 +121,7 @@ puts 'creating courses through categories'
 Category.all.each do |category|
   NUM_COURSES.times do |num|
     course = category.courses.create({
-      name: "#{Faker::Music.instrument} Studies",
+      name: "#{Faker::Music.instrument} Studies #{category.id}",
       number: "AA99#{category.id}#{num}",
       description: LOREM,
       units: 3,
@@ -132,10 +132,21 @@ Category.all.each do |category|
     course.sessions << Session.all.sample
     prereq = Course.all.sample
     course.required_courses << prereq unless prereq == course
-    if num % 4 == 0
-      Degree.all.sample.required_courses << course
-    end
   end
+end
+
+puts 'Creating unique required courses for degree'
+3.times do |num|
+  course = Course.create({
+      name: "Degree requirement #{num}",
+      number: "AA99#{num}",
+      description: LOREM,
+      units: 3,
+      level: 'graduate',
+      term_id: Term.all.sample.id
+    })
+
+  degree.required_courses << course
 end
 
 puts 'adding courses to non-thesis tracks'
@@ -186,19 +197,19 @@ Student.all.each do |student|
     degree_id: degree.id
   })
 
-  3.times do |num|
-    puts 'adding intended course to plan'
-    intended = Course.all.sample
-    plan.intended_courses << intended
-    if num.even?
-      puts 'adding scheduled course to plan'
-      plan.scheduled_classes << intended.meetings.sample
-    end
-    completed = Course.all.sample
-    break if completed == intended
-    puts 'adding completed course to plan'
-    plan.completed_courses << completed
-  end
+  # 3.times do |num|
+  #   puts 'adding intended course to plan'
+  #   intended = Course.all.sample
+  #   plan.intended_courses << intended
+  #   if num.even?
+  #     puts 'adding scheduled course to plan'
+  #     plan.scheduled_classes << intended.meetings.sample
+  #   end
+  #   completed = Course.all.sample
+  #   break if completed == intended
+  #   puts 'adding completed course to plan'
+  #   plan.completed_courses << completed
+  # end
 
   puts 'adding foreign course to plan'
   plan.foreign_courses << ForeignCourse.all.sample
