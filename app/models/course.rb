@@ -75,6 +75,8 @@ class Course < ApplicationRecord
     num.times do |num|
       current_year = Date.today.year
 
+      session = self.sessions.sample
+
       self.meetings.create({
         year: Date.new(current_year).advance(years: num).year,
         term: self.term.name,

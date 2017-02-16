@@ -89,7 +89,7 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'world-arts-courses.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
-  term = Term.find_by(name: row['Course Term'].upcase)
+  term = Term.find_by(name: row['Course Term'].titleize)
   if term.nil?
     term_name = row['Course Term'].upcase.split('/')[0]
     term = Term.find_by(name: term_name)
@@ -301,6 +301,7 @@ conc = degree.concentrations.create({
 
 
 puts 'creating meetings through courses'
+puts Course.all.sample
 Course.all.each do |course|
   course.create_meetings
 end
