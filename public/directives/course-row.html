@@ -1,6 +1,19 @@
-<td>
-  <input type="checkbox" ng-model='course.intended' ng-change='checkboxCallback({course: course})'>
-</td>
-<td>
-  <span>{{ course.number + ' ' + course.name }}</span>
-</td>
+<tr>
+  <td>
+    <input type="checkbox"
+           ng-model='course.intended'
+           ng-change='checkboxCallback({course: course})'
+           ng-disabled='course.required'
+           ng-if='!course.completed'>
+  </td>
+  <td>
+    <span>{{ course.number + ' ' + course.name }}</span>
+  </td>
+  <td>
+    <ng-transclude></ng-transclude>
+  </td>
+</tr>
+<!-- 
+  <span ng-if='!course.intended && !course.completed'>{{ course.units }}</span>
+  <button ng-if='course.intended'>Complete</button>
+  <button ng-if='course.completed'>Uncomplete</button> -->

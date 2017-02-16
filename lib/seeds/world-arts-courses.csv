@@ -1,0 +1,30 @@
+Category,Number,Name,Course Level,Credit Hours,Course Term,Course Location,Prerequisites,Corequisites,Sessions
+AA,5339,Research Methods for World Arts,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None,"2,3"
+AA,5357,Oral Tradition and Literature,Graduate,3,Fall,On-campus,None,None,4
+AA,5381,Arts for a Better Future (Intensive),Graduate,3,Summer,Intensive,None,None,1
+AA,5382,Applied Arts,Graduate,3,Fall,On-campus,AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or permission of instructor,None,4
+AA,5384,Expressive Form Analysis,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of instructor,None,"2,3"
+AA,5385,Song Transcription and Analysis,Graduate,3,Spring,On-campus,(1) Six semester hours of college level (western) music theory (or its equivalent) (2) AA5384 Expressive Form Analysis (or its equivalent),None,"3,4"
+AA,5386,Directed Practicum in World Arts (Online),Graduate,3,Spring/Fall,Online,AA5381 Arts for a Better Future or AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or AA5382 Applied Arts,None,"2,3,4"
+AA,5389,Advanced Form Analysis (Online),Graduate,3,Spring,Online,AA5384 Expressive Form Analysis,None,"3,4"
+WA,3381,Arts for a Better Future (Intensive),Undergraduate,3,Summer,Intensive,None,None,1
+WA,3384,Theory and Practice of Ethnodoxology,Undergraduate,3,Spring,On-campus,None,None,
+WA,3386,World Arts Practicum,Undergraduate,3,Spring,On-campus,None,None,
+WA,4322,Video Production and Editing,Undergraduate,3,Spring,On-campus,AA4202 Audio and Video Techniques for Fieldworkers ,None,
+WA,4382,Survey of World Arts,Undergraduate,3,Spring,On-campus,None,None,
+WA,4387,Area Studies for World Arts,Undergraduate,3,Spring,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None,
+AL,5312,Discourse Analysis,Graduate,3,Spring/Fall,On-campus,AL4410b Principles of Grammatical Analysis (b),None,"2,3"
+AC,5316,Contextualization Issues Among Muslim Peoples (Online),Graduate,3,Spring,Online,None,None,"3,4"
+AA,5333,Principles of Literacy,Graduate,3,Fall,On-campus,"AA4350 Language and Society, and either AL4303 Principles of Phonological Analysis and  AL4410a Principles of Grammatical Analysis (a), or AL4304 Introduction to Language Structure ",None,"2,3"
+AA,5343,Principles of Multilingual Education,Graduate,3,Fall,On-campus,None,None,"2,3"
+AA,5353,Language Development and Planning,Graduate,3,Spring,On-campus,AA4350 Language and Society ,None,4
+AA,5355,Scripture Engagement Strategy and Methods,Graduate,3,Spring,On-campus,AA4350 Language and Society or permission of instructor,None,1
+AA,5362,Language Survey Methods,Graduate,3,Spring,On-campus,"AL4303 Principles of Phonological Analysis, AA5361 Principles of Language Survey",None,"2,3"
+AA,5364,Theories and Practices in Community Development,Graduate,3,TBD,On-campus,None,None,
+AA,5373,Religion and Worldview,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology,None,4
+AA,5374,Christianity Across Cultures,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology,None,4
+AA,5383,Arts and Trauma Healing (Intensive),Graduate,3,Spring,Intensive,None,None,"1,2"
+AA,5387,Training Across Cultures,Graduate,3,Spring/Fall,On-campus,AA4370 Cultural Anthropology or AA4505 Second Language and Culture Acquisition,None,4
+AL,5316,Theory and Practice of Translation,Graduate,3,Spring/Fall,On-campus,Either AL5311 Relevance Theory or AL5315 Semantics and Pragmatics,None,4
+AL,5317,Language Documentation,Graduate,3,Spring,On-campus,AA4350 Language and Society,None,
+AC,5310,Core Components of Islam,Graduate,3,Fall,On-campus,None,None,"2,3,4"
