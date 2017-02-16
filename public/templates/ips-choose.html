@@ -51,9 +51,12 @@
 
     <!-- categories and their courses -->
     <div class="categories" ng-if='planInfo.plan.available_courses.length'>
-      <div class="category bordered course-section" ng-repeat='category in planInfo.plan.available_courses'>
+      <div class="category bordered course-section"
+           ng-repeat='category in planInfo.plan.available_courses'
+           ng-class="{'green-border': category.satisfiedByIntended(),
+                      'green-highlight': category.satisfiedByCompleted()}">
 
-        <h3>{{ category.name }}</h3>
+        <h3 ng-click='category.sumPlannedUnits()'>{{ category.name }}</h3>
 
         <table>
           <course-row ng-repeat='availableCourse in category.courses'
