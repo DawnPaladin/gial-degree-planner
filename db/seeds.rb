@@ -83,13 +83,24 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'world-arts-courses.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
-  course = Course.create({
+  term = Term.find_by(name: row['Course Term'].upcase)
+  if term.nil?
+    term_name = row['Course Term'].upcase.split('/')[0]
+    term = Term.find_by(name: term_name)
+    # FIXME: Term should not be required, and a course can have more than one term.
+  end
+  course = Course.new({
     number: row['Category'] + row['Number'],
     name: row['Name'],
     level: row['Course Level'],
     units: row['Credit Hours'],
-    term: Term.find_by(name: row['Course Term'].upcase),
+    term: term,
   })
+  if course.save
+    puts "Saved " + row['Name']
+  else
+    puts course.errors.full_messages
+  end
   unless row['Sessions'].nil?
     session_names = row['Sessions'].split(',')
     session_names.each do |session_name|
@@ -111,6 +122,7 @@ def addCoursesToCategory(category, courses)
       puts "Cannot find " + course_name
       next
     else
+      puts "Found " + course_name
       category.courses << course
     end
   end
@@ -128,7 +140,7 @@ conc = degree.concentrations.create({
   addCoursesToCategory(cat, [
     "Oral Tradition and Literature",
     "Song Transcription and Analysis",
-    "Advanced Form Analysis",
+    "Advanced Form Analysis (Online)",
     "Discourse Analysis",
   ])
   cat = conc.categories.create({
@@ -145,7 +157,7 @@ conc = degree.concentrations.create({
     "Theories and Practices in Community Development",
     "Religion and Worldview",
     "Christianity Across Cultures",
-    "Arts and Trauma Healing",
+    "Arts and Trauma Healing (Intensive)",
     "Training Across Cultures",
     "Theory and Practice of Translation",
     "Language Documentation",
@@ -170,7 +182,7 @@ conc = degree.concentrations.create({
   addCoursesToCategory(cat, [
     "Oral Tradition and Literature",
     "Song Transcription and Analysis",
-    "Advanced Form Analysis",
+    "Advanced Form Analysis (Online)",
     "Discourse Analysis",
   ])
   cat = conc.categories.create({
@@ -184,7 +196,7 @@ conc = degree.concentrations.create({
     "Theories and Practices in Community Development",
     "Religion and Worldview",
     "Christianity Across Cultures",
-    "Arts and Trauma Healing",
+    "Arts and Trauma Healing (Intensive)",
     "Training Across Cultures",
   ])
   cat = conc.categories.create({
@@ -193,7 +205,7 @@ conc = degree.concentrations.create({
   })
   addCoursesToCategory(cat, [
     "Core Components of Islam",
-    "Contextualization Issues Among Muslim Peoples",
+    "Contextualization Issues Among Muslim Peoples (Online)",
   ])
   conc.create_non_thesis_track({
     elective_hours: 6
@@ -209,7 +221,7 @@ conc = degree.concentrations.create({
   addCoursesToCategory(cat, [
     "Oral Tradition and Literature",
     "Song Transcription and Analysis",
-    "Advanced Form Analysis",
+    "Advanced Form Analysis (Online)",
     "Discourse Analysis",
   ])
   cat = conc.categories.create({
@@ -241,7 +253,7 @@ conc = degree.concentrations.create({
   addCoursesToCategory(cat, [
     "Religion and Worldview",
     "Christianity Across Cultures",
-    "Arts and Trauma Healing",
+    "Arts and Trauma Healing (Intensive)",
   ])
   conc.create_non_thesis_track({
     elective_hours: 6
