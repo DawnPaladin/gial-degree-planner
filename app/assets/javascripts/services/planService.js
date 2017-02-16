@@ -25,6 +25,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         _initializeCourses(plan);
 
         angular.copy(plan, _planInfo.plan);
+
         return _planInfo;
       }, function(error) {
         console.error(error);
