@@ -2,6 +2,10 @@ planner.filter('sessionFilter', function() {
 
   return function(sessions) {
 
+    if (sessions == undefined) {
+      return '';
+    }
+
     if (sessions.length === 1) {
       return sessions[0].name;
     } else {
