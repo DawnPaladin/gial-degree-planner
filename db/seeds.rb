@@ -300,6 +300,13 @@ conc = degree.concentrations.create({
     elective_hours: 6
   })
 
+puts 'adding required courses to degree'
+degree.required_courses << Course.find_by(number: 'AA5339')
+degree.required_courses << Course.find_by(number: 'AA5381')
+degree.required_courses << Course.find_by(number: 'AA5382')
+degree.required_courses << Course.find_by(number: 'AA5384')
+degree.required_courses << Course.find_by(number: 'AA5386')
+
 
 puts 'creating meetings through courses'
 puts Course.all.sample
