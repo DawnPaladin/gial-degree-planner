@@ -339,7 +339,7 @@ Student.all.each do |student|
 
   plan = student.create_plan({
     graduation_year: 2020,
-    graduation_term: 'SPRING',
+    graduation_term: 'Spring',
     degree_id: degree.id
   })
 
