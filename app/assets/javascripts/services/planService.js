@@ -21,6 +21,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
         
+        _extendCategories(plan);
         _extractCourses(plan);
         _initializeCourses(plan);
 
@@ -31,6 +32,44 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         console.error(error);
       });
   };
+
+  var _extendCategories = function(plan) {
+    if (!plan.available_courses) return;
+
+    plan.available_courses.forEach(function(category) {
+      category.sumCompletedUnits = function() {
+        var sum = 0;
+        for (i = 0; i < this.courses.length; i++) {
+          if (!!this.courses[i].completed) {
+            sum += this.courses[i].units;
+          }
+        }
+        return sum;
+      };
+
+      category.sumIntendedUnits = function() {
+        var sum = 0;
+        for (i = 0; i < this.courses.length; i++) {
+          if (!!this.courses[i].intended) {
+            sum += this.courses[i].units;
+          }
+        }
+        return sum;
+      };
+
+      category.sumPlannedUnits = function() {
+        return this.sumCompletedUnits() + this.sumIntendedUnits();
+      }
+
+      category.satisfiedByCompleted = function() {
+        return this.sumCompletedUnits() >= this.required_units;
+      }
+
+      category.satisfiedByIntended = function() {
+        return this.sumPlannedUnits() >= this.required_units;
+      }
+    });
+  }
 
   // Makes data from backend useful for front
   // TODO: refactor into separate functions
@@ -116,6 +155,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
+        _extendCategories(plan);
         _extractCourses(plan);
         _initializeCourses(plan);
         angular.copy(plan, _planInfo.plan);

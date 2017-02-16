@@ -17,16 +17,11 @@ planner.run(['$rootScope', function($rootScope){
   $rootScope.$on("$stateChangeError", console.warn.bind(console));
 }]);
 
-planner.factory('_', ['$window', function($window) {
-  return $window._;
-}]);
-
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-
 
     // Dashboard
     .state('dashboard', {

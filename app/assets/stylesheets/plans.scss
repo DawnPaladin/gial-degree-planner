@@ -16,9 +16,15 @@
 }
 
 .bordered {
-  border: 1px solid #aaa;
+  border: 1px solid #AAA;
   padding: 15px 20px;
   padding-top: -15px;
+}
+.green-border {
+  border: 3px solid #65804C;
+}
+.green-highlight {
+  background-color: rgba(101,128,76,0.2);
 }
 
 .course-section {
@@ -28,9 +34,18 @@
   }
 }
 
+.category {
+  padding-bottom: 32px;
+}
+
 .course-row {
   td {
     padding: 5px;
+  }
+  .completed-course {
+    color: #6FC44A;
+    text-decoration: line-through;
+    font-style: italic;
   }
 }
 
