@@ -18,7 +18,6 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
     @term = Term.find(params[:meeting_term])
     @session = Session.find(params[:meeting_session])
-    binding.pry
     @meeting = Meeting.find_meeting(params[:meeting_year], @term, @session)
     @plan.scheduled_classes << @meeting
     render json: @plan, status: 200
