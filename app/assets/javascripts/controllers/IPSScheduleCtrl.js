@@ -1,6 +1,6 @@
 planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', 'terms', function($scope, $rootScope, planService, $window, $timeout, _, Flash, terms) {
 
-  $rootScope.$broadcast('toggle-concentration');
+  $rootScope.$broadcast('toggle-concentration', { enabled: false });
 
   $scope.planInfo = planService.getPlanInfo();
 
