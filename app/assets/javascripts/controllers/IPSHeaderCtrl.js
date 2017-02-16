@@ -7,8 +7,8 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
   $scope.student = student;
   $scope.concentrations = student.degree.concentrations;
   $scope.planInfo = planService.getPlanInfo();
+  $scope.terms = ['Spring', 'Summer', 'Fall'];
   $scope.plan = $scope.planInfo.plan;
-  $scope.terms = ['SPRING', 'SUMMER', 'FALL'];
 
   // For all plan updates except for updates to latest_registered and registration_date
   $scope.updatePlan = function() {
@@ -52,5 +52,13 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
     $scope.planInfo.plan.latest_registered = false;
     $scope.toggleRegistration();
   }
+
+  $scope.$on('toggle-concentration', function() {
+    if ($scope.concentrationDisabled) {
+      $scope.concentrationDisabled = false;
+    } else {
+      $scope.concentrationDisabled = true;
+    }
+  });
 
 }]);

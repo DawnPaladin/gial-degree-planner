@@ -12,9 +12,13 @@ Rails.application.routes.draw do
     scope :v1 do
       resources :students do
         resource :plan
+        
+        # TODO Refactor
+        put 'update_schedule', to: 'plans#update_schedule'
       end
       resources :advisors
       resources :concentrations, only: [:index, :show]
+      resources :terms, only: [:index]
       resources :courses, only: [:index]
     end
   end

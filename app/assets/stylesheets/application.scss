@@ -4,3 +4,23 @@
 */
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+
+body {
+  font-family: 'Georgia';
+}
+
+.navbar {
+  border-radius: 0;
+}
+
+.navbar-inverse {
+  background-color: #4D3960;
+  border: none;
+  -webkit-font-smoothing: antialiased;
+
+  .navbar-brand,
+  .navbar-text,
+  .navbar-link {
+    color: #fff;
+  }
+}

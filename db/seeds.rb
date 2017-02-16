@@ -6,7 +6,7 @@ NUM_MEETINGS = 3
 NUM_CONCENTRATIONS = 2
 NUM_TEACHERS = 4
 NUM_FOREIGN_COURSES = 2
-TERMS = ['SPRING', 'SUMMER', 'FALL', 'ANY']
+TERMS = ['Spring', 'Summer', 'Fall', 'Any']
 LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos reiciendis doloremque, tenetur nulla illo eaque, qui excepturi assumenda aspernatur praesentium quo cumque sint repellat natus.'
 
 puts 'Destroying...'
@@ -40,13 +40,19 @@ puts 'foreign courses'
 ForeignCourse.destroy_all
 
 puts 'creating terms'
+terms = []
 TERMS.each do |term|
-  Term.create({ name: term })
+  terms << Term.create({ name: term })
 end
 
 puts 'creating sessions'
-['1', '2', '3', '4'].each do |session|
-  Session.create({ name: session })
+['1', '2', '3', '4'].each_with_index do |session, index|
+  new_session = Session.create({ name: session })
+  terms.each do |term|
+    unless term.name == 'Summer' && index > 0
+      term.sessions << new_session
+    end
+  end
 end
 
 puts 'creating admin'
@@ -166,6 +172,7 @@ conc = degree.concentrations.create({
     thesis_hours: 6,
     elective_hours: 3
   })
+
   thesis.courses << Course.thesis_writing
   thesis.courses << Course.thesis_course
   conc.create_non_thesis_track({
@@ -292,6 +299,7 @@ conc = degree.concentrations.create({
     elective_hours: 6
   })
 
+
 puts 'creating meetings through courses'
 Course.all.each do |course|
   course.create_meetings
@@ -344,17 +352,3 @@ on_track.completed_courses << Course.thesis_writing
 on_track.scheduled_classes << Course.thesis_writing.meetings.first
 on_track.save
 
-
-# degree
-# terms
-# sessions
-# advisor
-# student
-# courses
-# concentrations
-# non-thesis
-# thesis
-# categories
-# foreign courses
-# meetings
-# plans

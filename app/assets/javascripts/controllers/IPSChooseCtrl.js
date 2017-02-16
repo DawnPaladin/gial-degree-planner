@@ -1,5 +1,7 @@
 planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student', 'plan', 'planService', function($scope, $state, $rootScope, student, plan, planService) {
-  
+
+  $rootScope.$broadcast('toggle-concentration');
+
   $scope.student = student;
   $scope.planInfo = plan;
 

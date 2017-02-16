@@ -9,8 +9,8 @@ end
 json.advisor @student.advisor
 json.plan do
   json.extract! @plan, *@plan.attributes.keys
-  json.term = @term
   json.courses @plan.courses
+  json.term = @term
   json.degree do
     json.name @degree.name
     json.description @degree.description

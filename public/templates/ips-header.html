@@ -1,3 +1,7 @@
+<div class="flash-container">
+  <flash-message></flash-message>
+</div>
+
 <div class="row">
   <div class="col-xs-12">
     <h2>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h2>
@@ -12,7 +16,8 @@
 
       <select ng-model='plan.concentration_id'
               ng-options='concentration.id as concentration.name for concentration in concentrations'
-              ng-change='updatePlan()'>
+              ng-change='updatePlan()'
+              ng-disabled="concentrationDisabled">
         <option value=""></option>        
       </select>
 
@@ -39,6 +44,7 @@
     <div class="ips-navigation">
       <a ui-sref='ips.choose'>Choose Courses</a>
       <a ui-sref='ips.schedule'>Schedule Courses</a>
+      <a ui-sref='ips.print'>Print Intended Plan of Study</a>
     </div>
 
     <div class="registered-info">

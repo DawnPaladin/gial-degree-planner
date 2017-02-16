@@ -1,4 +1,4 @@
-var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore']);
 
 planner.config(function(AuthProvider) {
   AuthProvider.loginPath('/advisors/sign_in.json');
@@ -109,7 +109,18 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     })
     .state('ips.schedule', {
       url: '/schedule',
-      templateUrl: '/templates/ips-schedule.html'
+      templateUrl: '/templates/ips-schedule.html',
+      controller: 'IPSScheduleCtrl',
+      resolve: {
+        terms: ['Restangular',
+        function(Restangular) {
+          return Restangular.all('terms').getList();
+        }]
+      }
+    })
+    .state('ips.print', {
+      url: '/print',
+      templateUrl: '/templates/ips-print.html'
     });
 
 }]);

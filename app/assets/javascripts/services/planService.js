@@ -126,6 +126,14 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     });
   };
 
+  // TODO Refactor
+  var updateSchedule = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
+        return response;
+    }, function(response) {
+      console.error(response);
+    });
+  };
 
   // used in callbacks
   var addOrRemoveIntended = function(course) {
@@ -205,6 +213,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
     update: update,
+    updateSchedule: updateSchedule,
     addOrRemoveIntended: addOrRemoveIntended,
     addOrRemoveCompleted: addOrRemoveCompleted
   };

@@ -1,1 +1,43 @@
-CLASSES GET SCHEDULED HERE
+<section>
+
+  <h3>Unscheduled Courses</h3>
+
+  <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop" bin="bin">
+
+    <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" draggable draggable-course="course">
+      {{ course.number }}<br>
+      <span class="truncated">
+        {{ course.name }}<br>
+        {{ course.term.name }}<br>
+        {{ course.sessions | sessionFilter }}
+      </span>
+    </div>      
+
+  </div>
+
+</section>
+
+{{ planInfo }}
+
+
+<section class="schedule">
+
+  <div ng-repeat="year in years" class="text-center">
+
+    <h3>{{ year }}</h3>
+
+    <div class="term" ng-repeat="term in terms">
+
+      <div class="sessions">
+        <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year="{{ year }}" droppable drop="handleDrop" session="session">
+          {{ sessions.name }}
+        </div>
+      </div>
+
+      <p><strong>{{ term.name }}</strong></p>
+
+    </div>
+
+  </div>
+
+</section>

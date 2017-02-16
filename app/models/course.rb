@@ -41,7 +41,7 @@ class Course < ApplicationRecord
   # Class Methods
   #####
   def self.thesis_writing
-    any_term = Term.find_by_name('ANY')
+    any_term = Term.find_by_name('Any')
     self.find_or_create_by({
       name: "Thesis Writing",
       number: 'AA5190',
@@ -53,7 +53,7 @@ class Course < ApplicationRecord
   end
 
   def self.thesis_course
-    any_term = Term.find_by_name('ANY')
+    any_term = Term.find_by_name('Any')
     self.find_or_create_by({
       name: "Thesis",
       number: 'AA5191',
@@ -71,18 +71,17 @@ class Course < ApplicationRecord
 
   # this will probably need work
   # to determine the correct year/term
-  def create_meetings(num = 5)
+  def create_meetings(num = 10)
     num.times do |num|
       current_year = Date.today.year
-      session = self.sessions.sample
+
       self.meetings.create({
+        year: Date.new(current_year).advance(years: num).year,
         term: self.term.name,
-        session: session.nil? ? "" : session.name,
-        year: Date.new(current_year).advance(years: num).year
+        session: session.nil? ? "1" : session.name,
       })
     end
   end
-
 
 
 end
