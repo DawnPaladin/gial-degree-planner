@@ -6,6 +6,7 @@ if @plan.concentration
   json.available_courses @plan.concentration.categories do |category|
     json.id category.id
     json.name category.name
+    json.required_units category.required_units
     json.courses category.courses
   end
 end

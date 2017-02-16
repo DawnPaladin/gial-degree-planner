@@ -10,7 +10,7 @@
     <div class="completed-courses course-section">
       <h3>Completed Courses</h3>
       <table>
-        <course-row ng-repeat='completed in planInfo.plan.completed_courses'
+        <course-row ng-repeat='completed in completedCourses'
             course='completed'
             class='course-row'>
 
@@ -22,18 +22,14 @@
     <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
       <table>
-<!--         <course-row ng-repeat='requirement in planInfo.plan.required_courses'
-            course='requirement'
-            class='course-row'>
-          <button ng-click='toggleCompleted(requirement)'>Complete</button>
-        </course-row> -->
 
-        <course-row ng-repeat='intended in planInfo.plan.intended_courses'
+        <course-row ng-repeat='intended in intendedCourses'
             course='intended'
             checkbox-callback='addOrRemoveIntended(course)'
             class='course-row'>
           <button ng-click='toggleCompleted(intended)'>Complete</button>
         </course-row> 
+
       </table>
     </div>
   </div>
@@ -43,16 +39,16 @@
     <div class="required-courses course-section">
       <h3>Required Courses</h3>
       <table>
-        <course-row ng-repeat='requirement in planInfo.plan.required_courses'
-            course='requirement'
-            class='course-row'>
+        <course-row ng-repeat='requirement in requiredCourses'
+                    course='requirement'
+                    class='course-row'>
         </course-row>
       </table>
     </div><!-- required courses -->
 
     <!-- categories and their courses -->
-    <div class="categories" ng-if='concentration.categories.length'>
-      <div class="category bordered course-section" ng-repeat='category in concentration.categories'>
+    <div class="categories" ng-if='coursesByCategory.length'>
+      <div class="category bordered course-section" ng-repeat='category in coursesByCategory'>
 
         <h3>{{ category.name }}</h3>
 
@@ -69,6 +65,13 @@
 
       </div><!-- category directive -->
     </div><!-- categories column -->
+
+    <div class="bordered friendly-message text-center">
+      <h4>If you plan to schedule more than the required courses,</h4>
+      <h4>Please choose a concentration from the dropdown above!</h4>
+    </div>
   </div><!-- right column -->
 
 </div>
+
+{{ planInfo.plan }}

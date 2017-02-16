@@ -1,6 +1,5 @@
 class Plan < ApplicationRecord
   # lifecycle
-  before_save :add_required_degrees_courses
 
   # validations
 
@@ -40,10 +39,6 @@ class Plan < ApplicationRecord
 
 
   private
-
-    def add_required_degrees_courses
-      self.intended_courses = self.degree.required_courses
-    end
 
     def add_or_remove_intended(course)
       if self.intended_courses.include?(course)
