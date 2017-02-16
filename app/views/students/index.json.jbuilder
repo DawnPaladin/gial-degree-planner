@@ -3,7 +3,11 @@ json.array! @students do |student|
   json.advisor student.advisor
   if student.plan.concentration
     json.concentration student.plan.concentration.name
-    json.thesis_starts friendly_date(student.plan.thesis_starts)
+    if student.plan.thesis_starts
+      json.thesis_starts friendly_date(student.plan.thesis_starts)
+    else
+      json.thesis_starts ""
+    end
     json.graduation_date student.plan.graduation_term.titleize + ' ' + student.plan.graduation_year.to_s
   end
   json.currently_registered student.plan.latest_registered
