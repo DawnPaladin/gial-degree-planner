@@ -333,20 +333,6 @@ Student.all.each do |student|
     degree_id: degree.id
   })
 
-  3.times do |num|
-    puts 'adding intended course to plan'
-    intended = Course.all.sample
-    plan.intended_courses << intended
-    if num.even?
-      puts 'adding scheduled course to plan'
-      plan.scheduled_classes << intended.meetings.sample
-    end
-    completed = Course.all.sample
-    break if completed == intended
-    puts 'adding completed course to plan'
-    plan.completed_courses << completed
-  end
-
   puts 'adding foreign course to plan'
   plan.foreign_courses << ForeignCourse.all.sample
 end

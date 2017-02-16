@@ -17,6 +17,10 @@ planner.run(['$rootScope', function($rootScope){
   $rootScope.$on("$stateChangeError", console.warn.bind(console));
 }]);
 
+planner.factory('_', ['$window', function($window) {
+  return $window._;
+}]);
+
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('/');
@@ -60,6 +64,13 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
 
     .state('dashboard.meetings', {
       url: 'classes',
+      resolve: {
+        courses: ['Restangular',
+          function(Restangular) {
+            return Restangular.all('courses').getList();
+          }
+        ],
+      },
       views: {
         "main@": {
           templateUrl: '/templates/meetings.html',
@@ -83,8 +94,8 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
       resolve: {
         student: ['Restangular', '$stateParams',
           function(Restangular, $stateParams) {
-          return Restangular.one('students', $stateParams.student_id).get();
-        }],
+            return Restangular.one('students', $stateParams.student_id).get();
+          }],
         plan: ['planService', '$stateParams',
           function(planService, $stateParams) {
             return planService.getPlan($stateParams.student_id);
