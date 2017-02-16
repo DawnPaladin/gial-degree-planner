@@ -91,8 +91,9 @@ csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
   term = Term.find_by(name: row['Course Term'].titleize)
   if term.nil?
-    term_name = row['Course Term'].upcase.split('/')[0]
+    term_name = row['Course Term'].titleize.split('/')[0]
     term = Term.find_by(name: term_name)
+    next if term.nil?
     # FIXME: Term should not be required, and a course can have more than one term.
   end
   course = Course.new({
@@ -352,4 +353,3 @@ on_track.concentration = Concentration.last
 on_track.completed_courses << Course.thesis_writing
 on_track.scheduled_classes << Course.thesis_writing.meetings.first
 on_track.save
-
