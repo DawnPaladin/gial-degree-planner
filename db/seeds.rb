@@ -347,6 +347,13 @@ Student.all.each do |student|
   plan.foreign_courses << ForeignCourse.all.sample
 end
 
+puts 'enrolling plans in courses'
+Course.all.each do |course|
+  meeting = course.meetings.all.sample
+  plan = Plan.all.sample
+  meeting.plans << plan
+end
+
 puts 'creating on-track student'
 on_track = Student.last.plan
 on_track.concentration = Concentration.last
