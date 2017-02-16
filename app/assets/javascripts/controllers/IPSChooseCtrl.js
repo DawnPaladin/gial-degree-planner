@@ -20,8 +20,3 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student'
   };
 
 }]);
-
-// Two days,
-// 3 unused services,
-// and ~10000 LOC later,
-// this is what remains.
