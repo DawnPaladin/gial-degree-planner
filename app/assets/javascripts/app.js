@@ -1,4 +1,4 @@
-var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash']);
 
 planner.config(function(AuthProvider) {
   AuthProvider.loginPath('/advisors/sign_in.json');
