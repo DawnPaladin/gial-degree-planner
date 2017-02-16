@@ -107,7 +107,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         }]
       }
     })
-    .state('/ips.print', {
+    .state('ips.print', {
       url: '/print',
       templateUrl: '/templates/ips-print.html'
     });
