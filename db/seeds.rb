@@ -126,10 +126,10 @@ def addCoursesToCategory(category, courses)
   courses.each do |course_name|
     course = Course.find_by(name: course_name)
     if course.nil?
-      puts "Cannot find " + course_name
+      # puts "Cannot find " + course_name
       next
     else
-      puts "Found " + course_name
+      # puts "Found " + course_name
       category.courses << course
     end
   end
@@ -302,7 +302,6 @@ conc = degree.concentrations.create({
 
 
 puts 'creating meetings through courses'
-puts Course.all.sample
 Course.all.each do |course|
   course.create_meetings
 end
@@ -349,7 +348,7 @@ end
 
 puts 'enrolling plans in courses'
 Course.all.each do |course|
-  meeting = course.meetings.all.sample
+  meeting = course.meetings.first
   plan = Plan.all.sample
   meeting.plans << plan
 end
