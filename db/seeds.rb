@@ -50,7 +50,7 @@ puts 'creating sessions'
 end
 
 puts 'creating admin'
-admin = Advisor.create({
+Advisor.create({
   email: 'admin@gial.edu',
   first_name: 'Admin',
   last_name: 'Admin',
@@ -104,19 +104,52 @@ degree = Degree.create({
   description: LOREM
 })
 
+def addCoursesToCategory(category, courses)
+  courses.each do |course_name|
+    course = Course.find_by(name: course_name)
+    if course.nil?
+      puts "Cannot find " + course_name
+      next
+    else
+      category.courses << course
+    end
+  end
+end
+
 puts 'creating concentrations, categories, and thesis/non-thesis tracks'
 conc = degree.concentrations.create({
   name: "Applied Arts",
   description: LOREM
 })
-  conc.categories.create({
+  cat = conc.categories.create({
     name: "Arts analysis specialization",
     required_units: 6
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Oral Tradition and Literature",
+    "Song Transcription and Analysis",
+    "Advanced Form Analysis",
+    "Discourse Analysis",
+  ])
+  cat = conc.categories.create({
     name: "Application domain courses",
     required_units: 6
   })
+  addCoursesToCategory(cat, [
+    "Contextualization Issues Among Muslim Peoples",
+    "Principles of Literacy",
+    "Principles of Multilingual Education",
+    "Language Development and Planning",
+    "Scripture Engagement Strategy and Methods",
+    "Language Survey Methods",
+    "Theories and Practices in Community Development",
+    "Religion and Worldview",
+    "Christianity Across Cultures",
+    "Arts and Trauma Healing",
+    "Training Across Cultures",
+    "Theory and Practice of Translation",
+    "Language Documentation",
+  ])
   thesis = conc.create_thesis_track({
     thesis_hours: 6,
     elective_hours: 3
@@ -130,18 +163,38 @@ conc = degree.concentrations.create({
   name: "Arts & Islam",
   description: LOREM
 })
-  conc.categories.create({
+  cat = conc.categories.create({
     name: "Arts analysis specialization",
     required_units: 6
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Oral Tradition and Literature",
+    "Song Transcription and Analysis",
+    "Advanced Form Analysis",
+    "Discourse Analysis",
+  ])
+  cat = conc.categories.create({
     name: "Application domain courses",
     required_units: 3
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Principles of Literacy",
+    "Principles of Multilingual Education",
+    "Scripture Engagement Strategy and Methods",
+    "Theories and Practices in Community Development",
+    "Religion and Worldview",
+    "Christianity Across Cultures",
+    "Arts and Trauma Healing",
+    "Training Across Cultures",
+  ])
+  cat = conc.categories.create({
     name: "Concentration-specific courses",
     required_units: 6
   })
+  addCoursesToCategory(cat, [
+    "Core Components of Islam",
+    "Contextualization Issues Among Muslim Peoples",
+  ])
   conc.create_non_thesis_track({
     elective_hours: 6
   })
@@ -149,22 +202,47 @@ conc = degree.concentrations.create({
   name: "Arts & Scripture Engagement",
   description: LOREM
 })
-  conc.categories.create({
+  cat = conc.categories.create({
     name: "Arts analysis specialization",
     required_units: 6
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Oral Tradition and Literature",
+    "Song Transcription and Analysis",
+    "Advanced Form Analysis",
+    "Discourse Analysis",
+  ])
+  cat = conc.categories.create({
     name: "Application domain courses",
     required_units: 3
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Contextualization Issues Among Muslim Peoples",
+    "Principles of Literacy",
+    "Principles of Multilingual Education",
+    "Language Development and Planning",
+    "Theories and Practices in Community Development",
+    "Training Across Cultures",
+    "Theory and Practice of Translation",
+  ])
+  cat = conc.categories.create({
     name: "Concentration-specific courses",
     required_units: 9
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Scripture Engagement Strategy and Methods",
+    "Current Issues in Scripture Engagement",
+    "Culture Change & Minority Cultures",
+  ])
+  cat = conc.categories.create({
     name: "Choose one of the following",
     required_units: 3
   })
+  addCoursesToCategory(cat, [
+    "Religion and Worldview",
+    "Christianity Across Cultures",
+    "Arts and Trauma Healing",
+  ])
   conc.create_non_thesis_track({
     elective_hours: 6
   })
@@ -172,14 +250,26 @@ conc = degree.concentrations.create({
   name: "Linguistics",
   description: LOREM
 })
-  conc.categories.create({
+  cat = conc.categories.create({
     name: "Concentration-specific courses",
     required_units: 12
   })
-  conc.categories.create({
+  addCoursesToCategory(cat, [
+    "Field Methods",
+    "Field Data Management",
+    "Discourse Analysis",
+    "Semantic & Pragmatics",
+  ])
+  cat = conc.categories.create({
     name: "Choose one of the following",
     required_units: 3
   })
+  addCoursesToCategory(cat, [
+    "Theory and Practice of Translation",
+    "Oral Tradition and Literature",
+    "Principles of Literacy",
+    "Scripture Engagement Strategy and Methods",
+  ])
   thesis = conc.create_thesis_track({
     thesis_hours: 6,
     elective_hours: 0
@@ -189,34 +279,6 @@ conc = degree.concentrations.create({
   conc.create_non_thesis_track({
     elective_hours: 6
   })
-
-puts 'creating courses through categories'
-Category.all.each do |category|
-  NUM_COURSES.times do |num|
-    # course = category.courses.create({
-    #   name: "#{Faker::Music.instrument} Studies",
-    #   number: "AA99#{category.id}#{num}",
-    #   description: LOREM,
-    #   units: 3,
-    #   level: ['graduate', 'graduate', 'graduate', 'undergraduate'].sample,
-    #   term_id: Term.all.sample.id
-    # })
-
-    # course.sessions << Session.all.sample
-    # prereq = Course.all.sample
-    # course.required_courses << prereq unless prereq == course
-    # if num % 4 == 0
-    #   Degree.all.sample.required_courses << course
-    # end
-  end
-end
-
-puts 'adding courses to non-thesis tracks'
-NonThesisTrack.all.each do |nt_track|
-  2.times do
-    nt_track.courses << Course.all.sample
-  end
-end
 
 puts 'creating meetings through courses'
 Course.all.each do |course|
@@ -283,7 +345,6 @@ on_track.concentration = Concentration.last
 on_track.completed_courses << Course.thesis_writing
 on_track.scheduled_classes << Course.thesis_writing.meetings.first
 on_track.save
-p on_track
 
 
 # degree
