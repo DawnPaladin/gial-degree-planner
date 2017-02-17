@@ -8,15 +8,13 @@
       {{ course.number }}<br>
       <span class="truncated">
         {{ course.name }}<br>
-        {{ course.term.name }}<br>
-        {{ course.sessions | sessionFilter }}
+        {{ course.term.name }} {{ course.sessions | sessionFilter }}
       </span>
     </div>
 
   </div>
 
 </section>
-
 
 <section class="schedule">
 

@@ -3,9 +3,7 @@ json.extract! @plan, *@plan.attributes.keys
 json.intended_courses @plan.intended_courses
 json.completed_courses @plan.completed_courses
 json.required_courses @plan.required_courses do |required_course|
-  json.id required_course.id
-  json.name required_course.name
-  json.number required_course.number
+  json.extract! required_course, *required_course.attributes.keys
   json.term required_course.term
   json.sessions required_course.sessions
 end
