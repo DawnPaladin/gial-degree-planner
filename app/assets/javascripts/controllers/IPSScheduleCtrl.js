@@ -12,7 +12,6 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
   var nextYear = 2;
   var messages = {
-    'newYear': "New year added!",
     'courseScheduled': "Course scheduled!",
     'courseUnscheduled': "Course removed from schedule"
   };
@@ -22,7 +21,6 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
       $timeout(function() {
         $scope.years.push($scope.possibleYears[nextYear]);
         nextYear++;
-        Flash.create('success', messages.newYear);
       }, 150);
     }
   };

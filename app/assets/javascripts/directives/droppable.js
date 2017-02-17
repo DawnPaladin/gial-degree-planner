@@ -1,4 +1,4 @@
-planner.directive('droppable', function() {
+planner.directive('droppable', ['planService', function(planService) {
 
   return {
     scope: {
@@ -47,6 +47,15 @@ planner.directive('droppable', function() {
         'drop',
         function(e) {
           if (e.stopPropagation) e.stopPropagation();
+
+          // if this bubble is the 'sticky-bubble-container'
+            // allow the function to continue normally
+
+          // if either the term id or the session id on this session
+          // do not match the term id and any of the session ids on the bubble being dragged
+            // do not allow the drop to execute
+
+
           this.classList.remove('over');
 
           var meetingData = {
@@ -79,4 +88,4 @@ planner.directive('droppable', function() {
     }
   }
 
-});
+}]);
