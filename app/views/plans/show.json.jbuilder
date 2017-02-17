@@ -17,4 +17,14 @@ if @plan.concentration
       end
     end
   end
+  if @plan.concentration.thesis_track
+    json.thesis_track do
+      json.extract! @plan.concentration.thesis_track, *@plan.concentration.thesis_track.attributes.keys
+      json.courses @plan.concentration.thesis_track.courses
+    end
+  end
+  json.non_thesis_track do
+    json.extract! @plan.concentration.non_thesis_track, *@plan.concentration.non_thesis_track.attributes.keys
+    json.courses @plan.concentration.non_thesis_track.courses
+  end
 end

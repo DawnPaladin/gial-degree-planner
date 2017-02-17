@@ -25,6 +25,9 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         _extractCourses(plan);
         _initializeCourses(plan);
 
+        console.log(plan.thesis_track)
+        console.log(plan.non_thesis_track)
+
         angular.copy(plan, _planInfo.plan);
 
         return _planInfo;
