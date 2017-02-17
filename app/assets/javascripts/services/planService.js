@@ -41,9 +41,9 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
   // Makes data from backend useful for front
   // TODO: refactor into separate functions
   var _extractCourses = function(plan) {
-    var required = plan.required_courses;
-    var intended = plan.intended_courses;
-    var completed = plan.completed_courses;
+    var required = plan.required_courses,
+        intended = plan.intended_courses,
+        completed = plan.completed_courses;
     plan.coursesById = {};
     
     // available_courses are present if
@@ -75,6 +75,16 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       Object.assign(thesis, additionalParams);
       plan.available_courses.push(thesis);
     }
+
+    // Make non-thesis track into a catrgory
+    // push nttrack as category into available courses
+    additionalParams = {
+      name: 'Non-Thesis Track',
+      required_units: plan.non_thesis_track.elective_hours,
+      id: 'non_thesis'
+    };
+    Object.assign(plan.non_thesis_track, additionalParams);
+    plan.available_courses.push(plan.non_thesis_track);
     
     // Go through coursesById and set the correct ones
     // to required

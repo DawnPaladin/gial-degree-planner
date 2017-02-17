@@ -15,6 +15,10 @@
 
 }
 
+// Category boxes
+.category {
+  padding-bottom: 32px;
+}
 .bordered {
   border: 1px solid #AAA;
   padding: 15px 20px;
@@ -27,17 +31,13 @@
   background-color: rgba(101,128,76,0.2);
 }
 
+// Section/Panel on page
 .course-section {
   margin-bottom: 25px;
   .required-units {
     float: right;
   }
 }
-
-.category {
-  padding-bottom: 32px;
-}
-
 .course-row {
   td {
     padding: 5px;

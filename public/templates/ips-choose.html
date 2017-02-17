@@ -51,28 +51,11 @@
 
     <!-- categories and their courses -->
     <div class="categories" ng-if='planInfo.plan.available_courses.length'>
-      <div class="category bordered course-section"
-           ng-repeat='category in planInfo.plan.available_courses'
-           ng-class="{'green-border': category.satisfiedByIntended(),
-                      'green-highlight': category.satisfiedByCompleted()}">
 
-        <h3>{{ category.name }}</h3>
-
-        <table>
-          <course-row ng-repeat='availableCourse in category.courses'
-              course='availableCourse'
-              checkbox-callback='addOrRemoveIntended(course)'
-              class='course-row'>
-            <!-- text transcluded -->
-            {{ availableCourse.units }}
-          </course-row>
-          <input ng-if='category.elective_hours'
-                 class='form-control'>
-        </table>
-
-        <p class='required-units'>Units required: {{ category.required_units }}</p>
-
-      </div><!-- category directive -->
+      <category-section ng-repeat='category in planInfo.plan.available_courses'
+                        category='category'>
+      </category-section>
+      
     </div><!-- categories column -->
 
     <div class="bordered friendly-message text-center" ng-if='!planInfo.plan.available_courses.length'>

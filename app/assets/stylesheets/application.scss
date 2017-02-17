@@ -24,3 +24,11 @@ body {
     color: #fff;
   }
 }
+
+.clickable {
+  cursor: pointer;
+  color: #4D3960;
+  &:hover {
+    color: #D75EAE;
+  }
+}
