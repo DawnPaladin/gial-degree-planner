@@ -58,7 +58,6 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
-    bower-rails (0.11.0)
     builder (3.2.3)
     byebug (9.0.6)
     capybara (2.12.0)
@@ -286,7 +285,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
-  bower-rails (~> 0.11.0)
   byebug
   capybara
   coffee-rails (~> 4.2)
