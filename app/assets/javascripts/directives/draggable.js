@@ -7,36 +7,43 @@ planner.directive('draggable', function() {
 
     el.draggable = true;
 
-    var dotheDragStartThings = function(e, attrs) {
+    var dotheDragStartThings = function(e, attrs, that) {
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('Text', this.id);
-      this.classList.add('drag');
+      e.dataTransfer.setData('Text', that.id);
+      that.classList.add('drag');
 
-      debugger;
+      // Get the term id and session ids off of the element being dragged
+
+      var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
+      var thisSessionIds = [];
+      var thisSessions = JSON.parse(e.target.getAttribute('sessions'));
+
+      for (var i = 0; i < thisSessions.length; i++) {
+        thisSessionIds.push(thisSessions[i].id);
+      }
 
       // iterate over all of the session bins
       // if a session bin's term and session ids
       // match the term id and any session id on this thing being dragged
-        // add the green highlight class to them
+        // add the green highlight class to it
       // otherwise
         // add a dull 'disabled' class
 
-      var terms = JSON.parse(attrs.terms);
+        angular.element('.session')
+          .addClass('unpermitted');
 
-      for(var i = 0; i < terms.length; i++) {
-        for (var j = 0; j < terms[i].sessions.length; j++) {
+        var thisSessionId = thisSessionIds[0].id;
+          angular.element(".session[data-term-id='" + thisTermId + "'][data-session-id='" + thisSessionIds[0] + "']")
+          .removeClass('unpermitted')
+          .addClass('permitted');
 
-          var termId = terms[i].id;
-          var sessionId = terms[i].sessions[j].id;
 
-        }
-      }
 
       return false;
     };
 
     el.addEventListener('dragstart', function(e) {
-      dotheDragStartThings(e, attrs);
+      dotheDragStartThings(e, attrs, this);
     }, false);
 
 
@@ -44,6 +51,9 @@ planner.directive('draggable', function() {
       'dragend',
       function(e) {
         this.classList.remove('drag');
+        angular.element(".session")
+          .removeClass('unpermitted')
+          .removeClass('permitted');
         return false;
       },
       false

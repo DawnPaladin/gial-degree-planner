@@ -4,10 +4,10 @@
 
   <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop" bin="bin">
 
-    <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" course terms="{{ terms }}" sessions="{{ course.sessions }}" draggable draggable-course="course">
-      {{ course.number }}<br>
+    <div ng-repeat="course in planInfo.plan.intended_courses" class="course-bubble" id="{{ course.id }}" course all-terms="{{ terms }}" sessions="{{ course.sessions }}" term="{{ course.term }}" draggable draggable-course="course">
+      {{ course.name }}<br>
       <span class="truncated">
-        {{ course.name }}<br>
+        {{ course.number }}<br>
         {{ course.term.name }} {{ course.sessions | sessionFilter }}
       </span>
     </div>
