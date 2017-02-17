@@ -10,27 +10,25 @@
     <div class="completed-courses course-section">
       <h3>Completed Courses</h3>
       <table>
-        <course-row ng-repeat='completed in planInfo.plan.completed_courses'
+        <tr course-row ng-repeat='completed in planInfo.plan.completed_courses'
             course='completed'
-            class='course-row'>
-
-          <!-- this button is transcluded -->
-          <button ng-click='toggleCompleted(completed)'>UnComplete</button>
-        </course-row>
+            class='course-row'
+            button-callback='toggleCompleted(course)'
+            section='completed'>
+        </tr>
       </table>
     </div>
 
     <div class="intended-courses bordered course-section">
       <h3>Intended Courses</h3>
       <table>
-        <course-row ng-repeat='intended in planInfo.plan.intended_courses'
+        <tr course-row ng-repeat='intended in planInfo.plan.intended_courses'
             course='intended'
             checkbox-callback='addOrRemoveIntended(course)'
-            class='course-row'>
-
-          <!-- this button is transcluded -->
-          <button ng-click='toggleCompleted(intended)'>Complete</button>
-        </course-row> 
+            button-callback='toggleCompleted(course)'
+            class='course-row'
+            section='intended'>
+        </tr> 
 
       </table>
     </div>
@@ -41,11 +39,11 @@
     <div class="required-courses course-section">
       <h3>Required Courses</h3>
       <table>
-        <!-- nothing transcluded -->
-        <course-row ng-repeat='requirement in planInfo.plan.required_courses'
+        <tr course-row ng-repeat='requirement in planInfo.plan.required_courses'
                     course='requirement'
-                    class='course-row'>      
-        </course-row>
+                    class='course-row'
+                    section='required'>      
+        </tr>
       </table>
     </div><!-- required courses -->
 
@@ -55,7 +53,7 @@
       <category-section ng-repeat='category in planInfo.plan.available_courses'
                         category='category'>
       </category-section>
-      
+
     </div><!-- categories column -->
 
     <div class="bordered friendly-message text-center" ng-if='!planInfo.plan.available_courses.length'>

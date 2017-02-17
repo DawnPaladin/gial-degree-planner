@@ -25,9 +25,6 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         _extractCourses(plan);
         _initializeCourses(plan);
 
-        console.log(plan.thesis_track)
-        // console.log(plan.non_thesis_track)
-
         angular.copy(plan, _planInfo.plan);
 
         return _planInfo;
@@ -78,13 +75,15 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
     // Make non-thesis track into a catrgory
     // push nttrack as category into available courses
-    additionalParams = {
-      name: 'Non-Thesis Track',
-      required_units: plan.non_thesis_track.elective_hours,
-      id: 'non_thesis'
-    };
-    Object.assign(plan.non_thesis_track, additionalParams);
-    plan.available_courses.push(plan.non_thesis_track);
+    if (plan.non_thesis_track) {
+      additionalParams = {
+        name: 'Non-Thesis Track',
+        required_units: plan.non_thesis_track.elective_hours,
+        id: 'non_thesis'
+      };
+      Object.assign(plan.non_thesis_track, additionalParams);
+      plan.available_courses.push(plan.non_thesis_track);
+    }
     
     // Go through coursesById and set the correct ones
     // to required
@@ -212,7 +211,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     plan.available_courses.forEach(function(category) {
       category.sumCompletedUnits = function() {
         var sum = 0;
-        for (i = 0; i < this.courses.length; i++) {
+        for (var i = 0; i < this.courses.length; i++) {
           if (!!this.courses[i].completed) {
             sum += this.courses[i].units;
           }
@@ -222,7 +221,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
       category.sumIntendedUnits = function() {
         var sum = 0;
-        for (i = 0; i < this.courses.length; i++) {
+        for (var i = 0; i < this.courses.length; i++) {
           if (!!this.courses[i].intended) {
             sum += this.courses[i].units;
           }
@@ -232,17 +231,17 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
       category.sumPlannedUnits = function() {
         return this.sumCompletedUnits() + this.sumIntendedUnits();
-      }
+      };
 
       category.satisfiedByCompleted = function() {
         return this.sumCompletedUnits() >= this.required_units;
-      }
+      };
 
       category.satisfiedByIntended = function() {
         return this.sumPlannedUnits() >= this.required_units;
-      }
+      };
     });
-  }
+  };
 
 
   // NOTE: these are purely front-end functions.

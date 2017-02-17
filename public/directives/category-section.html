@@ -5,14 +5,15 @@
   <h3>{{ category.name }}</h3>
 
   <table>
-    <course-row ng-repeat='availableCourse in category.courses'
+    <tr course-row ng-repeat='availableCourse in category.courses'
         course='availableCourse'
         checkbox-callback='addOrRemoveIntended(course)'
+        section='available'
         class='course-row'>
 
       {{ availableCourse.units }}
 
-    </course-row>
+    </tr course-row>
     <tr>
       <td></td>
       <td>
