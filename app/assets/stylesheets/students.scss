@@ -68,7 +68,6 @@
   .sessions {
     display: inline-block;
     margin: 0px 5px 10px;
-    overflow: hidden;
 
     .session {
       height: 100px;
@@ -79,19 +78,15 @@
       border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc;
       border-right: 2px dashed #ddd;
-      transition: all 0.5s;
+      transition: background 0.5s;
       z-index: 0;
     }
 
     .session:first-child {
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
       border-left: 1px solid #ccc;
     }
 
     .session:last-child {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
       border-right-style: solid;
     }
 
@@ -110,8 +105,8 @@
 
 }
 
-.over {
-  background: green;
+.permitted.over {
+  background: green !important;
 }
 
 .unpermitted {

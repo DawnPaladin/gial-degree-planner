@@ -11,8 +11,8 @@ class Meeting < ApplicationRecord
 
   belongs_to :course
 
-  def self.find_meeting(year, term, session)
-    Meeting.where(year: year, term: term.name, session: session.name).first
+  def self.find_meeting(course, year, term, session)
+    Meeting.where(course_id: course.id, year: year, term: term.name, session: session.name, )
   end
 
 end

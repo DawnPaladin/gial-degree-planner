@@ -21,7 +21,7 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
       $timeout(function() {
         $scope.years.push($scope.possibleYears[nextYear]);
         nextYear++;
-      }, 150);
+      }, 250);
     }
   };
 
@@ -33,19 +33,25 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
 
   $scope.handleDrop = function(courseId, meetingData) {
-    if (meetingData.id) { 
-      Flash.create('warning', messages.courseUnscheduled);
-      return false; 
-    }
+
     var data = {
       'course_id': courseId,
       'meeting_year': meetingData.meetingYear,
       'meeting_term': meetingData.meetingTerm,
       'meeting_session': meetingData.meetingSession
     };
-    planService.updateSchedule(data).then(function(response){
-      Flash.create('success', messages.courseScheduled);
-    });
+
+    if (meetingData.id == 'sticky-container') { 
+      planService.disenrollFromMeeting(data).then(function(response) {
+        Flash.create('warning', messages.courseUnscheduled);
+        return false;
+      });
+    } else {
+      planService.enrollInMeeting(data).then(function(response){
+        Flash.create('success', messages.courseScheduled);
+      });
+    }
+
   };
 
 

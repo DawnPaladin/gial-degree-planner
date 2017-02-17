@@ -14,7 +14,8 @@ Rails.application.routes.draw do
         resource :plan
         
         # TODO Refactor
-        put 'update_schedule', to: 'plans#update_schedule'
+        put 'enroll_in_meeting', to: 'plans#enroll_in_meeting'
+        put 'disenroll_from_meeting', to: 'plans#disenroll_from_meeting'
       end
       resources :advisors
       resources :concentrations, only: [:index, :show]

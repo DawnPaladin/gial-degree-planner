@@ -41,7 +41,6 @@ planner.directive('droppable', ['planService', function(planService) {
             meetingSession: that.getAttribute('data-session-id')
           };
 
-
           that.appendChild(item);
           
           if (angular.element(that).hasClass('session')) {

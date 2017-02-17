@@ -7,6 +7,7 @@ json.required_courses @plan.required_courses do |required_course|
   json.term required_course.term
   json.sessions required_course.sessions
 end
+json.scheduled_classes @plan.scheduled_classes
 
 if @plan.concentration
   json.available_courses @plan.concentration.categories do |category|

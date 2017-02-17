@@ -77,6 +77,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     var required = plan.required_courses;
     var intended = plan.intended_courses;
     var completed = plan.completed_courses;
+    var scheduled = plan.scheduled_classes;
     plan.coursesById = {};
     
     // available_courses are present if
@@ -113,6 +114,16 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         plan.coursesById[course.id].intended = true;
       } else {
         course.intended = true;
+        plan.coursesById[course.id] = course;
+      }
+    });
+
+    // same for intended courses
+    scheduled.forEach(function(course) {
+      if (plan.coursesById[course.id]) {
+        plan.coursesById[course.id].scheduled = true;
+      } else {
+        course.scheduled = true;
         plan.coursesById[course.id] = course;
       }
     });
@@ -168,12 +179,20 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
   };
 
   // TODO Refactor
-  var updateSchedule = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
+  var enrollInMeeting = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(response) {
         return response;
     }, function(response) {
       console.error(response);
     });
+  };
+
+  var disenrollFromMeeting = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(response) {
+        return response;
+    }, function(response) {
+      console.error(response);
+    });    
   };
 
   // used in callbacks
@@ -254,7 +273,8 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
     update: update,
-    updateSchedule: updateSchedule,
+    enrollInMeeting: enrollInMeeting,
+    disenrollFromMeeting: disenrollFromMeeting,
     addOrRemoveIntended: addOrRemoveIntended,
     addOrRemoveCompleted: addOrRemoveCompleted
   };

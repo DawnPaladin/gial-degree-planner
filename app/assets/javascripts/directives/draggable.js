@@ -7,7 +7,7 @@ planner.directive('draggable', function() {
 
     el.draggable = true;
 
-    var dotheDragStartThings = function(e, attrs, that) {
+    var doTheDragStartThings = function(e, attrs, that) {
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('Text', that.id);
       that.classList.add('drag');
@@ -43,7 +43,7 @@ planner.directive('draggable', function() {
     };
 
     el.addEventListener('dragstart', function(e) {
-      dotheDragStartThings(e, attrs, this);
+      doTheDragStartThings(e, attrs, this);
     }, false);
 
 
