@@ -104,3 +104,28 @@
   box-shadow: inset 0 0 5px green;
 }
 
+.student-header {
+  margin-top: 0;
+}
+
+#new-student-button {
+  float: right;
+  position: relative;
+  z-index: 1;
+}
+
+#new-student-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  & > * {
+    margin: 0 0.25em;
+  }
+  .create-student-button {
+    display: flex;
+    align-items: flex-end;
+  }
+  input {
+    font-weight: normal;
+  }
+}

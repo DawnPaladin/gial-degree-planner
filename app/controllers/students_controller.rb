@@ -21,9 +21,18 @@ class StudentsController < ApplicationController
     end
   end
 
+  def create
+    @student = Student.new(student_params)
+    if @student.save
+      render json: @student.as_json(include: :advisor)
+    else
+      render json: @student.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     def student_params
-      params.require(:student).permit(:id, :advisor_id)
+      params.require(:student).permit(:id, :first_name, :last_name, :email, :advisor_id)
     end
 
 end

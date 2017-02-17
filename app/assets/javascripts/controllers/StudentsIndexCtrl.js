@@ -51,5 +51,14 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
       });
     };
 
+    $scope.createStudent = function() {
+      var newStudent = Restangular.restangularizeElement(null, $scope.newStudent, 'students');
+      console.log("input", newStudent);
+      newStudent.post()
+        .then(function(response) {
+          console.log("response", response);
+        });
+    };
+
   }
 ]);

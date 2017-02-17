@@ -1,4 +1,25 @@
-<h3>Students</h3>
+<button id="new-student-button" class="btn btn-default" ng-click="showNewStudentForm = true" ng-hide="showNewStudentForm">New student</button>
+<div class="row">
+  <div class="col-md-2">
+    <h3 class="student-header">Students</h3>
+  </div>
+  <div class="col-md-10">
+    <form id="new-student-form" class="form form-inline" ng-show="showNewStudentForm">
+      <label>First name <input ng-model="newStudent.first_name" class="form-control" required></label>
+      <label>Last name <input ng-model="newStudent.last_name" class="form-control" required></label>
+      <label>Email <input ng-model="newStudent.email" class="form-control" required></label>
+      <label>Advisor
+        <select class="form-control" required
+          ng-model="newStudent.advisor_id"
+          ng-options="advisor.id as (advisor.first_name + ' ' + advisor.last_name) for advisor in advisors">
+        </select>
+      </label>
+      <div class="create-student-button">
+        <button class="btn btn-success" ng-click="createStudent()">Create student</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 <table class="table">
   <thead>
