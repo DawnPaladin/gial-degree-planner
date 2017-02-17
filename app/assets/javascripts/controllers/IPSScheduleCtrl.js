@@ -53,17 +53,18 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   var stickyContainer = document.getElementById('sticky-container');
   var stickyContainerLocation = stickyContainer.getBoundingClientRect().top - 35;
   var page = document.getElementById('page');
+  var schedule = document.getElementById('schedule');
   var pageBottom = page.getBoundingClientRect().bottom;
 
   var stuckCourses = function() {
     var stickyContainerHeight = stickyContainer.offsetHeight;
     stickyContainer.setAttribute("style", 'position: fixed; top: 0; left: 0; background: rgba(240, 240, 240, 0.8);');
-    page.setAttribute("style", 'padding-top: ' + stickyContainerHeight + 'px;');
+    schedule.setAttribute("style", 'padding-top: ' + stickyContainerHeight + 'px;');
   };
 
   var unstuckCourses = function() {
     stickyContainer.setAttribute("style", 'position: static;')
-    page.setAttribute("style", 'padding-top: 0px;');
+    schedule.setAttribute("style", 'padding-top: 0px;');
   }
 
   var stickyCourses = function() {
