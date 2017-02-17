@@ -1,5 +1,6 @@
 class Plan < ApplicationRecord
   # lifecycle
+  after_create :add_degree_requirements_to_intended
 
   ###### make intended courses degree.requried courses
 
@@ -54,9 +55,12 @@ class Plan < ApplicationRecord
   private
 
     def add_or_remove_intended(course)
+      puts self.intended_courses.include?(course)
       if self.intended_courses.include?(course)
+        puts 'deleting'
         self.intended_courses.delete(course)
       else
+        puts 'adding'
         self.intended_courses << course
       end
     end
@@ -67,6 +71,10 @@ class Plan < ApplicationRecord
       else
         self.completed_courses << course
       end
+    end
+
+    def add_degree_requirements_to_intended
+      self.intended_courses = self.required_courses
     end
 
 
