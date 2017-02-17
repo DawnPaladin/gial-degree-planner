@@ -107,9 +107,9 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
       templateUrl: '/templates/ips-schedule.html',
       controller: 'IPSScheduleCtrl',
       resolve: {
-        terms: ['Restangular',
-        function(Restangular) {
-          return Restangular.all('terms').getList();
+        terms: ['Restangular', 'termService',
+        function(Restangular, termService) {
+          return termService.getTerms(); 
         }]
       }
     })
