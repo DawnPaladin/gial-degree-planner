@@ -19,4 +19,6 @@
 //= require bootstrap-sprockets
 //= require angular-devise
 //= require angular-flash
+//= require bootstrap-typeahead
+//= require angular-bootstrap-typeahead
 //= require_tree .
