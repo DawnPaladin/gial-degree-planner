@@ -26,7 +26,9 @@ planner.directive('droppable', ['planService', function(planService) {
 
           that.classList.remove('over');
 
-          if (that.id == 'sticky-container') {
+          if (item.parentNode.id == 'sticky-container' && that.id == 'sticky-container') {
+            return false;
+          } else if (that.id == 'sticky-container') {
 
           } else if (termId != that.getAttribute('data-term-id') || sessionId != that.getAttribute('data-session-id')) {
             return false;
