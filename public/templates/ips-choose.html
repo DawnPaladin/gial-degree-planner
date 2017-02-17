@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <p class="tagline">Check the box next to a course to add it to your Intended Courses.</p>
+    <p class="tagline">Check the box next to a course to add it to Intended Courses. You can then schedule it on the Schedule Courses tab.</p>
   </div>
 </div>
 
@@ -15,7 +15,7 @@
             class='course-row'>
 
           <!-- this button is transcluded -->
-          <button ng-click='toggleCompleted(completed)'>UnComplete</button>
+          <button ng-click='toggleCompleted(completed)'>Uncomplete</button>
         </course-row>
       </table>
     </div>
@@ -30,7 +30,7 @@
 
           <!-- this button is transcluded -->
           <button ng-click='toggleCompleted(intended)'>Complete</button>
-        </course-row> 
+        </course-row>
 
       </table>
     </div>
@@ -44,7 +44,7 @@
         <!-- nothing transcluded -->
         <course-row ng-repeat='requirement in planInfo.plan.required_courses'
                     course='requirement'
-                    class='course-row'>      
+                    class='course-row'>
         </course-row>
       </table>
     </div><!-- required courses -->
