@@ -38,6 +38,7 @@ gem 'bootstrap-sass'
 gem 'angular_rails_csrf'
 gem 'devise'
 gem 'faker'
+gem "bower-rails", "~> 0.11.0"
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-angular-devise'
