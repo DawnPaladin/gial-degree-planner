@@ -71,7 +71,7 @@ class Course < ApplicationRecord
 
   # this will probably need work
   # to determine the correct year/term
-  def create_meetings(num = 10)
+  def create_meetings(num = 2)
     num.times do |num|
       current_year = Date.today.year
 

@@ -126,10 +126,10 @@ def addCoursesToCategory(category, courses)
   courses.each do |course_name|
     course = Course.find_by(name: course_name)
     if course.nil?
-      puts "Cannot find " + course_name
+      # puts "Cannot find " + course_name
       next
     else
-      puts "Found " + course_name
+      # puts "Found " + course_name
       category.courses << course
     end
   end
@@ -300,9 +300,15 @@ conc = degree.concentrations.create({
     elective_hours: 6
   })
 
+puts 'adding required courses to degree'
+degree.required_courses << Course.find_by(number: 'AA5339')
+degree.required_courses << Course.find_by(number: 'AA5381')
+degree.required_courses << Course.find_by(number: 'AA5382')
+degree.required_courses << Course.find_by(number: 'AA5384')
+degree.required_courses << Course.find_by(number: 'AA5386')
+
 
 puts 'creating meetings through courses'
-puts Course.all.sample
 Course.all.each do |course|
   course.create_meetings
 end
@@ -345,6 +351,13 @@ Student.all.each do |student|
 
   puts 'adding foreign course to plan'
   plan.foreign_courses << ForeignCourse.all.sample
+end
+
+puts 'enrolling plans in courses'
+Course.all.each do |course|
+  meeting = course.meetings.first
+  plan = Plan.all.sample
+  meeting.plans << plan
 end
 
 puts 'creating on-track student'

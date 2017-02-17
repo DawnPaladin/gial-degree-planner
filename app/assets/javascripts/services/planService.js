@@ -21,6 +21,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
         
+        _extendCategories(plan);
         _extractCourses(plan);
         _initializeCourses(plan);
 
@@ -32,6 +33,44 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       });
   };
 
+  var _extendCategories = function(plan) {
+    if (!plan.available_courses) return;
+
+    plan.available_courses.forEach(function(category) {
+      category.sumCompletedUnits = function() {
+        var sum = 0;
+        for (i = 0; i < this.courses.length; i++) {
+          if (!!this.courses[i].completed) {
+            sum += this.courses[i].units;
+          }
+        }
+        return sum;
+      };
+
+      category.sumIntendedUnits = function() {
+        var sum = 0;
+        for (i = 0; i < this.courses.length; i++) {
+          if (!!this.courses[i].intended) {
+            sum += this.courses[i].units;
+          }
+        }
+        return sum;
+      };
+
+      category.sumPlannedUnits = function() {
+        return this.sumCompletedUnits() + this.sumIntendedUnits();
+      }
+
+      category.satisfiedByCompleted = function() {
+        return this.sumCompletedUnits() >= this.required_units;
+      }
+
+      category.satisfiedByIntended = function() {
+        return this.sumPlannedUnits() >= this.required_units;
+      }
+    });
+  }
+
   // Makes data from backend useful for front
   // TODO: refactor into separate functions
   var _extractCourses = function(plan) {
@@ -40,7 +79,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     var completed = plan.completed_courses;
     plan.coursesById = {};
     
-    // available_courses are preset if
+    // available_courses are present if
     // a concentration has been set
     // if it exists, populate the all-knowing coursesById
     if (plan.available_courses) {
@@ -111,11 +150,12 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
   // is update function
   // refactor to pass in registration info
   // to avoid double updates
-  // eg var update = function(plan, registrationValue)
-  var update = function(plan) {
+  var update = function(plan, latestRegistered) {
+    plan.latest_registered = !!latestRegistered;
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
+        _extendCategories(plan);
         _extractCourses(plan);
         _initializeCourses(plan);
         angular.copy(plan, _planInfo.plan);
