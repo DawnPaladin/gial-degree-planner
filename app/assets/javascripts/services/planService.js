@@ -26,7 +26,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         _initializeCourses(plan);
 
         console.log(plan.thesis_track)
-        console.log(plan.non_thesis_track)
+        // console.log(plan.non_thesis_track)
 
         angular.copy(plan, _planInfo.plan);
 
@@ -36,43 +36,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       });
   };
 
-  var _extendCategories = function(plan) {
-    if (!plan.available_courses) return;
-
-    plan.available_courses.forEach(function(category) {
-      category.sumCompletedUnits = function() {
-        var sum = 0;
-        for (i = 0; i < this.courses.length; i++) {
-          if (!!this.courses[i].completed) {
-            sum += this.courses[i].units;
-          }
-        }
-        return sum;
-      };
-
-      category.sumIntendedUnits = function() {
-        var sum = 0;
-        for (i = 0; i < this.courses.length; i++) {
-          if (!!this.courses[i].intended) {
-            sum += this.courses[i].units;
-          }
-        }
-        return sum;
-      };
-
-      category.sumPlannedUnits = function() {
-        return this.sumCompletedUnits() + this.sumIntendedUnits();
-      }
-
-      category.satisfiedByCompleted = function() {
-        return this.sumCompletedUnits() >= this.required_units;
-      }
-
-      category.satisfiedByIntended = function() {
-        return this.sumPlannedUnits() >= this.required_units;
-      }
-    });
-  }
+  
 
   // Makes data from backend useful for front
   // TODO: refactor into separate functions
@@ -92,6 +56,24 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
           plan.coursesById[course.id] = course;
         });
       });
+    }
+
+    if (plan.thesis_track) {
+      var thesis = plan.thesis_track;
+      thesis.courses.forEach(function(course) {
+        course.category_id = 'thesis';
+        plan.coursesById[course.id] = course;
+      });
+
+      // Make thesis track into a category
+      // push ttrack as category into available courses
+      var additionalParams = {
+        name: 'Thesis Track',
+        required_units: thesis.elective_hours + thesis.thesis_hours,
+        id: 'thesis'
+      };
+      Object.assign(thesis, additionalParams);
+      plan.available_courses.push(thesis);
     }
     
     // Go through coursesById and set the correct ones
@@ -209,6 +191,48 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     // this way there's only one update call
     addOrRemoveIntended(course);
   };
+
+
+  // Add functions to category to calculate
+  // how many of its requried units are satisfied
+  // based on intended and completed courses
+  var _extendCategories = function(plan) {
+    if (!plan.available_courses) return;
+
+    plan.available_courses.forEach(function(category) {
+      category.sumCompletedUnits = function() {
+        var sum = 0;
+        for (i = 0; i < this.courses.length; i++) {
+          if (!!this.courses[i].completed) {
+            sum += this.courses[i].units;
+          }
+        }
+        return sum;
+      };
+
+      category.sumIntendedUnits = function() {
+        var sum = 0;
+        for (i = 0; i < this.courses.length; i++) {
+          if (!!this.courses[i].intended) {
+            sum += this.courses[i].units;
+          }
+        }
+        return sum;
+      };
+
+      category.sumPlannedUnits = function() {
+        return this.sumCompletedUnits() + this.sumIntendedUnits();
+      }
+
+      category.satisfiedByCompleted = function() {
+        return this.sumCompletedUnits() >= this.required_units;
+      }
+
+      category.satisfiedByIntended = function() {
+        return this.sumPlannedUnits() >= this.required_units;
+      }
+    });
+  }
 
 
   // NOTE: these are purely front-end functions.

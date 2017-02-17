@@ -32,8 +32,6 @@ class Course < ApplicationRecord
 
   has_many :meetings
 
-  belongs_to :thesis_track, optional: true
-  belongs_to :non_thesis_track, optional: true
   belongs_to :term
 
 
