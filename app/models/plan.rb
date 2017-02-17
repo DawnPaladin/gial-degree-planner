@@ -1,6 +1,8 @@
 class Plan < ApplicationRecord
   # lifecycle
 
+  ###### make intended courses degree.requried courses
+
   # validations
 
   # associations

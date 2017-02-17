@@ -151,7 +151,8 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
   // refactor to pass in registration info
   // to avoid double updates
   // eg var update = function(plan, registrationValue)
-  var update = function(plan) {
+  var update = function(plan, latestRegistered) {
+    plan.latest_registered = !!latestRegistered;
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
