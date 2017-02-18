@@ -1,31 +1,30 @@
-<h1>All Advisors</h1>
+<%= render 'shared/navbar' %>
+<div class="container">
+  <h1>All Advisors</h1>
 
-<table class="table table-striped">
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Admin Status</th>
-    <th>Delete?</th>
-  </tr>
-  <% @advisors.each do |advisor| %>
+  <table class="table table-striped">
     <tr>
-      <td><%= advisor.first_name %></td>
-      <td><%= advisor.last_name %></td>
-      <td><%= advisor.email %></td>
-      <td>
-        <%= advisor_status(advisor) %>
-
-      </td>
-      <td>
-        <%= advisor_deletion(advisor) %>
-      </td>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Admin Status</th>
+      <th>Delete?</th>
     </tr>
-  <% end %>
-</table>  
+    <% @advisors.each do |advisor| %>
+      <tr>
+        <td><%= advisor.first_name %></td>
+        <td><%= advisor.last_name %></td>
+        <td><%= advisor.email %></td>
+        <td>
+          <%= advisor_status(advisor) %>
 
-<a href="/advisors/sign_up" id="add-advisor" class="btn btn-primary">Add new admin or advisor</a>
+        </td>
+        <td>
+          <%= advisor_deletion(advisor) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 
-
-
-
+  <a href="/advisors/sign_up" id="add-advisor" class="btn btn-primary">Add new admin or advisor</a>
+</div>
