@@ -8,7 +8,9 @@ json.array! @students do |student|
     else
       json.thesis_starts ""
     end
-    json.graduation_date student.plan.graduation_term.titleize + ' ' + student.plan.graduation_year.to_s
+    unless student.plan.graduation_term.nil? || student.plan.graduation_year.nil?
+      json.graduation_date student.plan.graduation_term + ' ' + student.plan.graduation_year.to_s
+    end
   end
   json.currently_registered student.plan.latest_registered
   json.registration_date student.plan.registration_date

@@ -13,6 +13,7 @@
   $tab-border: hsl(0,0%,25%);
   font-size: 1.2em;
   margin-top: 2em;
+  margin-bottom: 1em;
   &::after {
     content: "";
     display: block;
@@ -43,8 +44,5 @@
       text-decoration: none;
       outline: 0;
     }
-  }
-  &.ips-navigation {
-    margin-bottom: 1em;
   }
 }
