@@ -52,8 +52,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
     };
 
     $scope.createStudent = function() {
-      var newStudent = Restangular.restangularizeElement(null, $scope.newStudent, 'students');
-      newStudent.post()
+      Restangular.all('students').post($scope.newStudent)
         .then(function() {
           $scope.newStudent = {};
           $scope.students = Restangular.all('students').getList().$object;

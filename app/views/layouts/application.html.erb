@@ -8,11 +8,8 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body id="page" ng-app="planner">
-    <%= render 'shared/navbar' %>
+  <body id="page">
     <%= render "shared/flash" %>
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>

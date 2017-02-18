@@ -19,7 +19,7 @@ planner.run(['$rootScope', function($rootScope){
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('');
+  $urlRouterProvider.otherwise('/students');
 
   $stateProvider
 
