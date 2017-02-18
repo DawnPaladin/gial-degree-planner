@@ -13,14 +13,21 @@ body {
   border-radius: 0;
 }
 
-.navbar-inverse {
+.navbar.navbar-inverse {
   background-color: #4D3960;
   border: none;
   -webkit-font-smoothing: antialiased;
 
-  .navbar-brand,
-  .navbar-text,
-  .navbar-link {
-    color: #fff;
+  .nav.navbar-brand {
+    color: white;
+  }
+  .nav {
+    .navbar-text,
+    .navbar-link {
+      color: white;
+      &.active {
+        background: hsla(0, 0%, 0%, 0.25);
+      }
+    }
   }
 }
