@@ -90,11 +90,21 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       plan.electives.forEach(function(elective) {
         // mark the course as elective
         elective.course.elective = true;
+
         //push course into correct category for display
         for (var i = 0; i < plan.available_courses.length; i++) {
           if (plan.available_courses[i].name === elective.category_name){
+            elective.course.category_id = plan.available_courses[i].id;
             plan.available_courses[i].courses.push(elective.course);
           }
+        }
+
+        // push into courses by id
+        if (plan.coursesById[elective.id]) {
+          plan.coursesById.duplicates = plan.coursesById.duplicates || [];
+          plan.coursesById.duplicates.push(elective);
+        } else {
+          plan.coursesById[elective.id] = elective;
         }
 
       });
@@ -124,6 +134,16 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         course.intended = true;
         plan.coursesById[course.id] = course;
       }
+      
+
+      // change this
+      if (plan.coursesById.duplicates) {
+        for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
+          if (plan.coursesById.duplicates[i].id === course.id) {
+            plan.coursesById.duplicates[i].intended = true;
+          }
+        }
+      }
     });
 
     // same for completed courses
@@ -135,6 +155,17 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
         var savedCourse = angular.copy(course, {});
         savedCourse.completed = true;
         plan.coursesById[savedCourse.id] = savedCourse;
+      }
+
+      /// fix elective stuff
+      // 162 139 89
+      if (plan.coursesById.duplicates) {
+        for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
+          if (plan.coursesById.duplicates[i].id === course.id) {
+            plan.coursesById.duplicates[i].completed = true;
+            plan.coursesById.duplicates[i].intended = false;
+          }
+        }
       }
     });
   };
