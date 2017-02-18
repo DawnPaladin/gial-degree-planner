@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         # TODO Refactor
         put 'update_schedule', to: 'plans#update_schedule'
       end
-      resources :electives, only: [:update, :destroy]
+      resources :electives, only: [:create, :destroy]
       resources :advisors
       resources :concentrations, only: [:index, :show]
       resources :terms, only: [:index]

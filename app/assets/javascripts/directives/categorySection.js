@@ -1,4 +1,4 @@
-planner.directive('categorySection', ['Restangular', '$timeout', 'courseService', function(Restangular, $timeout, courseService) {
+planner.directive('categorySection', ['Restangular', '$timeout', 'courseService', 'planService', function(Restangular, $timeout, courseService, planService) {
   return {
     restrict: 'E',
     templateUrl: '/directives/category-section.html',
@@ -23,8 +23,8 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         };
 
         Restangular.all('electives')
-          .post(electiveParams).then(function(response) {
-            console.log('posted. got:', response);
+          .post({ elective: electiveParams }).then(function(response) {
+            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
           });
       };
 
