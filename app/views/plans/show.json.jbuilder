@@ -26,4 +26,10 @@ if @plan.concentration
   json.non_thesis_track do
     json.extract! @plan.concentration.non_thesis_track, *@plan.concentration.non_thesis_track.attributes.keys
   end
+  json.electives do
+    json.array! @plan.electives do |elective|
+      json.category_name elective.category_name
+      json.course elective.course
+    end
+  end
 end

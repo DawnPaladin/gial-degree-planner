@@ -84,7 +84,22 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       Object.assign(plan.non_thesis_track, additionalParams);
       plan.available_courses.push(plan.non_thesis_track);
     }
-    
+
+    // Place electives into correct category
+    if (plan.electives) {
+      plan.electives.forEach(function(elective) {
+        // mark the course as elective
+        elective.course.elective = true;
+        //push course into correct category for display
+        for (var i = 0; i < plan.available_courses.length; i++) {
+          if (plan.available_courses[i].name === elective.category_name){
+            plan.available_courses[i].courses.push(elective.course);
+          }
+        }
+
+      });
+    }
+
     // Go through coursesById and set the correct ones
     // to required
     // If a course by the same name is

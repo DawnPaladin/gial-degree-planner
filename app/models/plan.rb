@@ -2,8 +2,6 @@ class Plan < ApplicationRecord
   # lifecycle
   after_create :add_degree_requirements_to_intended
 
-  ###### make intended courses degree.requried courses
-
   # validations
 
   # associations
@@ -22,6 +20,9 @@ class Plan < ApplicationRecord
   has_many :enrollments, dependent: :destroy
   has_many :scheduled_classes, through: :enrollments,
            class_name: 'Meeting'
+
+  has_many :electives, dependent: :destroy
+  has_many :elective_courses, through: :electives, source: :course
 
   belongs_to :degree
   has_many :required_courses, through: :degree

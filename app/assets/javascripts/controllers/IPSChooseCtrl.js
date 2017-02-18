@@ -9,14 +9,12 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student'
   // Passed into course-row directives
   $scope.addOrRemoveIntended = function(course) {
     planService.addOrRemoveIntended(course);
-    $rootScope.$broadcast('planChanged', course);
   };
 
   $scope.toggleCompleted = function(course) {
     course.completed = !course.completed;
     course.intended = !course.intended;
     planService.addOrRemoveCompleted(course);
-    $rootScope.$broadcast('planChanged', course);
   };
 
 }]);

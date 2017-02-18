@@ -22,7 +22,8 @@
                ng-blur='hideClassInput()'
                bs3-typeahead
                bs3-promise='availableElectives'
-               ng-model='addedCourse'>
+               ng-model='addedCourse'
+               bs3-afterSelect='addElective'>
 
         <span class="clickable add-course-link"
               ng-if='!addingClass'

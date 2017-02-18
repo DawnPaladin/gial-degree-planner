@@ -30,6 +30,9 @@ class Course < ApplicationRecord
   has_many :degree_course_requirements, dependent: :destroy
   has_many :requiring_degrees, through: :degree_course_requirements, source: :degree
 
+  has_many :electives
+  has_many :electing_plans, through: :electives, source: :plan
+
   has_many :meetings
 
   belongs_to :term
