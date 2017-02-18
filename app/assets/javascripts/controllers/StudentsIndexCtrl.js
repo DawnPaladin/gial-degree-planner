@@ -53,10 +53,22 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
 
     $scope.createStudent = function() {
       var newStudent = Restangular.restangularizeElement(null, $scope.newStudent, 'students');
-      console.log("input", newStudent);
       newStudent.post()
-        .then(function(response) {
-          console.log("response", response);
+        .then(function() {
+          $scope.newStudent = {};
+          $scope.students = Restangular.all('students').getList().$object;
+        }, function(error) {
+          var errorMessage = "";
+          console.warn(error);
+          if (error.statusText == "Unprocessable Entity" && error.data) {
+            for (var key in error.data) {
+              if (error.data.hasOwnProperty(key)) {
+                errorMessage += key + ' ';
+                errorMessage += error.data[key].join(',');
+              }
+            }
+            Flash.create('danger', errorMessage);
+          }
         });
     };
 
