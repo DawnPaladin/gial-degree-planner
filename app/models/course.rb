@@ -37,7 +37,6 @@ class Course < ApplicationRecord
 
   belongs_to :term
 
-
   #####
   # Class Methods
   #####

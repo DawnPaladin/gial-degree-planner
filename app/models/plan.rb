@@ -28,14 +28,6 @@ class Plan < ApplicationRecord
   has_many :required_courses, through: :degree
 
 
-  def course_groupings
-    {
-      intended_courses: self.intended_courses,
-      completed_courses: self.completed_courses,
-      required_courses: self.required_courses,
-      scheduled_classes: self.scheduled_classes
-    }
-  end
 
   def add_or_remove_courses(opts)
     add_or_remove_completed(opts[:completed]) if opts[:completed]
@@ -46,7 +38,8 @@ class Plan < ApplicationRecord
     self.completed_courses + self.intended_courses
   end
 
-   # TODO More edge case coverage
+
+  # TODO More edge case coverage
   def thesis_starts
     unless self.scheduled_classes.empty? || Course.thesis_writing.meetings.empty?
       self.scheduled_classes.merge(Course.thesis_writing.meetings).first

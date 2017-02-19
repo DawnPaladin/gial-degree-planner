@@ -1,4 +1,4 @@
-planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
+planner.factory('planService', ['Restangular', '_', 'electiveService', function(Restangular, _, electiveService) {
 
   var _planInfo = {};
   
@@ -20,6 +20,8 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       .then(function(plan){
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
+
+        // console.log(plan.elective_courses)
         
         _extendCategories(plan);
         _extractCourses(plan);
@@ -85,27 +87,29 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       plan.available_courses.push(plan.non_thesis_track);
     }
 
-    // Place electives into correct category
-    if (plan.electives) {
-      plan.electives.forEach(function(elective) {
+    // Place elective_courses into correct category
+    if (plan.elective_courses) {
+      plan.elective_courses.forEach(function(course) {
         // mark the course as elective
-        elective.course.elective = true;
+        // each course is carrying whether
+        // it is intended or completed
+        course.elective = true;
 
         //push course into correct category for display
         for (var i = 0; i < plan.available_courses.length; i++) {
-          if (plan.available_courses[i].name === elective.category_name){
-            elective.course.category_id = plan.available_courses[i].id;
-            plan.available_courses[i].courses.push(elective.course);
+          if (plan.available_courses[i].name === course.category_name){
+            course.category_id = plan.available_courses[i].id;
+            plan.available_courses[i].courses.push(course);
           }
         }
 
         // push into courses by id
-        if (plan.coursesById[elective.id]) {
-          plan.coursesById.duplicates = plan.coursesById.duplicates || [];
-          plan.coursesById.duplicates.push(elective);
-        } else {
-          plan.coursesById[elective.id] = elective;
-        }
+        // if (plan.coursesById[elective.id]) {
+        //   plan.coursesById.duplicates = plan.coursesById.duplicates || [];
+        //   plan.coursesById.duplicates.push(elective);
+        // } else {
+        //   plan.coursesById[elective.id] = elective;
+        // }
 
       });
     }
@@ -137,13 +141,13 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       
 
       // change this
-      if (plan.coursesById.duplicates) {
-        for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
-          if (plan.coursesById.duplicates[i].id === course.id) {
-            plan.coursesById.duplicates[i].intended = true;
-          }
-        }
-      }
+      // if (plan.coursesById.duplicates) {
+      //   for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
+      //     if (plan.coursesById.duplicates[i].id === course.id) {
+      //       plan.coursesById.duplicates[i].intended = true;
+      //     }
+      //   }
+      // }
     });
 
     // same for completed courses
@@ -159,14 +163,14 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
       /// fix elective stuff
       // 162 139 89
-      if (plan.coursesById.duplicates) {
-        for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
-          if (plan.coursesById.duplicates[i].id === course.id) {
-            plan.coursesById.duplicates[i].completed = true;
-            plan.coursesById.duplicates[i].intended = false;
-          }
-        }
-      }
+      // if (plan.coursesById.duplicates) {
+      //   for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
+      //     if (plan.coursesById.duplicates[i].id === course.id) {
+      //       plan.coursesById.duplicates[i].completed = true;
+      //       plan.coursesById.duplicates[i].intended = false;
+      //     }
+      //   }
+      // }
     });
   };
 
@@ -184,6 +188,37 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     plan.completed_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.completed === true;
     });
+
+    if (plan.elective_courses) {
+      _replaceElectives(plan.elective_courses, plan.intended_courses, 'intended');
+      _replaceElectives(plan.elective_courses, plan.completed_courses, 'completed');
+    }
+  };
+
+  var _replaceElectives = function(elective_courses, courses, property) {
+    var count, course_index, elective_index;
+
+    // go through intended courses
+    for (var i = 0; i < courses.length; i++) {
+      count = 0;
+      for (var j = 0; j < elective_courses.length; j++) {
+        if (courses[i].id === elective_courses[j].id && elective_courses[j][property]) {
+          count += 1;
+          course_index = i;
+          elective_index = j;
+        }
+        if (courses[i].id === elective_courses[j].id && count > 1 && elective_courses[j][property]) {
+          // if a course has the same id as an elective AND it is not the first one there
+          // replace with the course in plan.elective_courses
+          angular.copy(elective_courses[j], courses[i]);
+        }
+      }
+      // if it has the same id as an elective and it's the only one there
+      // replace course with the course in elective
+      if (count === 1) {
+        angular.copy(elective_courses[elective_index], courses[course_index])
+      }
+    }
   };
 
 
@@ -218,25 +253,30 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
   // used in callbacks
   var addOrRemoveIntended = function(course) {
-    if (course.intended) {
-      _addToIntended(course);
+    // if (course.intended) {
+    //   _addToIntended(course);
+    // } else {
+    //   _removeFromIntended(course);
+    // }
+    
+    // update the elective to reflect intendedness/completedness
+    if (course.elective) {
+      electiveService.update(course);
     } else {
-      _removeFromIntended(course);
+      // rails controller configured to take intended_id
+      // and add or remove association conditionally
     }
-
-    // rails controller configured to take intended_id
-    // and add or remove association conditionally
-    _planInfo.plan.intended_id = course.id;
+      _planInfo.plan.intended_id = course.id;
     update(_planInfo.plan);
   };
 
   var addOrRemoveCompleted = function(course) {
-    if (course.completed) {
-      _addToCompleted(course);
-    } else {
-      _removeFromCompleted(course);
-    }
-    
+    // if (course.completed) {
+    //   _addToCompleted(course);
+    // } else {
+    //   _removeFromCompleted(course);
+    // }
+
     // rails controller configured to take completed_id
     // and add or remove association conditionally
     _planInfo.plan.completed_id = course.id;
