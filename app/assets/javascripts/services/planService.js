@@ -20,8 +20,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       .then(function(plan){
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
-
-        // console.log(plan.elective_courses)
         
         _extendCategories(plan);
         _extractCourses(plan);
@@ -103,14 +101,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
           }
         }
 
-        // push into courses by id
-        // if (plan.coursesById[elective.id]) {
-        //   plan.coursesById.duplicates = plan.coursesById.duplicates || [];
-        //   plan.coursesById.duplicates.push(elective);
-        // } else {
-        //   plan.coursesById[elective.id] = elective;
-        // }
-
       });
     }
 
@@ -139,15 +129,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         plan.coursesById[course.id] = course;
       }
       
-
-      // change this
-      // if (plan.coursesById.duplicates) {
-      //   for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
-      //     if (plan.coursesById.duplicates[i].id === course.id) {
-      //       plan.coursesById.duplicates[i].intended = true;
-      //     }
-      //   }
-      // }
     });
 
     // same for completed courses
@@ -160,17 +141,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         savedCourse.completed = true;
         plan.coursesById[savedCourse.id] = savedCourse;
       }
-
-      /// fix elective stuff
-      // 162 139 89
-      // if (plan.coursesById.duplicates) {
-      //   for (var i = 0; i < plan.coursesById.duplicates.length; i++) {
-      //     if (plan.coursesById.duplicates[i].id === course.id) {
-      //       plan.coursesById.duplicates[i].completed = true;
-      //       plan.coursesById.duplicates[i].intended = false;
-      //     }
-      //   }
-      // }
     });
   };
 
@@ -334,31 +304,29 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
   // I tried to get this to work as Restangular collections..
   // but here we are
   // completed/intended_courses are rendered visually
-  var _addToIntended = function(course) {
-    _planInfo.plan.intended_courses.push(course);
-  };
+  // var _addToIntended = function(course) {
+  //   _planInfo.plan.intended_courses.push(course);
+  // };
 
-  var _addToCompleted = function(course) {
-      _planInfo.plan.completed_courses.push(course);
-  };
+  // var _addToCompleted = function(course) {
+  //     _planInfo.plan.completed_courses.push(course);
+  // };
 
-  var _removeFromIntended = function(course) {
-    for (var i = 0; i < _planInfo.plan.intended_courses.length; i++) {
-      if (_planInfo.plan.intended_courses[i].id === course.id) {
-        _planInfo.plan.intended_courses.splice(i, 1);
-      }
-    }
-  };
+  // var _removeFromIntended = function(course) {
+  //   for (var i = 0; i < _planInfo.plan.intended_courses.length; i++) {
+  //     if (_planInfo.plan.intended_courses[i].id === course.id) {
+  //       _planInfo.plan.intended_courses.splice(i, 1);
+  //     }
+  //   }
+  // };
 
-  var _removeFromCompleted = function(course) {
-    for (var i = 0; i < _planInfo.plan.completed_courses.length; i++) {
-      if (_planInfo.plan.completed_courses[i].id === course.id) {
-        _planInfo.plan.completed_courses.splice(i, 1);
-      }
-    }
-  };
-
-
+  // var _removeFromCompleted = function(course) {
+  //   for (var i = 0; i < _planInfo.plan.completed_courses.length; i++) {
+  //     if (_planInfo.plan.completed_courses[i].id === course.id) {
+  //       _planInfo.plan.completed_courses.splice(i, 1);
+  //     }
+  //   }
+  // };
 
 
   // populates years in the graduation year dropdown

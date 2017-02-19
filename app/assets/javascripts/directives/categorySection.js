@@ -1,4 +1,4 @@
-planner.directive('categorySection', ['Restangular', '$timeout', 'courseService', 'planService', function(Restangular, $timeout, courseService, planService) {
+planner.directive('categorySection', ['Restangular', '$timeout', 'courseService', 'planService', 'electiveService', function(Restangular, $timeout, courseService, planService, electiveService) {
   return {
     restrict: 'E',
     templateUrl: '/directives/category-section.html',
@@ -22,11 +22,19 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
           plan_id: scope.planInfo.plan.id
         };
 
-        Restangular.all('electives')
-          .post({ elective: electiveParams }).then(function(response) {
+        electiveService.create(electiveParams)
+          .then(function(response) {
             planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
           });
       };
+
+      scope.deleteElective = function(course) {
+        var elective_id = course.elective_id;
+        electiveService.remove(elective_id)
+          .then(function(response) {
+            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+          });
+      }
 
       scope.showClassInput = function() {
         scope.addingClass = true;

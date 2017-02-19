@@ -8,11 +8,21 @@ planner.factory('electiveService', ['Restangular', function(Restangular) {
       completed: course.completed
     };
     var elective = Restangular.restangularizeElement(null, params, 'electives');
-    elective.put();
-    // return Restangular.one('electives', course.elective_id).put({elective: params})
+    return elective.put();
+  };
+
+  var create = function(params) {
+    return Restangular.all('electives')
+      .post({ elective: params });
+  };
+
+  var remove = function(id) {
+    return Restangular.one('electives', id).remove();
   };
 
   return {
-    update: update
+    update: update,
+    create: create,
+    remove: remove
   }
 }]);

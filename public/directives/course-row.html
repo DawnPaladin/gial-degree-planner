@@ -10,7 +10,11 @@
     <span>
       {{ course.number + ' ' + course.name }}
     </span>
-    <span ng-if='course.elective' class='clickable'> remove</span>
+    <span ng-if='course.elective'
+          class='clickable'
+          ng-click='deleteElective({course: course})'>
+          remove
+    </span>
   </td>
   <td>
 

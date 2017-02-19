@@ -8,12 +8,13 @@
     <tr course-row ng-repeat='availableCourse in category.courses'
         course='availableCourse'
         checkbox-callback='addOrRemoveIntended(course)'
+        delete-elective='deleteElective(course)'
         section='available'
         class='course-row'>
 
       {{ availableCourse.units }}
 
-    </tr course-row>
+    </tr>
     <tr>
       <td></td>
       <td>

@@ -1,5 +1,7 @@
 class ElectivesController < ApplicationController
 
+  before_action :set_elective, only: [:update, :destroy]
+
   def create
     @elective = Elective.new(elective_params)
     if @elective.save
@@ -10,7 +12,6 @@ class ElectivesController < ApplicationController
   end
 
   def update
-    @elective = Elective.find(params[:id])
     if @elective.update_attributes(elective_params)
       render json: @elective
     else
@@ -18,11 +19,20 @@ class ElectivesController < ApplicationController
     end
   end
 
+  def destroy
+    @elective.delete
+    render json: @elective
+  end
+
   private
 
     def elective_params
       params.require(:elective)
         .permit(:course_id, :plan_id, :category_name, :intended, :completed)
+    end
+
+    def set_elective
+      @elective = Elective.find(params[:id])
     end
 
 

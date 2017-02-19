@@ -1,4 +1,4 @@
-planner.directive('courseRow', function() {
+planner.directive('courseRow', [function() {
   return {
     restrict: 'AE',
     templateUrl: '/directives/course-row.html',
@@ -8,7 +8,8 @@ planner.directive('courseRow', function() {
       course: '=',
       section: '@',
       checkboxCallback: '&',
-      buttonCallback: '&'
+      buttonCallback: '&',
+      deleteElective: '&'
     }
   };
-});
+}]);
