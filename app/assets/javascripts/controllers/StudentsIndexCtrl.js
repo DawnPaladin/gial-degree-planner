@@ -51,5 +51,25 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
       });
     };
 
+    $scope.createStudent = function() {
+      Restangular.all('students').post($scope.newStudent)
+        .then(function() {
+          $scope.newStudent = {};
+          $scope.students = Restangular.all('students').getList().$object;
+        }, function(error) {
+          var errorMessage = "";
+          console.warn(error);
+          if (error.statusText == "Unprocessable Entity" && error.data) {
+            for (var key in error.data) {
+              if (error.data.hasOwnProperty(key)) {
+                errorMessage += key + ' ';
+                errorMessage += error.data[key].join(',');
+              }
+            }
+            Flash.create('danger', errorMessage);
+          }
+        });
+    };
+
   }
 ]);
