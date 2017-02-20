@@ -21,9 +21,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
         
-        if (plan.available_courses) _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
+        _initializePlan(plan);
 
         angular.copy(plan, _planInfo.plan);
 
@@ -38,9 +36,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
+        _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
 
         return _planInfo;
@@ -75,11 +71,39 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     addOrRemoveIntended(course);
   };
 
+  var enrollInMeeting = function(data) {
+
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
+      _initializePlan(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
+  var disenrollFromMeeting = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
+      _initializePlan(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });    
+  };
+
 
   /*
    * Utility, private, etc
    *
    */
+
+
+  var _initializePlan = function(plan) {
+    if (plan.available_courses) _extendCategories(plan);
+    _extractCourses(plan);
+    _initializeCourses(plan);
+  };
   
 
   // Makes data from backend useful for front
@@ -144,33 +168,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       return course[property];
     });
     angular.copy(courses.concat(filtered_electives), courses);
-  };
-
-  
-  // TODO Refactor
-  var enrollInMeeting = function(data) {
-
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
-        angular.copy(plan, _planInfo.plan);
-        return _planInfo;
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
-  var disenrollFromMeeting = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
-        angular.copy(plan, _planInfo.plan);
-        return _planInfo;
-    }, function(response) {
-      console.error(response);
-    });    
   };
 
   var _extractAvailableCourses = function(plan) {
@@ -247,7 +244,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     }
   };
 
-  var _markOrCreateCompleted =function(course) {
+  var _markOrCreateCompleted = function(course) {
     // `this` is the plan obj
     if (this.coursesById[course.id]) {
       this.coursesById[course.id].completed = true;

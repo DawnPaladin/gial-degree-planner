@@ -367,10 +367,6 @@ Student.all.each do |student|
   puts 'adding foreign course to plan'
   plan.foreign_courses << ForeignCourse.all.sample
 
-  puts 'adding years to plans'
-  years.each do |year|
-    plan.years << year
-  end
 end
 
 # puts 'enrolling plans in courses'
