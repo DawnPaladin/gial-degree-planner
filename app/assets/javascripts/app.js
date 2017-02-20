@@ -103,8 +103,20 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
           }
         ],
       },
-      templateUrl: '/templates/degreesIndex.html',
+      templateUrl: '/templates/degree-index.html',
       controller: 'DegreesIndexCtrl'
+    })
+    .state('degreeEdit', {
+      url: ('/degrees/:degree_id'),
+      resolve: {
+        degree: ['Restangular', '$stateParams',
+          function(Restangular, $stateParams) {
+            return Restangular.one('degrees', $stateParams.degree_id).get();
+          }
+        ],
+      },
+      templateUrl: '/templates/degree-edit.html',
+      controller: 'DegreeEditCtrl'
     });
 
 }]);
