@@ -49,6 +49,10 @@ planner.directive('droppable', ['planService', function(planService) {
             angular.element(item).removeClass('placed');
           }
 
+          var itemHeight = angular.element(item).css('height');
+          var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";
+          angular.element(item).parent().next().prepend(space);
+
           scope.$apply(function(scope) {
             var fn = scope.drop();
             if ('undefined' !== typeof fn) {

@@ -1,8 +1,4 @@
 class Plan < ApplicationRecord
-  # lifecycle
-  after_create :add_degree_requirements_to_intended
-
-  ###### make intended courses degree.requried courses
 
   # validations
 
@@ -26,6 +22,10 @@ class Plan < ApplicationRecord
   belongs_to :degree
   has_many :required_courses, through: :degree
 
+  # lifecycle
+  after_create :add_degree_requirements_to_intended
+
+  ###### make intended courses degree.requried courses
 
   def course_groupings
     {
@@ -74,7 +74,7 @@ class Plan < ApplicationRecord
     end
 
     def add_degree_requirements_to_intended
-      self.intended_courses = self.required_courses
+      self.intended_courses = self.degree.required_courses
     end
 
 

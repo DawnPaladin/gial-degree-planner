@@ -118,7 +118,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
       }
     });
 
-    // same for intended courses
+    // same for scheduled courses
     scheduled.forEach(function(course) {
       if (plan.coursesById[course.id]) {
         plan.coursesById[course.id].scheduled = true;
@@ -152,6 +152,9 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     plan.required_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.required === true;
     });
+    plan.scheduled_classes = _.filter(_.values(plan.coursesById), function(scheduled_class) {
+      return scheduled_class.completed === true;
+    });
     plan.completed_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.completed === true;
     });
@@ -180,16 +183,25 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
   // TODO Refactor
   var enrollInMeeting = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(response) {
-        return response;
+    return false;
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
+        _extendCategories(plan);
+        _extractCourses(plan);
+        _initializeCourses(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
     }, function(response) {
       console.error(response);
     });
   };
 
   var disenrollFromMeeting = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(response) {
-        return response;
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
+        _extendCategories(plan);
+        _extractCourses(plan);
+        _initializeCourses(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
     }, function(response) {
       console.error(response);
     });    

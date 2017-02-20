@@ -35,10 +35,12 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   $scope.handleDrop = function(courseId, meetingData) {
 
     var data = {
-      'course_id': courseId,
-      'meeting_year': meetingData.meetingYear,
-      'meeting_term': meetingData.meetingTerm,
-      'meeting_session': meetingData.meetingSession
+      meeting_data: {
+        'course_id': courseId,
+        'year': meetingData.meetingYear,
+        'term': meetingData.meetingTerm.name,
+        'session': meetingData.meetingSession.name
+      }
     };
 
     if (meetingData.id == 'sticky-container') { 
