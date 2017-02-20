@@ -1,0 +1,18 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <span class="nav navbar-brand">GIAL Degree Planner</span>
+    <ul class="nav navbar-nav">
+      <li><a class="navbar-link" href="/#!/students">Students</a></li>
+      <li><a class="navbar-link" href="/#!/classes">Classes</a></li>
+    </ul>
+    <% if signed_in? %>
+      <div class="nav navbar-right">
+        <% if current_advisor.is_admin %>
+          <p class="navbar-text"><%= link_to "Edit Advisors", advisors_path, class: "navbar-link" %></p>
+        <% end %>
+        <p class="navbar-text"><%= link_to "Edit Account", edit_advisor_registration_path(id: current_advisor.id), class: "navbar-link" %></p>
+        <p class="navbar-text"><%= link_to "Log Out", destroy_advisor_session_path, class: "navbar-link" %></p>
+      </div>
+    <% end %>
+  </div>
+</nav>
