@@ -3,4 +3,22 @@
 <p>To complete a concentration, a student must complete all of its categories and required courses.</p>
 <p>To complete a category, a student must complete a certain number of the courses inside.</p>
 
+<div class="row">
+  <div class="col-md-6">
+
+    <h3>Concentrations</h3>
+    <ul>
+      <li ng-repeat="concentration in degree.concentrations">{{ concentration.name }}</li>
+    </ul>
+
+    <h3>Core courses</h3>
+    <ul>
+      <li ng-repeat="course in degree.required_courses">{{ course.name }}</li>
+    </ul>
+
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>
+
 <button class="btn btn-primary" ng-click="saveDegree()">Save</button>
