@@ -1,4 +1,4 @@
-var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore', 'bootstrap3-typeahead']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore', 'bootstrap3-typeahead', 'xeditable']);
 
 planner.config(['AuthProvider', function(AuthProvider) {
   AuthProvider.loginPath('/advisors/sign_in.json');
@@ -13,8 +13,9 @@ planner.config( ['RestangularProvider', function(RestangularProvider) {
   });
 }]);
 
-planner.run(['$rootScope', function($rootScope){
+planner.run(['$rootScope', 'editableOptions', function($rootScope, editableOptions){
   $rootScope.$on("$stateChangeError", console.warn.bind(console));
+  editableOptions.theme = 'bs3';
 }]);
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
