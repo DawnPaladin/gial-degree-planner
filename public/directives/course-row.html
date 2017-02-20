@@ -16,19 +16,19 @@
           remove
     </span>
   </td>
-  <td>
+  <td class="text-right">
 
     <span ng-if="section === 'available'">{{ course.units }}</span>
 
     <button ng-if="section === 'completed'"
             ng-click='buttonCallback({course: course})'>
-      UnComplete
+      Uncomplete
     </button>
 
     <button ng-if="section === 'intended'"
             ng-click='buttonCallback({course: course})'>
       Complete
     </button>
-    
+
   </td>
 </tr>
