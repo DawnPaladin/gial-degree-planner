@@ -22,9 +22,6 @@ class Plan < ApplicationRecord
   belongs_to :degree
   has_many :required_courses, through: :degree
 
-  has_many :plans_years, dependent: :destroy
-  has_many :years, through: :plans_years
-
   # lifecycle
   after_create :add_degree_requirements_to_intended
 

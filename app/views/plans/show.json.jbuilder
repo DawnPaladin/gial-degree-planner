@@ -12,7 +12,7 @@ end
 
 json.scheduled_classes @plan.scheduled_classes
 
-json.years @plan.years do |year|
+json.years Year.all do |year|
   json.id year.id
   json.value year.value
   json.terms year.terms.get_all do |term|

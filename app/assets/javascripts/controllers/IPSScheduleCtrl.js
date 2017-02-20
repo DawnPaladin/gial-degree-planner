@@ -4,6 +4,8 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
   $scope.planInfo = planService.getPlanInfo();
 
+  // Fix years
+
   $scope.possibleYears = $scope.planInfo.possibleYears;
 
   $scope.years = [$scope.possibleYears[0], $scope.possibleYears[1]];
