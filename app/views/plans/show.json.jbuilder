@@ -17,6 +17,7 @@ json.years Year.all do |year|
   json.value year.value
   json.terms year.terms.get_all do |term|
     json.id term.id
+    json.name term.name
     json.sessions term.sessions do |session|
       json.id session.id
       json.courses do

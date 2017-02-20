@@ -21,9 +21,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
         
-        if (plan.available_courses) _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
+        _initializePlan(plan);
 
         angular.copy(plan, _planInfo.plan);
 
@@ -38,22 +36,11 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
+        _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
 
         return _planInfo;
 
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
-  // TODO Refactor
-  var updateSchedule = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
-        return response;
     }, function(response) {
       console.error(response);
     });
@@ -84,11 +71,39 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     addOrRemoveIntended(course);
   };
 
+  var enrollInMeeting = function(data) {
+
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
+      _initializePlan(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
+  var disenrollFromMeeting = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
+      _initializePlan(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });    
+  };
+
 
   /*
    * Utility, private, etc
    *
    */
+
+
+  var _initializePlan = function(plan) {
+    if (plan.available_courses) _extendCategories(plan);
+    _extractCourses(plan);
+    _initializeCourses(plan);
+  };
   
 
   // Makes data from backend useful for front
@@ -154,46 +169,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     });
     angular.copy(courses.concat(filtered_electives), courses);
   };
-
-  
-  // TODO Refactor
-  var enrollInMeeting = function(data) {
-
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
-        angular.copy(plan, _planInfo.plan);
-        return _planInfo;
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
-  var disenrollFromMeeting = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
-        angular.copy(plan, _planInfo.plan);
-        return _planInfo;
-    }, function(response) {
-      console.error(response);
-    });    
-  };
-
-  // used in callbacks
-  var addOrRemoveIntended = function(course) {
-    if (course.intended) {
-      _addToIntended(course);
-    } else {
-      _removeFromIntended(course);
-    }
-
-    // rails controller configured to take intended_id
-    // and add or remove association conditionally
-    _planInfo.plan.intended_id = course.id;
-    update(_planInfo.plan);
 
   var _extractAvailableCourses = function(plan) {
     plan.available_courses.forEach(function(category) {
@@ -269,7 +244,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     }
   };
 
-  var _markOrCreateCompleted =function(course) {
+  var _markOrCreateCompleted = function(course) {
     // `this` is the plan obj
     if (this.coursesById[course.id]) {
       this.coursesById[course.id].completed = true;
@@ -282,13 +257,13 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     
   var _markOrCreateScheduled = function(course) {
     // `this` is the plan obj
-    if (plan.coursesById[course.id]) {
-      plan.coursesById[course.id].scheduled = true;
+    if (this.coursesById[course.id]) {
+      this.coursesById[course.id].scheduled = true;
     } else {
       course.scheduled = true;
-      plan.coursesById[course.id] = course;
+      this.coursesById[course.id] = course;
     }
-  }
+  };
 
   // Add functions to category to calculate
   // how many of its requried units are satisfied

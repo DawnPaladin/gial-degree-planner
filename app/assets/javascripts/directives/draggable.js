@@ -33,11 +33,10 @@ planner.directive('draggable', function() {
           .addClass('unpermitted');
 
         var thisSessionId = thisSessionIds[0].id;
-          angular.element(".session[data-term-id='" + thisTermId + "'][data-session-id='" + thisSessionIds[0] + "']")
+
+        angular.element(".session[data-term-id='" + thisTermId + "'][data-session-id='" + thisSessionIds[0] + "']")
           .removeClass('unpermitted')
           .addClass('permitted');
-
-
 
       return false;
     };
