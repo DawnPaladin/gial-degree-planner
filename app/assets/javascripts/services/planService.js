@@ -87,6 +87,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
     // Place elective_courses into correct category
     if (plan.elective_courses) {
+      // console.log(plan.elective_courses)
       plan.elective_courses.forEach(function(course) {
         // mark the course as elective
         // each course is carrying whether
@@ -128,7 +129,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         course.intended = true;
         plan.coursesById[course.id] = course;
       }
-      
     });
 
     // same for completed courses
@@ -160,36 +160,46 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     });
 
     if (plan.elective_courses) {
-      _replaceElectives(plan.elective_courses, plan.intended_courses, 'intended');
-      _replaceElectives(plan.elective_courses, plan.completed_courses, 'completed');
+      // _replaceElectives(plan.elective_courses, plan.intended_courses, 'intended');
+      _insertElectives(plan.elective_courses, plan.intended_courses, 'intended');
+      // _replaceElectives(plan.elective_courses, plan.completed_courses, 'completed');
+      _insertElectives(plan.elective_courses, plan.completed_courses, 'completed');
+
     }
   };
 
-  var _replaceElectives = function(elective_courses, courses, property) {
-    var count, course_index, elective_index;
-
-    // go through intended courses
-    for (var i = 0; i < courses.length; i++) {
-      count = 0;
-      for (var j = 0; j < elective_courses.length; j++) {
-        if (courses[i].id === elective_courses[j].id && elective_courses[j][property]) {
-          count += 1;
-          course_index = i;
-          elective_index = j;
-        }
-        if (courses[i].id === elective_courses[j].id && count > 1 && elective_courses[j][property]) {
-          // if a course has the same id as an elective AND it is not the first one there
-          // replace with the course in plan.elective_courses
-          angular.copy(elective_courses[j], courses[i]);
-        }
-      }
-      // if it has the same id as an elective and it's the only one there
-      // replace course with the course in elective
-      if (count === 1) {
-        angular.copy(elective_courses[elective_index], courses[course_index])
-      }
-    }
+  var _insertElectives = function(elective_courses, courses, property) {
+    var filtered_electives = _.filter(elective_courses, function(course) {
+      return course[property];
+    });
+    angular.copy(courses.concat(filtered_electives), courses);
   };
+
+  // var _replaceElectives = function(elective_courses, courses, property) {
+  //   var count, course_index, elective_index;
+
+  //   // go through intended courses
+  //   for (var i = 0; i < courses.length; i++) {
+  //     count = 0;
+  //     for (var j = 0; j < elective_courses.length; j++) {
+  //       if (courses[i].id === elective_courses[j].id && elective_courses[j][property]) {
+  //         count += 1;
+  //         course_index = i;
+  //         elective_index = j;
+  //       }
+  //       if (courses[i].id === elective_courses[j].id && count > 1 && elective_courses[j][property]) {
+  //         // if a course has the same id as an elective AND it is not the first one there
+  //         // replace with the course in plan.elective_courses
+  //         angular.copy(elective_courses[j], courses[i]);
+  //       }
+  //     }
+  //     // if it has the same id as an elective and it's the only one there
+  //     // replace course with the course in elective
+  //     if (count === 1) {
+  //       angular.copy(elective_courses[elective_index], courses[course_index]);
+  //     }
+  //   }
+  // };
 
 
   // is update function
@@ -197,6 +207,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
   // to avoid double updates
   var update = function(plan, latestRegistered) {
     plan.latest_registered = !!latestRegistered;
+    console.log('update')
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
@@ -223,20 +234,17 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
   // used in callbacks
   var addOrRemoveIntended = function(course) {
-    // if (course.intended) {
-    //   _addToIntended(course);
-    // } else {
-    //   _removeFromIntended(course);
-    // }
     
     // update the elective to reflect intendedness/completedness
+    // console.log(course)
     if (course.elective) {
       electiveService.update(course);
     } else {
       // rails controller configured to take intended_id
       // and add or remove association conditionally
-    }
       _planInfo.plan.intended_id = course.id;
+    }
+    console.log('addRemove')
     update(_planInfo.plan);
   };
 

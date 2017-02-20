@@ -24,5 +24,5 @@ planner.factory('electiveService', ['Restangular', function(Restangular) {
     update: update,
     create: create,
     remove: remove
-  }
+  };
 }]);

@@ -38,6 +38,15 @@ class Plan < ApplicationRecord
     self.completed_courses + self.intended_courses
   end
 
+  # def all_intended_courses
+  #   # intended_elective_courses = self.electives.where(intended: true).map do |elective|
+  #   #   course = JSON.parse(elective.course.to_json)
+  #   #   course[:elective] = true
+  #   #   course
+  #   # end
+  #   self.intended_courses + intended_elective_courses
+  # end
+
 
   # TODO More edge case coverage
   def thesis_starts
