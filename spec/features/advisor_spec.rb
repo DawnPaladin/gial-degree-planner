@@ -45,10 +45,6 @@ feature 'Advisor log in' do
       expect(current_path).to eq(root_path)
     end
 
-    scenario 'renders a flash' do
-      expect(page).to have_css('#flash')
-    end
-
   end
 
 
@@ -81,6 +77,7 @@ feature 'Advisor creation' do
 
   before do
     sign_in(advisor)
+    click_link "Edit Advisors"
     find('#add-advisor').click
   end
 
@@ -91,7 +88,7 @@ feature 'Advisor creation' do
 
     before do
       fill_out_sign_up(new_advisor)
-    end    
+    end
 
     scenario 'it creates a new advisor', js: true do
       expect { click_on('Sign up') }.to change(Advisor, :count).by(1)
