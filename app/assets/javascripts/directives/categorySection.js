@@ -16,16 +16,23 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
       });
 
       scope.addElective = function(course) {
-        var electiveParams = {
-          category_name: scope.category.name,
-          course_id: course.id,
-          plan_id: scope.planInfo.plan.id
-        };
+        if (course.id === 'newCourse') {
+          angular.element('.elective-input').val('');
+          scope.addingClass = false;
+          _displayCourseForm();
+        }
+        else { 
+          var electiveParams = {
+            category_name: scope.category.name,
+            course_id: course.id,
+            plan_id: scope.planInfo.plan.id
+          };
 
-        electiveService.create(electiveParams)
-          .then(function(response) {
-            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
-          });
+          electiveService.create(electiveParams)
+            .then(function() {
+              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+            });
+        }
       };
 
       scope.deleteElective = function(course) {
@@ -40,6 +47,16 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
           });
       };
 
+      scope.newCourse = { 
+        name: "&#43; Add new course", 
+        id: 'newCourse'
+      };
+      var _displayCourseForm = function() {
+        console.log('aww here it goes');
+        console.log($('#new-course-form'))
+        angular.element('#new-course-form').modal('show');
+      };
+
       scope.showClassInput = function() {
         scope.addingClass = true;
         $timeout(function() {
@@ -52,11 +69,11 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
           scope.addingClass = false;
       };
 
-      scope.setCourse = function(course) {
-        course = angular.copy(course, {});
-        course.category_id = scope.category.id;
-        scope.category.courses.push(course);
-      };
+      // scope.setCourse = function(course) {
+      //   course = angular.copy(course, {});
+      //   course.category_id = scope.category.id;
+      //   scope.category.courses.push(course);
+      // };
 
     }
   };
