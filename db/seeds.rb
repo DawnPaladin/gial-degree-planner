@@ -186,12 +186,12 @@ conc = degree.concentrations.create({
     thesis_hours: 6,
     elective_hours: 3
   })
-
   thesis.courses << Course.thesis_writing
   thesis.courses << Course.thesis_course
   conc.create_non_thesis_track({
     elective_hours: 9
   })
+
 conc = degree.concentrations.create({
   name: "Arts & Islam",
   description: LOREM
@@ -231,6 +231,7 @@ conc = degree.concentrations.create({
   conc.create_non_thesis_track({
     elective_hours: 6
   })
+
 conc = degree.concentrations.create({
   name: "Arts & Scripture Engagement",
   description: LOREM
@@ -279,6 +280,7 @@ conc = degree.concentrations.create({
   conc.create_non_thesis_track({
     elective_hours: 6
   })
+  
 conc = degree.concentrations.create({
   name: "Linguistics",
   description: LOREM

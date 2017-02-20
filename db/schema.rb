@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170220172343) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,16 +80,14 @@ ActiveRecord::Schema.define(version: 20170220172343) do
 
   create_table "courses", force: :cascade do |t|
     t.integer  "category_id"
-    t.integer  "non_thesis_track_id"
-    t.integer  "thesis_track_id"
-    t.integer  "term_id",             null: false
-    t.string   "name",                null: false
-    t.string   "number",              null: false
+    t.integer  "term_id",     null: false
+    t.string   "name",        null: false
+    t.string   "number",      null: false
     t.text     "description"
-    t.integer  "units",               null: false
+    t.integer  "units",       null: false
     t.string   "level"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_courses_on_category_id", using: :btree
     t.index ["name"], name: "index_courses_on_name", using: :btree
     t.index ["number"], name: "index_courses_on_number", unique: true, using: :btree
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 20170220172343) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "electives", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "plan_id"
+    t.string   "category_name"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "completed",     default: false
+    t.boolean  "intended",      default: false
   end
 
   create_table "enrollments", force: :cascade do |t|

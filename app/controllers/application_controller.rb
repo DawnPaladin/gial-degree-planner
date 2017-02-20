@@ -18,6 +18,10 @@ class ApplicationController < ActionController::Base
       new_advisor_session_path
     end
 
+    def after_sign_in_path_for(resource)
+      "/#!/students"
+    end
+
     def require_admin
       unless current_advisor.is_admin
         redirect_back(fallback_location: root_path)
@@ -28,6 +32,6 @@ class ApplicationController < ActionController::Base
       unless current_advisor.id == params[:id].to_i
         redirect_back(fallback_location: edit_advisor_registration_path(id: current_advisor.id))
       end
-    end        
+    end
 
 end

@@ -1,4 +1,4 @@
-var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore', 'bootstrap3-typeahead']);
 
 planner.config(['AuthProvider', function(AuthProvider) {
   AuthProvider.loginPath('/advisors/sign_in.json');
@@ -19,28 +19,12 @@ planner.run(['$rootScope', function($rootScope){
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/students');
 
   $stateProvider
 
-    // Dashboard
-    .state('dashboard', {
-      url: '/',
-      abstract: true,
-      views: {
-        'header': {
-          templateUrl: '/templates/dashboard-header.html',
-          controller: 'DashboardHeaderCtrl',
-        },
-        'main': {
-          templateUrl: '/templates/dashboard-main.html',
-          controller: 'StudentsIndexCtrl'
-        }
-      }
-    })
-
-    .state('dashboard.students', {
-      url: '',
+    .state('students', {
+      url: '/students',
       resolve: {
         advisors: ['Restangular', function(Restangular) {
           return Restangular.all('advisors').getList();
@@ -49,16 +33,12 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
           return Restangular.all('students').getList();
         }]
       },
-      views: {
-        'main@': {
-          templateUrl: '/templates/students.html',
-          controller: 'StudentsIndexCtrl'
-        }
-      }
+      templateUrl: '/templates/students.html',
+      controller: 'StudentsIndexCtrl'
     })
 
-    .state('dashboard.meetings', {
-      url: 'classes',
+    .state('meetings', {
+      url: '/classes',
       resolve: {
         courses: ['Restangular',
           function(Restangular) {
@@ -66,12 +46,8 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
           }
         ],
       },
-      views: {
-        "main@": {
-          templateUrl: '/templates/meetings.html',
-          controller: 'MeetingsIndexCtrl',
-        }
-      }
+      templateUrl: '/templates/meetings.html',
+      controller: 'MeetingsIndexCtrl',
     })
 
     // Intended Plan of Study

@@ -17,6 +17,7 @@ Rails.application.routes.draw do
         put 'enroll_in_meeting', to: 'plans#enroll_in_meeting'
         put 'disenroll_from_meeting', to: 'plans#disenroll_from_meeting'
       end
+      resources :electives, only: [:create, :update, :destroy]
       resources :advisors
       resources :concentrations, only: [:index, :show]
       resources :terms, only: [:index]
