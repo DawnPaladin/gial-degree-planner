@@ -92,6 +92,19 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('ips.print', {
       url: '/print',
       templateUrl: '/templates/ips-print.html'
+    })
+
+    .state('degrees', {
+      url: '/degrees',
+      resolve: {
+        degrees: ['Restangular',
+          function(Restangular) {
+            return Restangular.all('degrees').getList();
+          }
+        ],
+      },
+      templateUrl: '/templates/degreesIndex.html',
+      controller: 'DegreesIndexCtrl'
     });
 
 }]);
