@@ -244,20 +244,16 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       // and add or remove association conditionally
       _planInfo.plan.intended_id = course.id;
     }
-    console.log('addRemove')
     update(_planInfo.plan);
   };
 
   var addOrRemoveCompleted = function(course) {
-    // if (course.completed) {
-    //   _addToCompleted(course);
-    // } else {
-    //   _removeFromCompleted(course);
-    // }
 
-    // rails controller configured to take completed_id
-    // and add or remove association conditionally
-    _planInfo.plan.completed_id = course.id;
+    if (!course.elective) {
+      // rails controller configured to take completed_id
+      // and add or remove association conditionally
+      _planInfo.plan.completed_id = course.id;
+    }
 
     // Do this because intended must be toggled
     // every time completed is

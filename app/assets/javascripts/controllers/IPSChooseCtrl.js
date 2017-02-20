@@ -22,9 +22,9 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student'
     electiveService.remove(elective_id)
       .then(function(elective) {
         if (elective.intended)
-          $scope.planInfo.plan.intended_id = elective.course_id
+          $scope.planInfo.plan.intended_id = elective.course_id;
         if (elective.completed)
-          $scope.planInfo.plan.completed_id = elective.course_id
+          $scope.planInfo.plan.completed_id = elective.course_id;
         planService.update($scope.planInfo.plan, $scope.planInfo.plan.latest_registered);
       });
   }
