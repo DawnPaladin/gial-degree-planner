@@ -33,6 +33,8 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       });
   };
 
+  
+
   // Makes data from backend useful for front
   // TODO: refactor into separate functions
   var _extractCourses = function(plan) {
@@ -43,64 +45,25 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     
     // available_courses are present if
     // a concentration has been set
-    // if it exists, populate the all-knowing coursesById
+    // populate coursesById
     if (plan.available_courses) {
-      plan.available_courses.forEach(function(category) {
-        category.courses.forEach(function(course) {
-          course.category_id = category.id;
-          plan.coursesById[course.id] = course;
-        });
-      });
+      _extractAvailableCourses(plan);
     }
 
     if (plan.thesis_track) {
-      var thesis = plan.thesis_track;
-      thesis.courses.forEach(function(course) {
-        course.category_id = 'thesis';
-        plan.coursesById[course.id] = course;
-      });
-
-      // Make thesis track into a category
-      // push ttrack as category into available courses
-      var additionalParams = {
-        name: 'Thesis Track',
-        required_units: thesis.elective_hours + thesis.thesis_hours,
-        id: 'thesis'
-      };
-      Object.assign(thesis, additionalParams);
-      plan.available_courses.push(thesis);
+      _extractThesisCourses(plan);
+      _createThesisCategory(plan);
     }
 
-    // Make non-thesis track into a catrgory
-    // push nttrack as category into available courses
     if (plan.non_thesis_track) {
-      additionalParams = {
-        name: 'Non-Thesis Track',
-        required_units: plan.non_thesis_track.elective_hours,
-        id: 'non_thesis'
-      };
-      Object.assign(plan.non_thesis_track, additionalParams);
-      plan.available_courses.push(plan.non_thesis_track);
+      _createNonThesisCategory(plan);
     }
 
     // Place elective_courses into correct category
+    // NOTE: While other courses get extracted into coursesById
+    // Electives are extracted straight into availableCourses
     if (plan.elective_courses) {
-      // console.log(plan.elective_courses)
-      plan.elective_courses.forEach(function(course) {
-        // mark the course as elective
-        // each course is carrying whether
-        // it is intended or completed
-        course.elective = true;
-
-        //push course into correct category for display
-        for (var i = 0; i < plan.available_courses.length; i++) {
-          if (plan.available_courses[i].name === course.category_name){
-            course.category_id = plan.available_courses[i].id;
-            plan.available_courses[i].courses.push(course);
-          }
-        }
-
-      });
+      _extractElectives(plan);
     }
 
     // Go through coursesById and set the correct ones
@@ -169,6 +132,57 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       return course[property];
     });
     angular.copy(courses.concat(filtered_electives), courses);
+  };
+
+  var _extractAvailableCourses = function(plan) {
+    plan.available_courses.forEach(function(category) {
+      category.courses.forEach(function(course) {
+        course.category_id = category.id;
+        plan.coursesById[course.id] = course;
+      });
+    });
+  };
+
+  var _extractThesisCourses = function(plan) {
+    var thesis = plan.thesis_track;
+    thesis.courses.forEach(function(course) {
+      course.category_id = 'thesis';
+      plan.coursesById[course.id] = course;
+    });
+  };
+
+  var _createThesisCategory = function(plan) {
+    var thesis = plan.thesis_track;
+    var additionalParams = {
+      name: 'Thesis Track',
+      required_units: thesis.elective_hours + thesis.thesis_hours,
+      id: 'thesis'
+    };
+    Object.assign(thesis, additionalParams);
+    plan.available_courses.push(thesis);
+  };
+
+  var _createNonThesisCategory = function(plan) {
+    var additionalParams = {
+      name: 'Non-Thesis Track',
+      required_units: plan.non_thesis_track.elective_hours,
+      id: 'non_thesis',
+      courses: []
+    };
+    Object.assign(plan.non_thesis_track, additionalParams);
+    plan.available_courses.push(plan.non_thesis_track);
+  };
+
+  var _extractElectives = function(plan) {
+    plan.elective_courses.forEach(function(course) {
+      course.elective = true;
+      for (var i = 0; i < plan.available_courses.length; i++) {
+        if (plan.available_courses[i].name === course.category_name){
+          course.category_id = plan.available_courses[i].id;
+          plan.available_courses[i].courses.push(course);
+        }
+      }
+    });
   };
 
   // is update function
@@ -267,33 +281,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       };
     });
   };
-
-
-  // NOTE: these are purely front-end functions.
-  // completed/intended_courses are rendered visually
-  // var _addToIntended = function(course) {
-  //   _planInfo.plan.intended_courses.push(course);
-  // };
-
-  // var _addToCompleted = function(course) {
-  //     _planInfo.plan.completed_courses.push(course);
-  // };
-
-  // var _removeFromIntended = function(course) {
-  //   for (var i = 0; i < _planInfo.plan.intended_courses.length; i++) {
-  //     if (_planInfo.plan.intended_courses[i].id === course.id) {
-  //       _planInfo.plan.intended_courses.splice(i, 1);
-  //     }
-  //   }
-  // };
-
-  // var _removeFromCompleted = function(course) {
-  //   for (var i = 0; i < _planInfo.plan.completed_courses.length; i++) {
-  //     if (_planInfo.plan.completed_courses[i].id === course.id) {
-  //       _planInfo.plan.completed_courses.splice(i, 1);
-  //     }
-  //   }
-  // };
 
 
   // populates years in the graduation year dropdown
