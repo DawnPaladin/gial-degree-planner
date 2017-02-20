@@ -18,10 +18,10 @@ Rails.application.routes.draw do
       end
       resources :electives, only: [:create, :update, :destroy]
       resources :advisors
-      resources :concentrations, only: [:index, :show]
+      resources :concentrations, only: [:index, :show, :update, :delete]
       resources :terms, only: [:index]
       resources :courses, only: [:index]
-      resources :degrees
+      resources :degrees, only: [:index, :show, :update, :delete]
     end
   end
 
