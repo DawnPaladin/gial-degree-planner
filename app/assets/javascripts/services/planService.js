@@ -21,7 +21,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
         
-        _extendCategories(plan);
+        if (plan.available_courses) _extendCategories(plan);
         _extractCourses(plan);
         _initializeCourses(plan);
 
@@ -33,10 +33,65 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       });
   };
 
+  var update = function(plan, latestRegistered) {
+    plan.latest_registered = !!latestRegistered;
+    return Restangular.one('students', plan.student_id)
+      .customPUT(plan, 'plan')
+      .then(function(plan) {
+        _extendCategories(plan);
+        _extractCourses(plan);
+        _initializeCourses(plan);
+        angular.copy(plan, _planInfo.plan);
+
+        return _planInfo;
+
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
+  // TODO Refactor
+  var updateSchedule = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
+        return response;
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
+  // used in callbacks
+  var addOrRemoveIntended = function(course) {
+    // Update the elective resource to reflect intended/completedness
+    if (course.elective) {
+      electiveService.update(course);
+    } else {
+      // Rails controller configured to take intended_id
+      // and add or remove association conditionally
+      _planInfo.plan.intended_id = course.id;
+    }
+    update(_planInfo.plan);
+  };
+
+  var addOrRemoveCompleted = function(course) {
+    if (!course.elective) {
+      // rails controller configured to take completed_id
+      // and add or remove association conditionally
+      _planInfo.plan.completed_id = course.id;
+    }
+
+    // Do this because intended must be toggled every time completed is
+    // this way there's only one update call
+    addOrRemoveIntended(course);
+  };
+
+
+  /*
+   * Utility, private, etc
+   *
+   */
   
 
   // Makes data from backend useful for front
-  // TODO: refactor into separate functions
   var _extractCourses = function(plan) {
     var required = plan.required_courses,
         intended = plan.intended_courses,
@@ -46,63 +101,23 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     // available_courses are present if
     // a concentration has been set
     // populate coursesById
-    if (plan.available_courses) {
-      _extractAvailableCourses(plan);
-    }
-
+    if (plan.available_courses) _extractAvailableCourses(plan);
+    if (plan.non_thesis_track) _createNonThesisCategory(plan);
     if (plan.thesis_track) {
       _extractThesisCourses(plan);
       _createThesisCategory(plan);
     }
 
-    if (plan.non_thesis_track) {
-      _createNonThesisCategory(plan);
-    }
-
     // Place elective_courses into correct category
     // NOTE: While other courses get extracted into coursesById
     // Electives are extracted straight into availableCourses
-    if (plan.elective_courses) {
-      _extractElectives(plan);
-    }
+    if (plan.elective_courses) _extractElectives(plan);
 
     // Go through coursesById and set the correct ones
-    // to required
-    // If a course by the same name is
-    // not already there, make one
-    required.forEach(function(course) {
-      if (plan.coursesById[course.id]) {
-        plan.coursesById[course.id].required = true;
-        plan.coursesById[course.id].intended = true;
-      } else {
-        var savedCourse = angular.copy(course, {});
-        savedCourse.required = true;
-        savedCourse.intended = true;
-        plan.coursesById[savedCourse.id] = savedCourse;
-      }
-    });
-    
-    // same for intended courses
-    intended.forEach(function(course) {
-      if (plan.coursesById[course.id]) {
-        plan.coursesById[course.id].intended = true;
-      } else {
-        course.intended = true;
-        plan.coursesById[course.id] = course;
-      }
-    });
-
-    // same for completed courses
-    completed.forEach(function(course) {
-      if (plan.coursesById[course.id]) {
-        plan.coursesById[course.id].completed = true;
-        plan.coursesById[course.id].intended = false;
-      } else {
-        var savedCourse = angular.copy(course, {});
-        savedCourse.completed = true;
-        plan.coursesById[savedCourse.id] = savedCourse;
-      }
-    });
+    // to required, intended, completed within coursesById
+    required.forEach(_markOrCreateRequired, plan);  
+    intended.forEach(_markOrCreateIntended, plan);
+    completed.forEach(_markOrCreateCompleted, plan);
   };
 
 
@@ -185,68 +200,43 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     });
   };
 
-  // is update function
-  // refactor to pass in registration info
-  // to avoid double updates
-  var update = function(plan, latestRegistered) {
-    plan.latest_registered = !!latestRegistered;
-    return Restangular.one('students', plan.student_id)
-      .customPUT(plan, 'plan')
-      .then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
-        angular.copy(plan, _planInfo.plan);
-
-        return _planInfo;
-
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
-  // TODO Refactor
-  var updateSchedule = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
-        return response;
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
-  // used in callbacks
-  var addOrRemoveIntended = function(course) {
-    // Update the elective resource to reflect intended/completedness
-    if (course.elective) {
-      electiveService.update(course);
+  var _markOrCreateRequired = function(course) {
+    // `this` is the plan obj
+    if (this.coursesById[course.id]) {
+      this.coursesById[course.id].required = true;
+      this.coursesById[course.id].intended = true;
     } else {
-      // Rails controller configured to take intended_id
-      // and add or remove association conditionally
-      _planInfo.plan.intended_id = course.id;
+      course.required = true;
+      course.intended = true;
+      this.coursesById[course.id] = course;
     }
-    update(_planInfo.plan);
   };
 
-  var addOrRemoveCompleted = function(course) {
-
-    if (!course.elective) {
-      // rails controller configured to take completed_id
-      // and add or remove association conditionally
-      _planInfo.plan.completed_id = course.id;
+  var _markOrCreateIntended = function(course) {
+    // `this` is the plan obj
+    if (this.coursesById[course.id]) {
+      this.coursesById[course.id].intended = true;
+    } else {
+      course.intended = true;
+      this.coursesById[course.id] = course;
     }
-
-    // Do this because intended must be toggled every time completed is
-    // this way there's only one update call
-    addOrRemoveIntended(course);
   };
 
+  var _markOrCreateCompleted =function(course) {
+    // `this` is the plan obj
+    if (this.coursesById[course.id]) {
+      this.coursesById[course.id].completed = true;
+      this.coursesById[course.id].intended = false;
+    } else {
+      course.completed = true;
+      this.coursesById[course.id] = course;
+    }
+  };
 
   // Add functions to category to calculate
   // how many of its requried units are satisfied
   // based on intended and completed courses
   var _extendCategories = function(plan) {
-    if (!plan.available_courses) return;
-
     plan.available_courses.forEach(function(category) {
       category.sumCompletedUnits = function() {
         var sum = 0;
