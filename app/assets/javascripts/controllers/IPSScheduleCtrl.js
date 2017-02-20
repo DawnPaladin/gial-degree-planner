@@ -1,4 +1,4 @@
-planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', 'terms', function($scope, $rootScope, planService, $window, $timeout, _, Flash, terms) {
+planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$window', '$timeout', '_', 'Flash', function($scope, $rootScope, planService, $window, $timeout, _, Flash) {
 
   $rootScope.$broadcast('toggle-concentration', { enabled: false });
 
@@ -7,8 +7,6 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
   $scope.possibleYears = $scope.planInfo.possibleYears;
 
   $scope.years = [$scope.possibleYears[0], $scope.possibleYears[1]];
-
-  $scope.terms = terms;
 
   var nextYear = 2;
   var messages = {
@@ -34,22 +32,15 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', '$
 
   $scope.handleDrop = function(courseId, meetingData) {
 
-    var data = {
-      meeting_data: {
-        'course_id': courseId,
-        'year': meetingData.meetingYear,
-        'term': meetingData.meetingTerm.name,
-        'session': meetingData.meetingSession.name
-      }
-    };
+    meetingData.course_id = courseId;
 
     if (meetingData.id == 'sticky-container') { 
-      planService.disenrollFromMeeting(data).then(function(response) {
+      planService.disenrollFromMeeting(meetingData).then(function(response) {
         Flash.create('warning', messages.courseUnscheduled);
         return false;
       });
     } else {
-      planService.enrollInMeeting(data).then(function(response){
+      planService.enrollInMeeting(meetingData).then(function(response){
         Flash.create('success', messages.courseScheduled);
       });
     }

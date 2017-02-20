@@ -183,7 +183,7 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
 
   // TODO Refactor
   var enrollInMeeting = function(data) {
-    return false;
+
     return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
         _extendCategories(plan);
         _extractCourses(plan);

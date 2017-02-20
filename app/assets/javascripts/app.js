@@ -105,13 +105,7 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('ips.schedule', {
       url: '/schedule',
       templateUrl: '/templates/ips-schedule.html',
-      controller: 'IPSScheduleCtrl',
-      resolve: {
-        terms: ['Restangular', 'termService',
-        function(Restangular, termService) {
-          return termService.getTerms(); 
-        }]
-      }
+      controller: 'IPSScheduleCtrl'
     })
     .state('ips.print', {
       url: '/print',

@@ -22,6 +22,9 @@ class Plan < ApplicationRecord
   belongs_to :degree
   has_many :required_courses, through: :degree
 
+  has_many :plans_years, dependent: :destroy
+  has_many :years, through: :plans_years
+
   # lifecycle
   after_create :add_degree_requirements_to_intended
 
@@ -52,6 +55,13 @@ class Plan < ApplicationRecord
     end
   end
 
+  def find_scheduled_classes(year, term, session)
+    meetings = self.scheduled_classes.where(year: year.value, term: term.name, session: session.name)
+    meetings.map do |meeting|
+      meeting.course
+    end
+  end
+
   private
 
     def add_or_remove_intended(course)
@@ -76,6 +86,8 @@ class Plan < ApplicationRecord
     def add_degree_requirements_to_intended
       self.intended_courses = self.degree.required_courses
     end
+
+
 
 
 end

@@ -16,15 +16,18 @@ class PlansController < ApplicationController
   end
 
   def enroll_in_meeting
-    # @course = Course.find(params[:course_id])
-    # @year = params[:meeting_year]
-    # @term = Term.find(params[:meeting_term])
-    # @session = Session.find(params[:meeting_session])
-
-    @meeting = Meeting.find_by(JSON.parse(params[:meeting_data]))
+    @course = Course.find(params[:course_id])
+    @year = params[:meeting_year]
+    @term = Term.find(params[:meeting_term])
+    @session = Session.find(params[:meeting_session])
+    @meeting = Meeting.find_meeting(@course, @year, @term, @session)
     @plan = Plan.find(params[:plan][:id])
-    @plan.scheduled_classes << @meeting
-    render :show
+    if @meeting
+      @plan.scheduled_classes << @meeting
+      render :show
+    else
+      render :show
+    end
   end
 
   def disenroll_from_meeting

@@ -6,6 +6,7 @@ NUM_MEETINGS = 3
 NUM_CONCENTRATIONS = 2
 NUM_TEACHERS = 4
 NUM_FOREIGN_COURSES = 2
+NUM_YEARS = 10
 TERMS = ['Spring', 'Summer', 'Fall', 'Any']
 LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos reiciendis doloremque, tenetur nulla illo eaque, qui excepturi assumenda aspernatur praesentium quo cumque sint repellat natus.'
 
@@ -22,6 +23,8 @@ puts 'thesis tracks'
 ThesisTrack.destroy_all
 puts 'non thesis tracks'
 NonThesisTrack.destroy_all
+puts 'destroying years'
+Year.destroy_all
 puts 'terms'
 Term.destroy_all
 puts 'sessions'
@@ -39,10 +42,20 @@ Category.destroy_all
 puts 'foreign courses'
 ForeignCourse.destroy_all
 
+puts 'creating years'
+years = []
+Time.now.year.upto(Time.now.year + NUM_YEARS) do |year|
+  years << Year.create({ value: year })
+end
+
 puts 'creating terms'
 terms = []
 TERMS.each do |term|
-  terms << Term.create({ name: term })
+  term = Term.create({ name: term })
+  terms << term
+  years.each do |year|
+    year.terms << term
+  end
 end
 
 puts 'creating sessions'
@@ -351,6 +364,11 @@ Student.all.each do |student|
 
   puts 'adding foreign course to plan'
   plan.foreign_courses << ForeignCourse.all.sample
+
+  puts 'adding years to plans'
+  years.each do |year|
+    plan.years << year
+  end
 end
 
 puts 'enrolling plans in courses'
@@ -366,3 +384,5 @@ on_track.concentration = Concentration.last
 on_track.completed_courses << Course.thesis_writing
 on_track.scheduled_classes << Course.thesis_writing.meetings.first
 on_track.save
+
+puts 'seeds complete'

@@ -34,20 +34,15 @@ planner.directive('droppable', ['planService', function(planService) {
             return false;
           }
 
+
           var meetingData = {
             id: that.id,
-            meetingYear: that.getAttribute('data-year'),
-            meetingTerm: that.getAttribute('data-term-id'),
-            meetingSession: that.getAttribute('data-session-id')
+            meeting_year: that.getAttribute('data-year'),
+            meeting_term: that.getAttribute('data-term-id'),
+            meeting_session: that.getAttribute('data-session-id')
           };
 
           that.appendChild(item);
-          
-          if (angular.element(that).hasClass('session')) {
-            angular.element(item).addClass('placed');
-          } else {
-            angular.element(item).removeClass('placed');
-          }
 
           var itemHeight = angular.element(item).css('height');
           var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";

@@ -8,6 +8,16 @@ json.required_courses @plan.required_courses do |required_course|
   json.sessions required_course.sessions
 end
 json.scheduled_classes @plan.scheduled_classes
+json.years @plan.years do |year|
+  json.value year.value
+  json.terms year.terms.get_all do |term|
+    json.id term.id
+    json.sessions term.sessions do |session|
+      json.id session.id
+      json.courses @plan.find_scheduled_classes(year, term, session)
+    end
+  end
+end
 
 if @plan.concentration
   json.available_courses @plan.concentration.categories do |category|
