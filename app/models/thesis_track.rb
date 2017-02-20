@@ -1,6 +1,9 @@
 class ThesisTrack < ApplicationRecord
 
   belongs_to :concentration
-  has_many :courses
+
+  def courses
+    [Course.thesis_writing, Course.thesis_course]
+  end
   
 end

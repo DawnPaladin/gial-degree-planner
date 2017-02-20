@@ -2,8 +2,6 @@ class Plan < ApplicationRecord
   # lifecycle
   after_create :add_degree_requirements_to_intended
 
-  ###### make intended courses degree.requried courses
-
   # validations
 
   # associations
@@ -23,18 +21,13 @@ class Plan < ApplicationRecord
   has_many :scheduled_classes, through: :enrollments,
            class_name: 'Meeting'
 
+  has_many :electives, dependent: :destroy
+  has_many :elective_courses, through: :electives, source: :course
+
   belongs_to :degree
   has_many :required_courses, through: :degree
 
 
-  def course_groupings
-    {
-      intended_courses: self.intended_courses,
-      completed_courses: self.completed_courses,
-      required_courses: self.required_courses,
-      scheduled_classes: self.scheduled_classes
-    }
-  end
 
   def add_or_remove_courses(opts)
     add_or_remove_completed(opts[:completed]) if opts[:completed]
@@ -45,7 +38,17 @@ class Plan < ApplicationRecord
     self.completed_courses + self.intended_courses
   end
 
-   # TODO More edge case coverage
+  # def all_intended_courses
+  #   # intended_elective_courses = self.electives.where(intended: true).map do |elective|
+  #   #   course = JSON.parse(elective.course.to_json)
+  #   #   course[:elective] = true
+  #   #   course
+  #   # end
+  #   self.intended_courses + intended_elective_courses
+  # end
+
+
+  # TODO More edge case coverage
   def thesis_starts
     unless self.scheduled_classes.empty? || Course.thesis_writing.meetings.empty?
       self.scheduled_classes.merge(Course.thesis_writing.meetings).first

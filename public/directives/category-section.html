@@ -1,0 +1,41 @@
+<div class="category bordered course-section"
+     ng-class="{'green-border': category.satisfiedByIntended(),
+                'green-highlight': category.satisfiedByCompleted()}">
+
+  <h3>{{ category.name }}</h3>
+
+  <table>
+    <tr course-row ng-repeat='availableCourse in category.courses'
+        course='availableCourse'
+        checkbox-callback='addOrRemoveIntended(course)'
+        delete-elective='deleteElective(course)'
+        section='available'
+        class='course-row'>
+
+      {{ availableCourse.units }}
+
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input ng-if='addingClass'
+               class='form-control elective-input'
+               ng-blur='hideClassInput()'
+               bs3-typeahead
+               bs3-promise='availableElectives'
+               ng-model='addedCourse'
+               bs3-afterSelect='addElective'>
+
+        <span class="clickable add-course-link"
+              ng-if='!addingClass'
+              ng-click='showClassInput()'>
+          &#43; Add a course
+        </span>
+
+      </td>
+    </tr>
+  </table>
+
+  <p class='required-units'>Units required: {{ category.required_units }}</p>
+
+</div>
