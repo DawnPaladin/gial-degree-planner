@@ -33,8 +33,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       });
   };
 
-  
-
   // Makes data from backend useful for front
   // TODO: refactor into separate functions
   var _extractCourses = function(plan) {
@@ -160,14 +158,12 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     });
 
     if (plan.elective_courses) {
-      // _replaceElectives(plan.elective_courses, plan.intended_courses, 'intended');
       _insertElectives(plan.elective_courses, plan.intended_courses, 'intended');
-      // _replaceElectives(plan.elective_courses, plan.completed_courses, 'completed');
       _insertElectives(plan.elective_courses, plan.completed_courses, 'completed');
-
     }
   };
 
+  // Push electives onto the lists to be rendered
   var _insertElectives = function(elective_courses, courses, property) {
     var filtered_electives = _.filter(elective_courses, function(course) {
       return course[property];
@@ -175,39 +171,11 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     angular.copy(courses.concat(filtered_electives), courses);
   };
 
-  // var _replaceElectives = function(elective_courses, courses, property) {
-  //   var count, course_index, elective_index;
-
-  //   // go through intended courses
-  //   for (var i = 0; i < courses.length; i++) {
-  //     count = 0;
-  //     for (var j = 0; j < elective_courses.length; j++) {
-  //       if (courses[i].id === elective_courses[j].id && elective_courses[j][property]) {
-  //         count += 1;
-  //         course_index = i;
-  //         elective_index = j;
-  //       }
-  //       if (courses[i].id === elective_courses[j].id && count > 1 && elective_courses[j][property]) {
-  //         // if a course has the same id as an elective AND it is not the first one there
-  //         // replace with the course in plan.elective_courses
-  //         angular.copy(elective_courses[j], courses[i]);
-  //       }
-  //     }
-  //     // if it has the same id as an elective and it's the only one there
-  //     // replace course with the course in elective
-  //     if (count === 1) {
-  //       angular.copy(elective_courses[elective_index], courses[course_index]);
-  //     }
-  //   }
-  // };
-
-
   // is update function
   // refactor to pass in registration info
   // to avoid double updates
   var update = function(plan, latestRegistered) {
     plan.latest_registered = !!latestRegistered;
-    console.log('update')
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
@@ -234,13 +202,11 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
   // used in callbacks
   var addOrRemoveIntended = function(course) {
-    
-    // update the elective to reflect intendedness/completedness
-    // console.log(course)
+    // Update the elective resource to reflect intended/completedness
     if (course.elective) {
       electiveService.update(course);
     } else {
-      // rails controller configured to take intended_id
+      // Rails controller configured to take intended_id
       // and add or remove association conditionally
       _planInfo.plan.intended_id = course.id;
     }
@@ -255,8 +221,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       _planInfo.plan.completed_id = course.id;
     }
 
-    // Do this because intended must be toggled
-    // every time completed is
+    // Do this because intended must be toggled every time completed is
     // this way there's only one update call
     addOrRemoveIntended(course);
   };
@@ -305,8 +270,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
 
   // NOTE: these are purely front-end functions.
-  // I tried to get this to work as Restangular collections..
-  // but here we are
   // completed/intended_courses are rendered visually
   // var _addToIntended = function(course) {
   //   _planInfo.plan.intended_courses.push(course);
