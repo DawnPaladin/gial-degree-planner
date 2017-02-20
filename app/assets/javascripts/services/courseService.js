@@ -2,6 +2,7 @@ planner.factory('courseService', ['Restangular', '$q', function(Restangular, $q)
   
   var _courses = [];
 
+
   var getCourses = function() {
     if (_courses.length) { return $q.when(_courses); }
     else { return _fetchCourses(); }
@@ -14,7 +15,7 @@ planner.factory('courseService', ['Restangular', '$q', function(Restangular, $q)
         return _courses;
       });
   };
-
+  
   return {
     getCourses: getCourses
   };

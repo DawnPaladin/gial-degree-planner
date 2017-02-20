@@ -16,6 +16,7 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
       });
 
       scope.addElective = function(course) {
+
         if (course.id === 'newCourse') {
           angular.element('.elective-input').val('');
           scope.addingClass = false;
@@ -40,6 +41,7 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         electiveService.remove(elective_id)
           .then(function(elective) {
             if (elective.intended)
+
               scope.planInfo.plan.intended_id = elective.course_id;
             if (elective.completed)
               scope.planInfo.plan.completed_id = elective.course_id;
@@ -52,10 +54,10 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         id: 'newCourse'
       };
       var _displayCourseForm = function() {
-        console.log('aww here it goes');
-        console.log($('#new-course-form'))
         angular.element('#new-course-form').modal('show');
       };
+
+
 
       scope.showClassInput = function() {
         scope.addingClass = true;
@@ -74,6 +76,7 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
       //   course.category_id = scope.category.id;
       //   scope.category.courses.push(course);
       // };
+
 
     }
   };
