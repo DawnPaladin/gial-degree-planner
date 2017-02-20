@@ -25,7 +25,6 @@
                bs3-typeahead
                bs3-promise='availableElectives'
                ng-model='addedCourse'
-
                bs3-afterSelect='addElective'
                bs3-addItem='newCourse'>
 
@@ -39,7 +38,7 @@
     </tr>
   </table>
 
-  <p class='required-units'>Units required: {{ category.required_units }}</p>
+  <div class='required-units'>Units required: {{ category.required_units }}</div>
 
 </div>
 
