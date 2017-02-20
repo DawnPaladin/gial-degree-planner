@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form ng-submit='createCourse(courseForm.$valid)' name='courseForm'>
+
+      <div class="row">
+        <div class="col-xs-9"> <!-- left column -->
+          <div class="col-xs-9">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text"
+              id='name'
+              class="form-control"
+              name='name'
+              required
+              ng-model='newCourse.name'>
+            </div>
+          </div>
+
+          <div class="col-xs-3">
+            <div class="form-group">
+              <label for="units">Units</label>
+              <input type="number"
+              id=units
+              class="form-control"
+              name='units'
+              ng-model='newCourse.units'>
+            </div>
+          </div>
+
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea id='description'
+              class="form-control"
+              name='description'
+              ng-model='newCourse.description'>
+            </textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3"> <!-- right column -->
+        <div class="form-group">
+          <label for="number">Number</label>
+          <input type="text"
+          id='number'
+          class="form-control"
+          name='number'
+          ng-model='newCourse.number'>
+        </div>
+
+        <div class="form-group">
+          <label for="">Level</label>
+          <div ng-repeat='levelName in levels'>
+            <input type="radio"
+            ng-value='levelName'
+            name='level'
+            ng-model='newCourse.level'> {{ levelName }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="">Term</label>
+          <div ng-repeat='term in terms'>
+            <input type="radio"
+            ng-value='term.id'
+            name='term'
+            ng-model='newCourse.term_id'> {{ term.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="submit"
+        class='btn btn-success btn-block'>
+      </div>
+    </div>
+
+  </form>
+</div>

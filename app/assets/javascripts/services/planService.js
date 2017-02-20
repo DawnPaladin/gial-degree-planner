@@ -50,15 +50,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     });
   };
 
-  // TODO Refactor
-  var updateSchedule = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
-        return response;
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
   // used in callbacks
   var addOrRemoveIntended = function(course) {
     // Update the elective resource to reflect intended/completedness
@@ -182,19 +173,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     });    
   };
 
-  // used in callbacks
-  var addOrRemoveIntended = function(course) {
-    if (course.intended) {
-      _addToIntended(course);
-    } else {
-      _removeFromIntended(course);
-    }
-
-    // rails controller configured to take intended_id
-    // and add or remove association conditionally
-    _planInfo.plan.intended_id = course.id;
-    update(_planInfo.plan);
-
   var _extractAvailableCourses = function(plan) {
     plan.available_courses.forEach(function(category) {
       category.courses.forEach(function(course) {
@@ -282,13 +260,13 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     
   var _markOrCreateScheduled = function(course) {
     // `this` is the plan obj
-    if (plan.coursesById[course.id]) {
-      plan.coursesById[course.id].scheduled = true;
+    if (this.coursesById[course.id]) {
+      this.coursesById[course.id].scheduled = true;
     } else {
       course.scheduled = true;
-      plan.coursesById[course.id] = course;
+      this.coursesById[course.id] = course;
     }
-  }
+  };
 
   // Add functions to category to calculate
   // how many of its requried units are satisfied
