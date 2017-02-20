@@ -9,13 +9,13 @@
     <h3>Concentrations</h3>
     <ul>
       <li ng-repeat="concentration in degree.concentrations">
-        {{ concentration.name }} &mdash;
-        <button ng-click="editConcentration(concentration)">Edit</button>
-        <button ng-click="deleteConcentration(concentration)">Delete</button>
+        {{ concentration.name }}
+        <span class="clickable glyphicon glyphicon-edit" ng-click="editConcentration(concentration)"></span>
+        <span class="clickable glyphicon glyphicon-remove" ng-click="deleteConcentration(concentration)"></span>
         <!-- <a ng-click="editConcentration('conc')">Edit</a> -->
       </li>
     </ul>
-    <button ng-click="addConcentrationVisible = true" ng-hide="addConcentrationVisible">Add concentration</button>
+    <button class="btn btn-default" ng-click="addConcentrationVisible = true" ng-hide="addConcentrationVisible">Add concentration</button>
     <div ng-show="addConcentrationVisible">
       <input ng-model="newConcentration.name">
       <button ng-click="createConcentration()">
@@ -28,12 +28,15 @@
 
     <h3>Core courses</h3>
     <ul>
-      <li ng-repeat="course in degree.required_courses">{{ course.name }}</li>
+      <li ng-repeat="course in degree.required_courses">
+        {{ course.name }}
+        <span class="clickable glyphicon glyphicon-remove" ng-click="deleteCoreCourse(course)"></span>
+      </li>
     </ul>
 
   </div>
-  <div class="col-md-6">
-    <h3>{{ currentConcentration.name || "Click an Edit button to select a concentration" }}</h3>
+  <div class="col-md-6" ng-show="currentConcentration.name">
+    <h3>{{ currentConcentration.name }} concentration</h3>
     <a>New category</a>
     <label><input type="checkbox"> Thesis option available</label>
 
@@ -41,4 +44,4 @@
   </div>
 </div>
 
-<button class="btn btn-primary" ng-click="saveDegree()">Save</button>
+<button class="btn btn-primary" ng-click="saveDegree()">Save Degree</button>
