@@ -71,11 +71,11 @@ class Course < ApplicationRecord
 
   # this will probably need work
   # to determine the correct year/term
-  def create_meetings(num = 2)
+  def create_meetings(num = 10)
     num.times do |num|
       current_year = Date.today.year
 
-      session = self.sessions.sample
+      session = self.sessions.first
 
       self.meetings.create({
         year: Date.new(current_year).advance(years: num).year,
@@ -84,6 +84,7 @@ class Course < ApplicationRecord
       })
     end
   end
+
 
 
 end

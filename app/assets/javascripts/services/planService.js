@@ -93,9 +93,12 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
   // Makes data from backend useful for front
   var _extractCourses = function(plan) {
-    var required = plan.required_courses,
-        intended = plan.intended_courses,
-        completed = plan.completed_courses;
+
+    var required = plan.required_courses;
+    var intended = plan.intended_courses;
+    var completed = plan.completed_courses;
+    var scheduled = plan.scheduled_classes;
+
     plan.coursesById = {};
     
     // available_courses are present if
@@ -118,6 +121,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     required.forEach(_markOrCreateRequired, plan);  
     intended.forEach(_markOrCreateIntended, plan);
     completed.forEach(_markOrCreateCompleted, plan);
+    scheduled.forEach(_markOrCreateScheduled, plan);
   };
 
 
@@ -128,9 +132,11 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     plan.intended_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.intended === true;
     });
+    
     plan.required_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.required === true;
     });
+    
     plan.completed_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.completed === true;
     });
@@ -149,6 +155,46 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     angular.copy(courses.concat(filtered_electives), courses);
   };
 
+  
+  // TODO Refactor
+  var enrollInMeeting = function(data) {
+
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
+        _extendCategories(plan);
+        _extractCourses(plan);
+        _initializeCourses(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
+  var disenrollFromMeeting = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
+        _extendCategories(plan);
+        _extractCourses(plan);
+        _initializeCourses(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });    
+  };
+
+  // used in callbacks
+  var addOrRemoveIntended = function(course) {
+    if (course.intended) {
+      _addToIntended(course);
+    } else {
+      _removeFromIntended(course);
+    }
+
+    // rails controller configured to take intended_id
+    // and add or remove association conditionally
+    _planInfo.plan.intended_id = course.id;
+    update(_planInfo.plan);
+
   var _extractAvailableCourses = function(plan) {
     plan.available_courses.forEach(function(category) {
       category.courses.forEach(function(course) {
@@ -164,6 +210,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       course.category_id = 'thesis';
       plan.coursesById[course.id] = course;
     });
+
   };
 
   var _createThesisCategory = function(plan) {
@@ -232,6 +279,16 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       this.coursesById[course.id] = course;
     }
   };
+    
+  var _markOrCreateScheduled = function(course) {
+    // `this` is the plan obj
+    if (plan.coursesById[course.id]) {
+      plan.coursesById[course.id].scheduled = true;
+    } else {
+      course.scheduled = true;
+      plan.coursesById[course.id] = course;
+    }
+  }
 
   // Add functions to category to calculate
   // how many of its requried units are satisfied
@@ -288,7 +345,8 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
     update: update,
-    updateSchedule: updateSchedule,
+    enrollInMeeting: enrollInMeeting,
+    disenrollFromMeeting: disenrollFromMeeting,
     addOrRemoveIntended: addOrRemoveIntended,
     addOrRemoveCompleted: addOrRemoveCompleted
   };
