@@ -371,12 +371,12 @@ Student.all.each do |student|
   end
 end
 
-puts 'enrolling plans in courses'
-Course.all.each do |course|
-  meeting = course.meetings.first
-  plan = Plan.all.sample
-  meeting.plans << plan
-end
+# puts 'enrolling plans in courses'
+# Course.all.each do |course|
+#   meeting = course.meetings.first
+#   plan = Plan.all.sample
+#   meeting.plans << plan
+# end
 
 puts 'creating on-track student'
 on_track = Student.last.plan

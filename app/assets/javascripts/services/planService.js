@@ -152,9 +152,9 @@ planner.factory('planService', ['Restangular', '_', function(Restangular, _) {
     plan.required_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.required === true;
     });
-    plan.scheduled_classes = _.filter(_.values(plan.coursesById), function(scheduled_class) {
-      return scheduled_class.completed === true;
-    });
+    // plan.scheduled_classes = _.filter(_.values(plan.coursesById), function(scheduled_class) {
+    //   return scheduled_class.completed === true;
+    // });
     plan.completed_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.completed === true;
     });

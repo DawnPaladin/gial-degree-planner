@@ -11,7 +11,7 @@ planner.filter('unscheduledFilter', ['planService', function(planService) {
     for (var i = 0; i < courses.length; i++) {
       var isScheduled = false;
       for (var j = 0; j < scheduledClasses.length; j++) {
-        if (scheduledClasses[j].course_id == course[i].id) {
+        if (scheduledClasses[j].course_id == courses[i].id) {
           isScheduled = true;
         }
       }

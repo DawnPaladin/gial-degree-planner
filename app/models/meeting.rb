@@ -12,7 +12,7 @@ class Meeting < ApplicationRecord
   belongs_to :course
 
   def self.find_meeting(course, year, term, session)
-    Meeting.where(course: course, year: year, term: term.name, session: session.name).first
+    Meeting.where(course: course, year: year.value, term: term.name, session: session.name).first
   end
 
 end

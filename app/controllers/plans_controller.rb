@@ -17,7 +17,7 @@ class PlansController < ApplicationController
 
   def enroll_in_meeting
     @course = Course.find(params[:course_id])
-    @year = params[:meeting_year]
+    @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
     @session = Session.find(params[:meeting_session])
     @meeting = Meeting.find_meeting(@course, @year, @term, @session)
@@ -32,7 +32,7 @@ class PlansController < ApplicationController
 
   def disenroll_from_meeting
     @course = Course.find(params[:course_id])
-    @year = params[:meeting_year]
+    @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
     @session = Session.find(params[:meeting_session])
     @meeting = Meeting.find_meeting(@course, @year, @term, @session)
