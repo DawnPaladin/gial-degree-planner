@@ -33,12 +33,12 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         electiveService.remove(elective_id)
           .then(function(elective) {
             if (elective.intended)
-              scope.planInfo.plan.intended_id = elective.course_id
+              scope.planInfo.plan.intended_id = elective.course_id;
             if (elective.completed)
-              scope.planInfo.plan.completed_id = elective.course_id
-            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+              scope.planInfo.plan.completed_id = elective.course_id;
+              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
           });
-      }
+      };
 
       scope.showClassInput = function() {
         scope.addingClass = true;
@@ -48,7 +48,8 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
       };
 
       scope.hideClassInput = function() {
-        // scope.addingClass = false;
+        if (event.relatedTarget === null)
+          scope.addingClass = false;
       };
 
       scope.setCourse = function(course) {
