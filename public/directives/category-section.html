@@ -3,6 +3,18 @@
                 'green-highlight': category.satisfiedByCompleted()}">
 
   <h3>{{ category.name }}</h3>
+  <h3 class="upper-right">Units</h3>
+    <div class="category-info">
+      <p class="tagline category-tagline" ng-if='category.thesis_hours'>
+        {{ category.thesis_hours }} thesis hours
+      </p>
+      <p class="tagline category-tagline" ng-if='category.elective_hours && !category.thesis_hours'>
+        A Comprehensive Exam
+      </p>
+      <p class="tagline category-tagline" ng-if='category.elective_hours'>
+        and {{ category.elective_hours }} elective hours
+      </p>
+    </div>
 
   <table class="full-width">
     <tr course-row ng-repeat='availableCourse in category.courses'

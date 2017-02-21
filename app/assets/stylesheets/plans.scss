@@ -15,29 +15,55 @@
 
 }
 
-// Category boxes
-.category {
-  padding-bottom: 32px;
+// header
+.main-header {
+  font-size: 2.3em;
+  font-weight: 600;
+  display: inline;
 }
-.bordered {
-  border: 1px solid #AAA;
-  padding: 15px 20px;
-  padding-top: -15px;
+
+.degree-info {
+  .degree {
+    font-size: 2.0em;
+  }
+  .registered-info {
+    float: left;
+    margin-left: 25px;
+  }
+  .graduating-info {
+    float: left;
+    line-height: 3.4em;
+    .graduating {
+      font-size: 1.8em;
+    }
+  }
+  .registration-confirmation {
+    font-size: 1em;
+  }
+  .main-info {
+    margin-top: 14px;
+  }
+  .additional-info {
+    display: inline-block;
+    margin-top: 8px;
+  }
 }
-.green-border {
-  border: 3px solid #65804C;
-}
-.green-highlight {
-  background-color: rgba(101,128,76,0.2);
-}
+
 
 // Section/Panel on page
 .course-section {
   margin-bottom: 25px;
   .required-units {
     float: right;
-    padding: .5em;
+    padding: 1.2em 0.3em 0.1em;
     background-color: white;
+  }
+  .add-course-link {
+    margin-top: 5px;
+  }
+  .bold-header {
+    font-weight: 600;
+    font-size: 18px;
   }
 }
 .course-row {
@@ -54,12 +80,43 @@
   }
 }
 
-.upper-right {
-  position: absolute;
-  top: 20px;
-  right: 0;
+// Category boxes
+.category {
+  padding-bottom: 26px;
+  padding-top: 0;
+  margin-bottom: 44px;;
+  position: relative;
+  h3 {
+    padding: 0 5px;
+    margin: 0;
+    display: inline-block;
+    position: relative;
+    top: -13px;
+    background-color: #FFF;
+    font-size: 1.4em;
+  }
+  .category-info {
+    margin: 5px 0;
+  }
+}
+.bordered {
+  border: 1px solid #AAA;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.green-border {
+  border: 3px solid #65804C;
+}
+.green-highlight {
+  background-color: rgba(101,128,76,0.2);
 }
 
 .full-width {
   width: 100%;
+}
+
+.upper-right {
+  float: right;
+  font-size: 1em;
+  line-height: 1.4em;
 }

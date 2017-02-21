@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <h2>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h2>
+    <h1 class='main-header'>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h1>
     <button class='btn btn-default upper-right' ng-click="exportIPS()">Export PDF</button>
   </div>
 </div>
@@ -12,32 +12,44 @@
 <div class="row">
   <div class="col-xs-12">
     <div class="degree-info">
-      <span>MA with Major in World Arts -- Concentration: </span>
 
-      <select ng-model='plan.concentration_id'
-              ng-options='concentration.id as concentration.name for concentration in concentrations'
-              ng-change='updatePlan()'
-              ng-disabled="concentrationDisabled">
-        <option value=""></option>
-      </select>
+      <div class="main-info">
+        <span class='degree'>MA with Major in World Arts -- Concentration: </span>
+        
+        <select ng-model='plan.concentration_id'
+                ng-options='concentration.id as concentration.name for concentration in concentrations'
+                ng-change='updatePlan()'
+                ng-disabled="concentrationDisabled">
+          <option value=""></option>
+        </select>
+      </div>
+    
+      <br>
 
-      <span>Graduating:</span>
-      <select ng-model='plan.graduation_term'
-              ng-options='term for term in terms'
-              ng-change='updatePlan()'>
-        <option value=""></option>
-      </select>
-
-      <select ng-model='plan.graduation_year'
-              ng-options='year for year in planInfo.possibleYears'
-              ng-change="updatePlan()">
-        <option value=""></option>
-      </select>
-
-      <div class="registered-info">
-        <span>Has the most recent intended plan of study been registered?</span>
-        <input type="checkbox" ng-model="plan.latest_registered" ng-change="toggleRegistration()">
-        <p ng-if="plan.registration_date" >An intended plan of study for {{ student.first_name }} was last registered on {{ plan.registration_date | date }}</p>
+      <div class="additional-info">
+        <div class="graduating-info">
+          <span class='graduating'>Graduating:</span>
+          <select ng-model='plan.graduation_term'
+                  ng-options='term for term in terms'
+                  ng-change='updatePlan()'>
+            <option value=""></option>
+          </select>
+          
+          <select ng-model='plan.graduation_year'
+                  ng-options='year for year in planInfo.possibleYears'
+                  ng-change="updatePlan()">
+            <option value=""></option>
+          </select>
+        </div>
+        
+        
+        
+        <div class="registered-info">
+          <span class='registration-confirmation'>Has the most recent intended plan of study been registered?</span>
+          <input type="checkbox" ng-model="plan.latest_registered" ng-change="toggleRegistration()">
+          <br>
+          <p ng-if="plan.registration_date" class='tagline' >An intended plan of study for {{ student.first_name }} was last registered on {{ plan.registration_date | date }}</p>
+        </div>
       </div>
 
     </div>
