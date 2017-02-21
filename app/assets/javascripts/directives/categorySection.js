@@ -66,18 +66,10 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         });
       };
 
-      scope.hideClassInput = function() {
+      scope.hideClassInput = function(event) {
         if (event.relatedTarget === null)
           scope.addingClass = false;
       };
-
-      // scope.setCourse = function(course) {
-      //   course = angular.copy(course, {});
-      //   course.category_id = scope.category.id;
-      //   scope.category.courses.push(course);
-      // };
-
-
     }
   };
 }]);

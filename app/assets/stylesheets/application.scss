@@ -33,12 +33,17 @@ body {
 }
 
 
-
-
 .clickable {
   cursor: pointer;
   color: #4D3960;
   &:hover {
     color: #D75EAE;
   }
+}
+
+.tagline {
+  color: #555;
+  font-style: italic;
+  weight: 600;
+  display: inline-block;
 }
