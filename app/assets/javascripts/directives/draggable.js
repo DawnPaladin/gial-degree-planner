@@ -34,6 +34,11 @@ planner.directive('draggable', function() {
 
         var thisSessionId = thisSessionIds[0].id;
 
+        if (!that.parentNode.classList.contains('course-bubble-container')) {
+          angular.element('.course-bubble-container')
+            .addClass('permitted');
+        }
+
         angular.element(".session[data-term-id='" + thisTermId + "'][data-session-id='" + thisSessionIds[0] + "']")
           .removeClass('unpermitted')
           .addClass('permitted');
@@ -50,6 +55,8 @@ planner.directive('draggable', function() {
       'dragend',
       function(e) {
         this.classList.remove('drag');
+        angular.element('.course-bubble-container')
+          .removeClass('permitted');
         angular.element(".session")
           .removeClass('unpermitted')
           .removeClass('permitted');

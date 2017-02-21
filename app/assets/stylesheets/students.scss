@@ -23,6 +23,8 @@
   transition: left 0.5s;
   padding: 5px 5px 0;
   z-index: 10;
+  -webkit-transition: background 0.5s;
+  transition: background 0.5s;
 }
 
 .course-bubble {
@@ -115,7 +117,7 @@
 }
 
 .permitted {
-  background: lightgreen;
+  background: lightgreen !important;
   border-right: 0 !important;
 }
 

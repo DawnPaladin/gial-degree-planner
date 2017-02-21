@@ -35,9 +35,9 @@ planner.directive('droppable', function() {
           }
 
 
-
+          // 
           if (that.id == "sticky-container") {
-            console.log('item', item);
+
             var year = item.getAttribute('data-year-id');
             var term = JSON.parse(item.getAttribute('term')).id;
             var session = JSON.parse(item.getAttribute('sessions'))[0].id;
