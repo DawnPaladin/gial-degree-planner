@@ -2,9 +2,7 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
   return {
     restrict: 'E',
     templateUrl: '/directives/category-edit.html',
-    scope: {
-      category: '=',
-    },
+    scope: true,
     link: function(scope) {
 
       courseService.getCourses().then(function(courses) {

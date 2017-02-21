@@ -56,8 +56,8 @@
     <button class="btn btn-primary btn-block" ng-click="saveDegree()">Save Degree</button>
   </div>
   <div class="col-md-6" ng-show="currentConcentration.name">
-    <h2>{{ currentConcentration.name }} concentration</h2>
-    <a>New category</a>
+    <h2><span editable-text="currentConcentration.name">{{ currentConcentration.name }}</span> concentration</h2>
+    <span class="clickable" ng-click="createCategory()">New category</span>
     <label class="pull-right"><input type="checkbox" ng-model="currentConcentration.has_thesis_track"> Thesis option available</label>
 
     <category-edit ng-repeat="category in currentConcentration.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
