@@ -21,6 +21,6 @@ class DegreesController < ApplicationController
   private
     def degree_params
       params.permit(:id, :name, :description,
-      concentrations_attributes: [:id, :degree_id, :name], degree_course_requirements_attributes: [:id] )
+      concentrations_attributes: [:id, :degree_id, :name, :description], required_course_ids: [] )
     end
 end

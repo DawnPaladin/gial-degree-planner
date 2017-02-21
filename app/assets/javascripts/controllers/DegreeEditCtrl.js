@@ -20,8 +20,8 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
 
     $scope.saveDegree = function() {
       console.log("Outgoing:", $scope.degree);
-      $scope.degree.degree_course_requirements_attributes = $scope.degree.required_courses.map(function(course) {
-        return { id: course.id };
+      $scope.degree.required_course_ids = $scope.degree.required_courses.map(function(course) {
+        return course.id;
       });
       $scope.degree.concentrations_attributes = $scope.degree.concentrations;
 
