@@ -26,17 +26,20 @@
 
       <div class="sessions">
 
-        <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year-id="{{ year.id }}" droppable drop="handleDrop" session="session">
+          <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year-id="{{ year.id }}" droppable drop="handleDrop" session="session">
 
-          <div ng-repeat="course in session.courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" data-year-id="{{ year.id }}" term="{{ course.term }}" draggable draggable-course="course">
-            {{ course.name }}<br>
-            <span class="truncated">
-              {{ course.number }}<br>
-              {{ course.term.name }} {{ course.sessions | sessionFilter }}
+            <span ng-repeat="course in session.courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" data-year-id="{{ year.id }}" term="{{ course.term }}" draggable draggable-course="course">
+              {{ course.name }}<br>
+              <span class="truncated">
+                {{ course.number }}<br>
+                {{ course.term.name }} {{ course.sessions | sessionFilter }}
+              </span>
             </span>
+
           </div>
 
-        </div>
+        </tr>
+
       </div>
 
       <p><strong>{{ term.name }}</strong></p>

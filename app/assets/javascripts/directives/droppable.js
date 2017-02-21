@@ -1,4 +1,4 @@
-planner.directive('droppable', ['planService', function(planService) {
+planner.directive('droppable', function() {
 
   return {
     scope: {
@@ -48,6 +48,8 @@ planner.directive('droppable', ['planService', function(planService) {
               meeting_term: term,
               meeting_session: session          
             };
+
+
           } else {
             var meetingData = {
               id: that.id,
@@ -58,9 +60,11 @@ planner.directive('droppable', ['planService', function(planService) {
             that.appendChild(item);
           }
 
-          var itemHeight = angular.element(item).css('height');
-          var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";
-          angular.element(item).parent().next().prepend(space);
+
+
+          // var itemHeight = angular.element(item).css('height');
+          // var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";
+          // angular.element(item).parent().next().prepend(space);
 
           scope.$apply(function(scope) {
             var fn = scope.drop();
@@ -111,4 +115,4 @@ planner.directive('droppable', ['planService', function(planService) {
     }
   }
 
-}]);
+});
