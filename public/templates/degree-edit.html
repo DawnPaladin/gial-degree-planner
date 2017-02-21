@@ -32,6 +32,22 @@
         {{ course.name }}
         <span class="clickable glyphicon glyphicon-remove" ng-click="deleteCoreCourse(course)"></span>
       </li>
+      <input id='coreCourseInput'
+             ng-if='addingCoreCourse'
+             class='form-control'
+             placeholder='Enter a course name or number'
+             ng-blur='hideCourseInput()'
+             bs3-typeahead
+             bs3-promise='courseNames'
+             ng-model='addedCoreCourse'
+             bs3-afterSelect='addCoreCourse'>
+
+      <span class="clickable add-course-link"
+            ng-if='!addingCoreCourse'
+            ng-click='showCourseInput()'>
+        &#43; Add a course
+      </span>
+      <!-- FIXME: This requires a second click after you select the course; Alexa's does not. Ask why. -->
     </ul>
 
   </div>

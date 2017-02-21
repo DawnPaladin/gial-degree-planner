@@ -12,7 +12,7 @@ class DegreesController < ApplicationController
   def update
     @degree = Degree.find_by_id(params[:id])
     if @degree.update(degree_params)
-      render json: @degree.to_json
+      render json: @degree.to_json(include: [:concentrations, :required_courses])
     else
       render json: @degree.errors.full_messages.to_json
     end
@@ -20,6 +20,7 @@ class DegreesController < ApplicationController
 
   private
     def degree_params
-      params.require(:degree).permit(:name, :description)
+      params.permit(:id, :name, :description,
+      concentrations_attributes: [:id, :degree_id, :name], degree_course_requirements_attributes: [:id] )
     end
 end
