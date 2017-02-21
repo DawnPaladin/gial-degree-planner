@@ -1,3 +1,12 @@
 // Place all the styles related to the degrees controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.category-table {
+  width: 100%;
+  td:nth-child(1) { width: 20px; }
+  td:nth-child(3) { width: 10px; }
+}
+
+.credits-input {
+  width: 2em;
+}

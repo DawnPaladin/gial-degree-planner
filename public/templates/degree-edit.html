@@ -1,4 +1,4 @@
-<h2>Degree: <span editable-text="degree.name">{{ degree.name || "Enter degree name" }}</span></h2>
+<h1>Degree: <span editable-text="degree.name">{{ degree.name || "Enter degree name" }}</span></h1>
 
 <p>To complete a concentration, a student must complete all of its categories and required courses.</p>
 <p>To complete a category, a student must complete a certain number of the courses inside.</p>
@@ -6,7 +6,7 @@
 <div class="row">
   <div class="col-md-6">
 
-    <h3>Concentrations</h3>
+    <h2>Concentrations</h2>
     <ul>
       <li ng-repeat="concentration in degree.concentrations">
         {{ concentration.name }}
@@ -26,7 +26,7 @@
       </button>
     </div>
 
-    <h3>Core courses</h3>
+    <h2>Core courses</h2>
     <ul>
       <li ng-repeat="course in degree.required_courses">
         {{ course.name }}
@@ -52,12 +52,28 @@
 
   </div>
   <div class="col-md-6" ng-show="currentConcentration.name">
-    <h3>{{ currentConcentration.name }} concentration</h3>
+    <h2>{{ currentConcentration.name }} concentration</h2>
     <a>New category</a>
     <label><input type="checkbox"> Thesis option available</label>
 
     <category-edit ng-repeat="category in currentConcentration.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
-    <category-edit ng-if="currentConcentration.thesis_track" category="currentConcentration.thesis_track"></category-edit>
+
+    <div class="category bordered course-section">
+      <h3>Thesis track</h3>
+      <table class="category-table">
+        <tr>
+          <td></td>
+          <td>Required thesis hours</td>
+          <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.thesis_writing_course.units"></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Required elective hours</td>
+          <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.elective_hours"></td>
+        </tr>
+      </table>
+      <div class='required-units'>Units required: <input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.thesis_hours"></div>
+    </div>
     <category-edit ng-if="currentConcentration.non_thesis_track" category="currentConcentration.non_thesis_track"></category-edit>
   </div>
 </div>

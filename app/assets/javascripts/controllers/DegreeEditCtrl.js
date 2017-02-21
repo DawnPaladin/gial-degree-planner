@@ -2,15 +2,7 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
   function($scope, $timeout, degree, courseService) {
     $scope.degree = degree;
     console.log(degree);
-    $scope.currentConcentration = {
-      name: "",
-      categories: [
-        {
-          name: "Test category",
-          required_units: 3
-        }
-      ],
-    };
+    $scope.currentConcentration = {};
 
     function Concentration() {
       this.name = "";
@@ -38,11 +30,9 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     };
 
     $scope.editConcentration = function(concentration) {
-      concentration.thesis_track.name = "Thesis track";
-      concentration.non_thesis_track.name = "Non-thesis track";
-      concentration.categories.forEach(function(category) {
-        category.removeCourse = $scope.removeElementFromArray;
-      });
+      concentration.thesis_track.thesis_writing_course = concentration.thesis_track.courses.filter(function(course) {
+        return course.name === "Thesis Writing";
+      })[0];
       $scope.currentConcentration = concentration;
       console.log(concentration);
     };
