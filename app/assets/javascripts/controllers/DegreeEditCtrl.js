@@ -32,13 +32,17 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       });
     };
 
-    $scope.editConcentration = function(current) {
-      $scope.currentConcentration = current;
+    $scope.editConcentration = function(concentration) {
+      concentration.thesis_track.name = "Thesis track";
+      concentration.non_thesis_track.name = "Non-thesis track";
+      $scope.currentConcentration = concentration;
+      console.log(concentration);
     };
 
     $scope.createConcentration = function() {
       $scope.degree.concentrations.push($scope.newConcentration);
       $scope.addConcentrationVisible = false;
+      $scope.currentConcentration = $scope.newConcentration;
       $scope.newConcentration = new Concentration();
     };
 
