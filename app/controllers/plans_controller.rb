@@ -15,13 +15,30 @@ class PlansController < ApplicationController
     end
   end
 
-  def update_schedule
-    @plan = Plan.find(params[:id])
+  def enroll_in_meeting
+    @course = Course.find(params[:course_id])
+    @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
     @session = Session.find(params[:meeting_session])
-    @meeting = Meeting.find_meeting(params[:meeting_year], @term, @session)
-    @plan.scheduled_classes << @meeting
-    render json: @plan, status: 200
+    @meeting = Meeting.find_meeting(@course, @year, @term, @session)
+    @plan = Plan.find(params[:plan][:id])
+    if @meeting
+      @plan.scheduled_classes << @meeting
+      render :show
+    else
+      render :show
+    end
+  end
+
+  def disenroll_from_meeting
+    @course = Course.find(params[:course_id])
+    @year = Year.find(params[:meeting_year])
+    @term = Term.find(params[:meeting_term])
+    @session = Session.find(params[:meeting_session])
+    @meeting = Meeting.find_meeting(@course, @year, @term, @session)
+    @plan = Plan.find(params[:plan][:id])
+    @plan.scheduled_classes.delete(@meeting)
+    render :show
   end
 
   private

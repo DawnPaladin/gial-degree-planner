@@ -1,6 +1,4 @@
 class Plan < ApplicationRecord
-  # lifecycle
-  after_create :add_degree_requirements_to_intended
 
   # validations
 
@@ -27,6 +25,10 @@ class Plan < ApplicationRecord
   belongs_to :degree
   has_many :required_courses, through: :degree
 
+  # lifecycle
+  after_create :add_degree_requirements_to_intended
+
+  ###### make intended courses degree.requried courses
 
 
   def add_or_remove_courses(opts)
@@ -42,6 +44,13 @@ class Plan < ApplicationRecord
   def thesis_starts
     unless self.scheduled_classes.empty? || Course.thesis_writing.meetings.empty?
       self.scheduled_classes.merge(Course.thesis_writing.meetings).first
+    end
+  end
+
+  def find_scheduled_classes(year, term, session)
+    meetings = self.scheduled_classes.where(year: year.value, term: term.name, session: session.name)
+    meetings.map do |meeting|
+      meeting.course
     end
   end
 
@@ -67,8 +76,10 @@ class Plan < ApplicationRecord
     end
 
     def add_degree_requirements_to_intended
-      self.intended_courses = self.required_courses
+      self.intended_courses = self.degree.required_courses
     end
+
+
 
 
 end

@@ -66,16 +66,10 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         });
       };
 
-      scope.hideClassInput = function() {
+      scope.hideClassInput = function(event) {
         if (event.relatedTarget === null)
           scope.addingClass = false;
       };
-
-      scope.logIt = function(thing) {
-        console.log(thing)
-      }
-
-
     }
   };
 }]);
