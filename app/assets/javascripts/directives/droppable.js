@@ -10,6 +10,18 @@ planner.directive('droppable', function() {
 
       var el = element[0];
 
+      var droppingInSameLocation = function(item, that) {
+
+        var yearSame = item.parentNode.getAttribute('data-year-id') == that.getAttribute('data-year-id');
+        var termSame = item.parentNode.getAttribute('data-term-id') == that.getAttribute('data-term-id');
+        var sessionSame = item.parentNode.getAttribute('data-session-id') == that.getAttribute('data-session-id');
+
+        if (yearSame && termSame && sessionSame) {
+          return true;
+        }
+        return false;
+      };
+
       var dropEventHandler = function(e, attrs, that) {
           if (e.stopPropagation) e.stopPropagation();
 
@@ -27,6 +39,8 @@ planner.directive('droppable', function() {
           that.classList.remove('over');
 
           if (item.parentNode.id == 'sticky-container' && that.id == 'sticky-container') {
+            return false;
+          } else if (droppingInSameLocation(item, that)){
             return false;
           } else if (that.id == 'sticky-container') {
 
@@ -51,20 +65,23 @@ planner.directive('droppable', function() {
 
 
           } else {
+
             var meetingData = {
               id: that.id,
               meeting_year: that.getAttribute('data-year-id'),
               meeting_term: that.getAttribute('data-term-id'),
               meeting_session: that.getAttribute('data-session-id')
             };
+
             that.appendChild(item);
+
+            // var itemHeight = angular.element(item).css('height');
+            // var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";
+            // angular.element(item).parent().next().prepend(space);
+            // debugger;
+
           }
 
-
-
-          // var itemHeight = angular.element(item).css('height');
-          // var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";
-          // angular.element(item).parent().next().prepend(space);
 
           scope.$apply(function(scope) {
             var fn = scope.drop();
