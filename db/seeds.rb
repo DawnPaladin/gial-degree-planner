@@ -310,10 +310,10 @@ degree.required_courses << Course.find_by(number: 'AA5384')
 degree.required_courses << Course.find_by(number: 'AA5386')
 
 
-puts 'creating meetings through courses'
-Course.all.each do |course|
-  course.create_meetings
-end
+# puts 'creating meetings through courses'
+# Course.all.each do |course|
+#   course.create_meetings
+# end
 
 puts 'creating and adding teachers to meetings'
 NUM_TEACHERS.times do |num|

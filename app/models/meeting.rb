@@ -9,6 +9,9 @@ class Meeting < ApplicationRecord
   has_many :meetings_teachers, dependent: :destroy
   has_many :teachers, through: :meetings_teachers
 
+  has_many :meetings_sessions, dependent: :destroy
+  has_many :sessions, through: :meetings_sessions
+
   belongs_to :course
 
   def self.find_meeting(year, term, session)
