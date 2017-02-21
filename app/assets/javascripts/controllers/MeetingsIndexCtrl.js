@@ -1,5 +1,5 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', 'courses',
-  function($scope, courses) {
+planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
+  function($scope, courses, meetingService) {
     $scope.courses = courses;
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
@@ -21,12 +21,25 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses',
       };
       course.meetings.forEach(function(meeting) {
         var term = meeting.term.toLowerCase();
-        yearAttendance[term] = meeting.enrollments.length;
+        yearAttendance[term] = {
+          count: meeting.enrollments.length,
+          meeting_id: meeting.id
+        };
       });
       years.forEach(function() {
         course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
       });
     });
+
+    $scope.showMeeting = function(id) {
+      meetingService.get(id)
+        .then(function(meeting) {
+          $scope.meeting = meeting;
+          angular.element('#edit-meeting').modal('show');
+        }, function(error) {
+          console.error(error);
+        });
+    };
 
   }
 ]);

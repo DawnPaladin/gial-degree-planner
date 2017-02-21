@@ -103,16 +103,18 @@ csv.each do |row|
     units: row['Credit Hours'],
     term: term,
   })
-  if course.save
-    puts "Saved " + row['Name']
-  else
-    puts course.errors.full_messages
-  end
   unless row['Sessions'].nil?
     session_names = row['Sessions'].split(',')
     session_names.each do |session_name|
       course.sessions << Session.find_by(name: session_name)
     end
+  end
+  # it is important to save AFTER sessions are added
+  # There is an after create callback that needs access to sessions
+  if course.save
+    puts "Saved " + row['Name']
+  else
+    puts course.errors.full_messages
   end
 end
 

@@ -77,11 +77,12 @@ class Course < ApplicationRecord
   def create_meetings(num = 10)
     num.times do |num|
       current_year = Date.today.year
-
+      puts self.sessions
+      puts 'hello!'
       self.meetings.create({
         year: Date.new(current_year).advance(years: num).year,
         term: self.term.name,
-        sessions: self.sessions
+        sessions: self.sessions.to_a
       })
     end
   end

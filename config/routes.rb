@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :concentrations, only: [:index, :show]
       resources :terms, only: [:index]
       resources :courses, only: [:index, :create, :show]
+      resources :meetings, only: [:show, :update]
     end
   end
 
