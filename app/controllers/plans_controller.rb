@@ -23,6 +23,8 @@ class PlansController < ApplicationController
     @meeting = Meeting.find_meeting(@course, @year, @term, @session)
     @plan = Plan.find(params[:plan][:id])
     if @meeting
+      thesis_ids = [233, 234]
+      @plan.scheduled_classes.find_by(course_id: @meeting.course_id).enrollments.where(plan_id: @plan.id).delete_all
       @plan.scheduled_classes << @meeting
       render :show
     else
