@@ -19,11 +19,6 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           scope.terms = terms;
         });
 
-<<<<<<< HEAD
-  scope.levels.forEach(console.log)
-
-=======
->>>>>>> master
       scope.createCourse = function(formValid) {
         if (formValid) {
           courseService.create(scope.newCourse)
