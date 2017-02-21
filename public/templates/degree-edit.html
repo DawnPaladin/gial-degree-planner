@@ -30,7 +30,7 @@
     <ul>
       <li ng-repeat="course in degree.required_courses">
         {{ course.name }}
-        <span class="clickable glyphicon glyphicon-remove" ng-click="deleteCoreCourse(course)"></span>
+        <span class="clickable glyphicon glyphicon-remove" ng-click="removeElementFromArray(course, degree.required_courses)"></span>
       </li>
       <input id='coreCourseInput'
              ng-if='addingCoreCourse'
@@ -56,7 +56,7 @@
     <a>New category</a>
     <label><input type="checkbox"> Thesis option available</label>
 
-    <category-edit ng-repeat="category in currentConcentration.categories" category="category"></category-edit>
+    <category-edit ng-repeat="category in currentConcentration.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
     <category-edit ng-if="currentConcentration.thesis_track" category="currentConcentration.thesis_track"></category-edit>
     <category-edit ng-if="currentConcentration.non_thesis_track" category="currentConcentration.non_thesis_track"></category-edit>
   </div>

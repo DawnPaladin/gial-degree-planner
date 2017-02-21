@@ -18,6 +18,11 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     }
     $scope.newConcentration = new Concentration();
 
+    $scope.removeElementFromArray = function(element, array) {
+      var index = array.indexOf(element);
+      array.splice(index, 1);
+    };
+
     $scope.saveDegree = function() {
       console.log("Outgoing:", $scope.degree);
       $scope.degree.required_course_ids = $scope.degree.required_courses.map(function(course) {
@@ -35,6 +40,9 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     $scope.editConcentration = function(concentration) {
       concentration.thesis_track.name = "Thesis track";
       concentration.non_thesis_track.name = "Non-thesis track";
+      concentration.categories.forEach(function(category) {
+        category.removeCourse = $scope.removeElementFromArray;
+      });
       $scope.currentConcentration = concentration;
       console.log(concentration);
     };
@@ -48,8 +56,7 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
 
     $scope.deleteConcentration = function(concentration) {
       if (confirm("Are you sure you wish to remove the " + concentration.name + " concentration?")) {
-        var index = $scope.degree.concentrations.indexOf(concentration);
-        $scope.degree.concentrations.splice(index, 1);
+        $scope.removeElementFromArray(concentration, $scope.degree.concentrations);
       }
     };
 
@@ -79,10 +86,6 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
         return obj.id === courseName.id;
       })[0];
       $scope.degree.required_courses.push(course);
-    };
-    $scope.deleteCoreCourse = function(course) {
-      var index = $scope.degree.required_courses.indexOf(course);
-      $scope.degree.required_courses.splice(index, 1);
     };
 
   }

@@ -17,7 +17,7 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
         });
       });
 
-      scope.addElective = function(course) {
+      scope.addCourse = function(course) {
 
         if (course.id === 'newCourse') {
           angular.element('.elective-input').val('');
@@ -38,7 +38,7 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
         }
       };
 
-      scope.deleteElective = function(course) {
+      scope.deleteCourse = function(course) {
         var elective_id = course.elective_id;
         electiveService.remove(elective_id)
           .then(function(elective) {
@@ -71,6 +71,11 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
       scope.hideClassInput = function() {
         if (event.relatedTarget === null)
           scope.addingClass = false;
+      };
+
+      scope.removeElementFromArray = function(element, array) {
+        var index = array.indexOf(element);
+        array.splice(index, 1);
       };
 
       // scope.setCourse = function(course) {

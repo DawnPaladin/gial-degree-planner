@@ -5,15 +5,10 @@
   <h3>{{ category.name }}</h3>
 
   <table class="full-width">
-    <tr course-row ng-repeat='availableCourse in category.courses'
-        course='availableCourse'
-        checkbox-callback='addOrRemoveIntended(course)'
-        delete-elective='deleteElective(course)'
-        section='available'
-        class='course-row'>
-
-      {{ availableCourse.units }}
-
+    <tr ng-repeat="course in category.courses">
+      <td><span class="glyphicon glyphicon-remove clickable" ng-click="removeElementFromArray(course, category.courses)"></span></td>
+      <td>{{ course.name }}</td>
+      <td>{{ course.units }}</td>
     </tr>
     <tr>
       <td></td>
@@ -25,7 +20,7 @@
                bs3-typeahead
                bs3-promise='availableElectives'
                ng-model='addedCourse'
-               bs3-afterSelect='addElective'
+               bs3-afterSelect='addCourse'
                bs3-addItem='newCourse'>
 
         <span class="clickable add-course-link"
