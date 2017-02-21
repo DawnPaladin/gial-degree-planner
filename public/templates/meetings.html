@@ -27,14 +27,24 @@
 <modal id='edit-meeting'>
   <modal-title>
     <h3>Edit Class: {{ meeting.course }}</h3>
-    <p class="tagline">Sessions: {{ meeting.sessions }}, {{ meeting.term }} {{ meeting.year }}</p>
+    <p class="tagline">Sessions: {{ meeting.sessions | filter }}, {{ meeting.term }} {{ meeting.year }}</p>
   </modal-title>
   <modal-body>
-  <form ng-model='meeting'>
-    <input type="radio" ng-model='meeting.teaching_style' value='Distance'> Distance
-    <input type="radio" ng-model='meeting.teaching_style' value='Residential'> Residential
-    <input type="radio" ng-model='meeting.teaching_style' value='Intensive'> Intensive
-  </form>
+    <form ng-model='meeting'>
+      <div class="row">
+        <input type="checkbox" ng-model='meeting.delete'> Canceled
+        <div class="col-xs-12">
+          <div class="teacher">
+            <input type="text" ng-model='meeting.teacher' class='form-control'>
+          </div>
+          <div class="teaching-style col-xs-3">
+            <input type="radio" ng-model='meeting.teaching_style' value='Distance'> Distance
+            <input type="radio" ng-model='meeting.teaching_style' value='Residential'> Residential
+            <input type="radio" ng-model='meeting.teaching_style' value='Intensive'> Intensive
+          </div>
+        </div>
+      </div>
+    </form>
     <!-- <meeting-form></meeting-form> -->
   </modal-body>
 </modal>
