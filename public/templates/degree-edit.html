@@ -1,3 +1,7 @@
+<div class="flash-container">
+  <flash-message></flash-message>
+</div>
+
 <h1>Degree: <span editable-text="degree.name">{{ degree.name || "Enter degree name" }}</span></h1>
 
 <p>To complete a concentration, a student must complete all of its categories and required courses.</p>
@@ -49,7 +53,7 @@
       </span>
       <!-- FIXME: This requires a second click after you select the course; Alexa's does not. Ask why. -->
     </ul>
-
+    <button class="btn btn-primary btn-block" ng-click="saveDegree()">Save Degree</button>
   </div>
   <div class="col-md-6" ng-show="currentConcentration.name">
     <h2>{{ currentConcentration.name }} concentration</h2>
@@ -87,5 +91,3 @@
     </div>
   </div>
 </div>
-
-<button class="btn btn-primary" ng-click="saveDegree()">Save Degree</button>
