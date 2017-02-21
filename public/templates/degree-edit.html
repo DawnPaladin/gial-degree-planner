@@ -55,39 +55,40 @@
     </ul>
     <button class="btn btn-primary btn-block" ng-click="saveDegree()">Save Degree</button>
   </div>
-  <div class="col-md-6" ng-show="currentConcentration.name">
-    <h2><span editable-text="currentConcentration.name">{{ currentConcentration.name }}</span> concentration</h2>
+  <div class="col-md-6" ng-show="concentrationService.current">
+    <h2><span editable-text="concentrationService.current.name">{{ concentrationService.current.name }}</span> concentration</h2>
     <span class="clickable" ng-click="createCategory()">New category</span>
-    <label class="pull-right"><input type="checkbox" ng-model="currentConcentration.has_thesis_track"> Thesis option available</label>
+    <label class="pull-right"><input type="checkbox" ng-model="concentrationService.current.has_thesis_track"> Thesis option available</label>
 
-    <category-edit ng-repeat="category in currentConcentration.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
+    <category-edit ng-repeat="category in concentrationService.current.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
 
-    <div class="category bordered course-section" ng-show="currentConcentration.has_thesis_track">
+    <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
       <h3>Thesis track</h3>
       <table class="category-table">
         <tr>
           <td></td>
           <td>Required thesis hours</td>
-          <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.thesis_hours"></td>
+          <td><input type="number" class="credits-input" ng-model="concentrationService.current.thesis_track.thesis_hours"></td>
         </tr>
         <tr>
           <td></td>
           <td>Required elective hours</td>
-          <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.elective_hours"></td>
+          <td><input type="number" class="credits-input" ng-model="concentrationService.current.thesis_track.elective_hours"></td>
         </tr>
       </table>
-      <div class='required-units'>Units required: {{ currentConcentration.thesis_track.thesis_hours + currentConcentration.thesis_track.elective_hours }}</div>
+      <div class='required-units'>Units required: {{ concentrationService.current.thesis_track.thesis_hours + concentrationService.current.thesis_track.elective_hours }}</div>
     </div>
-    <div class="category bordered course-section" ng-show="currentConcentration.has_thesis_track">
+    <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
       <h3>Non-thesis track</h3>
       <table class="category-table">
         <tr>
           <td></td>
           <td>Required elective hours</td>
-          <td><input type="number" class="credits-input" ng-model="currentConcentration.non_thesis_track.elective_hours"></td>
+          <td><input type="number" class="credits-input" ng-model="concentrationService.current.non_thesis_track.elective_hours"></td>
         </tr>
       </table>
-      <div class='required-units'>Units required: {{ currentConcentration.non_thesis_track.elective_hours }}</div>
+      <div class='required-units'>Units required: {{ concentrationService.current.non_thesis_track.elective_hours }}</div>
     </div>
+    <button class="btn btn-primary btn-block" ng-click="concentrationService.save()">Save concentration</button>
   </div>
 </div>

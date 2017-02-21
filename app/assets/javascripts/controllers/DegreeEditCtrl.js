@@ -1,8 +1,11 @@
-planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseService', 'Flash',
-  function($scope, $timeout, degree, courseService, Flash) {
+planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseService', 'concentrationService', 'Flash',
+  function($scope, $timeout, degree, courseService, concentrationService, Flash) {
     $scope.degree = degree;
     console.log(degree);
     $scope.currentConcentration = {};
+
+    $scope.concentrationService = concentrationService;
+    concentrationService.setup(degree);
 
     function Concentration() {
       this.name = "";
@@ -32,9 +35,7 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     };
 
     $scope.editConcentration = function(concentration) {
-      concentration.has_thesis_track = !!concentration.thesis_track;
-      $scope.currentConcentration = concentration;
-      console.log(concentration);
+      concentrationService.loadConcentration(concentration, $scope);
     };
 
     $scope.createConcentration = function() {
