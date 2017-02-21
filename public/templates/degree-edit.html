@@ -64,7 +64,7 @@
         <tr>
           <td></td>
           <td>Required thesis hours</td>
-          <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.thesis_writing_course.units"></td>
+          <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.thesis_hours"></td>
         </tr>
         <tr>
           <td></td>
@@ -72,9 +72,19 @@
           <td><input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.elective_hours"></td>
         </tr>
       </table>
-      <div class='required-units'>Units required: <input type="number" class="credits-input" ng-model="currentConcentration.thesis_track.thesis_hours"></div>
+      <div class='required-units'>Units required: {{ currentConcentration.thesis_track.thesis_hours + currentConcentration.thesis_track.elective_hours }}</div>
     </div>
-    <category-edit ng-if="currentConcentration.non_thesis_track" category="currentConcentration.non_thesis_track"></category-edit>
+    <div class="category bordered course-section">
+      <h3>Non-thesis track</h3>
+      <table class="category-table">
+        <tr>
+          <td></td>
+          <td>Required elective hours</td>
+          <td><input type="number" class="credits-input" ng-model="currentConcentration.non_thesis_track.elective_hours"></td>
+        </tr>
+      </table>
+      <div class='required-units'>Units required: {{ currentConcentration.non_thesis_track.elective_hours }}</div>
+    </div>
   </div>
 </div>
 

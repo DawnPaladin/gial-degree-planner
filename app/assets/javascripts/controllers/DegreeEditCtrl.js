@@ -30,9 +30,6 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     };
 
     $scope.editConcentration = function(concentration) {
-      concentration.thesis_track.thesis_writing_course = concentration.thesis_track.courses.filter(function(course) {
-        return course.name === "Thesis Writing";
-      })[0];
       $scope.currentConcentration = concentration;
       console.log(concentration);
     };
