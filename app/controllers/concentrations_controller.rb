@@ -1,5 +1,4 @@
 class ConcentrationsController < ApplicationController
-# TODO see if necessary
   def index
     @concentrations = Concentration.all
     render json: @concentrations, status: 200
@@ -22,7 +21,12 @@ class ConcentrationsController < ApplicationController
   end
 
   def concentration_params
-    params.permit(:id, :name)
+    params.permit(:id, :name, :degree_id, { categories_attributes: [:id, :concentration_id, :name, :required_units, course_ids: [] ]})
   end
 
 end
+
+# params.permit(:id, :name, :description,
+# concentrations_attributes: [:id, :degree_id, :name, :description, { categories: [
+#   :id, :concentration_id, :name, :required_units
+# ] }], required_course_ids: [] )

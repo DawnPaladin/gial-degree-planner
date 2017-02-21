@@ -51,16 +51,6 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       }
     };
 
-    $scope.createCategory = function() {
-      console.log($scope.currentConcentration.categories);
-      $scope.currentConcentration.categories.push({
-        concentration_id: $scope.currentConcentration.id,
-        courses: [],
-        name: "New category",
-        required_units: 0
-      });
-    };
-
     // "Add a core course" link + typeahead
     courseService.getCourses().then(function(courses) {
       $scope.courses = courses;

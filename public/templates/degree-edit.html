@@ -57,7 +57,7 @@
   </div>
   <div class="col-md-6" ng-show="concentrationService.current">
     <h2><span editable-text="concentrationService.current.name">{{ concentrationService.current.name }}</span> concentration</h2>
-    <span class="clickable" ng-click="createCategory()">New category</span>
+    <span class="clickable" ng-click="concentrationService.createCategory()">New category</span>
     <label class="pull-right"><input type="checkbox" ng-model="concentrationService.current.has_thesis_track"> Thesis option available</label>
 
     <category-edit ng-repeat="category in concentrationService.current.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>

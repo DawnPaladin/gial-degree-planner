@@ -13,7 +13,18 @@ planner.factory('concentrationService', ['Restangular', function(Restangular) {
 
   exports.save = function() {
     console.log(exports.current);
+    exports.current.categories_attributes = exports.current.categories
     exports.current.put();
+  };
+
+  exports.createCategory = function() {
+    console.log(exports.current.categories);
+    exports.current.categories.push({
+      concentration_id: exports.current.id,
+      courses: [],
+      name: "New category",
+      required_units: 0
+    });
   };
 
   return exports;
