@@ -54,11 +54,11 @@
   <div class="col-md-6" ng-show="currentConcentration.name">
     <h2>{{ currentConcentration.name }} concentration</h2>
     <a>New category</a>
-    <label><input type="checkbox"> Thesis option available</label>
+    <label class="pull-right"><input type="checkbox" ng-model="currentConcentration.has_thesis_track"> Thesis option available</label>
 
     <category-edit ng-repeat="category in currentConcentration.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
 
-    <div class="category bordered course-section">
+    <div class="category bordered course-section" ng-show="currentConcentration.has_thesis_track">
       <h3>Thesis track</h3>
       <table class="category-table">
         <tr>
@@ -74,7 +74,7 @@
       </table>
       <div class='required-units'>Units required: {{ currentConcentration.thesis_track.thesis_hours + currentConcentration.thesis_track.elective_hours }}</div>
     </div>
-    <div class="category bordered course-section">
+    <div class="category bordered course-section" ng-show="currentConcentration.has_thesis_track">
       <h3>Non-thesis track</h3>
       <table class="category-table">
         <tr>
