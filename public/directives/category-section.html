@@ -21,7 +21,7 @@
         <input ng-if='addingClass'
                class='form-control elective-input'
                placeholder='Enter a course name or number'
-               ng-blur='hideClassInput()'
+               ng-blur='hideClassInput($event)'
                bs3-typeahead
                bs3-promise='availableElectives'
                ng-model='addedCourse'
