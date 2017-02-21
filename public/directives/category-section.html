@@ -4,7 +4,7 @@
 
   <h3>{{ category.name }}</h3>
 
-  <table>
+  <table class="full-width">
     <tr course-row ng-repeat='availableCourse in category.courses'
         course='availableCourse'
         checkbox-callback='addOrRemoveIntended(course)'
@@ -20,11 +20,13 @@
       <td>
         <input ng-if='addingClass'
                class='form-control elective-input'
+               placeholder='Enter a course name or number'
                ng-blur='hideClassInput()'
                bs3-typeahead
                bs3-promise='availableElectives'
                ng-model='addedCourse'
-               bs3-afterSelect='addElective'>
+               bs3-afterSelect='addElective'
+               bs3-addItem='newCourse'>
 
         <span class="clickable add-course-link"
               ng-if='!addingClass'
@@ -36,6 +38,14 @@
     </tr>
   </table>
 
-  <p class='required-units'>Units required: {{ category.required_units }}</p>
+  <div class='required-units'>Units required: {{ category.required_units }}</div>
 
 </div>
+
+<modal id='new-course-form'
+       category='category'
+       >
+  <modal-title>New Course</modal-title>
+  <modal-body>body goes here</modal-body>
+  <modal-footer>some buttons or something</modal-footer>
+</modal>

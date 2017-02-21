@@ -16,16 +16,24 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
       });
 
       scope.addElective = function(course) {
-        var electiveParams = {
-          category_name: scope.category.name,
-          course_id: course.id,
-          plan_id: scope.planInfo.plan.id
-        };
 
-        electiveService.create(electiveParams)
-          .then(function(response) {
-            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
-          });
+        if (course.id === 'newCourse') {
+          angular.element('.elective-input').val('');
+          scope.addingClass = false;
+          _displayCourseForm();
+        }
+        else { 
+          var electiveParams = {
+            category_name: scope.category.name,
+            course_id: course.id,
+            plan_id: scope.planInfo.plan.id
+          };
+
+          electiveService.create(electiveParams)
+            .then(function() {
+              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+            });
+        }
       };
 
       scope.deleteElective = function(course) {
@@ -33,12 +41,23 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         electiveService.remove(elective_id)
           .then(function(elective) {
             if (elective.intended)
-              scope.planInfo.plan.intended_id = elective.course_id
+
+              scope.planInfo.plan.intended_id = elective.course_id;
             if (elective.completed)
-              scope.planInfo.plan.completed_id = elective.course_id
-            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+              scope.planInfo.plan.completed_id = elective.course_id;
+              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
           });
-      }
+      };
+
+      scope.newCourse = { 
+        name: "&#43; Add new course", 
+        id: 'newCourse'
+      };
+      var _displayCourseForm = function() {
+        angular.element('#new-course-form').modal('show');
+      };
+
+
 
       scope.showClassInput = function() {
         scope.addingClass = true;
@@ -48,14 +67,16 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
       };
 
       scope.hideClassInput = function() {
-        // scope.addingClass = false;
+        if (event.relatedTarget === null)
+          scope.addingClass = false;
       };
 
-      scope.setCourse = function(course) {
-        course = angular.copy(course, {});
-        course.category_id = scope.category.id;
-        scope.category.courses.push(course);
-      };
+      // scope.setCourse = function(course) {
+      //   course = angular.copy(course, {});
+      //   course.category_id = scope.category.id;
+      //   scope.category.courses.push(course);
+      // };
+
 
     }
   };

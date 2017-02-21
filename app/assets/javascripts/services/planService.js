@@ -21,9 +21,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
         
-        if (plan.available_courses) _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
+        _initializePlan(plan);
 
         angular.copy(plan, _planInfo.plan);
 
@@ -38,22 +36,11 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     return Restangular.one('students', plan.student_id)
       .customPUT(plan, 'plan')
       .then(function(plan) {
-        _extendCategories(plan);
-        _extractCourses(plan);
-        _initializeCourses(plan);
+        _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
 
         return _planInfo;
 
-    }, function(response) {
-      console.error(response);
-    });
-  };
-
-  // TODO Refactor
-  var updateSchedule = function(data) {
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "update_schedule", data ).then(function(response) {
-        return response;
     }, function(response) {
       console.error(response);
     });
@@ -84,18 +71,49 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     addOrRemoveIntended(course);
   };
 
+  var enrollInMeeting = function(data) {
+
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
+      _initializePlan(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });
+  };
+
+  var disenrollFromMeeting = function(data) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
+      _initializePlan(plan);
+        angular.copy(plan, _planInfo.plan);
+        return _planInfo;
+    }, function(response) {
+      console.error(response);
+    });    
+  };
+
 
   /*
    * Utility, private, etc
    *
    */
+
+
+  var _initializePlan = function(plan) {
+    if (plan.available_courses) _extendCategories(plan);
+    _extractCourses(plan);
+    _initializeCourses(plan);
+  };
   
 
   // Makes data from backend useful for front
   var _extractCourses = function(plan) {
-    var required = plan.required_courses,
-        intended = plan.intended_courses,
-        completed = plan.completed_courses;
+
+    var required = plan.required_courses;
+    var intended = plan.intended_courses;
+    var completed = plan.completed_courses;
+    var scheduled = plan.scheduled_classes;
+
     plan.coursesById = {};
     
     // available_courses are present if
@@ -118,6 +136,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     required.forEach(_markOrCreateRequired, plan);  
     intended.forEach(_markOrCreateIntended, plan);
     completed.forEach(_markOrCreateCompleted, plan);
+    scheduled.forEach(_markOrCreateScheduled, plan);
   };
 
 
@@ -128,9 +147,11 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     plan.intended_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.intended === true;
     });
+    
     plan.required_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.required === true;
     });
+    
     plan.completed_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.completed === true;
     });
@@ -164,6 +185,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       course.category_id = 'thesis';
       plan.coursesById[course.id] = course;
     });
+
   };
 
   var _createThesisCategory = function(plan) {
@@ -222,13 +244,23 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     }
   };
 
-  var _markOrCreateCompleted =function(course) {
+  var _markOrCreateCompleted = function(course) {
     // `this` is the plan obj
     if (this.coursesById[course.id]) {
       this.coursesById[course.id].completed = true;
       this.coursesById[course.id].intended = false;
     } else {
       course.completed = true;
+      this.coursesById[course.id] = course;
+    }
+  };
+    
+  var _markOrCreateScheduled = function(course) {
+    // `this` is the plan obj
+    if (this.coursesById[course.id]) {
+      this.coursesById[course.id].scheduled = true;
+    } else {
+      course.scheduled = true;
       this.coursesById[course.id] = course;
     }
   };
@@ -288,7 +320,8 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     getPlanInfo: getPlanInfo,
     getPlan: getPlan,
     update: update,
-    updateSchedule: updateSchedule,
+    enrollInMeeting: enrollInMeeting,
+    disenrollFromMeeting: disenrollFromMeeting,
     addOrRemoveIntended: addOrRemoveIntended,
     addOrRemoveCompleted: addOrRemoveCompleted
   };

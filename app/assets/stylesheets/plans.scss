@@ -36,6 +36,8 @@
   margin-bottom: 25px;
   .required-units {
     float: right;
+    padding: .5em;
+    background-color: white;
   }
 }
 .course-row {
@@ -53,4 +55,8 @@
   position: absolute;
   top: 20px;
   right: 0;
+}
+
+.full-width {
+  width: 100%;
 }
