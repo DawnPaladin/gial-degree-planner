@@ -20,7 +20,7 @@ class MeetingsController < ApplicationController
     end
 
     def meeting_params
-      params.require(:meeting).permit(:teaching_style)
+      params.permit(:teaching_style, teachers_attributes: [ :first_name, :last_name, :title, :id ] )
     end
 
 end

@@ -18,23 +18,32 @@
     vertical-align: middle;
     margin-top: -3px;
   }
-  .canceled {
-    margin-bottom: 16px;
-    font-size: 1.15em;
+  .barrier-label {
+    display: block;
+  }
+}
+
+.meeting-form {
+  .teacher {
+    font-size: 1.4em;
+  }
+  .teacher-form {
+    margin-bottom: 10px;
   }
   .teaching-style {
     margin-top: 20px;
-  }
-  .name-input {
-    width: 42%;
-    display: inline-block;
   }
   .title-select {
     width: 14%;
     display: inline-block;
     padding: 2px;
   }
-  .barrier-label {
-    display: block;
+  .canceled {
+    margin-bottom: 16px;
+    font-size: 1.15em;
+  }
+  .name-input {
+    width: 42%;
+    display: inline-block;
   }
 }
