@@ -5,3 +5,36 @@
 .zebra-col {
   background-color: hsl(0, 0%, 92%);
 }
+
+.modal-form {
+  input[type='radio'] {
+    margin-top: -2px;
+    vertical-align: middle;
+  }
+  .radio-label {
+    font-weight: normal;
+  }
+  input[type='checkbox'] {
+    vertical-align: middle;
+    margin-top: -3px;
+  }
+  .canceled {
+    margin-bottom: 16px;
+    font-size: 1.15em;
+  }
+  .teaching-style {
+    margin-top: 20px;
+  }
+  .name-input {
+    width: 42%;
+    display: inline-block;
+  }
+  .title-select {
+    width: 14%;
+    display: inline-block;
+    padding: 2px;
+  }
+  .barrier-label {
+    display: block;
+  }
+}

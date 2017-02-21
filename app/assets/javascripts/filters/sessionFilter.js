@@ -7,7 +7,7 @@ planner.filter('sessionFilter', function() {
     }
 
     if (sessions.length === 1) {
-      return sessions[0].name;
+      return "Session: " + sessions[0].name;
     } else {
       var min, max;
       for (var i = 0; i < sessions.length; i++) {

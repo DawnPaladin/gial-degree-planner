@@ -85,6 +85,10 @@ class Course < ApplicationRecord
     end
   end
 
+  def full_name
+    "#{self.number} #{self.name}"
+  end
+
 
 
 end

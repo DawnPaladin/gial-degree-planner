@@ -31,11 +31,23 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
       });
     });
 
+    $scope.titles = ['Dr.', 'Mr.', 'Mrs.', 'Ms.'];
+
     $scope.showMeeting = function(id) {
       meetingService.get(id)
         .then(function(meeting) {
           $scope.meeting = meeting;
           angular.element('#edit-meeting').modal('show');
+        }, function(error) {
+          console.error(error);
+        });
+    };
+
+    $scope.updateMeeting = function(meeting) {
+      meetingService.update(meeting)
+        .then(function(meeting) {
+          // flash message
+          angular.element('#edit-meeting').modal('hide');
         }, function(error) {
           console.error(error);
         });

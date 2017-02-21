@@ -4,8 +4,13 @@ planner.factory('meetingService', ['Restangular', function(Restangular) {
     return Restangular.one('meetings', id).get();
   };
 
+  var update = function(meeting) {
+    return meeting.save();
+  };
+
   return {
-    get: get
+    get: get,
+    update: update
   };
 
 }]);

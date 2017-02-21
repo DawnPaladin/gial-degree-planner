@@ -26,22 +26,54 @@
 
 <modal id='edit-meeting'>
   <modal-title>
-    <h3>Edit Class: {{ meeting.course }}</h3>
-    <p class="tagline">Sessions: {{ meeting.sessions | filter }}, {{ meeting.term }} {{ meeting.year }}</p>
+    <h3>Edit Class: {{ meeting.course.full_name }}</h3>
+    <p class="tagline">{{ meeting.sessions | sessionFilter }}, {{ meeting.term }} {{ meeting.year }}</p>
   </modal-title>
   <modal-body>
-    <form ng-model='meeting'>
+    <form ng-model='meeting' class='modal-form' ng-submit='updateMeeting(meeting)'>
+
       <div class="row">
-        <input type="checkbox" ng-model='meeting.delete'> Canceled
-        <div class="col-xs-12">
-          <div class="teacher">
-            <input type="text" ng-model='meeting.teacher' class='form-control'>
+        <div class="col-xs-12 canceled">
+          <input type="checkbox" id='cancel' ng-model='meeting.delete'>
+          <label for="cancel" class='radio-label'>Canceled</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="teacher col-xs-9">
+          <div class="form-group">
+            <label for='teacher' class='barrier-label'>Teacher</label>
+            <select name="title"
+                    class='form-control title-select'
+                    ng-model='meeting.teacher.title'
+                    ng-options='title for title in titles'>
+              <option value=""></option>
+            </select> 
+            <input type="text"
+                   class='form-control name-input first-name'
+                   placeholder="First name" 
+                   id='teacher'
+                   ng-model='meeting.teacher.first_name'> <!--
+            --><input type="text"
+                   class='form-control name-input last-name'
+                   placeholder="Last name" 
+                   id='teacher'
+                   ng-model='meeting.teacher.last_name'>
           </div>
-          <div class="teaching-style col-xs-3">
-            <input type="radio" ng-model='meeting.teaching_style' value='Distance'> Distance
-            <input type="radio" ng-model='meeting.teaching_style' value='Residential'> Residential
-            <input type="radio" ng-model='meeting.teaching_style' value='Intensive'> Intensive
-          </div>
+
+          <input type='submit' class="btn btn-block btn-success" value='Update Class'>
+        </div>
+
+        <div class="teaching-style col-xs-3">
+          <label for="distance" class='radio-label warning'>
+          <input type="radio" ng-model='meeting.teaching_style' value='Distance' id='distance'>
+          Distance</label>
+          <br>
+          <input type="radio" ng-model='meeting.teaching_style' value='Residential' id='residential'>
+          <label for="residential" class='radio-label'>Residential</label>
+          <br>
+          <input type="radio" ng-model='meeting.teaching_style' value='Intensive' id='intensive'>
+          <label for="intensive" class='radio-label'>Intensive</label>
         </div>
       </div>
     </form>
