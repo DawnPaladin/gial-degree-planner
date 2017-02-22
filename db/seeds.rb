@@ -129,6 +129,7 @@ csv.each do |row|
   else
     puts course.errors.full_messages
   end
+  puts course.term.name
 end
 
 puts 'creating degree'

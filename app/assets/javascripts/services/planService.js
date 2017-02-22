@@ -145,7 +145,8 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
   // and the courses in these groupings are the same references
   var _initializeCourses = function(plan) {
     _.pluck(plan.scheduled_classes, 'course_id').forEach(function(id) {
-      plan.coursesById[id].scheduled = true;
+      if (plan.coursesById[id])
+        plan.coursesById[id].scheduled = true;
     });
     
     plan.intended_courses = _.filter(_.values(plan.coursesById), function(course) {

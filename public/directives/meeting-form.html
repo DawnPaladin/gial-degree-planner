@@ -2,32 +2,32 @@
 
   <div class="row">
     <div class="col-xs-12 canceled">
-      <input type="checkbox" id='cancel' ng-model='meeting.delete'>
+      <input type="checkbox" id='cancel' ng-model='meeting.canceled'>
       <label for="cancel" class='radio-label'>Canceled</label>
     </div>
   </div>
 
   <div class="row">
     <div class="teacher col-xs-9">
-      <label for='teacher' class='barrier-label'>Taught By:</label>
-
+      
       <span ng-if='!meeting.teachers_attributes.length && !addingTeacher'>There has been no teacher declared for this class. Click below to add one.</span>
 
       <div ng-repeat='teacher in meeting.teachers_attributes'>
-        <p class='teacher'>{{ teacher.title }} {{teacher.first_name }} {{ teacher.last_name }}</p>
+        <p class='teacher-name'>{{ teacher.title }} {{teacher.first_name }} {{ teacher.last_name }}</p>
       </div>
 
       <div class="form-group teacher-form" ng-if='addingTeacher'>
+        <label for="new-teacher" class='barrier-label'>New Teacher</label>
         <select name="title"
                 class='form-control title-select'
                 ng-model='newTeacher.title'
                 ng-options='title for title in titles'>
-          <option value=""></option>
+          <option value="" class='select-placeholder' disabled selected>Title</option>
         </select> 
         <input type="text"
                class='form-control name-input first-name'
                placeholder="First name" 
-               id='teacher'
+               id='new-teacher'
                ng-model='newTeacher.first_name'> <!--
         --><input type="text"
                class='form-control name-input last-name'

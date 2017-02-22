@@ -25,7 +25,6 @@ class Meeting < ApplicationRecord
     self.teachers.each do |teacher|
       teacher_attrs = { first_name: teacher.first_name, last_name: teacher.last_name, title: teacher.title }
       found_teacher = Teacher.find_by(teacher_attrs)
-      binding.pry
       if !found_teacher
         self.teachers.create(first_name: teacher.first_name, last_name: teacher.last_name, title: teacher.title)
       else

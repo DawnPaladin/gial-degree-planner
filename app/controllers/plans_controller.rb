@@ -20,7 +20,7 @@ class PlansController < ApplicationController
     @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
     @session = Session.find(params[:meeting_session])
-    @meeting = Meeting.find_meeting(@course, @year, @term, @session)
+    @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
     if @meeting
       @plan.scheduled_classes << @meeting
