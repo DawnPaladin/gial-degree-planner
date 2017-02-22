@@ -37,6 +37,9 @@ class Course < ApplicationRecord
 
   belongs_to :term
 
+  # lifecycle
+  after_create :create_meetings
+
   #####
   # Class Methods
   #####
@@ -74,15 +77,16 @@ class Course < ApplicationRecord
   def create_meetings(num = 10)
     num.times do |num|
       current_year = Date.today.year
-
-      session = self.sessions.first
-
       self.meetings.create({
         year: Date.new(current_year).advance(years: num).year,
         term: self.term.name,
-        session: session.nil? ? "1" : session.name,
+        sessions: self.sessions.to_a
       })
     end
+  end
+
+  def full_name
+    "#{self.number} #{self.name}"
   end
 
 

@@ -47,8 +47,8 @@ class Plan < ApplicationRecord
     end
   end
 
-  def find_scheduled_classes(year, term, session)
-    meetings = self.scheduled_classes.where(year: year.value, term: term.name, session: session.name)
+  def find_scheduled_classes(year, term)
+    meetings = self.scheduled_classes.where(year: year.value, term: term.name)
     meetings.map do |meeting|
       meeting.course
     end
