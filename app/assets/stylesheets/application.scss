@@ -1,21 +1,17 @@
 @import 'variables';
-
-/*
-*= require xeditable
-*= require_tree .
-*= require_self
-*/
-
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-/* @import 'variables';
+@import 'xeditable';
+
 @import 'advisors';
 @import 'angular_app';
 @import 'concentrations';
 @import 'courses';
+@import 'degrees';
 @import 'plans';
 @import 'students';
-@import 'terms'; */
+@import 'terms';
+
 
 body {
   font-family: $sans-serif;
@@ -86,4 +82,3 @@ h1, h2, h3, h4, .tabs {
 .select-placeholder {
   display: none;
 }
-

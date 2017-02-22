@@ -34,6 +34,7 @@
 
 .degree-info {
   .degree {
+    font-family: $serif;
     font-size: 2.0em;
   }
   .registered-info {
@@ -44,6 +45,7 @@
     float: left;
     line-height: 3.4em;
     .graduating {
+      font-family: $serif;
       font-size: 1.8em;
     }
   }
