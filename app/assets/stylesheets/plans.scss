@@ -15,6 +15,16 @@
 
 }
 
+
+// Category boxes
+.category {
+  padding-bottom: 32px;
+}
+.bordered {
+  border: 1px solid $medium-gray;
+  padding: 15px 20px;
+  padding-top: -15px;
+}
 // header
 .main-header {
   font-size: 2.3em;
@@ -53,13 +63,16 @@
 // Section/Panel on page
 .course-section {
   margin-bottom: 25px;
+  background: #fff;
   h3 {
-    margin-top: 0;
+    margin-top: 5px;
   }
   .required-units {
     float: right;
-    padding: 1.2em 0.3em 0.1em;
-    background-color: white;
+    padding: .4em .7em;
+    background-color: #555;
+    color: #fff;
+    -webkit-font-smoothing: antialiased;
   }
   .add-course-link {
     margin-top: 5px;

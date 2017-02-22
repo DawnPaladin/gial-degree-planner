@@ -14,11 +14,13 @@ class Meeting < ApplicationRecord
 
   belongs_to :course
 
-  accepts_nested_attributes_for :teachers
 
-  def self.find_meeting(course, year, term, session)
-    Meeting.where(course: course, year: year.value, term: term.name, session: session.name).first
+  def self.find_meeting(course, year, term)
+    Meeting.where(course: course, year: year.value, term: term.name).first
   end
+
+  accepts_nested_attributes_for :teachers
+    
 
   def autosave_associated_records_for_teachers
     # Find or create the teacher by name

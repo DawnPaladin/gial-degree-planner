@@ -12,29 +12,19 @@ planner.directive('draggable', function() {
       e.dataTransfer.setData('Text', that.id);
       that.classList.add('drag');
 
-      // Get the term id and session ids off of the element being dragged
+      // Get the term id off of the element being dragged
 
       var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
-      var thisSessionIds = [];
-      var thisSessions = JSON.parse(e.target.getAttribute('sessions'));
 
-      for (var i = 0; i < thisSessions.length; i++) {
-        thisSessionIds.push(thisSessions[i].id);
-      }
-
-      // iterate over all of the session bins
-      // if a session bin's term and session ids
-      // match the term id and any session id on this thing being dragged
-        // add the green highlight class to it
-      // otherwise
-        // add a dull 'disabled' class
-
-        angular.element('.session')
+        angular.element('.term')
           .addClass('unpermitted');
 
-        var thisSessionId = thisSessionIds[0].id;
+        if (!that.parentNode.classList.contains('course-bubble-container')) {
+          angular.element('.course-bubble-container')
+            .addClass('permitted');
+        }
 
-        angular.element(".session[data-term-id='" + thisTermId + "'][data-session-id='" + thisSessionIds[0] + "']")
+        angular.element(".term[data-term-id='" + thisTermId + "']")
           .removeClass('unpermitted')
           .addClass('permitted');
 
@@ -50,7 +40,9 @@ planner.directive('draggable', function() {
       'dragend',
       function(e) {
         this.classList.remove('drag');
-        angular.element(".session")
+        angular.element('.course-bubble-container')
+          .removeClass('permitted');
+        angular.element(".term")
           .removeClass('unpermitted')
           .removeClass('permitted');
         return false;
