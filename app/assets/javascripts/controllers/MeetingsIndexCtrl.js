@@ -20,14 +20,13 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
           fall: {},
           any: {},
         };
-        course.meetings.forEach(function storeYearAttendance(meeting) {
-          if (meeting.year !== Number(year)) { return; }
-          var term = meeting.term.toLowerCase();
-          yearAttendance[term] = {
-            count: meeting.enrollments.length,
-            meeting_id: meeting.id,
-          }
-        });
+        // find the course meeting for this year
+        var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
+        var term = thisYearsMeeting.term.toLowerCase();
+        yearAttendance[term] = {
+          count: thisYearsMeeting.enrollments.length,
+          meeting_id: thisYearsMeeting.id,
+        };
         course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
       });
     });
