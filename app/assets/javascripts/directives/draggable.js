@@ -12,16 +12,9 @@ planner.directive('draggable', function() {
       e.dataTransfer.setData('Text', that.id);
       that.classList.add('drag');
 
-      // Get the term id and session ids off of the element being dragged
+      // Get the term id off of the element being dragged
 
       var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
-
-      // iterate over all of the session bins
-      // if a session bin's term and session ids
-      // match the term id and any session id on this thing being dragged
-        // add the green highlight class to it
-      // otherwise
-        // add a dull 'disabled' class
 
         angular.element('.term')
           .addClass('unpermitted');
@@ -30,7 +23,6 @@ planner.directive('draggable', function() {
           angular.element('.course-bubble-container')
             .addClass('permitted');
         }
-
 
         angular.element(".term[data-term-id='" + thisTermId + "']")
           .removeClass('unpermitted')

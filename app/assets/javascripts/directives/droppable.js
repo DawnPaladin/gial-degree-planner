@@ -2,11 +2,9 @@ planner.directive('droppable', function() {
 
   return {
     scope: {
-      drop: '&',
-      bin: '='
+      drop: '&'
     },
     link: function(scope, element, attrs) {
-
 
       var el = element[0];
 
@@ -27,9 +25,9 @@ planner.directive('droppable', function() {
           // if this bubble is the 'sticky-bubble-container'
             // allow the function to continue normally
 
-          // if either the term id or the session id on this session
-          // do not match the term id and any of the session ids on the bubble being dragged
-            // do not allow the drop to execute
+          // if the term id on this session
+          // does not match the term id on the bubble being dragged
+          // do not allow the drop to execute
 
           var item = document.getElementById(e.dataTransfer.getData('Text'));
           var termId = JSON.parse(item.getAttribute('term')).id;

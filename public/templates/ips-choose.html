@@ -1,66 +1,70 @@
-<div class="row">
-  <div class="col-xs-12">
-    <p class="tagline">Check the box next to a course to add it to Intended Courses. You can then schedule it on the Schedule Courses tab.</p>
-  </div>
-</div>
-
-<div class="row">
-
-  <div class="col-xs-6 ips-left-col">
-    <div class="completed-courses bordered course-section">
-      <h3>Completed Courses</h3>
-      <table class="full-width">
-        <tr course-row ng-repeat='completed in planInfo.plan.completed_courses'
-            course='completed'
-            class='course-row'
-            button-callback='toggleCompleted(course)'
-            section='completed'>
-        </tr>
-      </table>
-    </div>
-
-    <div class="intended-courses bordered course-section">
-      <h3>Intended Courses</h3>
-      <table class="full-width">
-        <tr course-row ng-repeat='intended in planInfo.plan.intended_courses'
-            course='intended'
-            checkbox-callback='addOrRemoveIntended(course)'
-            button-callback='toggleCompleted(course)'
-            delete-elective='deleteElective(course)'
-            class='course-row'
-            section='intended'>
-        </tr>
-
-      </table>
+<section class="choose-page">
+  <div class="row">
+    <div class="col-xs-12">
+      <p class="tagline">Check the box next to a course to add it to Intended Courses. You can then schedule it on the Schedule Courses tab.</p>
     </div>
   </div>
 
-  <!-- right column -->
-  <div class="col-xs-6 ips-right-col">
-    <div class="required-courses bordered course-section">
-      <h3>Required Courses</h3>
-      <table>
-        <tr course-row ng-repeat='requirement in planInfo.plan.required_courses'
-                    course='requirement'
-                    class='course-row'
-                    section='required'>
-        </tr>
-      </table>
-    </div><!-- /required courses -->
+  <div class="row">
 
-    <!-- categories and their courses -->
-    <div class="categories" ng-if='planInfo.plan.available_courses.length'>
+    <div class="col-xs-6 ips-left-col">
+      <div stickable>
+        <div class="completed-courses bordered course-section">
+          <h3>Completed Courses</h3>
+          <table class="full-width">
+            <tr course-row ng-repeat='completed in planInfo.plan.completed_courses'
+                course='completed'
+                class='course-row'
+                button-callback='toggleCompleted(course)'
+                section='completed'>
+            </tr>
+          </table>
+        </div>
 
-      <category-section ng-repeat='category in planInfo.plan.available_courses'
-                        category='category'>
-      </category-section>
+        <div class="intended-courses bordered course-section">
+          <h3>Intended Courses</h3>
+          <table class="full-width">
+            <tr course-row ng-repeat='intended in planInfo.plan.intended_courses'
+                course='intended'
+                checkbox-callback='addOrRemoveIntended(course)'
+                button-callback='toggleCompleted(course)'
+                delete-elective='deleteElective(course)'
+                class='course-row'
+                section='intended'>
+            </tr>
 
-    </div><!-- /categories column -->
-
-    <div class="bordered friendly-message text-center" ng-if='!planInfo.plan.available_courses.length'>
-      <h4>If you plan to schedule more than the required courses,</h4>
-      <h4>Please choose a concentration from the dropdown above!</h4>
+          </table>
+        </div>
+      </div>
     </div>
-  </div><!-- /right column -->
 
-</div>
+    <!-- right column -->
+    <div class="col-xs-6 ips-right-col">
+      <div class="required-courses bordered course-section">
+        <h3>Required Courses</h3>
+        <table>
+          <tr course-row ng-repeat='requirement in planInfo.plan.required_courses'
+                      course='requirement'
+                      class='course-row'
+                      section='required'>
+          </tr>
+        </table>
+      </div><!-- /required courses -->
+
+      <!-- categories and their courses -->
+      <div class="categories" ng-if='planInfo.plan.available_courses.length'>
+
+        <category-section ng-repeat='category in planInfo.plan.available_courses'
+                          category='category'>
+        </category-section>
+
+      </div><!-- /categories column -->
+
+      <div class="bordered friendly-message text-center" ng-if='!planInfo.plan.available_courses.length'>
+        <h4>If you plan to schedule more than the required courses,</h4>
+        <h4>Please choose a concentration from the dropdown above!</h4>
+      </div>
+    </div><!-- /right column -->
+
+  </div>
+</section>  

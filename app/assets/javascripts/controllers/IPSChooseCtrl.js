@@ -5,6 +5,11 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student'
   $scope.student = student;
   $scope.planInfo = plan;
 
+  $scope.stickableData = {
+    addPadding: false,
+    getWidth: true
+  };
+
   // CHECKBOX CALLBACKS:
   // Passed into course-row directives
   $scope.addOrRemoveIntended = function(course) {

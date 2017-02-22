@@ -1,8 +1,8 @@
-<section class="text-center">
+<section class="text-center schedule-page">
 
   <h3>Unscheduled Courses</h3>
 
-  <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop" bin="bin">
+  <div id="sticky-container" class="course-bubble-container" stickable droppable drop="handleDrop">
 
     <div ng-repeat="course in planInfo.plan.intended_courses | unscheduledFilter" class="course-bubble" id="{{ course.id }}" term="{{ course.term }}" draggable draggable-course="course">
       {{ course.name }}<br>
