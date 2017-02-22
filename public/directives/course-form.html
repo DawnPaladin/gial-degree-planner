@@ -27,6 +27,7 @@
                   id='number'
                   class="form-control"
                   name='number'
+                  required
                   ng-model='newCourse.number'>
                 </div>
               </div>
@@ -38,6 +39,7 @@
                   id=units
                   class="form-control"
                   name='units'
+                  required
                   ng-model='newCourse.units'>
                 </div>
               </div>
@@ -53,6 +55,8 @@
               </div> -->
               <select name="level"
               class='form-control modal-select'
+              name='level'
+              required
               ng-model='newCourse.level'
               ng-options='level for level in levels'></select>
             </div>
@@ -80,6 +84,7 @@
 
             <input type="radio"
             ng-value='term.id'
+            required
             name='term'
             ng-model='newCourse.term_id'> {{ term.name }}
 
@@ -97,6 +102,7 @@
             ng-value='session.id'
             name='session'
             ng-checked="selection.indexOf(session) > -1"
+            ng-required='!newCourse.sessions.length'
             ng-click="toggleSelection(session.id)"> Session {{ session.name }}
 
           </div>
