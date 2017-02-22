@@ -31,10 +31,15 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
       });
     });
 
+    $scope.newCourse = {};
 
-
-    $scope.showCourseModal = function() {
+    $scope.showNewCourseModal = function() {
       angular.element('#new-course-form').modal('show');
+    };
+
+    $scope.showEditCourseModal = function(course) {
+      $scope.course = course;
+      angular.element('#edit-course-form').modal('show');
     };
 
     $scope.showMeeting = function(id) {
@@ -47,6 +52,8 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
         });
 
     };
+
+
 
   }
 ]);
