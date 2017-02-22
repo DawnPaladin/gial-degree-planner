@@ -1,3 +1,12 @@
+.classes-index {
+  overflow-x: scroll;
+  .table {
+    .form-control {
+      width: auto;
+    }
+  }
+}
+
 .noBold {
   font-weight: normal;
 }

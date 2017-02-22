@@ -8,19 +8,19 @@
   <div class="row">
 
     <div class="col-xs-6 ips-left-col">
-      <div stickable>
-        <div class="completed-courses bordered course-section">
-          <h3>Completed Courses</h3>
-          <table class="full-width">
-            <tr course-row ng-repeat='completed in planInfo.plan.completed_courses'
-                course='completed'
-                class='course-row'
-                button-callback='toggleCompleted(course)'
-                section='completed'>
-            </tr>
-          </table>
-        </div>
+      <div class="completed-courses bordered course-section">
+        <h3>Completed Courses</h3>
+        <table class="full-width">
+          <tr course-row ng-repeat='completed in planInfo.plan.completed_courses'
+              course='completed'
+              class='course-row'
+              button-callback='toggleCompleted(course)'
+              section='completed'>
+          </tr>
+        </table>
+      </div>
 
+      <div stickable>      
         <div class="intended-courses bordered course-section">
           <h3>Intended Courses</h3>
           <table class="full-width">

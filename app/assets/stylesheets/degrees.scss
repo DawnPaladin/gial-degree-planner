@@ -7,10 +7,15 @@
   width: 100%;
   td:nth-child(1) { width: 20px; }
   td:nth-child(3) { width: 10px; }
+  .credits-input {
+    background: transparent;
+  }
 }
 
 .credits-input {
   width: 2em;
+  background: #555;
+  border: 0;
 }
 
 .category-name {
