@@ -1,4 +1,5 @@
-planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'termService', 'sessionService', function(Restangular, $timeout, courseService, termService, sessionService) {
+planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'termService', 'sessionService', 'Flash',
+  function(Restangular, $timeout, courseService, termService, sessionService, Flash) {
   return {
     restrict: 'E',
     templateUrl : '/directives/course-form.html',
@@ -25,32 +26,43 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           scope.sessions = sessions;
         });
       
-      if (scope.course && scope.course.sessions && !scope.course.sessions.length)
-        scope.course.sessions = [];
+      scope.$watch('course', function() {
+        if (scope.course && !scope.course.sessions) {
+          scope.course.session_ids = [];
+        } else {
+          console.log('in else', scope.course.sessions)
+          scope.course.session_ids = scope.course.sessions.map(function(session) {
+            return session.id;
+          });
+        }
+      });
+      
 
       scope.toggleSelection = function toggleSelection(sessionId) {
-        var idx = scope.course.sessions.indexOf(sessionId);
-
-        // Is currently selected
+        var idx = scope.course.session_ids.indexOf(sessionId);
         if (idx > -1) {
-          scope.course.sessions.splice(idx, 1);
+          scope.course.session_ids.splice(idx, 1);
         }
-
-        // Is newly selected
         else {
-          scope.course.sessions.push(sessionId);
+          scope.course.session_ids.push(sessionId);
         }
       };
 
-      scope.createCourse = function(formValid) {
+      scope.submitForm = function(formValid) {
         if (formValid) {
-          courseService.create(scope.course)
-            .then(function(course) {
-              // example of afterSave: addElective which takes
-              // the created course and adds it as an elective
-              var result = scope.afterSave(course);
-              return result;
-            });
+          if (scope.course.id) {
+            return courseService.update(scope.course);
+          } else {
+            courseService.create(scope.course)
+              .then(function(course) {
+                // example of afterSave: addElective which takes
+                // the created course and adds it as an elective
+                var result = scope.afterSave(course);
+                return result;
+              }, function(error) {
+                // Flash.create('warning', error);
+              });
+          }
         }
       };
 

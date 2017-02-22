@@ -33,7 +33,7 @@
 <modal id='new-course-form'>
   <modal-title>New Course</modal-title>
   <modal-body>
-    <course-form course='newCourse'></course-form>
+    <course-form course='newCourse' formSubmit='createCourse(formValid)'></course-form>
   </modal-body>
   <!-- <modal-footer></modal-footer> -->
 </modal>
@@ -41,7 +41,7 @@
 <modal id='edit-course-form'>
   <modal-title>Edit Course</modal-title>
   <modal-body>
-    <course-form course='course'></course-form>
+    <course-form course='course' ng-if='course'></course-form>
   </modal-body>
   <!-- <modal-footer></modal-footer> -->
 </modal>
@@ -55,3 +55,5 @@
     <meeting-form></meeting-form>
   </modal-body>
 </modal>
+
+{{ course }}

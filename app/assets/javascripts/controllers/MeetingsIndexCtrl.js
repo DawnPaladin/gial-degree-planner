@@ -50,10 +50,6 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
         }, function(error) {
           console.error(error);
         });
-
     };
-
-
-
   }
 ]);
