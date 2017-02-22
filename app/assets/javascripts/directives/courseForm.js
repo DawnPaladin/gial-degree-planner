@@ -3,15 +3,16 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
     restrict: 'E',
     templateUrl : '/directives/course-form.html',
     scope: {
-      afterSave: '&'
+      afterSave: '&',
+      course: '='
     },
     link: function(scope) {
 
       // would rather use
       // ng-checked="(levelName == 'Graduate')"
-      scope.newCourse = {
-        level: 'Graduate'
-      };
+      // scope.newCourse = {
+      //   level: 'Graduate'
+      // };
 
       scope.levels = ['Graduate', 'Undergrad'];
       termService.getTerms()
@@ -24,25 +25,25 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           scope.sessions = sessions;
         });
       
-      scope.newCourse.sessions = [];
+      scope.course.sessions = [];
 
       scope.toggleSelection = function toggleSelection(sessionId) {
-        var idx = scope.newCourse.sessions.indexOf(sessionId);
+        var idx = scope.course.sessions.indexOf(sessionId);
 
         // Is currently selected
         if (idx > -1) {
-          scope.newCourse.sessions.splice(idx, 1);
+          scope.course.sessions.splice(idx, 1);
         }
 
         // Is newly selected
         else {
-          scope.newCourse.sessions.push(sessionId);
+          scope.course.sessions.push(sessionId);
         }
       };
 
       scope.createCourse = function(formValid) {
         if (formValid) {
-          courseService.create(scope.newCourse)
+          courseService.create(scope.course)
             .then(function(course) {
               // example of afterSave: addElective which takes
               // the created course and adds it as an elective

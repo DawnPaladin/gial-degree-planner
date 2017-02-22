@@ -49,13 +49,19 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
           });
       };
 
-      scope.newCourse = { 
-        name: "&#43; Add new course", 
-        id: 'newCourse'
+      scope.noneFound = {
+        name: 'No Course Found'
       };
-      var _displayCourseForm = function() {
-        angular.element('#new-course-form').modal('show');
-      };
+  
+      // Features for creating a course
+      // scope.newCourse = { 
+      //   name: "&#43; Add new course", 
+      //   id: 'newCourse'
+      // };
+      // var _displayCourseForm = function() {
+      //   angular.element('#new-course-form').modal('show');
+      // };
+      // scope.courseParams = {};
 
       scope.showClassInput = function() {
         scope.addingClass = true;

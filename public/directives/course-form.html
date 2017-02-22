@@ -16,7 +16,7 @@
                   class="form-control"
                   name='name'
                   required
-                  ng-model='newCourse.name'>
+                  ng-model='course.name'>
                 </div>
               </div>
 
@@ -28,7 +28,7 @@
                   class="form-control"
                   name='number'
                   required
-                  ng-model='newCourse.number'>
+                  ng-model='course.number'>
                 </div>
               </div>
 
@@ -40,7 +40,7 @@
                   class="form-control"
                   name='units'
                   required
-                  ng-model='newCourse.units'>
+                  ng-model='course.units'>
                 </div>
               </div>
 
@@ -51,81 +51,78 @@
                 <input type="radio"
                 ng-value='levelName'
                 name='level'
-                ng-model='newCourse.level'> {{ levelName }}
+                ng-model='course.level'> {{ levelName }}
               </div> -->
-              <select name="level"
-              class='form-control modal-select'
-              name='level'
-              required
-              ng-model='newCourse.level'
-              ng-options='level for level in levels'></select>
+                  <select name="level"
+                  class='form-control modal-select'
+                  name='level'
+                  required
+                  ng-model='course.level'
+                  ng-options='level for level in levels'></select>
+                </div>
+              </div>
+
+              <div class="col-xs-12">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea id='description'
+                  class="form-control"
+                  name='description'
+                  ng-model='course.description'>
+                  </textarea>
+                </div>
+              </div>
             </div>
           </div>
 
+          <div class="col-xs-4">
+
+            <div class="">
+              <div class="form-group">
+                <label class="barrier-label">Term</label>
+                <div ng-repeat='term in terms'>
+
+                  <input type="radio"
+                  ng-value='term.id'
+                  required
+                  name='term'
+                  ng-model='course.term_id'> {{ term.name }}
+
+                </div>
+              </div>
+            </div>
+
+            <div class="">
+              <div class="form-group">
+                <label class="">Sessions</label>
+                <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
+                <div ng-repeat='session in sessions'>
+
+                  <input type="checkbox"
+                  ng-value='session.id'
+                  name='session'
+                  ng-checked="selection.indexOf(session) > -1"
+                  ng-required='!course.sessions.length'
+                  ng-click="toggleSelection(session.id)"> Session {{ session.name }}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-8">
+
+        <div class="row">
           <div class="col-xs-12">
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea id='description'
-              class="form-control"
-              name='description'
-              ng-model='newCourse.description'>
-            </textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xs-4">
-
-      <div class="">
-        <div class="form-group">
-          <label class="barrier-label">Term</label>
-          <div ng-repeat='term in terms'>
-
-            <input type="radio"
-            ng-value='term.id'
-            required
-            name='term'
-            ng-model='newCourse.term_id'> {{ term.name }}
-
+            <input type="submit"
+            class='btn btn-success btn-block'
+            value='Create Course'>
           </div>
         </div>
       </div>
 
-      <div class="">
-        <div class="form-group">
-          <label class="">Sessions</label>
-          <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
-          <div ng-repeat='session in sessions'>
-
-            <input type="checkbox"
-            ng-value='session.id'
-            name='session'
-            ng-checked="selection.indexOf(session) > -1"
-            ng-required='!newCourse.sessions.length'
-            ng-click="toggleSelection(session.id)"> Session {{ session.name }}
-
-          </div>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
-
-<div class="col-xs-8">
-
-  <div class="row">
-    <div class="col-xs-12">
-      <input type="submit"
-      class='btn btn-success btn-block'
-      value='Create Course'>
-    </div>
-  </div>
-</div>
-
-</form>
-</div>
-</div>
-
-
-{{ newCourse.sessions }}
