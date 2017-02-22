@@ -32,14 +32,8 @@
     </tr>
   </table>
 
-  <div class='required-units'>Units required: {{ category.required_units }}</div>
+  <div class='required-units'>Units required:
+    <input type="number" ng-model="category.required_units" class="credits-input">
+  </div>
 
 </div>
-
-<modal id='new-course-form'
-       category='category'
-       >
-  <modal-title>New Course</modal-title>
-  <modal-body>body goes here</modal-body>
-  <modal-footer>some buttons or something</modal-footer>
-</modal>

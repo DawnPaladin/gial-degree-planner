@@ -15,9 +15,8 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
     exports.current.categories_attributes = exports.current.categories.map(function(category) {
       return {
         id: category.id,
-        course_ids: category.courses.map(function(course) {
-          return course.id;
-        })
+        course_ids: category.courses.map(function(course) { return course.id; }),
+        required_units: category.required_units,
       };
     });
     exports.current.put().then(function() {
