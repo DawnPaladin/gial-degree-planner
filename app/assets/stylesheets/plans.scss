@@ -70,7 +70,11 @@
     margin-top: 5px;
   }
   .required-units {
-    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
     padding: .4em .7em;
     background-color: #555;
     color: #fff;
@@ -87,6 +91,7 @@
 .course-row {
   td {
     padding: 5px;
+    vertical-align: top;
   }
   .completed-course {
     color: #6FC44A;
@@ -100,19 +105,7 @@
 
 // Category boxes
 .category {
-  padding-bottom: 26px;
-  padding-top: 0;
-  margin-bottom: 44px;;
   position: relative;
-  h3 {
-    padding: 0 5px;
-    margin: 0;
-    display: inline-block;
-    position: relative;
-    top: -13px;
-    background-color: #FFF;
-    font-size: 1.4em;
-  }
   .units {
     font-size: 1.2em;
   }
@@ -120,11 +113,24 @@
     margin: 5px 0;
   }
 }
-.bordered {
-  border: 1px solid #AAA;
-  padding-left: 20px;
-  padding-right: 20px;
+
+.degree-edit {
+  .category {
+    padding-bottom: 26px;
+    padding-top: 0;
+    margin-bottom: 44px;;
+    h3 {
+      padding: 0 5px;
+      margin: 0;
+      display: inline-block;
+      position: relative;
+      top: -13px;
+      background-color: #FFF;
+      font-size: 1.4em;
+    }
+  }
 }
+
 .green-border {
   border: 3px solid #65804C;
 }
