@@ -10,23 +10,24 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
     });
 
     var meetings = [];
-    courses.forEach(function(course) {
+    courses.forEach(function getCourseAttendance(course) {
       meetings.push.apply(meetings, course.meetings);
       course.attendance = [];
-      var yearAttendance = {
-        spring: "",
-        summer: "",
-        fall: "",
-        any: ""
-      };
-      course.meetings.forEach(function(meeting) {
-        var term = meeting.term.toLowerCase();
-        yearAttendance[term] = {
-          count: meeting.enrollments.length,
-          meeting_id: meeting.id
+      years.forEach(function(year) {
+        var yearAttendance = {
+          spring: {},
+          summer: {},
+          fall: {},
+          any: {},
         };
-      });
-      years.forEach(function() {
+        course.meetings.forEach(function storeYearAttendance(meeting) {
+          if (meeting.year !== Number(year)) { return; }
+          var term = meeting.term.toLowerCase();
+          yearAttendance[term] = {
+            count: meeting.enrollments.length,
+            meeting_id: meeting.id,
+          }
+        });
         course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
       });
     });
