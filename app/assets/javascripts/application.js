@@ -21,4 +21,5 @@
 //= require angular-flash
 //= require bootstrap-typeahead
 //= require angular-bootstrap-typeahead
+//= require xeditable
 //= require_tree .

@@ -10,4 +10,6 @@ class Concentration < ApplicationRecord
   has_one :non_thesis_track
 
   belongs_to :degree
+
+  accepts_nested_attributes_for :categories
 end

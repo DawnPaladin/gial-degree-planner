@@ -1,13 +1,21 @@
+@import 'variables';
+
+/*
+*= require xeditable
+*= require_tree .
+*= require_self
+*/
+
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
-@import 'variables';
+/* @import 'variables';
 @import 'advisors';
 @import 'angular_app';
 @import 'concentrations';
 @import 'courses';
 @import 'plans';
 @import 'students';
-@import 'terms';
+@import 'terms'; */
 
 body {
   font-family: $sans-serif;
@@ -40,7 +48,6 @@ h1, h2, h3, h4, .tabs {
   }
 }
 
-
 .planner {
   background: $light-gray;
   min-height: 100vh;
@@ -49,7 +56,34 @@ h1, h2, h3, h4, .tabs {
 .clickable {
   cursor: pointer;
   color: #4D3960;
+  padding: 1px;
   &:hover {
     color: #D75EAE;
   }
 }
+
+.tagline {
+  color: #555;
+  font-style: italic;
+  weight: 600;
+  display: inline-block;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.sm-text {
+  font-size: .6em;
+}
+
+.warning-text {
+  color: red;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.select-placeholder {
+  display: none;
+}
+

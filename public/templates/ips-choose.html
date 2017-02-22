@@ -32,16 +32,16 @@
                 class='course-row'
                 section='intended'>
             </tr>
-
           </table>
         </div>
       </div>
     </div>
 
+
     <!-- right column -->
     <div class="col-xs-6 ips-right-col">
       <div class="required-courses bordered course-section">
-        <h3>Required Courses</h3>
+        <h3 class='bold-header'>Required Courses</h3>
         <table>
           <tr course-row ng-repeat='requirement in planInfo.plan.required_courses'
                       course='requirement'
@@ -50,6 +50,7 @@
           </tr>
         </table>
       </div><!-- /required courses -->
+
 
       <!-- categories and their courses -->
       <div class="categories" ng-if='planInfo.plan.available_courses.length'>
