@@ -5,6 +5,9 @@
 
 .category-table {
   width: 100%;
+  td {
+    padding: 3px 0;
+  }
   td:nth-child(1) { width: 20px; }
   td:nth-child(3) { width: 10px; }
   .credits-input {
@@ -17,15 +20,6 @@
   background: #736f6f;
   padding: 2px;
   border: 0;
-}
-
-.category-name {
-  display: inline-block;
-  position: absolute;
-  top: -1em;
-  background-color: white;
-  padding: 0.25em;
-  font-size: 22px;
 }
 
 .add-to-list {

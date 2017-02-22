@@ -65,7 +65,7 @@
       <category-edit ng-repeat="category in concentrationService.current.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
 
       <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
-        <h3 class="category-name">Thesis track</h3>
+        <h3>Thesis track</h3>
         <table class="category-table">
           <tr>
             <td></td>
@@ -81,7 +81,7 @@
         <div class='required-units'>Units required: {{ concentrationService.current.thesis_track.thesis_hours + concentrationService.current.thesis_track.elective_hours }}</div>
       </div>
       <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
-        <h3 class="category-name">Non-thesis track</h3>
+        <h3>Non-thesis track</h3>
         <table class="category-table">
           <tr>
             <td></td>
