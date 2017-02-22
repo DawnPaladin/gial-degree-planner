@@ -32,8 +32,11 @@ body {
   }
 }
 
-
-
+// delete this on merge
+.barrier-label {
+  display: block;
+}
+//
 
 .clickable {
   cursor: pointer;
@@ -41,4 +44,19 @@ body {
   &:hover {
     color: #D75EAE;
   }
+}
+
+.tagline {
+  color: #555;
+  font-style: italic;
+  weight: 600;
+  display: inline-block;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.sm-text {
+  font-size: .6em;
 }

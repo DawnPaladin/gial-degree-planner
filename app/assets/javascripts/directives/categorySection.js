@@ -71,11 +71,6 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
           scope.addingClass = false;
       };
 
-      scope.logIt = function(thing) {
-        console.log(thing)
-      }
-
-
     }
   };
 }]);

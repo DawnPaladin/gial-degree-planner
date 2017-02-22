@@ -11,7 +11,10 @@ planner.factory('courseService', ['Restangular', '$q', function(Restangular, $q)
     return Restangular.all('courses')
       .post(params)
       .then(function(course) {
+        _courses.push(course);
         return course;
+      }, function(error) {
+        console.error(error);
       });
   };
 
