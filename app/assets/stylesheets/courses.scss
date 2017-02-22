@@ -33,6 +33,9 @@
   .barrier-label {
     display: block;
   }
+  .error-border {
+    border: 1px solid $brand-orange;
+  }
 }
 
 .meeting-form {

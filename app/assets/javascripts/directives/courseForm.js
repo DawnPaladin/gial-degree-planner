@@ -9,6 +9,8 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
     },
     link: function(scope) {
 
+      scope.course = angular.copy(scope.course, {});
+
       scope.levels = ['Graduate', 'Undergrad'];
       termService.getTerms()
         .then(function(terms) {
@@ -42,7 +44,8 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
       };
 
       scope.submitForm = function(formValid) {
-        if (formValid) {
+        var continuousSessions = checkSessionsContinuous();
+        if (formValid && continuousSessions) {
           if (scope.course.id) {
             return courseService.update(scope.course)
               .then(function() {
@@ -60,7 +63,24 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
                 // Flash.create('warning', error);
               });
           }
+        } else {
+          if (!continuousSessions) {
+            angular.element('.sessions').addClass('error-border');
+          } else {
+            angular.element('.sessions').removeClass('error-border');
+          }
         }
+      };
+
+      var checkSessionsContinuous = function() {
+        var sessions = scope.course.session_ids;
+        if (!sessions.length) {
+          return false;
+        } else if (sessions.length === 1) {
+          return true;
+        }
+
+        return (Math.max.apply(null, sessions) - Math.min.apply(null, sessions)) === sessions.length - 1;
       };
 
     }
