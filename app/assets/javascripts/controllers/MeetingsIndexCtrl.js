@@ -28,5 +28,10 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses',
       });
     });
 
+
+    $scope.showCourseModal = function() {
+      angular.element('#new-course-form').modal('show');
+    };
+
   }
 ]);
