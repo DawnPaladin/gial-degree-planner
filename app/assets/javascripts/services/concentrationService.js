@@ -13,7 +13,7 @@ planner.factory('concentrationService', ['Restangular', function(Restangular) {
 
   exports.save = function() {
     console.log(exports.current);
-    exports.current.categories_attributes = exports.current.categories
+    exports.current.categories_attributes = exports.current.categories;
     exports.current.put();
   };
 
