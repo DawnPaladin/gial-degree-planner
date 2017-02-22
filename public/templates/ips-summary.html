@@ -1,0 +1,59 @@
+<section class="ips-summary">
+
+  <img src="gial-logo.png">
+
+  {{ planInfo.plan.concentration }}
+
+  <p>Intended Plan of Study (IPS) for Admission to the World Arts Degree<span ng-if="planInfo.plan.concentration" class="summary-concentration">, {{ planInfo.plan.concentration }} Concentration</span></p>
+
+  <p>{{ student.last_name }}, {{ student.first_name }}</p>
+  <small>Name (Last, First Middle)</small>
+
+  <p></p>
+  <small>Permanent Street Address</small>
+  <small>City, State ZIP</small>
+  <small>Phone Number</small>
+
+  <h2>Master of Arts in World Arts <span ng-if="planInfo.plan.concentration">{{ planInfo.plan.concentration }}</span></h2>
+  <small>Degree Sought</small>
+  <small>Graduate Major</small>
+
+  <p ng-if="planInfo.graduation_year">{{ planInfo.plan.graduation_term }} {{ planInfo.plan.graduation_year }}</p>
+  <small>Expected Degree Completion Date</small>
+
+  <p>Students admitted under this IPS will take Comprehensive Exams <strong>unless</strong> they have an approved <em>Petition to Write a Thesis for the World Arts Degree</em> on file with the Registrar.</p>
+
+  <div>
+    <p><strong>Departmental Prerequisites: Required prerequisites for admission to the WA Degree have been met.</strong></p>
+    <small>Signature of Advisor</small>
+
+    <small>Date</small>
+  </div>
+
+  <p><strong>Transfer Credit:</strong> Transfer credit will not be granted for course work done more than 10 years before initial enrollment in GIAL. <u>In order to receive transfer credit you must submit a signed <strong><em>Petition Form</em></strong> to the Dean of Academic Affairs</u>. After transfer credit has been granted, list those courses below along with courses to be taken at GIAL toward your degree. No more than 15 semester hours of transfer credit will be granted toward a degree.</p>
+
+  <p>List only the courses required for your degree. Include amount of transfer credit granted on your <em>Petition Form(s)</em>.</p>
+
+  <table>
+  </table>
+
+  <h2>Authorization of Study Plan</h2>
+  <small>Signature of Student</small>
+  <small>Date</small>
+
+  <small>Signature of Graduate Advisor</small>
+  <small>Date</small>
+
+  <h2>Approval for admission to the WA Degree</h2>
+
+  <small>2016 WA Intended Plan of Study Applied Arts</small>
+
+  <small>Signature of Department Header</small>
+  <small>Date</small>
+
+  <small>Signature of Dean of Academic Affairs</small>
+  <small>Date</small>
+
+  <h2>Comments</h2>
+
+</section>

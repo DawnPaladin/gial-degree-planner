@@ -29,6 +29,7 @@ json.years Year.all do |year|
 end
 
 if @plan.concentration
+  json.concentration @plan.concentration.name
   json.available_courses @plan.concentration.categories do |category|
     json.id  category.id
     json.name  category.name
