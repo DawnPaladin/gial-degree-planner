@@ -46,6 +46,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           if (scope.course.id) {
             return courseService.update(scope.course)
               .then(function() {
+                console.log('here')
                 angular.element("[data-dismiss=modal]").click();
               });
           } else {
@@ -54,6 +55,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
                 // example of afterSave: addElective which takes
                 // the created course and adds it as an elective
                 var result = scope.afterSave(course);
+                console.log('here')
                 angular.element("[data-dismiss=modal]").click();
                 return result;
               }, function(error) {

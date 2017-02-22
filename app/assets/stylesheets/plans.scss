@@ -22,7 +22,7 @@
 }
 .bordered {
   border: 1px solid $medium-gray;
-  padding: 15px 20px;
+  padding: 20px;
   padding-top: -15px;
 }
 // header
@@ -37,12 +37,12 @@
     font-family: $serif;
     font-size: 2.0em;
   }
-  .registered-info {
-    float: left;
-    margin-left: 25px;
+  .concentration-info {
+    display: inline-block;
+    margin-right: 1em;
   }
   .graduating-info {
-    float: left;
+    display: inline-block;
     line-height: 3.4em;
     .graduating {
       font-family: $serif;
@@ -55,10 +55,6 @@
   .main-info {
     margin-top: 14px;
   }
-  .additional-info {
-    display: inline-block;
-    margin-top: 8px;
-  }
 }
 
 
@@ -68,9 +64,14 @@
   background: #fff;
   h3 {
     margin-top: 5px;
+    display: inline-block;
   }
   .required-units {
-    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+    -webkit-transform: translateY(50%);
+    transform: translateY(50%);
     padding: .4em .7em;
     background-color: #555;
     color: #fff;
@@ -87,6 +88,7 @@
 .course-row {
   td {
     padding: 5px;
+    vertical-align: top;
   }
   .completed-course {
     color: #6FC44A;
@@ -100,19 +102,7 @@
 
 // Category boxes
 .category {
-  padding-bottom: 26px;
-  padding-top: 0;
-  margin-bottom: 44px;;
   position: relative;
-  h3 {
-    padding: 0 5px;
-    margin: 0;
-    display: inline-block;
-    position: relative;
-    top: -13px;
-    background-color: #FFF;
-    font-size: 1.4em;
-  }
   .units {
     font-size: 1.2em;
   }
@@ -120,11 +110,7 @@
     margin: 5px 0;
   }
 }
-.bordered {
-  border: 1px solid #AAA;
-  padding-left: 20px;
-  padding-right: 20px;
-}
+
 .green-border {
   border: 3px solid #65804C;
 }
