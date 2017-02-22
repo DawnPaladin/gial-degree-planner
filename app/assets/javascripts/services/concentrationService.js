@@ -1,4 +1,4 @@
-planner.factory('concentrationService', ['Restangular', function(Restangular) {
+planner.factory('concentrationService', ['Restangular', 'Flash', function(Restangular, Flash) {
   var exports = {};
 
   exports.setup = function(aDegree) {
@@ -12,16 +12,21 @@ planner.factory('concentrationService', ['Restangular', function(Restangular) {
   };
 
   exports.save = function() {
-    console.log(exports.current);
     exports.current.categories_attributes = exports.current.categories.map(function(category) {
       return {
         id: category.id,
         course_ids: category.courses.map(function(course) {
           return course.id;
         })
-      }
+      };
     });
-    exports.current.put();
+    exports.current.put().then(function() {
+      Flash.create("success", "Concentration saved");
+      exports.current = null;
+    }, function(response) {
+      console.warn(response);
+      Flash.create("danger", "Concentration could not be saved. See console for details.");
+    });
   };
 
   exports.createCategory = function() {

@@ -25,7 +25,7 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
             return obj.id === misnamedCourse.id;
           })[0];
           scope.category.courses.push(course);
-        })
+        });
       };
 
       // scope.deleteCourse = function(course) {
