@@ -25,7 +25,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           scope.sessions = sessions;
         });
       
-      if (scope.course)
+      if (scope.course && scope.course.sessions && !scope.course.sessions.length)
         scope.course.sessions = [];
 
       scope.toggleSelection = function toggleSelection(sessionId) {
