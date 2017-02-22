@@ -1,4 +1,4 @@
-var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore', 'bootstrap3-typeahead']);
+var planner = angular.module('planner', ['ui.router', 'restangular', 'Devise', 'ngFlash', 'underscore', 'bootstrap3-typeahead', 'xeditable']);
 
 planner.config(['AuthProvider', function(AuthProvider) {
   AuthProvider.loginPath('/advisors/sign_in.json');
@@ -13,8 +13,9 @@ planner.config( ['RestangularProvider', function(RestangularProvider) {
   });
 }]);
 
-planner.run(['$rootScope', function($rootScope){
+planner.run(['$rootScope', 'editableOptions', function($rootScope, editableOptions){
   $rootScope.$on("$stateChangeError", console.warn.bind(console));
+  editableOptions.theme = 'bs3';
 }]);
 
 planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -86,6 +87,31 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('ips.print', {
       url: '/print',
       templateUrl: '/templates/ips-print.html'
+    })
+
+    .state('degrees', {
+      url: '/degrees',
+      resolve: {
+        degrees: ['Restangular',
+          function(Restangular) {
+            return Restangular.all('degrees').getList();
+          }
+        ],
+      },
+      templateUrl: '/templates/degree-index.html',
+      controller: 'DegreesIndexCtrl'
+    })
+    .state('degreeEdit', {
+      url: ('/degrees/:degree_id'),
+      resolve: {
+        degree: ['Restangular', '$stateParams',
+          function(Restangular, $stateParams) {
+            return Restangular.one('degrees', $stateParams.degree_id).get();
+          }
+        ],
+      },
+      templateUrl: '/templates/degree-edit.html',
+      controller: 'DegreeEditCtrl'
     });
 
 }]);

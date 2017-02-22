@@ -1,0 +1,39 @@
+<div class="category bordered course-section"
+     ng-class="{'green-border': category.satisfiedByIntended(),
+                'green-highlight': category.satisfiedByCompleted()}">
+
+  <h3 class="category-name"><span editable-text="category.name">{{ category.name }}</span></h3>
+
+  <table class="category-table">
+    <tr ng-repeat="course in category.courses">
+      <td><span class="glyphicon glyphicon-remove clickable" ng-click="removeElementFromArray(course, category.courses)"></span></td>
+      <td>{{ course.name }}</td>
+      <td>{{ course.units }}</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <input ng-if='addingClass'
+               class='form-control elective-input'
+               placeholder='Enter a course name or number'
+               ng-blur='hideClassInput()'
+               bs3-typeahead
+               bs3-promise='availableElectives'
+               ng-model='addedCourse'
+               bs3-afterSelect='addCourse'>
+
+        <span class="clickable add-to-list"
+              ng-if='!addingClass'
+              ng-click='showClassInput()'>
+          <span class="glyphicon glyphicon-plus"></span> Add a course
+        </span>
+
+      </td>
+    </tr>
+  </table>
+
+  <div class='required-units'>Units required:
+    <input type="number" ng-model="category.required_units" class="credits-input">
+  </div>
+
+</div>

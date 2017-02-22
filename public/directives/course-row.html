@@ -21,12 +21,14 @@
     <span ng-if="section === 'available'">{{ course.units }}</span>
 
     <button ng-if="section === 'completed'"
-            ng-click='buttonCallback({course: course})'>
+            ng-click='buttonCallback({course: course})'
+            class="btn btn-danger">
       Uncomplete
     </button>
 
     <button ng-if="section === 'intended'"
-            ng-click='buttonCallback({course: course})'>
+            ng-click='buttonCallback({course: course})'
+            class="btn btn-primary">
       Complete
     </button>
 

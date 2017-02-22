@@ -15,27 +15,34 @@
 // SCHEDULE STYLES
 .course-bubble-container {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   left: 22.5px;
   transition: left 0.5s;
   padding: 5px 5px 0;
   z-index: 10;
+  -webkit-transition: background 0.5s ease-in-out;
+  transition: background 0.5s ease-in-out;
 }
 
 .course-bubble {
-  background: #ddd;
-  padding: 10px 5px;
+  background: $medium-gray;
+  padding: 10px;
   display: inline-block;
   cursor: -webkit-grab;
   cursor: -moz-grab;
   cursor: grab;
   font-size: 11px;
-  width: 100px;
+  width: 170px;
   text-align: center;
   position: relative;
+  -webkit-transition: background 0.5s ease-in-out;
+  transition: background 0.5s ease-in-out;
+}
+
+.course-bubble:hover {
+  background: $dark-gray;
 }
 
 .course-bubble-container .course-bubble {
@@ -56,47 +63,45 @@
 
   margin-top: 15px;
   margin-bottom: 120px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 
-  .term {
-    display: inline-block;
-    text-align: center;
-  }
-
-  .sessions {
-    display: inline-block;
-    margin: 0px 5px 10px;
-
-    .session {
-      height: 100px;
-      width: 100px;
-      display: inline-block;
-      float: left;
-      margin: 0;
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
-      border-right: 2px dashed #ddd;
-      transition: background 0.5s;
-      z-index: 0;
-    }
-
-    .session:first-child {
-      border-left: 1px solid #ccc;
-    }
-
-    .session:last-child {
-      border-right-style: solid;
-    }
-
-  }
-
-  .dates {
-    margin-bottom: 20px;
+  .year {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
   }
 
   .terms {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    flex-direction: row;
+  }
+
+  .term {
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    min-width: 170px;
+    margin: 0 2px;
+    text-align: center;
+    -webkit-transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out;
+    background: #fff;
+
+    p {
+      padding: 7px 0;
+      font-size: 15px;
+      margin: 0;
+      color: #fff;
+      background: $brand-blue;
+      -webkit-font-smoothing: antialiased;
+    }
+  }
+
+  .dates {
+    margin-bottom: 20px;
   }
 
   .truncated {
@@ -107,16 +112,29 @@
 }
 
 .permitted.over {
-  background: green !important;
+  background: #3d2e4c !important;
 }
 
 .unpermitted {
-  background: #ddd;
+  background: #ddd !important;
 }
 
 .permitted {
-  background: lightgreen;
-  border-right: 0 !important;
+  background: #5f4577 !important;
+}
+
+.stuck {
+  position: fixed;
+  top: 0;
+}
+
+.schedule-page {
+  .stuck {
+    top: 0; 
+    left: 0; 
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #eee;
+  }
 }
 
 #new-student-button {
