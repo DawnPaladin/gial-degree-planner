@@ -33,9 +33,6 @@ body {
   }
 }
 
-
-
-
 .clickable {
   cursor: pointer;
   color: #4D3960;
@@ -44,3 +41,29 @@ body {
     color: #D75EAE;
   }
 }
+
+.tagline {
+  color: #555;
+  font-style: italic;
+  weight: 600;
+  display: inline-block;
+}
+
+.caps {
+  text-transform: uppercase;
+}
+
+.sm-text {
+  font-size: .6em;
+}
+
+.warning-text {
+  color: red;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.select-placeholder {
+  display: none;
+}
+
