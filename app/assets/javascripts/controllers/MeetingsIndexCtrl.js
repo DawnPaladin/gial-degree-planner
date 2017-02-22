@@ -36,20 +36,11 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
     $scope.showNewCourseModal = function() {
       angular.element('#new-course-form').modal('show');
     };
-    $scope.hideNewCourse = function() {
-      console.log('here')
-      angular.element('#new-course-form').modal('hide');
-    };
 
     $scope.showEditCourseModal = function(course) {
       $scope.course = course;
       $scope.currentModal = '#edit-course-form';
       angular.element('#edit-course-form').modal('show');
-    };
-    $scope.hideEditCourse = function() {
-      console.log('here')
-      angular.element('#edit-course-form').modal('hide');
-      return 10;
     };
 
     $scope.showMeeting = function(id) {

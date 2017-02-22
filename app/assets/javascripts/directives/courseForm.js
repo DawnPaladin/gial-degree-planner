@@ -46,7 +46,6 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           if (scope.course.id) {
             return courseService.update(scope.course)
               .then(function() {
-                // console.log(angular.element('#edit-course-form'))
                 angular.element("[data-dismiss=modal]").click();
               });
           } else {
