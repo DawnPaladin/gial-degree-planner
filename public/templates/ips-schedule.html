@@ -1,10 +1,10 @@
-<section>
+<section class="text-center">
 
   <h3>Unscheduled Courses</h3>
 
   <div id="sticky-container" class="course-bubble-container" droppable drop="handleDrop" bin="bin">
 
-    <div ng-repeat="course in planInfo.plan.intended_courses | unscheduledFilter" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" term="{{ course.term }}" draggable draggable-course="course">
+    <div ng-repeat="course in planInfo.plan.intended_courses | unscheduledFilter" class="course-bubble" id="{{ course.id }}" term="{{ course.term }}" draggable draggable-course="course">
       {{ course.name }}<br>
       <span class="truncated">
         {{ course.number }}<br>
@@ -18,29 +18,25 @@
 
 <section id="schedule" class="schedule">
 
-  <div ng-repeat="year in planInfo.plan.years" class="text-center">
+  <div ng-repeat="year in planInfo.plan.years" class="text-center year">
 
     <h3>{{ year.value }}</h3>
 
-    <div class="term" ng-repeat="term in year.terms">
+    <div class="terms">
 
-      <div class="sessions">
+      <div class="term" data-term-id="{{ term.id }}" data-year-id="{{ year.id }}" ng-repeat="term in year.terms" droppable drop="handleDrop">
 
-        <div ng-repeat="session in term.sessions" class="session" data-session-id="{{ session.id }}" data-term-id="{{ term.id }}" data-year-id="{{ year.id }}" droppable drop="handleDrop" session="session">
+        <p>{{ term.name }}</p>
 
-          <span ng-repeat="course in session.courses" class="course-bubble" id="{{ course.id }}" course sessions="{{ course.sessions }}" data-year-id="{{ year.id }}" term="{{ course.term }}" draggable draggable-course="course">
-            {{ course.name }}<br>
-            <span class="truncated">
-              {{ course.number }}<br>
-              {{ course.term.name }} {{ course.sessions | sessionFilter }}
-            </span>
+        <span ng-repeat="course in term.courses" class="course-bubble" id="{{ course.id }}" data-year-id="{{ year.id }}" term="{{ course.term }}" draggable draggable-course="course">
+          {{ course.name }}<br>
+          <span class="truncated">
+            {{ course.number }}<br>
+            {{ course.term.name }} {{ course.sessions | sessionFilter }}
           </span>
-
-        </div>
+        </span>
 
       </div>
-
-      <p><strong>{{ term.name }}</strong></p>
 
     </div>
 

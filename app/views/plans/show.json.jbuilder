@@ -18,16 +18,13 @@ json.years Year.all do |year|
   json.terms year.terms.get_all do |term|
     json.id term.id
     json.name term.name
-    json.sessions term.sessions do |session|
-      json.id session.id
-      json.courses do
-        json.array! @plan.find_scheduled_classes(year, term, session) do |course|
-          json.extract! course, *course.attributes.keys
-          json.term course.term
-          json.sessions course.sessions
-        end
-      end        
-    end
+    json.courses do
+      json.array! @plan.find_scheduled_classes(year, term) do |course|
+        json.extract! course, *course.attributes.keys
+        json.term course.term
+        json.sessions course.sessions
+      end
+    end        
   end
 end
 

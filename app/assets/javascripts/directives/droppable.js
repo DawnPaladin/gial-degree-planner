@@ -14,9 +14,8 @@ planner.directive('droppable', function() {
 
         var yearSame = item.parentNode.getAttribute('data-year-id') == that.getAttribute('data-year-id');
         var termSame = item.parentNode.getAttribute('data-term-id') == that.getAttribute('data-term-id');
-        var sessionSame = item.parentNode.getAttribute('data-session-id') == that.getAttribute('data-session-id');
 
-        if (yearSame && termSame && sessionSame) {
+        if (yearSame && termSame) {
           return true;
         }
         return false;
@@ -34,7 +33,6 @@ planner.directive('droppable', function() {
 
           var item = document.getElementById(e.dataTransfer.getData('Text'));
           var termId = JSON.parse(item.getAttribute('term')).id;
-          var sessionId = JSON.parse(item.getAttribute('sessions'))[0].id;
 
           that.classList.remove('over');
 
@@ -44,23 +42,20 @@ planner.directive('droppable', function() {
             return false;
           } else if (that.id == 'sticky-container') {
 
-          } else if (termId != that.getAttribute('data-term-id') || sessionId != that.getAttribute('data-session-id')) {
+          } else if (termId != that.getAttribute('data-term-id')) {
             return false;
           }
 
 
-          // 
           if (that.id == "sticky-container") {
 
             var year = item.getAttribute('data-year-id');
             var term = JSON.parse(item.getAttribute('term')).id;
-            var session = JSON.parse(item.getAttribute('sessions'))[0].id;
 
             var meetingData = {
               id: that.id,
               meeting_year: year,
-              meeting_term: term,
-              meeting_session: session          
+              meeting_term: term       
             };
 
 
@@ -69,16 +64,10 @@ planner.directive('droppable', function() {
             var meetingData = {
               id: that.id,
               meeting_year: that.getAttribute('data-year-id'),
-              meeting_term: that.getAttribute('data-term-id'),
-              meeting_session: that.getAttribute('data-session-id')
+              meeting_term: that.getAttribute('data-term-id')
             };
 
             that.appendChild(item);
-
-            // var itemHeight = angular.element(item).css('height');
-            // var space = "<div style='height: " + itemHeight + "; width: 100%;'></div>";
-            // angular.element(item).parent().next().prepend(space);
-            // debugger;
 
           }
 
