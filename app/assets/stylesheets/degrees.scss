@@ -1,6 +1,8 @@
-// Place all the styles related to the degrees controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.category {
+  position: relative;
+  margin-top: 3em;
+}
+
 .category-table {
   width: 100%;
   td:nth-child(1) { width: 20px; }
@@ -9,4 +11,19 @@
 
 .credits-input {
   width: 2em;
+}
+
+.category-name {
+  display: inline-block;
+  position: absolute;
+  top: -1em;
+  background-color: white;
+  padding: 0.25em;
+  font-size: 22px;
+}
+
+.add-to-list {
+  display: inline-block;
+  margin-left: -1.5em;
+  margin-top: .25em;
 }

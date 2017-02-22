@@ -18,8 +18,8 @@
         <span class="clickable glyphicon glyphicon-remove" ng-click="deleteConcentration(concentration)"></span>
         <!-- <a ng-click="editConcentration('conc')">Edit</a> -->
       </li>
+      <span class="clickable add-to-list" ng-click="addConcentrationVisible = true" ng-hide="addConcentrationVisible"><span class="glyphicon glyphicon-plus"></span> Add concentration</span>
     </ul>
-    <button class="btn btn-default" ng-click="addConcentrationVisible = true" ng-hide="addConcentrationVisible">Add concentration</button>
     <div ng-show="addConcentrationVisible">
       <input ng-model="newConcentration.name">
       <button ng-click="createConcentration()">
@@ -46,10 +46,10 @@
              ng-model='addedCoreCourse'
              bs3-afterSelect='addCoreCourse'>
 
-      <span class="clickable add-course-link"
+      <span class="clickable add-to-list"
             ng-if='!addingCoreCourse'
             ng-click='showCourseInput()'>
-        &#43; Add a course
+        <span class="glyphicon glyphicon-plus"></span> Add a course
       </span>
       <!-- FIXME: This requires a second click after you select the course; Alexa's does not. Ask why. -->
     </ul>
@@ -64,7 +64,7 @@
     <category-edit ng-repeat="category in concentrationService.current.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
 
     <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
-      <h3>Thesis track</h3>
+      <h3 class="category-name">Thesis track</h3>
       <table class="category-table">
         <tr>
           <td></td>
@@ -80,7 +80,7 @@
       <div class='required-units'>Units required: {{ concentrationService.current.thesis_track.thesis_hours + concentrationService.current.thesis_track.elective_hours }}</div>
     </div>
     <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
-      <h3>Non-thesis track</h3>
+      <h3 class="category-name">Non-thesis track</h3>
       <table class="category-table">
         <tr>
           <td></td>

@@ -2,7 +2,7 @@
      ng-class="{'green-border': category.satisfiedByIntended(),
                 'green-highlight': category.satisfiedByCompleted()}">
 
-  <h3><span editable-text="category.name">{{ category.name }}</span></h3>
+  <h3 class="category-name"><span editable-text="category.name">{{ category.name }}</span></h3>
 
   <table class="category-table">
     <tr ng-repeat="course in category.courses">
@@ -22,10 +22,10 @@
                ng-model='addedCourse'
                bs3-afterSelect='addCourse'>
 
-        <span class="clickable add-course-link"
+        <span class="clickable add-to-list"
               ng-if='!addingClass'
               ng-click='showClassInput()'>
-          &#43; Add a course
+          <span class="glyphicon glyphicon-plus"></span> Add a course
         </span>
 
       </td>
