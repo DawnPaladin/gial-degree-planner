@@ -15,7 +15,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     if @course.save
-      params[:sessions].each do |session_id|
+      params[:session_ids].each do |session_id|
         @course.sessions << Session.find_by_id(session_id)
       end
 

@@ -9,12 +9,6 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
     },
     link: function(scope) {
 
-      // would rather use
-      // ng-checked="(levelName == 'Graduate')"
-      // scope.newCourse = {
-      //   level: 'Graduate'
-      // };
-
       scope.levels = ['Graduate', 'Undergrad'];
       termService.getTerms()
         .then(function(terms) {
@@ -30,7 +24,6 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         if (scope.course && !scope.course.sessions) {
           scope.course.session_ids = [];
         } else {
-          console.log('in else', scope.course.sessions)
           scope.course.session_ids = scope.course.sessions.map(function(session) {
             return session.id;
           });
@@ -51,13 +44,18 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
       scope.submitForm = function(formValid) {
         if (formValid) {
           if (scope.course.id) {
-            return courseService.update(scope.course);
+            return courseService.update(scope.course)
+              .then(function() {
+                // console.log(angular.element('#edit-course-form'))
+                angular.element("[data-dismiss=modal]").click();
+              });
           } else {
             courseService.create(scope.course)
               .then(function(course) {
                 // example of afterSave: addElective which takes
                 // the created course and adds it as an elective
                 var result = scope.afterSave(course);
+                angular.element("[data-dismiss=modal]").click();
                 return result;
               }, function(error) {
                 // Flash.create('warning', error);
