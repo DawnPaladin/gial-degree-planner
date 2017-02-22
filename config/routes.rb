@@ -12,15 +12,16 @@ Rails.application.routes.draw do
     scope :v1 do
       resources :students do
         resource :plan
-        
+
         # TODO Refactor
         put 'enroll_in_meeting', to: 'plans#enroll_in_meeting'
         put 'disenroll_from_meeting', to: 'plans#disenroll_from_meeting'
       end
       resources :electives, only: [:create, :update, :destroy]
       resources :advisors
-      resources :concentrations, only: [:index, :show]
+      resources :concentrations, only: [:index, :show, :update, :delete]
       resources :terms, only: [:index]
+      resources :degrees, only: [:index, :show, :update, :delete]
       resources :courses, only: [:index, :create, :show]
       resources :sessions, only: [:index]
       resources :meetings, only: [:show, :update, :destroy]

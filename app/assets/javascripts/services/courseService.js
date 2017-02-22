@@ -1,5 +1,5 @@
 planner.factory('courseService', ['Restangular', '$q', function(Restangular, $q) {
-  
+
   var _courses = [];
 
   var getCourses = function() {
@@ -25,7 +25,7 @@ planner.factory('courseService', ['Restangular', '$q', function(Restangular, $q)
         return _courses;
       });
   };
-  
+
   return {
     getCourses: getCourses,
     create: create

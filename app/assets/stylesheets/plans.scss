@@ -53,6 +53,9 @@
 // Section/Panel on page
 .course-section {
   margin-bottom: 25px;
+  h3 {
+    margin-top: 0;
+  }
   .required-units {
     float: right;
     padding: 1.2em 0.3em 0.1em;

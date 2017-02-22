@@ -7,4 +7,6 @@ class Degree < ApplicationRecord
 
   has_many :plans
 
+  accepts_nested_attributes_for :concentrations, :required_courses
+
 end

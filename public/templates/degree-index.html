@@ -1,0 +1,11 @@
+<h3>Degrees</h3>
+
+<ul>
+  <li ng-repeat="degree in degrees">
+    {{ degree.name }}
+    <button class="btn btn-primary" ui-sref="degreeEdit({ degree_id: degree.id })">Edit</button>
+    <button class="btn btn-danger">Delete</button>
+  </li>
+</ul>
+
+<button class="btn btn-default">Create Degree</button>
