@@ -32,12 +32,6 @@ body {
   }
 }
 
-// delete this on merge
-.barrier-label {
-  display: block;
-}
-//
-
 .clickable {
   cursor: pointer;
   color: #4D3960;
@@ -59,4 +53,13 @@ body {
 
 .sm-text {
   font-size: .6em;
+
+.warning-text {
+  color: red;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.select-placeholder {
+  display: none;
 }

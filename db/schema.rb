@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170218231703) do
+ActiveRecord::Schema.define(version: 20170221235444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,14 +157,22 @@ ActiveRecord::Schema.define(version: 20170218231703) do
   end
 
   create_table "meetings", force: :cascade do |t|
-    t.integer  "course_id",      null: false
+    t.integer  "course_id",                      null: false
     t.string   "teaching_style"
     t.integer  "year"
     t.string   "term"
-    t.string   "session"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "canceled",       default: false
     t.index ["course_id"], name: "index_meetings_on_course_id", using: :btree
+  end
+
+  create_table "meetings_sessions", force: :cascade do |t|
+    t.integer  "meeting_id"
+    t.integer  "session_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id", "session_id"], name: "index_meetings_sessions_on_meeting_id_and_session_id", using: :btree
   end
 
   create_table "meetings_teachers", force: :cascade do |t|
@@ -242,6 +250,15 @@ ActiveRecord::Schema.define(version: 20170218231703) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "terms_years", force: :cascade do |t|
+    t.integer  "year_id"
+    t.integer  "term_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["term_id"], name: "index_terms_years_on_term_id", using: :btree
+    t.index ["year_id"], name: "index_terms_years_on_year_id", using: :btree
+  end
+
   create_table "thesis_tracks", force: :cascade do |t|
     t.integer  "concentration_id", null: false
     t.integer  "thesis_hours",     null: false
@@ -256,6 +273,12 @@ ActiveRecord::Schema.define(version: 20170218231703) do
     t.integer  "foreign_course_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "years", force: :cascade do |t|
+    t.integer  "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

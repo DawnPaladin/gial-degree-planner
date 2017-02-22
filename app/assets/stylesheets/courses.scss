@@ -10,4 +10,43 @@
   .modal-select {
     padding: 2px;
   }
+  input[type='radio'] {
+    margin-top: -2px;
+    vertical-align: middle;
+  }
+  .radio-label {
+    font-weight: normal;
+  }
+  input[type='checkbox'] {
+    vertical-align: middle;
+    margin-top: -3px;
+  }
+  .barrier-label {
+    display: block;
+  }
+}
+
+.meeting-form {
+  .teacher-name {
+    font-size: 1.4em;
+  }
+  .teacher-form {
+    margin-bottom: 10px;
+  }
+  .teaching-style {
+    margin-top: 20px;
+  }
+  .title-select {
+    width: 14%;
+    display: inline-block;
+    padding: 2px;
+  }
+  .canceled {
+    margin-bottom: 16px;
+    font-size: 1.15em;
+  }
+  .name-input {
+    width: 42%;
+    display: inline-block;
+  }
 }

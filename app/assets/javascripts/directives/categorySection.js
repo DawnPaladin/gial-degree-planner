@@ -57,8 +57,6 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         angular.element('#new-course-form').modal('show');
       };
 
-
-
       scope.showClassInput = function() {
         scope.addingClass = true;
         $timeout(function() {
@@ -66,11 +64,10 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
         });
       };
 
-      scope.hideClassInput = function() {
+      scope.hideClassInput = function(event) {
         if (event.relatedTarget === null)
           scope.addingClass = false;
       };
-
     }
   };
 }]);
