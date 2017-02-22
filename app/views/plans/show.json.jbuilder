@@ -21,7 +21,7 @@ json.years Year.all do |year|
     json.sessions term.sessions do |session|
       json.id session.id
       json.courses do
-        json.array! @plan.find_scheduled_classes(year, term, session) do |course|
+        json.array! @plan.find_scheduled_classes(year, term) do |course|
           json.extract! course, *course.attributes.keys
           json.term course.term
           json.sessions course.sessions
