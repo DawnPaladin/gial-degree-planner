@@ -11,6 +11,7 @@
     <div class="teacher col-xs-9">
       
       <span ng-if='!meeting.teachers_attributes.length && !addingTeacher'>There has been no teacher declared for this class. Click below to add one.</span>
+      <h3 ng-if='meeting.teachers_attributes.length'>Taught by:</h3>
 
       <div ng-repeat='teacher in meeting.teachers_attributes'>
         <p class='teacher-name'>{{ teacher.title }} {{teacher.first_name }} {{ teacher.last_name }}</p>
