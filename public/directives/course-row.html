@@ -26,10 +26,16 @@
       Uncomplete
     </button>
 
-    <button ng-if="section === 'intended'"
+    <button ng-if="section === 'intended' && !course.scheduled"
             ng-click='buttonCallback({course: course})'
             class="btn btn-primary">
       Complete
+    </button>
+
+    <button ng-if="section === 'intended' && course.scheduled"
+            disabled
+            class="btn">
+      Scheduled
     </button>
 
   </td>
