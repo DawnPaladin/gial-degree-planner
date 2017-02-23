@@ -83,3 +83,10 @@ h1, h2, h3, h4, .tabs {
 .select-placeholder {
   display: none;
 }
+
+.modal-body {
+  position: relative;
+  overflow-y: auto;
+  max-height: 400px;
+  padding: 20px 15px;
+}

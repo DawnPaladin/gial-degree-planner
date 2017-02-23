@@ -41,9 +41,9 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
     .state('meetings', {
       url: '/classes',
       resolve: {
-        courses: ['Restangular',
-          function(Restangular) {
-            return Restangular.all('courses').getList();
+        courses: ['courseService',
+          function(courseService) {
+            return courseService.getCourses();
           }
         ],
       },
