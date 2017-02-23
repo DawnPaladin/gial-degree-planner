@@ -1,7 +1,6 @@
 planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseService', 'concentrationService', 'Flash',
   function($scope, $timeout, degree, courseService, concentrationService, Flash) {
     $scope.degree = degree;
-    console.log(degree);
     $scope.currentConcentration = {};
 
     $scope.concentrationService = concentrationService;
@@ -13,7 +12,6 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     };
 
     $scope.saveDegree = function() {
-      console.log("Outgoing:", $scope.degree);
       $scope.degree.required_course_ids = $scope.degree.required_courses.map(function(course) {
         return course.id;
       });
@@ -31,7 +29,6 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       });
 
       $scope.degree.put().then(function(response) {
-        console.log(response);
         Flash.create("success", "Degree saved.");
       }, function(response) {
         console.warn(response);

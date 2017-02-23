@@ -10,7 +10,6 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
     concentration.get().then(function(response) {
       exports.current = response;
       response.has_thesis_track = !!response.thesis_track;
-      console.log('loaded', response);
     });
   };
 
@@ -24,10 +23,8 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
         _destroy: category._destroy,
       };
     });
-    console.log("Outgoing concentration:", exports.current);
     return exports.current.put().then(function(response) {
       Flash.create("success", "Concentration saved");
-      console.log("Saved concentration:", response)
       exports.current = null;
       return response;
     }, function(response) {
@@ -37,7 +34,6 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
   };
 
   exports.createCategory = function() {
-    console.log(exports.current.categories);
     exports.current.categories.unshift({
       concentration_id: exports.current.id,
       courses: [],
