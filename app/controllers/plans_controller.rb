@@ -21,7 +21,6 @@ class PlansController < ApplicationController
     @term = Term.find(params[:meeting_term])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
-    # binding.pry
     @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
     if @enrollment.save
       if params[:prevYear] && params[:prevYear] != params[:meeting_year]
@@ -41,12 +40,9 @@ class PlansController < ApplicationController
     @term = Term.find(params[:meeting_term])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
-    # binding.pry
 
     @enrollment = Enrollment.find_by({meeting_id: @meeting.id, plan_id: @plan.id})
     @enrollment.delete
-
-    # @plan.scheduled_classes.delete(@meeting)
     render :show
   end
 
