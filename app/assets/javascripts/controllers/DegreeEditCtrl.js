@@ -43,7 +43,7 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
 
     $scope.deleteConcentration = function(concentration) {
       if (confirm("Are you sure you wish to remove the " + concentration.name + " concentration?")) {
-        $scope.removeElementFromArray(concentration, $scope.degree.concentrations);
+        concentration._destroy = true;
       }
     };
 

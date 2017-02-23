@@ -13,7 +13,7 @@
 
       <h2>Concentrations</h2>
       <ul>
-        <li ng-repeat="concentration in degree.concentrations">
+        <li ng-repeat="concentration in degree.concentrations | hideDeleted">
           {{ concentration.name }}
           <span class="clickable glyphicon glyphicon-edit" ng-click="editConcentration(concentration)"></span>
           <span class="clickable glyphicon glyphicon-remove" ng-click="deleteConcentration(concentration)"></span>
