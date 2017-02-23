@@ -44,22 +44,6 @@
         </div>
         
         <div class="additional-info">
-          <div class="graduating-info">
-            <span class='graduating'>Graduating:</span>
-            <select ng-model='plan.graduation_term'
-                    ng-options='term for term in terms'
-                    class='form-control'
-                    ng-change='updatePlan()'>
-              <option value=""></option>
-            </select>
-
-            <select ng-model='plan.graduation_year'
-                    ng-options='year for year in planInfo.possibleYears'
-                    ng-change="updatePlan()">
-              <option value=""></option>
-            </select>
-          </div>
-
           <div class="registered-info">
             <span class='registration-confirmation'>Has the most recent intended plan of study been registered?</span>
             <input type="checkbox" ng-model="plan.latest_registered" ng-change="toggleRegistration()">
