@@ -17,6 +17,7 @@ planner.filter('unscheduledFilter', ['planService', function(planService) {
         if (scheduledClasses[j].course_id == courses[i].id) {
           isScheduled = true;
           scheduledClasses.splice(j, 1);
+          break;
         }
       }
       if (!isScheduled) {

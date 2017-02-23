@@ -21,12 +21,10 @@ class PlansController < ApplicationController
     @term = Term.find(params[:meeting_term])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
-    if @meeting
-      if @plan.scheduled_classes.find_by(course_id: @meeting.course_id)
-        thesis_ids = [233, 234]
-        @plan.scheduled_classes.find_by(course_id: @meeting.course_id).enrollments.where(plan_id: @plan.id).delete_all
-      end
-      @plan.scheduled_classes << @meeting
+
+    @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
+
+    if @enrollment.save
       render :show
     else
       render :show
@@ -39,7 +37,11 @@ class PlansController < ApplicationController
     @term = Term.find(params[:meeting_term])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
-    @plan.scheduled_classes.delete(@meeting)
+
+    @enrollment = Enrollment.find_by({meeting_id: @meeting.id, plan_id: @plan.id})
+    @enrollment.delete
+
+    # @plan.scheduled_classes.delete(@meeting)
     render :show
   end
 

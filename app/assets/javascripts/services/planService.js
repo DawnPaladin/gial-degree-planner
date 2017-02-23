@@ -73,7 +73,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
   var enrollInMeeting = function(data) {
 
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data).then(function(plan) {
         _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
         return _planInfo;
