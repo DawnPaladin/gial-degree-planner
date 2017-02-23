@@ -1,7 +1,7 @@
-planner.factory('planService', ['Restangular', '_', 'electiveService', function(Restangular, _, electiveService) {
+planner.factory('planService', ['Restangular', '_', 'electiveService', 'Flash', function(Restangular, _, electiveService, Flash) {
 
   var _planInfo = {};
-  
+
   // This is called once from HeaderCtrl
   // Would be better to use the IPS resolve,
   // but changing it to do so,
@@ -20,7 +20,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       .then(function(plan){
         _planInfo.plan = {};
         _planInfo.plan.coursesById = {};
-        
+
         _initializePlan(plan);
 
         angular.copy(plan, _planInfo.plan);
@@ -38,10 +38,10 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       .then(function(plan) {
         _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
-
         return _planInfo;
 
     }, function(response) {
+      Flash.create('danger', 'Could not update plan.');
       console.error(response);
     });
   };
@@ -89,7 +89,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         return _planInfo;
     }, function(response) {
       console.error(response);
-    });    
+    });
   };
 
 
@@ -104,7 +104,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     _initializeCourses(plan);
     if (plan.available_courses) _extendCategories(plan);
   };
-  
+
 
   // Makes data from backend useful for front
   var _extractCourses = function(plan) {
@@ -115,7 +115,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     var scheduled = plan.scheduled_classes;
 
     plan.coursesById = {};
-    
+
     // available_courses are present if
     // a concentration has been set
     // populate coursesById
@@ -133,7 +133,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
     // Go through coursesById and set the correct ones
     // to required, intended, completed within coursesById
-    required.forEach(_markOrCreateRequired, plan);  
+    required.forEach(_markOrCreateRequired, plan);
     intended.forEach(_markOrCreateIntended, plan);
     completed.forEach(_markOrCreateCompleted, plan);
     scheduled.forEach(_markOrCreateScheduled, plan);
@@ -149,15 +149,15 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
           && !plan.coursesById[id].completed)
         plan.coursesById[id].scheduled = true;
     });
-    
+
     plan.intended_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.intended === true;
     });
-    
+
     plan.required_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.required === true;
     });
-    
+
     plan.completed_courses = _.filter(_.values(plan.coursesById), function(course) {
       return course.completed === true;
     });
@@ -261,7 +261,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       this.coursesById[course.id] = course;
     }
   };
-    
+
   var _markOrCreateScheduled = function(course) {
     // `this` is the plan obj
     var originalScheduled;
@@ -337,7 +337,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
 
   // populates years in the graduation year dropdown
-  var _populateYears = function() {  
+  var _populateYears = function() {
     _planInfo.possibleYears = [];
     var currentYear = new Date().getFullYear();
     for (var i = 0; i < 10; i++) {
