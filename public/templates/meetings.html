@@ -35,9 +35,8 @@
   <modal id='new-course-form'>
     <modal-title>New Course</modal-title>
     <modal-body>
-      <course-form course='newCourse' afterSave='createCourse(formValid)'></course-form>
+      <course-form course='newCourse'></course-form>
     </modal-body>
-    <modal-footer></modal-footer>
   </modal>
 
   <modal id='edit-course-form'>
@@ -45,12 +44,11 @@
     <modal-body>
       <course-form course='course' ng-if='course'></course-form>
     </modal-body>
-     <modal-footer></modal-footer
   </modal>
 
   <modal id='edit-meeting'>
     <modal-title>
-      <h3>Edit Class: {{ meeting.course.full_name }}</h3>
+      <h3>{{ meeting.course.full_name }}</h3>
       <p class="tagline">{{ meeting.sessions | sessionFilter }}, {{ meeting.term }} {{ meeting.year }}</p>
     </modal-title>
     <modal-body>

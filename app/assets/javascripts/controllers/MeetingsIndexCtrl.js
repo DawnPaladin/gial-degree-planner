@@ -1,5 +1,5 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
-  function($scope, courses, meetingService) {
+planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', '_',
+  function($scope, courses, meetingService, _) {
     $scope.courses = courses;
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
@@ -32,14 +32,14 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
     });
 
     $scope.newCourse = {};
+    $scope.course = {};
 
     $scope.showNewCourseModal = function() {
       angular.element('#new-course-form').modal('show');
     };
 
     $scope.showEditCourseModal = function(course) {
-      $scope.course = course;
-      $scope.currentModal = '#edit-course-form';
+      angular.copy(course, $scope.course);
       angular.element('#edit-course-form').modal('show');
     };
 

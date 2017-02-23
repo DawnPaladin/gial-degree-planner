@@ -90,3 +90,8 @@ h1, h2, h3, h4, .tabs {
   max-height: 400px;
   padding: 20px 15px;
 }
+
+.help-block {
+  @extend .sm-text;
+  color: $brand-orange;
+}
