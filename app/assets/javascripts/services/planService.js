@@ -100,9 +100,9 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
 
   var _initializePlan = function(plan) {
-    if (plan.available_courses) _extendCategories(plan);
     _extractCourses(plan);
     _initializeCourses(plan);
+    if (plan.available_courses) _extendCategories(plan);
   };
   
 
