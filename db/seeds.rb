@@ -230,6 +230,14 @@ conc = degree.concentrations.create({
   addCoursesToCategory(cat, [
     "Core Components of Islam",
     "Contextualization Issues Among Muslim Peoples (Online)",
+    "Contextualization Issues Among Muslim Peoples",
+    "Modern Islamic Religious and Political Movements",
+    "Abrahamic Messianism",
+    "Understanding the Qur'an",
+    "Abrahamic Monotheism",
+    "Arabic 1",
+    "Arabic 2",
+    "Abrahamic Worldviews"
   ])
   conc.create_non_thesis_track({
     elective_hours: 6
@@ -296,7 +304,7 @@ conc = degree.concentrations.create({
     "Field Methods",
     "Field Data Management",
     "Discourse Analysis",
-    "Semantic & Pragmatics",
+    "Semantic and Pragmatics",
   ])
   cat = conc.categories.create({
     name: "Choose one of the following",
