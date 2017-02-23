@@ -9,7 +9,8 @@ planner.directive('courseRow', [function() {
       section: '@',
       checkboxCallback: '&',
       buttonCallback: '&',
-      deleteElective: '&'
+      deleteElective: '&',
+      index: '='
     }
   };
 }]);

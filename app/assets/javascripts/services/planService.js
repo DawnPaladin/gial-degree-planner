@@ -73,8 +73,8 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
   var enrollInMeeting = function(data) {
 
-    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data ).then(function(plan) {
-      _initializePlan(plan);
+    return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data).then(function(plan) {
+        _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
         return _planInfo;
     }, function(response) {
@@ -84,7 +84,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
 
   var disenrollFromMeeting = function(data) {
     return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "disenroll_from_meeting", data ).then(function(plan) {
-      _initializePlan(plan);
+        _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
         return _planInfo;
     }, function(response) {
@@ -145,7 +145,8 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
   // and the courses in these groupings are the same references
   var _initializeCourses = function(plan) {
     _.pluck(plan.scheduled_classes, 'course_id').forEach(function(id) {
-      if (plan.coursesById[id])
+      if (plan.coursesById[id] && !plan.coursesById[id].scheduled
+          && !plan.coursesById[id].completed)
         plan.coursesById[id].scheduled = true;
     });
     
@@ -164,6 +165,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     if (plan.elective_courses) {
       _insertElectives(plan.elective_courses, plan.intended_courses, 'intended');
       _insertElectives(plan.elective_courses, plan.completed_courses, 'completed');
+      _insertElectives(plan.elective_courses, plan.scheduled_classes, 'scheduled');
     }
   };
 
@@ -262,11 +264,35 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
     
   var _markOrCreateScheduled = function(course) {
     // `this` is the plan obj
-    if (this.coursesById[course.id]) {
-      this.coursesById[course.id].scheduled = true;
-    } else {
+    var originalScheduled;
+    if (this.coursesById[course.course_id]) {
+      if (this.coursesById[course.course_id].scheduled ||
+          this.coursesById[course.course_id].completed ){
+        originalScheduled = true;
+      } else {
+        this.coursesById[course.course_id].scheduled = true;
+      }
+    }
+
+    if (_.pluck(this.elective_courses, 'id').includes(course.course_id) && originalScheduled) {
+      var elective_courses = _.where(this.elective_courses, { id: course.course_id });
+      for (var i = 0; i < elective_courses.length; i++) {
+        if (elective_courses[i].scheduled) continue;
+        elective_courses[i].scheduled = true;
+        break;
+      }
+    } else if (_.pluck(this.elective_courses, 'id').includes(course.course_id)) {
+      var elective_courses = _.where(this.elective_courses, { id: course.course_id });
+      for (var i = 0; i < elective_courses.length; i++) {
+        if (elective_courses[i].scheduled) continue;
+        elective_courses[i].scheduled = true;
+        break;
+      }
+    }
+
+    if (!this.coursesById[course.course_id]) {
       course.scheduled = true;
-      this.coursesById[course.id] = course;
+      this.coursesById[course.course_id] = course;
     }
   };
 
