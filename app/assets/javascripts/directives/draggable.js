@@ -14,19 +14,35 @@ planner.directive('draggable', function() {
 
       // Get the term id off of the element being dragged
 
-      var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
-
-        angular.element('.term')
+      angular.element('.term')
           .addClass('unpermitted');
 
-        if (!that.parentNode.classList.contains('course-bubble-container')) {
-          angular.element('.course-bubble-container')
+      if (!that.parentNode.classList.contains('course-bubble-container')) {
+        angular.element('.course-bubble-container')
+          .addClass('permitted');
+      }
+
+      var thisTermJSON = e.target.getAttribute('term');
+
+      if (thisTermJSON == "") {
+        angular.element(".term")
+          .removeClass('unpermitted')
+          .addClass('permitted');            
+      } else {
+
+        var thisTerm = JSON.parse(thisTermJSON);
+        var thisTermId = thisTerm.id;
+
+        if (thisTerm.name == 'Any' ) {
+          angular.element(".term")
+            .removeClass('unpermitted')
+            .addClass('permitted');          
+        } else {
+          angular.element(".term[data-term-id='" + thisTermId + "']")
+            .removeClass('unpermitted')
             .addClass('permitted');
         }
-
-        angular.element(".term[data-term-id='" + thisTermId + "']")
-          .removeClass('unpermitted')
-          .addClass('permitted');
+      }
 
       return false;
     };
