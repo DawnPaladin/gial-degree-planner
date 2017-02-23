@@ -2,7 +2,7 @@ planner.filter('sessionFilter', function() {
 
   return function(sessions) {
 
-    if (sessions == undefined) {
+    if (sessions == undefined || sessions.length == 0) {
       return '';
     }
 

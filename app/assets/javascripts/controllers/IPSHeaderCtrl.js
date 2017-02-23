@@ -1,5 +1,5 @@
-planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student', 'planService',
-  function($scope, $rootScope, $window, student, planService) {
+planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student', 'planService', '$state',
+  function($scope, $rootScope, $window, student, planService, $state) {
   
   // All static information comes over
   // on initial load
@@ -9,6 +9,14 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
   $scope.planInfo = planService.getPlanInfo();
   $scope.terms = ['Spring', 'Summer', 'Fall'];
   $scope.plan = $scope.planInfo.plan;
+
+  $scope.$on('onSummary', function() {
+    $scope.canPrint = true;  
+  });
+
+  $scope.$on('offSummary', function() {
+    $scope.canPrint = false;  
+  });
 
   // For all plan updates except for updates to latest_registered and registration_date
   $scope.updatePlan = function() {

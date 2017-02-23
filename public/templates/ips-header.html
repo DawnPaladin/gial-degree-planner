@@ -1,66 +1,69 @@
-<div class="flash-container">
-  <flash-message></flash-message>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <h1 class='main-header'>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h1>
+<header class="ips-heading">
+  <div class="flash-container">
+    <flash-message></flash-message>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="degree-info form-inline">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class='main-header'>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h1>
+    </div>
+  </div>
 
-      <div class="main-info">
-        <span class='degree'>MA with Major in World Arts -- Concentration: </span>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="degree-info form-inline">
 
-        <select ng-model='plan.concentration_id'
-                ng-options='concentration.id as concentration.name for concentration in concentrations'
-                ng-change='updatePlan()'
-                class='form-control'
-                ng-disabled="concentrationDisabled">
-          <option value=""></option>
-        </select>
-      </div>
+        <div class="main-info">
+          <span class='degree'>MA with Major in World Arts -- Concentration: </span>
 
-      <div class="additional-info">
-        <div class="graduating-info">
-          <span class='graduating'>Graduating:</span>
-          <select ng-model='plan.graduation_term'
-                  ng-options='term for term in terms'
+          <select ng-model='plan.concentration_id'
+                  ng-options='concentration.id as concentration.name for concentration in concentrations'
+                  ng-change='updatePlan()'
                   class='form-control'
-                  ng-change='updatePlan()'>
-            <option value=""></option>
-          </select>
-
-          <select ng-model='plan.graduation_year'
-                  ng-options='year for year in planInfo.possibleYears'
-                  ng-change="updatePlan()">
+                  ng-disabled="concentrationDisabled">
             <option value=""></option>
           </select>
         </div>
 
-        <div class="registered-info">
-          <span class='registration-confirmation'>Has the most recent intended plan of study been registered?</span>
-          <input type="checkbox" ng-model="plan.latest_registered" ng-change="toggleRegistration()">
-          <br>
-          <p ng-if="plan.registration_date" class='tagline' >An intended plan of study for {{ student.first_name }} was last registered on {{ plan.registration_date | date }}</p>
+        <div class="additional-info">
+          <div class="graduating-info">
+            <span class='graduating'>Graduating:</span>
+            <select ng-model='plan.graduation_term'
+                    ng-options='term for term in terms'
+                    class='form-control'
+                    ng-change='updatePlan()'>
+              <option value=""></option>
+            </select>
+
+            <select ng-model='plan.graduation_year'
+                    ng-options='year for year in planInfo.possibleYears'
+                    ng-change="updatePlan()">
+              <option value=""></option>
+            </select>
+          </div>
+
+          <div class="registered-info">
+            <span class='registration-confirmation'>Has the most recent intended plan of study been registered?</span>
+            <input type="checkbox" ng-model="plan.latest_registered" ng-change="toggleRegistration()">
+            <br>
+            <p ng-if="plan.registration_date" class='tagline' >An intended plan of study for {{ student.first_name }} was last registered on {{ plan.registration_date | date }}</p>
+          </div>
         </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="ips-navigation tabs">
+        <a ui-sref='ips.choose' ui-sref-active="active" class="tab">Choose Courses</a>
+        <a ui-sref='ips.schedule' ui-sref-active="active" class="tab">Schedule Courses</a>
+        <a ui-sref='ips.summary' ui-sref-active="active" class="tab">Summary</a>
+        <a ng-if="canPrint" ui-sref-active="active" ng-click="exportIPS()" class="tab print-tab">Print</a>
       </div>
 
     </div>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-
-    <div class="ips-navigation tabs">
-      <a ui-sref='ips.choose' ui-sref-active="active" class="tab">Choose Courses</a>
-      <a ui-sref='ips.schedule' ui-sref-active="active" class="tab">Schedule Courses</a>
-      <a ui-sref='ips.summary' ui-sref-active="active" class="tab">Summary</a>
-    </div>
-
-  </div>
-</div>
+</header>
