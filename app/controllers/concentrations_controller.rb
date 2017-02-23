@@ -20,13 +20,17 @@ class ConcentrationsController < ApplicationController
     end
   end
 
+  def create
+    @concentration = Concentration.new(concentration_params)
+    if @concentration.save
+      redirect_to concentration_path(@concentration, format: :json)
+    else
+      render json: @concentration.errors.full_messages.to_json
+    end
+  end
+
   def concentration_params
     params.permit(:id, :name, :degree_id, { categories_attributes: [:id, :concentration_id, :name, :required_units, course_ids: [] ]})
   end
 
 end
-
-# params.permit(:id, :name, :description,
-# concentrations_attributes: [:id, :degree_id, :name, :description, { categories: [
-#   :id, :concentration_id, :name, :required_units
-# ] }], required_course_ids: [] )

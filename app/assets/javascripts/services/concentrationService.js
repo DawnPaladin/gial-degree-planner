@@ -9,6 +9,7 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
     Restangular.restangularizeElement(null, concentration, 'concentrations');
     exports.current = concentration;
     concentration.has_thesis_track = !!concentration.thesis_track;
+    console.log(concentration);
   };
 
   exports.save = function() {
@@ -31,11 +32,30 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
 
   exports.createCategory = function() {
     console.log(exports.current.categories);
-    exports.current.categories.push({
+    exports.current.categories.unshift({
       concentration_id: exports.current.id,
       courses: [],
       name: "New category",
       required_units: 0
+    });
+  };
+
+  function Concentration(degree, name) {
+    this.name = name;
+    this.degree_id = degree.id;
+    this.categories = [];
+  }
+
+  exports.createConcentration = function(degree, name) {
+    var obj = new Concentration(degree, name);
+    Restangular.restangularizeElement(null, obj, 'concentrations');
+    return obj.post().then(function(newConcentration) {
+      Flash.create("success", "Concentration created");
+      exports.loadConcentration(newConcentration);
+      return newConcentration;
+    }, function(response) {
+      console.warn(response);
+      Flash.create("danger", "Concentration could not be created. See console for details.");
     });
   };
 

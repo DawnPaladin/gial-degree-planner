@@ -7,12 +7,6 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     $scope.concentrationService = concentrationService;
     concentrationService.setup(degree);
 
-    function Concentration() {
-      this.name = "";
-      this.degree_id = degree.id;
-    }
-    $scope.newConcentration = new Concentration();
-
     $scope.removeElementFromArray = function(element, array) {
       var index = array.indexOf(element);
       array.splice(index, 1);
@@ -38,11 +32,13 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       concentrationService.loadConcentration(concentration, $scope);
     };
 
-    $scope.createConcentration = function() {
-      $scope.degree.concentrations.push($scope.newConcentration);
+    $scope.createConcentration = function(name) {
       $scope.addConcentrationVisible = false;
-      $scope.currentConcentration = $scope.newConcentration;
-      $scope.newConcentration = new Concentration();
+      concentrationService.createConcentration(degree, name).then(function(newConcentration) {
+        $scope.degree.concentrations.push(newConcentration);
+        $scope.currentConcentration = newConcentration;
+        $scope.newConcentrationName = "";
+      });
     };
 
     $scope.deleteConcentration = function(concentration) {

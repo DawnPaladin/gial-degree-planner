@@ -22,8 +22,8 @@
         <span class="clickable add-to-list" ng-click="addConcentrationVisible = true" ng-hide="addConcentrationVisible"><span class="glyphicon glyphicon-plus"></span> Add concentration</span>
       </ul>
       <div ng-show="addConcentrationVisible">
-        <input ng-model="newConcentration.name">
-        <button ng-click="createConcentration()">
+        <input ng-model="newConcentrationName">
+        <button ng-click="createConcentration(newConcentrationName)">
           <span class="glyphicon glyphicon-ok"><span class="sr-only">OK</span></span>
         </button>
         <button ng-click="addConcentrationVisible = false">
