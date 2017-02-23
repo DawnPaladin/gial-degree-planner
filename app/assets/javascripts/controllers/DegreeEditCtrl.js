@@ -1,5 +1,5 @@
-planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseService', 'concentrationService', 'Flash',
-  function($scope, $timeout, degree, courseService, concentrationService, Flash) {
+planner.controller('DegreeEditCtrl', ['$scope', '$timeout', '$window', 'degree', 'courseService', 'concentrationService', 'Flash',
+  function($scope, $timeout, $window, degree, courseService, concentrationService, Flash) {
     $scope.degree = degree;
     $scope.currentConcentration = {};
 
@@ -50,7 +50,7 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
     };
 
     $scope.deleteConcentration = function(concentration) {
-      if (confirm("Are you sure you wish to remove the " + concentration.name + " concentration?")) {
+      if ($window.confirm("Are you sure you wish to remove the " + concentration.name + " concentration?")) {
         concentration._destroy = true;
       }
     };
