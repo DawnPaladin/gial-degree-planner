@@ -279,6 +279,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
       for (var i = 0; i < elective_courses.length; i++) {
         if (elective_courses[i].scheduled) continue;
         elective_courses[i].scheduled = true;
+        break;
       }
     }
 
