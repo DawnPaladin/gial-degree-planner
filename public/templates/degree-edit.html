@@ -13,7 +13,7 @@
 
       <h2>Concentrations</h2>
       <ul>
-        <li ng-repeat="concentration in degree.concentrations">
+        <li ng-repeat="concentration in degree.concentrations | hideDeleted">
           {{ concentration.name }}
           <span class="clickable glyphicon glyphicon-edit" ng-click="editConcentration(concentration)"></span>
           <span class="clickable glyphicon glyphicon-remove" ng-click="deleteConcentration(concentration)"></span>
@@ -22,8 +22,8 @@
         <span class="clickable add-to-list" ng-click="addConcentrationVisible = true" ng-hide="addConcentrationVisible"><span class="glyphicon glyphicon-plus"></span> Add concentration</span>
       </ul>
       <div ng-show="addConcentrationVisible">
-        <input ng-model="newConcentration.name">
-        <button ng-click="createConcentration()">
+        <input ng-model="newConcentrationName">
+        <button ng-click="createConcentration(newConcentrationName)">
           <span class="glyphicon glyphicon-ok"><span class="sr-only">OK</span></span>
         </button>
         <button ng-click="addConcentrationVisible = false">
@@ -62,7 +62,7 @@
       <span class="clickable" ng-click="concentrationService.createCategory()">New category</span>
       <label class="pull-right"><input type="checkbox" ng-model="concentrationService.current.has_thesis_track"> Thesis option available</label>
 
-      <category-edit ng-repeat="category in concentrationService.current.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
+      <category-edit ng-repeat="category in concentrationService.current.categories | hideDeleted" category="category"></category-edit>
 
       <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
         <h3>Thesis track</h3>
@@ -91,7 +91,7 @@
         </table>
         <div class='required-units'>Units required: {{ concentrationService.current.non_thesis_track.elective_hours }}</div>
       </div>
-      <button class="btn btn-primary btn-block" ng-click="concentrationService.save()">Save concentration</button>
+      <button class="btn btn-primary btn-block" ng-click="saveConcentration()">Save concentration</button>
     </div>
   </div>
 </section>

@@ -6,7 +6,7 @@ json.degree do
   end
 end
 json.categories @categories do |category|
-  json.extract! category, :name, :required_units
+  json.extract! category, :name, :required_units, :id
   json.courses do
     json.array! category.courses
   end

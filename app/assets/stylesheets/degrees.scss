@@ -3,6 +3,10 @@
   margin-top: 3em;
 }
 
+.category-name {
+  display: inline-block;
+}
+
 .category-table {
   width: 100%;
   td {
@@ -16,7 +20,7 @@
 }
 
 .credits-input {
-  width: 2em;
+  width: 3em;
   background: #736f6f;
   padding: 2px;
   border: 0;
@@ -26,4 +30,8 @@
   display: inline-block;
   margin-left: -1.5em;
   margin-top: .25em;
+}
+
+.degree-edit {
+  margin-bottom: 1em;
 }
