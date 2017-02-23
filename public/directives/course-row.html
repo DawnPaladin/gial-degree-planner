@@ -5,19 +5,20 @@
            ng-change='checkboxCallback({course: course})'
            ng-disabled='course.required || course.scheduled'
            ng-if='!course.completed'>
+    <span ng-if='section === "completed"'>{{ index + 1 }}.</span>
   </td>
   <td ng-class="{'completed-course': course.completed, 'scheduled-course': course.scheduled }">
     <span>
       {{ course.number + ' ' + course.name }}
     </span>
-    <span ng-if='course.elective && !course.completed && !course.scheduled'
-          class='clickable'
+    <span ng-if='course.elective && (!course.scheduled && !course.intended && !course.completed)'
+          class='clickable sm-text'
           ng-click='deleteElective({course: course})'>
-          remove
+          (remove)
     </span>
-    <span ng-if='course.elective && !course.completed && course.scheduled'
+    <span ng-if='course.elective && (course.scheduled || course.intended || course.completed)'
           class='sm-text hover-highlight'>
-          (unschedule to remove)
+          (elective)
     </span>
   </td>
   <td class="text-right">
