@@ -1,4 +1,4 @@
-planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', 'planService', 'electiveService', function(Restangular, $timeout, courseService, planService, electiveService) {
+planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', 'planService', 'electiveService', 'concentrationService', function(Restangular, $timeout, courseService, planService, electiveService, concentrationService) {
   return {
     restrict: 'E',
     templateUrl: '/directives/category-edit.html',
@@ -60,6 +60,8 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
         var index = array.indexOf(element);
         array.splice(index, 1);
       };
+
+      scope.concentrationService = concentrationService;
 
       // scope.setCourse = function(course) {
       //   course = angular.copy(course, {});

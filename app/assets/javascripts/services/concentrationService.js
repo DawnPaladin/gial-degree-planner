@@ -7,9 +7,11 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
 
   exports.loadConcentration = function(concentration) {
     Restangular.restangularizeElement(null, concentration, 'concentrations');
-    exports.current = concentration;
-    concentration.has_thesis_track = !!concentration.thesis_track;
-    console.log(concentration);
+    concentration.get().then(function(response) {
+      exports.current = response;
+      response.has_thesis_track = !!response.thesis_track;
+      console.log('loaded', response);
+    });
   };
 
   exports.save = function() {
@@ -19,11 +21,15 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
         name: category.name,
         course_ids: category.courses.map(function(course) { return course.id; }),
         required_units: category.required_units,
+        _destroy: category._destroy,
       };
     });
-    exports.current.put().then(function() {
+    console.log("Outgoing concentration:", exports.current);
+    return exports.current.put().then(function(response) {
       Flash.create("success", "Concentration saved");
+      console.log("Saved concentration:", response)
       exports.current = null;
+      return response;
     }, function(response) {
       console.warn(response);
       Flash.create("danger", "Concentration could not be saved. See console for details.");
@@ -38,6 +44,10 @@ planner.factory('concentrationService', ['Restangular', 'Flash', function(Restan
       name: "New category",
       required_units: 0
     });
+  };
+
+  exports.deleteCategory = function(category) {
+    category._destroy = true;
   };
 
   function Concentration(degree, name) {

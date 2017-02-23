@@ -62,7 +62,7 @@
       <span class="clickable" ng-click="concentrationService.createCategory()">New category</span>
       <label class="pull-right"><input type="checkbox" ng-model="concentrationService.current.has_thesis_track"> Thesis option available</label>
 
-      <category-edit ng-repeat="category in concentrationService.current.categories" category="category" removeElementFromArray="removeElementFromArray"></category-edit>
+      <category-edit ng-repeat="category in concentrationService.current.categories | hideDeleted" category="category"></category-edit>
 
       <div class="category bordered course-section" ng-show="concentrationService.current.has_thesis_track">
         <h3>Thesis track</h3>
@@ -91,7 +91,7 @@
         </table>
         <div class='required-units'>Units required: {{ concentrationService.current.non_thesis_track.elective_hours }}</div>
       </div>
-      <button class="btn btn-primary btn-block" ng-click="concentrationService.save()">Save concentration</button>
+      <button class="btn btn-primary btn-block" ng-click="saveConcentration()">Save concentration</button>
     </div>
   </div>
 </section>

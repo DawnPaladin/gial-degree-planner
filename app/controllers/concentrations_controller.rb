@@ -14,7 +14,7 @@ class ConcentrationsController < ApplicationController
   def update
     @concentration = Concentration.find(params[:id])
     if @concentration.update(concentration_params)
-      render json: @concentration.to_json
+      render json: @concentration.to_json(include: :categories)
     else
       render json: @concentration.errors.full_messages.to_json
     end
@@ -30,7 +30,7 @@ class ConcentrationsController < ApplicationController
   end
 
   def concentration_params
-    params.permit(:id, :name, :degree_id, { categories_attributes: [:id, :concentration_id, :name, :required_units, course_ids: [] ]})
+    params.permit(:id, :name, :degree_id, { categories_attributes: [:id, :concentration_id, :name, :required_units, :_destroy, course_ids: [] ]})
   end
 
 end

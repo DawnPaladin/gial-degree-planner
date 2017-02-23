@@ -17,7 +17,18 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       $scope.degree.required_course_ids = $scope.degree.required_courses.map(function(course) {
         return course.id;
       });
-      $scope.degree.concentrations_attributes = $scope.degree.concentrations;
+      $scope.degree.concentrations_attributes = $scope.degree.concentrations.map(function(concentration) {
+        return {
+          id: concentration.id,
+          degree_id: degree.id,
+          name: concentration.name,
+          description: concentration.description,
+          _destroy: concentration._destroy,
+          category_ids: concentration.categories.map(function(category) {
+            return category.id;
+          }),
+        };
+      });
 
       $scope.degree.put().then(function(response) {
         console.log(response);
@@ -45,6 +56,20 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       if (confirm("Are you sure you wish to remove the " + concentration.name + " concentration?")) {
         concentration._destroy = true;
       }
+    };
+
+    $scope.saveConcentration = function() {
+      concentrationService.save().then(function(response) {
+        // find the id of the saved concentration
+        var id = response.id;
+
+        // replace the old concentration with the new one
+        var oldConcentration = $scope.degree.concentrations.filter(function(concentration) {
+          return concentration.id === id;
+        })[0];
+        var oldConcentrationIndex = $scope.degree.concentrations.indexOf(oldConcentration);
+        $scope.degree.concentrations.splice(oldConcentrationIndex, 1, response);
+      });
     };
 
     // "Add a core course" link + typeahead
