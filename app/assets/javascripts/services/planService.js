@@ -281,6 +281,13 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', function(
         elective_courses[i].scheduled = true;
         break;
       }
+    } else if (_.pluck(this.elective_courses, 'id').includes(course.course_id)) {
+      var elective_courses = _.where(this.elective_courses, { id: course.course_id });
+      for (var i = 0; i < elective_courses.length; i++) {
+        if (elective_courses[i].scheduled) continue;
+        elective_courses[i].scheduled = true;
+        break;
+      }
     }
 
     if (!this.coursesById[course.course_id]) {
