@@ -87,14 +87,16 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', 'degree', 'courseSer
       });
     };
     $scope.hideCourseInput = function() {
-      if (event.relatedTarget === null)
-        $scope.addingCoreCourse = false;
+      if (event.relatedTarget === null) {
+        $timeout(function() { $scope.addingCoreCourse = false; });
+      }
     };
     $scope.addCoreCourse = function(courseName) {
       var course = $scope.courses.filter(function(obj) {
         return obj.id === courseName.id;
       })[0];
       $scope.degree.required_courses.push(course);
+      $scope.hideCourseInput();
     };
 
   }
