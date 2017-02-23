@@ -9,7 +9,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
     },
     link: function(scope) {
 
-      scope.course = angular.copy(scope.course, {});
+      scope.courseParams = angular.copy(scope.course, {});
 
       scope.levels = ['Graduate', 'Undergrad'];
       termService.getTerms()
@@ -23,36 +23,51 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         });
       
       scope.$watch('course', function() {
-        if (scope.course && !scope.course.sessions) {
-          scope.course.session_ids = [];
+        angular.copy(scope.course, scope.courseParams);
+        if (scope.courseParams && !scope.courseParams.sessions) {
+          scope.courseParams.session_ids = [];
+          scope.courseParams.pristineSessions = true;
         } else {
-          scope.course.session_ids = scope.course.sessions.map(function(session) {
+          scope.courseParams.session_ids = scope.courseParams.sessions.map(function(session) {
             return session.id;
           });
         }
+      }, true);
+
+      scope.$watch("courseParams", function(){
+        scope.checkFormValidity();
+      }, true);
+
+      angular.element(document.body).on('hide.bs.modal', function () {
+          if (!scope.courseParams.id) {
+            scope.courseParams = { pristineSessions: true, session_ids: [] };
+            scope.courseForm.$setPristine();
+            scope.courseForm.$setUntouched();
+          }
       });
-      
 
       scope.toggleSelection = function toggleSelection(sessionId) {
-        var idx = scope.course.session_ids.indexOf(sessionId);
+        scope.courseParams.pristineSessions = false;
+        var idx = scope.courseParams.session_ids.indexOf(sessionId);
         if (idx > -1) {
-          scope.course.session_ids.splice(idx, 1);
+          scope.courseParams.session_ids.splice(idx, 1);
         }
         else {
-          scope.course.session_ids.push(sessionId);
+          scope.courseParams.session_ids.push(sessionId);
         }
+        scope.checkFormValidity();
       };
 
       scope.submitForm = function(formValid) {
         var continuousSessions = checkSessionsContinuous();
         if (formValid && continuousSessions) {
-          if (scope.course.id) {
-            return courseService.update(scope.course)
+          if (scope.courseParams.id) {
+            return courseService.update(scope.courseParams)
               .then(function() {
                 angular.element("[data-dismiss=modal]").click();
               });
           } else {
-            courseService.create(scope.course)
+            courseService.create(scope.courseParams)
               .then(function(course) {
                 // example of afterSave: addElective which takes
                 // the created course and adds it as an elective
@@ -72,8 +87,15 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         }
       };
 
+      scope.checkFormValidity = function() {
+        scope.continuousSessions = checkSessionsContinuous();
+        var validFields = checkValidFields();
+        scope.courseForm.$valid = validFields && !!scope.courseParams.session_ids.length && scope.continuousSessions;
+        scope.courseForm.$invalid = !scope.courseForm.$valid;
+      };
+
       var checkSessionsContinuous = function() {
-        var sessions = scope.course.session_ids;
+        var sessions = scope.courseParams.session_ids;
         if (!sessions.length) {
           return false;
         } else if (sessions.length === 1) {
@@ -81,6 +103,16 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         }
 
         return (Math.max.apply(null, sessions) - Math.min.apply(null, sessions)) === sessions.length - 1;
+      };
+
+      var checkValidFields = function() {
+        return scope.courseForm.$$controls.every(function(field) {
+          return field.$valid;
+        });
+      };
+
+      scope.buttonValue = function() {
+        return scope.courseParams.id ? 'Update Course' : 'Create Course';
       };
 
     }
