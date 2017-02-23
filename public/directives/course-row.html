@@ -3,17 +3,21 @@
     <input type="checkbox"
            ng-model='course.intended'
            ng-change='checkboxCallback({course: course})'
-           ng-disabled='course.required'
+           ng-disabled='course.required || course.scheduled'
            ng-if='!course.completed'>
   </td>
   <td ng-class="{'completed-course': course.completed, 'scheduled-course': course.scheduled }">
     <span>
       {{ course.number + ' ' + course.name }}
     </span>
-    <span ng-if='course.elective && !course.completed'
+    <span ng-if='course.elective && !course.completed && !course.scheduled'
           class='clickable'
           ng-click='deleteElective({course: course})'>
           remove
+    </span>
+    <span ng-if='course.elective && !course.completed && course.scheduled'
+          class='sm-text hover-highlight'>
+          (unschedule to remove)
     </span>
   </td>
   <td class="text-right">
