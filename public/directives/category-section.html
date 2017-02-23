@@ -38,7 +38,7 @@
                bs3-promise='availableElectives'
                ng-model='addedCourse'
                bs3-afterSelect='addElective'
-               bs3-addItem='newCourse'>
+               bs3-addItem='noneFound'>
 
         <span class="clickable add-course-link"
               ng-if='!addingClass'
@@ -54,13 +54,14 @@
 
 </div>
 
+<!-- features to add new course
 <modal id='new-course-form'
        category='category'
        afterSave='addElective(course)'
        >
   <modal-title>New Course</modal-title>
   <modal-body>
-    <course-form></course-form>
+    <course-form course='courseParams'></course-form>
   </modal-body>
   <modal-footer>some buttons or something</modal-footer>
-</modal>
+</modal> -->

@@ -9,8 +9,7 @@ planner.directive('modal', [function() {
     templateUrl: '/directives/modal.html',
     transclude: {
       title: '?modalTitle',
-      body: 'modalBody',
-      footer: '?modalFooter'
+      body: 'modalBody'
     },
     replace: true
   };

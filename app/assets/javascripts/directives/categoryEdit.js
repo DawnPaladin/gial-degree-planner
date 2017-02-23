@@ -1,4 +1,4 @@
-planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', 'planService', 'electiveService', function(Restangular, $timeout, courseService, planService, electiveService) {
+planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', 'planService', 'electiveService', 'concentrationService', function(Restangular, $timeout, courseService, planService, electiveService, concentrationService) {
   return {
     restrict: 'E',
     templateUrl: '/directives/category-edit.html',
@@ -25,21 +25,9 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
             return obj.id === misnamedCourse.id;
           })[0];
           scope.category.courses.push(course);
+          scope.hideClassInput(true);
         });
       };
-
-      // scope.deleteCourse = function(course) {
-      //   var elective_id = course.elective_id;
-      //   electiveService.remove(elective_id)
-      //     .then(function(elective) {
-      //       if (elective.intended)
-      //
-      //         scope.planInfo.plan.intended_id = elective.course_id;
-      //       if (elective.completed)
-      //         scope.planInfo.plan.completed_id = elective.course_id;
-      //         planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
-      //     });
-      // };
 
       // show typeahead
       scope.showClassInput = function() {
@@ -50,9 +38,10 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
       };
 
       // hide typeahead
-      scope.hideClassInput = function() {
-        if (event.relatedTarget === null)
-          scope.addingClass = false;
+      scope.hideClassInput = function(override) {
+        if ((event && event.relatedTarget === null) || override === true) {
+          $timeout(function() { scope.addingClass = false; });
+        }
       };
 
       // utility
@@ -61,12 +50,7 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
         array.splice(index, 1);
       };
 
-      // scope.setCourse = function(course) {
-      //   course = angular.copy(course, {});
-      //   course.category_id = scope.category.id;
-      //   scope.category.courses.push(course);
-      // };
-
+      scope.concentrationService = concentrationService;
 
     }
   };

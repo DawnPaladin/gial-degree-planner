@@ -3,17 +3,22 @@
     <input type="checkbox"
            ng-model='course.intended'
            ng-change='checkboxCallback({course: course})'
-           ng-disabled='course.required'
+           ng-disabled='course.required || course.scheduled'
            ng-if='!course.completed'>
+    <span ng-if='section === "completed"'>{{ index + 1 }}.</span>
   </td>
   <td ng-class="{'completed-course': course.completed, 'scheduled-course': course.scheduled }">
     <span>
       {{ course.number + ' ' + course.name }}
     </span>
-    <span ng-if='course.elective && !course.completed'
-          class='clickable'
+    <span ng-if='course.elective && (!course.scheduled && !course.intended && !course.completed)'
+          class='clickable sm-text'
           ng-click='deleteElective({course: course})'>
-          remove
+          (remove)
+    </span>
+    <span ng-if='course.elective && (course.scheduled || course.intended || course.completed)'
+          class='sm-text hover-highlight'>
+          (elective)
     </span>
   </td>
   <td class="text-right">
@@ -26,10 +31,16 @@
       Uncomplete
     </button>
 
-    <button ng-if="section === 'intended'"
+    <button ng-if="section === 'intended' && !course.scheduled"
             ng-click='buttonCallback({course: course})'
             class="btn btn-primary">
       Complete
+    </button>
+
+    <button ng-if="section === 'intended' && course.scheduled"
+            disabled
+            class="btn">
+      Scheduled
     </button>
 
   </td>

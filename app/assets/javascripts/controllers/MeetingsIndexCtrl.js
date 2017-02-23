@@ -1,5 +1,5 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
-  function($scope, courses, meetingService) {
+planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', '_',
+  function($scope, courses, meetingService, _) {
     $scope.courses = courses;
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
@@ -10,31 +10,37 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
     });
 
     var meetings = [];
-    courses.forEach(function(course) {
+    courses.forEach(function getCourseAttendance(course) {
       meetings.push.apply(meetings, course.meetings);
       course.attendance = [];
-      var yearAttendance = {
-        spring: "",
-        summer: "",
-        fall: "",
-        any: ""
-      };
-      course.meetings.forEach(function(meeting) {
-        var term = meeting.term.toLowerCase();
-        yearAttendance[term] = {
-          count: meeting.enrollments.length,
-          meeting_id: meeting.id
+      years.forEach(function(year) {
+        var yearAttendance = {
+          spring: {},
+          summer: {},
+          fall: {},
+          any: {},
         };
-      });
-      years.forEach(function() {
+        // find the course meeting for this year
+        var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
+        var term = thisYearsMeeting.term.toLowerCase();
+        yearAttendance[term] = {
+          count: thisYearsMeeting.enrollments.length,
+          meeting_id: thisYearsMeeting.id,
+        };
         course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
       });
     });
 
+    $scope.newCourse = {};
+    $scope.course = {};
 
-
-    $scope.showCourseModal = function() {
+    $scope.showNewCourseModal = function() {
       angular.element('#new-course-form').modal('show');
+    };
+
+    $scope.showEditCourseModal = function(course) {
+      angular.copy(course, $scope.course);
+      angular.element('#edit-course-form').modal('show');
     };
 
     $scope.showMeeting = function(id) {
@@ -45,8 +51,6 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
         }, function(error) {
           console.error(error);
         });
-
     };
-
   }
 ]);

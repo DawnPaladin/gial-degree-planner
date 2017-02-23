@@ -54,6 +54,8 @@ if @plan.concentration
   json.elective_courses do
     json.array! @plan.electives do |elective|
       json.extract! elective.course, *elective.course.attributes.keys
+      json.term elective.course.term
+      json.sessions elective.course.sessions
       json.category_name elective.category_name
       json.elective_id elective.id
       json.completed elective.completed

@@ -32,6 +32,6 @@ planner.controller('IPSChooseCtrl', ['$scope', '$state', '$rootScope', 'student'
           $scope.planInfo.plan.completed_id = elective.course_id;
         planService.update($scope.planInfo.plan, $scope.planInfo.plan.latest_registered);
       });
-  }
+  };
 
 }]);

@@ -11,5 +11,5 @@ class Concentration < ApplicationRecord
 
   belongs_to :degree
 
-  accepts_nested_attributes_for :categories
+  accepts_nested_attributes_for :categories, allow_destroy: true
 end

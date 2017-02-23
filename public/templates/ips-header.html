@@ -14,17 +14,35 @@
       <div class="degree-info form-inline">
 
         <div class="main-info">
-          <span class='degree'>MA with Major in World Arts -- Concentration: </span>
+          <span class='degree'>MA with Major in World Arts &mdash; Concentration: </span>
 
-          <select ng-model='plan.concentration_id'
-                  ng-options='concentration.id as concentration.name for concentration in concentrations'
-                  ng-change='updatePlan()'
-                  class='form-control'
-                  ng-disabled="concentrationDisabled">
-            <option value=""></option>
-          </select>
+          <div class="concentration-info">
+            <select ng-model='plan.concentration_id'
+                    ng-options='concentration.id as concentration.name for concentration in concentrations'
+                    ng-change='updatePlan()'
+                    class='form-control'
+                    ng-disabled="concentrationDisabled">
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="graduating-info">
+            <span class='graduating'>Graduating:</span>
+            <select ng-model='plan.graduation_term'
+                    ng-options='term for term in terms'
+                    class='form-control'
+                    ng-change='updatePlan()'>
+              <option value=""></option>
+            </select>
+
+            <select ng-model='plan.graduation_year'
+                    ng-options='year for year in planInfo.possibleYears'
+                    class='form-control'
+                    ng-change="updatePlan()">
+              <option value=""></option>
+            </select>
+          </div>
         </div>
-
+        
         <div class="additional-info">
           <div class="graduating-info">
             <span class='graduating'>Graduating:</span>
@@ -49,7 +67,6 @@
             <p ng-if="plan.registration_date" class='tagline' >An intended plan of study for {{ student.first_name }} was last registered on {{ plan.registration_date | date }}</p>
           </div>
         </div>
-
       </div>
     </div>
   </div>

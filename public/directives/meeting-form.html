@@ -1,66 +1,84 @@
 <form ng-model='meeting' class='modal-form meeting-form' ng-submit='updateMeeting(meeting)'>
 
-  <div class="row">
+<!--   <div class="row">
     <div class="col-xs-12 canceled">
       <input type="checkbox" id='cancel' ng-model='meeting.canceled'>
       <label for="cancel" class='radio-label'>Canceled</label>
     </div>
-  </div>
+  </div> -->
 
   <div class="row">
-    <div class="teacher col-xs-9">
+    <div class="col-xs-9">
       
-      <span ng-if='!meeting.teachers_attributes.length && !addingTeacher'>There has been no teacher declared for this class. Click below to add one.</span>
-      <h3 ng-if='meeting.teachers_attributes.length'>Taught by:</h3>
-
-      <div ng-repeat='teacher in meeting.teachers_attributes'>
-        <p class='teacher-name'>{{ teacher.title }} {{teacher.first_name }} {{ teacher.last_name }}</p>
-      </div>
-
-      <div class="form-group teacher-form" ng-if='addingTeacher'>
-        <label for="new-teacher" class='barrier-label'>New Teacher</label>
-        <select name="title"
-                class='form-control title-select'
-                ng-model='newTeacher.title'
-                ng-options='title for title in titles'>
-          <option value="" class='select-placeholder' disabled selected>Title</option>
-        </select> 
-        <input type="text"
-               class='form-control name-input first-name'
-               placeholder="First name" 
-               id='new-teacher'
-               ng-model='newTeacher.first_name'> <!--
-        --><input type="text"
-               class='form-control name-input last-name'
-               placeholder="Last name" 
-               id='teacher'
-               ng-model='newTeacher.last_name'>
-      </div>
-      <div class="add-teacher-options">
-        <p ng-if='!addingTeacher'
-              class='clickable'
-              ng-click='showInput()'>&#43; Add a teacher</p>
-        <div ng-if='addingTeacher'>
-          <span class="clickable pull-left"
-                ng-click='hideInput()'>cancel</span>
-          <span class="clickable pull-right"
-                ng-click='addTeacher()'>save</span>
+      <div class="teacher">
+        <h4>Taught by:</h4>
+        <span ng-if='!meeting.teachers_attributes.length && !addingTeacher'>No teacher declared for this class. Click below to add one.</span>
+        
+        <div ng-repeat='teacher in meeting.teachers_attributes'>
+          <p class='teacher-name'>{{ teacher.title }} {{teacher.first_name }} {{ teacher.last_name }}</p>
+        </div>
+        
+        <div class="form-group teacher-form" ng-if='addingTeacher'>
+          <label for="new-teacher" class='barrier-label'>New Teacher</label>
+          <select name="title"
+                  class='form-control title-select'
+                  ng-model='newTeacher.title'
+                  ng-options='title for title in titles'>
+            <option value="" class='select-placeholder' disabled selected>Title</option>
+          </select> 
+          <input type="text"
+                 class='form-control name-input first-name'
+                 placeholder="First name" 
+                 id='new-teacher'
+                 ng-model='newTeacher.first_name'> <!--
+          --><input type="text"
+                 class='form-control name-input last-name'
+                 placeholder="Last name" 
+                 id='teacher'
+                 ng-model='newTeacher.last_name'>
+        </div>
+        <div class="add-teacher-options">
+          <p ng-if='!addingTeacher'
+                class='clickable'
+                ng-click='showInput()'>&#43; Add a teacher</p>
+          <div ng-if='addingTeacher'>
+            <span class="clickable pull-left"
+                  ng-click='hideInput()'>cancel</span>
+            <span class="clickable pull-right"
+                  ng-click='addTeacher()'>save</span>
+          </div>
         </div>
       </div>
-
-      <input type='submit' class="btn btn-block btn-success" value='Update Class'>
+      
+      <div class="enrolled-students">
+        <h4>Currently Enrolled: </h4>
+        <ul class='enrolled-students-list'>
+          <li ng-repeat='student in meeting.students'>
+            {{ student.name }}, <span class="tagline">{{ student.email }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="teaching-style col-xs-3">
-      <label for="distance" class='radio-label warning'>
-      <input type="radio" ng-model='meeting.teaching_style' value='Distance' id='distance'>
-      Distance</label>
-      <br>
-      <input type="radio" ng-model='meeting.teaching_style' value='Residential' id='residential'>
-      <label for="residential" class='radio-label'>Residential</label>
-      <br>
-      <input type="radio" ng-model='meeting.teaching_style' value='Intensive' id='intensive'>
-      <label for="intensive" class='radio-label'>Intensive</label>
+    <div class="col-xs-3">
+      
+      <div class="canceled">
+        <input type="checkbox" id='cancel' ng-model='meeting.canceled'>
+        <label for="cancel" class='checkbox-label'>Canceled</label>
+      </div>
+
+      <div class="teaching-style">
+        <label for="distance" class='radio-label warning'>
+        <input type="radio" ng-model='meeting.teaching_style' value='Distance' id='distance'>
+        Distance</label>
+        <br>
+        <input type="radio" ng-model='meeting.teaching_style' value='Residential' id='residential'>
+        <label for="residential" class='radio-label'>Residential</label>
+        <br>
+        <input type="radio" ng-model='meeting.teaching_style' value='Intensive' id='intensive'>
+        <label for="intensive" class='radio-label'>Intensive</label>
+      </div>
+      <input type='submit' class="btn btn-block btn-success" value='Update Class' ng-disabled='addingTeacher'>
     </div>
   </div>
 </form>

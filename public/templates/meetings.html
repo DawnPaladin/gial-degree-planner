@@ -3,8 +3,9 @@
     <flash-message></flash-message>
   </div>
 
-  <button id="new-student-button" class="btn btn-default" ng-click="showCourseModal()">&#43; New course</button>
-  <h3>Classes</h3>
+
+<button id="new-student-button" class="btn btn-default" ng-click="showNewCourseModal()">&#43; New course</button>
+<h3>Classes</h3>
 
   <table class="table">
     <colgroup>
@@ -20,7 +21,7 @@
     </thead>
 
     <tr ng-repeat="course in courses | filter: filteredCourses">
-      <td>{{ course.number }} {{ course.name }}</td>
+      <td><span class="clickable" ng-click='showEditCourseModal(course)'>{{ course.number }} {{ course.name }}</span></td>
       <td ng-repeat="termAttendance in course.attendance track by $index" class="text-center">
         <span class='clickable'
               ng-click='showMeeting(termAttendance.meeting_id)'>
@@ -34,14 +35,20 @@
   <modal id='new-course-form'>
     <modal-title>New Course</modal-title>
     <modal-body>
-      <course-form></course-form>
+      <course-form course='newCourse'></course-form>
     </modal-body>
-    <!-- <modal-footer></modal-footer> -->
+  </modal>
+
+  <modal id='edit-course-form'>
+    <modal-title>Edit Course</modal-title>
+    <modal-body>
+      <course-form course='course' ng-if='course'></course-form>
+    </modal-body>
   </modal>
 
   <modal id='edit-meeting'>
     <modal-title>
-      <h3>Edit Class: {{ meeting.course.full_name }}</h3>
+      <h3>{{ meeting.course.full_name }}</h3>
       <p class="tagline">{{ meeting.sessions | sessionFilter }}, {{ meeting.term }} {{ meeting.year }}</p>
     </modal-title>
     <modal-body>
