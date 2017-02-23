@@ -1,0 +1,137 @@
+@media print {
+
+  .ips-heading {
+    display: none;
+  }
+
+  .ips-summary {
+    padding: 0;
+  }
+
+  .col-sm-6 {
+    width: 50%;
+    float: left;
+  }
+
+}
+
+.ips-summary {
+
+  background: #fff;
+  font-family: $serif;
+  padding: 20px 40px;
+  margin-bottom: 40px;
+  font-size: 0.85em;
+
+  p {
+    margin: 0;
+  }
+  
+  .summary-concentration {
+    text-decoration: underline;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto 5px;
+    max-width: 120px;
+  }
+
+  .info-underline {
+    margin: 10px 0 20px;
+    p {
+      border-bottom: 2px dashed #555;
+    }
+  }
+
+  .captions {
+    display: flex;
+    justify-content: space-between;
+    .major {
+      margin-left: 90px;
+    }
+  }
+
+  .graduation-summary {
+    margin: 10px 0 20px;
+    h2 {
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 2px solid #555;
+      margin: 0;
+    }
+    .summary-grad-date {
+      float: right;
+    }
+  }
+
+  .summary-prerequisites {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #555;
+
+    .prereq-underline {
+      border-bottom: 1px solid #555;
+      margin: 20px 5px 0 0;
+    }
+  }
+
+  .transfer-credit {
+    margin-bottom: 5px;
+  }
+
+  .summary-plan {
+    width: 100%;
+    margin: 5px 0;
+    td {
+      border: 1px solid #555;
+      padding: 3px 6px;
+    }
+    td:last-child {
+      width: 12%;
+    }
+    .summary-available-courses {
+      display: block;
+      min-height: 1.4em;
+    }
+    .fill-in {
+      border-bottom: 1px dashed #555;
+    }
+    .summary-dates {
+      float: right;
+    }
+  }
+
+  .signatures {
+    h3 {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+  }
+
+  .approval {
+    p {
+      border-bottom: 1px solid #555;
+    }
+  }
+
+  .line {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .watermark {
+    color: #999;
+  }
+
+}
+
+.tabs .tab.print-tab {
+  background: $brand-orange;
+  border-color: $brand-orange;
+}
+
+.tabs .tab.print-tab:hover {
+  cursor: pointer;
+}

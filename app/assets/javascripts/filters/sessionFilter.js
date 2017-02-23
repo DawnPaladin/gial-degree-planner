@@ -2,8 +2,9 @@ planner.filter('sessionFilter', function() {
 
   return function(sessions) {
 
-    if (sessions == undefined || !sessions.length) {
-      return 'Sessions TBA';
+
+    if (sessions == undefined || sessions.length == 0) {
+      return '';
     }
 
     if (sessions.length === 1) {
