@@ -48,7 +48,7 @@
 
   <modal id='edit-meeting'>
     <modal-title>
-      <h3>Edit Class: {{ meeting.course.full_name }}</h3>
+      <h3>{{ meeting.course.full_name }}</h3>
       <p class="tagline">{{ meeting.sessions | sessionFilter }}, {{ meeting.term }} {{ meeting.year }}</p>
     </modal-title>
     <modal-body>
