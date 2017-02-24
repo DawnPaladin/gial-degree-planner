@@ -1,17 +1,26 @@
-planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 'students', 'Auth', 'Flash',
-  function($scope, Restangular, advisors, students, Auth, Flash) {
+planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash', 'studentService', 'advisorService',
+  function($scope, Restangular, Auth, Flash, studentService, advisorService) {
 
-    $scope.advisors = advisors;
-    $scope.students = students;
+    studentService.getAll().then(function(students) {
+      $scope.students = students;
+      getCurrentUser();
+    });
+
+    advisorService.getAll().then(function(advisors) {
+      $scope.advisors = advisors;
+    });    
+
     $scope.property = "last_name";
     $scope.reverse = false;
 
-    Auth.currentUser().then(function(advisor) {
-      $scope.currentAdvisor = advisor;
-      $scope.students.forEach(function(student) {
-        updatePinned(student);
+    var getCurrentUser = function() {
+      Auth.currentUser().then(function(advisor) {
+        $scope.currentAdvisor = advisor;
+        $scope.students.forEach(function(student) {
+          updatePinned(student);
+        });
       });
-    });
+    }
 
     var updatePinned = function(student) {
       student.pinned = student.advisor.id === $scope.currentAdvisor.id;

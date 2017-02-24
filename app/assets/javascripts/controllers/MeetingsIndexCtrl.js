@@ -1,6 +1,9 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
-  function($scope, courses, meetingService) {
-    $scope.courses = courses;
+planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService',
+  function($scope, meetingService) {
+    meetingService.getAll().then(function(courses) {
+      $scope.courses = courses;
+      initializeMeetings();
+    });
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
     $scope.termHeader = [];
@@ -9,27 +12,29 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService',
       $scope.termHeader.push.apply($scope.termHeader, terms);
     });
 
-    var meetings = [];
-    courses.forEach(function(course) {
-      meetings.push.apply(meetings, course.meetings);
-      course.attendance = [];
-      var yearAttendance = {
-        spring: "",
-        summer: "",
-        fall: "",
-        any: ""
-      };
-      course.meetings.forEach(function(meeting) {
-        var term = meeting.term.toLowerCase();
-        yearAttendance[term] = {
-          count: meeting.enrollments.length,
-          meeting_id: meeting.id
+    var initializeMeetings = function() {
+      var meetings = [];
+      $scope.courses.forEach(function(course) {
+        meetings.push.apply(meetings, course.meetings);
+        course.attendance = [];
+        var yearAttendance = {
+          spring: "",
+          summer: "",
+          fall: "",
+          any: ""
         };
+        course.meetings.forEach(function(meeting) {
+          var term = meeting.term.toLowerCase();
+          yearAttendance[term] = {
+            count: meeting.enrollments.length,
+            meeting_id: meeting.id
+          };
+        });
+        years.forEach(function() {
+          course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+        });
       });
-      years.forEach(function() {
-        course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
-      });
-    });
+    };
 
 
 

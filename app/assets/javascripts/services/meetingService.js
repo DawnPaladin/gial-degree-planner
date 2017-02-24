@@ -1,5 +1,9 @@
 planner.factory('meetingService', ['Restangular', function(Restangular) {
   
+  var getAll = function() {
+    return Restangular.all('courses').getList();
+  };
+
   var get = function(id) {
     return Restangular.one('meetings', id).get();
   };
@@ -10,7 +14,8 @@ planner.factory('meetingService', ['Restangular', function(Restangular) {
 
   return {
     get: get,
-    update: update
+    update: update,
+    getAll: getAll
   };
 
 }]);
