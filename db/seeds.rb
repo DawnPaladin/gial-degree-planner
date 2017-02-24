@@ -304,7 +304,7 @@ conc = degree.concentrations.create({
     "Field Methods",
     "Field Data Management",
     "Discourse Analysis",
-    "Semantic and Pragmatics",
+    "Semantics and Pragmatics",
   ])
   cat = conc.categories.create({
     name: "Choose one of the following",
