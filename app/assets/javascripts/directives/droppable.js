@@ -28,8 +28,6 @@ planner.directive('droppable', function() {
           // if the term id on this session
           // does not match the term id on the bubble being dragged
           // do not allow the drop to execute
-          console.log(e.target)
-          console.log(that)
 
           // var item = document.getElementById((JSON.parse(e.dataTransfer.getData('Text'))).id);
           var item = angular.element('.drag')[0];
