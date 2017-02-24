@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
 
   before_action :set_meeting, only: [:show, :update]
+  before_action :require_admin, only: [:update]
 
   def show
   end
@@ -9,7 +10,7 @@ class MeetingsController < ApplicationController
     if @meeting.update_attributes(meeting_params)
       render :show
     else
-      render json: @course.errors, status: :unprocessable_entity
+      render json: @meeting.errors, status: :unprocessable_entity
     end
   end
 

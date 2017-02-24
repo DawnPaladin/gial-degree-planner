@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # Necessary for APIs?
   before_action :authenticate_advisor!
 
   protected

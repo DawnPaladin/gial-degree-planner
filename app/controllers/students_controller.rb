@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
 
+  before_action :require_admin, only: [:update, :create]
+
   def index
     @students = Student.all
   end
@@ -9,7 +11,6 @@ class StudentsController < ApplicationController
     @plan = @student.plan
     @degree = @plan.degree
     @term = @plan.graduation_term
-    # renders the jbuilder
   end
 
   def update
