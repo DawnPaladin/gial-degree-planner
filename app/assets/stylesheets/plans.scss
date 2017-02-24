@@ -14,37 +14,37 @@
 }
 // header
 .main-header {
-  font-size: 2.3em;
+  font-size: 2.2em;
   font-weight: 600;
   display: inline;
 }
-
+.main-info {
+  margin-top: 14px;
+}
+.degree {
+  font-family: $serif;
+  font-size: 1.4em;
+  vertical-align: middle;
+}
 .degree-info {
-  .degree {
-    font-family: $serif;
-    font-size: 2.0em;
-  }
   .registered-info {
     float: left;
-    margin-left: 25px;
   }
   .graduating-info {
     float: left;
     line-height: 3.4em;
     .graduating {
       font-family: $serif;
-      font-size: 1.8em;
+      font-size: 1.5em;
+      vertical-align: middle;
     }
   }
   .registration-confirmation {
     font-size: 1em;
   }
-  .main-info {
-    margin-top: 14px;
-  }
+
   .additional-info {
     display: inline-block;
-    margin-top: 8px;
   }
 }
 
