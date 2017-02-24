@@ -7,6 +7,10 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     else { return _fetchCourses(); }
   };
 
+  var setCourses = function(courses) {
+    _courses = courses;
+  };
+
   var create = function(params) {
     return Restangular.all('courses')
       .post(params)
@@ -73,7 +77,8 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
   return {
     getCourses: getCourses,
     create: create,
-    update: update
+    update: update,
+    setCourses: setCourses
   };
 
 }]);

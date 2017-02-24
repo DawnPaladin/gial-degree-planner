@@ -3,10 +3,9 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
     
     meetingService.getAll().then(function(courses) {
       $scope.courses = courses;
+      courseService.setCourses($scope.courses);
       initializeMeetings();
     });
-
-    courseService.getCourses();
 
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
