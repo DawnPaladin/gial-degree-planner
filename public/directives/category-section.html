@@ -17,7 +17,7 @@
     </div>
 
   <table class="full-width">
-    <tr course-row ng-repeat='availableCourse in category.courses'
+    <tr course-row ng-repeat='availableCourse in category.courses | orderBy : "number"'
         course='availableCourse'
         checkbox-callback='addOrRemoveIntended(course)'
         delete-elective='deleteElective(course)'
