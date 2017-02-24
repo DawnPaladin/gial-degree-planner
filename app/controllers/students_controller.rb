@@ -3,11 +3,11 @@ class StudentsController < ApplicationController
   before_action :require_admin, only: [:update, :create]
 
   def index
-    @students = Student.all
+    @students = Student.includes(:advisor, { plan: [:concentration]})
   end
 
   def show
-    @student = Student.find(params[:id])
+    @student = Student.includes(plan: [{ degree: [:concentrations, :required_courses]}]).find(params[:id])
     @plan = @student.plan
     @degree = @plan.degree
     @term = @plan.graduation_term

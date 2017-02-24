@@ -1,4 +1,4 @@
-<section class="classes-index">
+
   <div class="flash-container">
     <flash-message></flash-message>
   </div>
@@ -7,18 +7,26 @@
 <button id="new-student-button" class="btn btn-default" ng-click="showNewCourseModal()" ng-if='currentAdvisor.is_admin'>&#43; New course</button>
 <h3>Classes</h3>
 
-  <table class="table">
-    <colgroup>
-      <col>
-      <col span="4" class="zebra-col">
-      <col span="4">
-      <col span="4" class="zebra-col">
-      <col span="4">
-    </colgroup>
-    <thead>
-      <th><input placeholder="Filter courses" ng-model="filteredCourses" class="form-control"></th>
-      <th ng-repeat="term in termHeader track by $index" ng-class="{noBold: $index % 4 !== 0}" class="text-center">{{ term }}</th>
-    </thead>
+  <section ng-if="!courses" class="loading-container">
+    <div class="loading-items">
+      <h3>Loading Classes</h3>
+      <div class="spinner"></div>
+    </div>
+  </section>
+
+  <section ng-if="courses" class="classes-index">
+    <table class="table">
+      <colgroup>
+        <col>
+        <col span="4" class="zebra-col">
+        <col span="4">
+        <col span="4" class="zebra-col">
+        <col span="4">
+      </colgroup>
+      <thead>
+        <th><input placeholder="Filter courses" ng-model="filteredCourses" class="form-control"></th>
+        <th ng-repeat="term in termHeader track by $index" ng-class="{noBold: $index % 4 !== 0}" class="text-center">{{ term }}</th>
+      </thead>
 
     <tr ng-repeat="course in courses | filter: filteredCourses">
       <td ng-if='currentAdvisor.is_admin'><span class="clickable" ng-click='showEditCourseModal(course)'>{{ course.number }} {{ course.name }}</span></td>
@@ -31,7 +39,6 @@
       </td>
     </tr>
   </table>
-
 
   <modal id='new-course-form' ng-if='currentAdvisor.is_admin'>
     <modal-title>New Course</modal-title>
@@ -57,3 +64,4 @@
     </modal-body>
   </modal>
 </section>
+

@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+.ips-heading {
+  
+}
+
 .sortable {
   cursor: pointer;
 }
@@ -29,6 +34,7 @@
 
 .course-bubble {
   background: $medium-gray;
+  border: 1px solid $dark-gray;
   padding: 10px;
   display: inline-block;
   cursor: -webkit-grab;

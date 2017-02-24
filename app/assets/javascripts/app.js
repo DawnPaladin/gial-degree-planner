@@ -26,27 +26,12 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
 
     .state('students', {
       url: '/students',
-      resolve: {
-        advisors: ['Restangular', function(Restangular) {
-          return Restangular.all('advisors').getList();
-        }],
-        students: ['Restangular', function(Restangular) {
-          return Restangular.all('students').getList();
-        }]
-      },
       templateUrl: '/templates/students.html',
       controller: 'StudentsIndexCtrl'
     })
 
     .state('meetings', {
       url: '/classes',
-      resolve: {
-        courses: ['courseService',
-          function(courseService) {
-            return courseService.getCourses();
-          }
-        ],
-      },
       templateUrl: '/templates/meetings.html',
       controller: 'MeetingsIndexCtrl',
     })

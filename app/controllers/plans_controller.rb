@@ -2,7 +2,7 @@ class PlansController < ApplicationController
 
 
   def show
-    @plan = Student.find(params[:student_id]).plan
+    @plan = Student.includes(plan: [:intended_courses, :completed_courses, { required_courses: [:term, :sessions]}, :scheduled_classes, { concentration: [ { categories: { courses: [:term, :sessions]}}, :thesis_track, :non_thesis_track]}, :electives]).find(params[:student_id]).plan
   end
 
   def update

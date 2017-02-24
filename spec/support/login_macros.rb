@@ -27,7 +27,7 @@ module LoginMacros
     if advisor.is_admin
       check('advisor_is_admin')
     end
-    click_on('Sign up')
+    click_on('Create Advisor')
   end
 
 end

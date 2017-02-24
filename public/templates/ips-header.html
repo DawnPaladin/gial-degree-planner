@@ -3,28 +3,32 @@
     <flash-message></flash-message>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h1 class='main-header'>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h1>
-    </div>
-  </div>
 
   <div class="row">
-    <div class="col-xs-12">
+
+    <div class="col-sm-7">
+      <h1 class='main-header'>Intended Plan of Study for {{ student.first_name + ' ' + student.last_name }}</h1>
+
+      <div class="main-info form-inline">
+        <span class='degree'>MA with Major in World Arts &mdash; Concentration: </span>
+
+        <select ng-model='plan.concentration_id'
+                ng-options='concentration.id as concentration.name for concentration in concentrations'
+                ng-change='updatePlan()'
+                class='form-control'
+                ng-disabled="concentrationDisabled">
+          <option value=""></option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="col-sm-5">
+  
       <div class="degree-info form-inline">
 
-        <div class="main-info">
-          <span class='degree'>MA with Major in World Arts &mdash; Concentration: </span>
+        <div class="additional-info">
 
-          <div class="concentration-info">
-            <select ng-model='plan.concentration_id'
-                    ng-options='concentration.id as concentration.name for concentration in concentrations'
-                    ng-change='updatePlan()'
-                    class='form-control'
-                    ng-disabled="concentrationDisabled">
-              <option value=""></option>
-            </select>
-          </div>
           <div class="graduating-info">
             <span class='graduating'>Graduating:</span>
             <select ng-model='plan.graduation_term'

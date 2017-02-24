@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   before_action :require_admin, only: [:update, :create]
 
   def index
-    @courses = Course.all
+    @courses = Course.includes(meetings: :enrollments)
     render json: @courses.to_json(include: [{ meetings: { include: :enrollments }}, sessions: { only: :id }])
   end
 

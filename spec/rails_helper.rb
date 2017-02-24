@@ -32,6 +32,10 @@ ActiveRecord::Migration.maintain_test_schema!
 
 Capybara.javascript_driver = :poltergeist
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
 # Forces all threads to share the same connection. This works on
 # Capybara because it starts the web server in a thread.
 

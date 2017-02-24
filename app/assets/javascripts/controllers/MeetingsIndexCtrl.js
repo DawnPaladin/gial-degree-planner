@@ -1,6 +1,11 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', '_', 'Auth',
-  function($scope, courses, meetingService, _, Auth) {
-    $scope.courses = courses;
+planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth',
+  function($scope, meetingService, _, Auth) {
+    
+    meetingService.getAll().then(function(courses) {
+      $scope.courses = courses;
+      initializeMeetings();
+    });
+
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
     $scope.termHeader = [];
@@ -9,6 +14,31 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', 
       $scope.termHeader.push.apply($scope.termHeader, terms);
     });
 
+
+    var initializeMeetings = function() {
+      var meetings = [];
+      courses.forEach(function getCourseAttendance(course) {
+        meetings.push.apply(meetings, course.meetings);
+        course.attendance = [];
+        years.forEach(function(year) {
+          var yearAttendance = {
+            spring: {},
+            summer: {},
+            fall: {},
+            any: {},
+          };
+          // find the course meeting for this year
+          var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
+          var term = thisYearsMeeting.term.toLowerCase();
+          yearAttendance[term] = {
+            count: thisYearsMeeting.enrollments.length,
+            meeting_id: thisYearsMeeting.id,
+          };
+          course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+        });
+      });      
+    };
+
     Auth.currentUser()
       .then(function(advisor) {
         $scope.currentAdvisor = advisor;
@@ -16,27 +46,6 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', 
         console.error(error);
       });
 
-    var meetings = [];
-    courses.forEach(function getCourseAttendance(course) {
-      meetings.push.apply(meetings, course.meetings);
-      course.attendance = [];
-      years.forEach(function(year) {
-        var yearAttendance = {
-          spring: {},
-          summer: {},
-          fall: {},
-          any: {},
-        };
-        // find the course meeting for this year
-        var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
-        var term = thisYearsMeeting.term.toLowerCase();
-        yearAttendance[term] = {
-          count: thisYearsMeeting.enrollments.length,
-          meeting_id: thisYearsMeeting.id,
-        };
-        course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
-      });
-    });
 
     $scope.newCourse = {};
     $scope.course = {};

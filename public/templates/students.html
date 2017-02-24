@@ -7,7 +7,15 @@
 
 <h3 class="student-header">Students</h3>
 
+<section ng-if="!students" class="loading-container">
+  <div class="loading-items">
+    <h3>Loading Students</h3>
+    <div class="spinner"></div>
+  </div>
+</section>
+
 <form id="new-student-form" class="form form-inline" ng-show="showNewStudentForm && currentAdvisor.is_admin" ng-submit="createStudent()">
+
   <label>First name <input ng-model="newStudent.first_name" class="form-control" required></label>
   <label>Last name <input ng-model="newStudent.last_name" class="form-control" required></label>
   <label>Email <input ng-model="newStudent.email" class="form-control" required></label>
@@ -22,7 +30,7 @@
   </div>
 </form>
 
-<table class="table">
+<table class="table" ng-if="students">
   <thead>
     <th></th>
     <th class="sortable" ng-class="sortableClasses('first_name')" ng-click="alternate('first_name')">First name</th>

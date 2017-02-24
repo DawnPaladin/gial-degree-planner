@@ -27,13 +27,13 @@
 
     <button ng-if="section === 'completed'"
             ng-click='buttonCallback({course: course})'
-            class="btn btn-danger">
+            class="btn btn-sm btn-danger">
       Uncomplete
     </button>
 
     <button ng-if="section === 'intended' && !course.scheduled"
             ng-click='buttonCallback({course: course})'
-            class="btn btn-primary">
+            class="btn btn-sm btn-primary">
       Complete
     </button>
 
