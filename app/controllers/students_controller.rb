@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
 
+  before_action :require_admin, only: [:update, :create]
+
   def index
     @students = Student.all
   end

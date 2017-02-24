@@ -33,14 +33,14 @@
   </table>
 
 
-  <modal id='new-course-form'>
+  <modal id='new-course-form' ng-if='advisor.is_admin'>
     <modal-title>New Course</modal-title>
     <modal-body>
       <course-form course='newCourse'></course-form>
     </modal-body>
   </modal>
 
-  <modal id='edit-course-form'>
+  <modal id='edit-course-form' ng-if='advisor.is_admin'>
     <modal-title>Edit Course</modal-title>
     <modal-body>
       <course-form course='course' ng-if='course'></course-form>
