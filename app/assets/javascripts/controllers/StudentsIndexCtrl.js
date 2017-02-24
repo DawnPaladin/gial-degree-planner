@@ -56,6 +56,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
         .then(function() {
           $scope.newStudent = {};
           $scope.students = Restangular.all('students').getList().$object;
+          Flash.create('success', "Student created");
         }, function(error) {
           var errorMessage = "";
           console.warn(error);
