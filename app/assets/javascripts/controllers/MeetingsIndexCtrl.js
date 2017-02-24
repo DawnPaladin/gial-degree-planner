@@ -17,7 +17,7 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
 
     var initializeMeetings = function() {
       var meetings = [];
-      courses.forEach(function getCourseAttendance(course) {
+      $scope.courses.forEach(function getCourseAttendance(course) {
         meetings.push.apply(meetings, course.meetings);
         course.attendance = [];
         years.forEach(function(year) {
