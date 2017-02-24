@@ -130,8 +130,8 @@
 
 .schedule-page {
   .stuck {
-    top: 0; 
-    left: 0; 
+    top: 0;
+    left: 0;
     background: rgb(255, 255, 255);
     border-bottom: 1px solid #eee;
   }
@@ -159,5 +159,8 @@
     font-weight: normal;
   }
 }
-
-
+@media (min-width: 768px) and (max-width: 992px) {
+  #new-student-form input {
+    width: 128px;
+  }
+}
