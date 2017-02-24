@@ -4,7 +4,9 @@
     <ul class="nav navbar-nav">
       <li><a ui-sref="students" class="navbar-link" ui-sref-active="active">Students</a></li>
       <li><a ui-sref="meetings" class="navbar-link" ui-sref-active="active">Classes</a></li>
-      <li><a ui-sref="degrees" class="navbar-link" ui-sref-active="active">Degree Management</a></li>
+      <% if current_advisor.is_admin %>
+        <li><a ui-sref="degrees" class="navbar-link" ui-sref-active="active">Degree Management</a></li>
+      <% end %>
     </ul>
     <% if signed_in? %>
       <div class="nav navbar-right">

@@ -2,12 +2,13 @@ planner.filter('sessionFilter', function() {
 
   return function(sessions) {
 
-    if (sessions == undefined) {
+
+    if (sessions == undefined || sessions.length == 0) {
       return '';
     }
 
     if (sessions.length === 1) {
-      return "Session: " + sessions[0].name;
+      return "Session " + sessions[0].name;
     } else {
       var min, max;
       for (var i = 0; i < sessions.length; i++) {

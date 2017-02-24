@@ -8,25 +8,47 @@ planner.directive('draggable', function() {
     el.draggable = true;
 
     var doTheDragStartThings = function(e, attrs, that) {
+      // Get the term id off of the element being dragged
+      var thisYearId;
+      var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
+      if (e.target.getAttribute('data-year-id')) {
+        thisYearId = e.target.getAttribute('data-year-id');
+      }
+      
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('Text', that.id);
+      var data = JSON.stringify({id: that.id, prevTerm: thisTermId, prevYear: thisYearId});
+      e.dataTransfer.setData('Text', data);
       that.classList.add('drag');
 
-      // Get the term id off of the element being dragged
-
-      var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
-
-        angular.element('.term')
+      angular.element('.term')
           .addClass('unpermitted');
 
-        if (!that.parentNode.classList.contains('course-bubble-container')) {
-          angular.element('.course-bubble-container')
+      if (!that.parentNode.classList.contains('course-bubble-container')) {
+        angular.element('.course-bubble-container')
+          .addClass('permitted');
+      }
+
+      var thisTermJSON = e.target.getAttribute('term');
+
+      if (thisTermJSON == "") {
+        angular.element(".term")
+          .removeClass('unpermitted')
+          .addClass('permitted');            
+      } else {
+
+        var thisTerm = JSON.parse(thisTermJSON);
+        var thisTermId = thisTerm.id;
+
+        if (thisTerm.name == 'Any' ) {
+          angular.element(".term")
+            .removeClass('unpermitted')
+            .addClass('permitted');          
+        } else {
+          angular.element(".term[data-term-id='" + thisTermId + "']")
+            .removeClass('unpermitted')
             .addClass('permitted');
         }
-
-        angular.element(".term[data-term-id='" + thisTermId + "']")
-          .removeClass('unpermitted')
-          .addClass('permitted');
+      }
 
       return false;
     };
@@ -39,7 +61,7 @@ planner.directive('draggable', function() {
     el.addEventListener(
       'dragend',
       function(e) {
-        this.classList.remove('drag');
+        // this.classList.remove('drag');
         angular.element('.course-bubble-container')
           .removeClass('permitted');
         angular.element(".term")

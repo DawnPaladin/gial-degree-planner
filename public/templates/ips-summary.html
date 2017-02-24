@@ -1,0 +1,178 @@
+<section class="ips-summary">
+
+  <img src="gial-logo.png">
+
+  <p class="text-center"><strong>Intended Plan of Study (IPS) for Admission to the World Arts Degree<span ng-if="planInfo.plan.concentration">, <u>{{ planInfo.plan.concentration }} Concentration</u></span></strong></p>
+
+  <div class="info-underline">
+    <p>{{ student.last_name }}, {{ student.first_name }}</p>
+    <small>Name (Last, First Middle)</small>
+  </div>
+
+  <div class="info-underline">
+    <p></p>
+    <div class="captions">
+      <small class="">Permanent Street Address</small>
+      <small class="">City, State ZIP</small>
+      <small class="">Phone Number</small>
+    </div>
+  </div>
+
+  <div class="graduation-summary">
+
+    <h2>Master of Arts in World Arts 
+      <span ng-if="planInfo.plan.concentration">
+        &mdash; {{ planInfo.plan.concentration }} Concentration
+      </span>
+      <span class="summary-grad-date" ng-if="planInfo.plan.graduation_year">{{ planInfo.plan.graduation_term }} {{ planInfo.plan.graduation_year }}</span>
+    </h2>
+    <div class="captions">
+      <small>Degree Sought
+        <span class="major">Graduate Major</span>
+      </small>
+      <small>Expected Degree Completion Date</small>
+    </div>
+  </div>
+
+  <p class="text-center">Students admitted under this IPS will take Comprehensive Exams <strong>unless</strong> they have an approved <em>Petition to Write a Thesis for the World Arts Degree</em> on file with the Registrar.</p>
+
+  <div class="summary-prerequisites">
+    <p><strong>Departmental Prerequisites:</strong> Required prerequisites for admission to the WA Degree have been met.</p>
+
+    <div class="row">
+      <div class="col-sm-8">
+        <p class="prereq-underline"></p>
+        <small>Signature of Advisor</small>
+      </div>
+      <div class="col-sm-4">
+        <p class="prereq-underline"></p>
+        <small>Date</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="transfer-credit">
+    <p><strong>Transfer Credit:</strong> <small>Transfer credit will not be granted for course work done more than 10 years before initial enrollment in GIAL. <u>In order to receive transfer credit you must submit a signed <strong><em>Petition Form</em></strong> to the Dean of Academic Affairs</u>. After transfer credit has been granted, list those courses below along with courses to be taken at GIAL toward your degree. No more than 15 semester hours of transfer credit will be granted toward a degree.</small></p>
+  </div>
+
+  <p>List only the courses required for your degree. Include amount of transfer credit granted on your <em>Petition Form(s)</em>.</p>
+
+  <table class="summary-plan">
+
+    <tr>
+      <td colspan="3">
+        Date of <em>Catalog</em> when plan of study submitted:______________________ <em>(Term and Year)</em>
+      </td>
+      <td>
+        Term & Year
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3">
+        <strong>General Core</strong>
+      </td>
+      <td>
+        {{ totalCoreCredits }} hours
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3">
+        <span class="summary-required-courses" ng-repeat="course in planInfo.plan.required_courses">
+          {{ course.number }} {{ course.name }}
+          <span class="summary-dates">
+            {{ course.term.name }} {{ course.sessions | sessionFilter }}
+          </span>
+          <br>
+        </span>
+      </td>
+      <td>
+        <span class="summary-available-courses fill-in text-center" ng-repeat="course in planInfo.plan.required_courses">
+          {{ course | summaryCourseFilter }}          
+        </span>        
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="4">
+        <strong>Specializations and Categories</strong>
+      </td>
+    </tr>
+
+    <tr ng-repeat="category in planInfo.plan.available_courses">
+      <td colspan="3">
+        <strong>
+          {{ category.name }}
+          <span ng-if="category.required_units">(Required Units: {{ category.required_units }})</span>
+        </strong>
+        <span ng-repeat="course in category.courses">
+        <br>{{ course.number }} {{ course.name }} 
+          <span class="summary-dates">
+            {{ course.term.name }} {{ course.sessions | sessionFilter }}
+          </span>
+      </td>
+      <td>
+        <span class="summary-available-courses fill-in text-center" ng-repeat="course in category.courses">
+          {{ course | summaryCourseFilter }}
+        </span>          
+      </td>
+    </tr>
+
+  </table>
+
+  <footer class="signatures">
+    <h3>Authorization of Study Plan</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="approval">
+          <p></p>
+          <div class="line">
+            <small>Signature of Student</small>
+            <small>Date</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="approval">
+          <p></p>
+          <div class="line">
+            <small>Signature of Graduate Advisor</small>
+            <small>Date</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Approval for admission to the WA Degree</h3>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="approval">
+          <p></p>
+          <div class="line">
+            <small>Signature of Department Header</small>
+            <small>Date</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="approval">
+          <p></p>
+          <small>Signature of Dean of Academic Affairs</small>
+          <small>Date</small>
+        </div>
+      </div>
+    </div>
+
+    <h3>Comments</h3>
+
+    <div class="comments">
+    </div>
+
+    <small class="watermark">2016 WA Intended Plan of Study {{ planInfo.plan.concentration }}</small>
+
+  </footer>
+
+
+
+</section>

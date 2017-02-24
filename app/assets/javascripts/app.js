@@ -84,9 +84,10 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
       templateUrl: '/templates/ips-schedule.html',
       controller: 'IPSScheduleCtrl'
     })
-    .state('ips.print', {
-      url: '/print',
-      templateUrl: '/templates/ips-print.html'
+    .state('ips.summary', {
+      url: '/summary',
+      templateUrl: '/templates/ips-summary.html',
+      controller: 'IPSSummaryCtrl'
     })
 
     .state('degrees', {

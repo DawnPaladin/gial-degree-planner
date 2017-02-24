@@ -1,14 +1,22 @@
 planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student', 'planService',
   function($scope, $rootScope, $window, student, planService) {
-  
+
   // All static information comes over
   // on initial load
   // Student + Degree + List of Concentrations
   $scope.student = student;
   $scope.concentrations = student.degree.concentrations;
   $scope.planInfo = planService.getPlanInfo();
-  $scope.terms = ['Spring', 'Summer', 'Fall'];
+  $scope.terms = ['Spring', 'Fall'];
   $scope.plan = $scope.planInfo.plan;
+
+  $scope.$on('onSummary', function() {
+    $scope.canPrint = true;
+  });
+
+  $scope.$on('offSummary', function() {
+    $scope.canPrint = false;
+  });
 
   // For all plan updates except for updates to latest_registered and registration_date
   $scope.updatePlan = function() {
@@ -33,9 +41,9 @@ planner.controller('IPSHeaderCtrl', ['$scope', '$rootScope', '$window', 'student
 
   $scope.$on('toggle-concentration', function(e, args) {
     if (args.enabled) {
-      $scope.concentrationDisabled = false;      
+      $scope.concentrationDisabled = false;
     } else {
-      $scope.concentrationDisabled = true;      
+      $scope.concentrationDisabled = true;
     }
 
   });

@@ -1,7 +1,7 @@
 class AdvisorsController < ApplicationController
 
   before_action :authenticate_advisor!
-  before_action :require_admin
+  before_action :require_admin, only: [:destroy]
 
   def index
     @advisors = Advisor.all

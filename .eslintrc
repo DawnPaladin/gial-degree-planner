@@ -13,7 +13,9 @@
       1
     ],
     "no-unused-vars": [
-      1
+      1, {
+        "args": "none"
+      }
     ],
     "comma-dangle": [
       0

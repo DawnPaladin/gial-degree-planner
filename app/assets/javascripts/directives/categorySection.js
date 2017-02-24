@@ -17,23 +17,23 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
 
       scope.addElective = function(course) {
 
-        if (course.id === 'newCourse') {
-          angular.element('.elective-input').val('');
-          scope.addingClass = false;
-          _displayCourseForm();
-        }
-        else { 
-          var electiveParams = {
-            category_name: scope.category.name,
-            course_id: course.id,
-            plan_id: scope.planInfo.plan.id
-          };
+        // if (course.id === 'newCourse') {
+        //   angular.element('.elective-input').val('');
+        //   scope.addingClass = false;
+        //   _displayCourseForm();
+        // }
+        // else { 
+        var electiveParams = {
+          category_name: scope.category.name,
+          course_id: course.id,
+          plan_id: scope.planInfo.plan.id
+        };
 
-          electiveService.create(electiveParams)
-            .then(function() {
-              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
-            });
-        }
+        electiveService.create(electiveParams)
+          .then(function() {
+            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+          });
+        // }
       };
 
       scope.deleteElective = function(course) {

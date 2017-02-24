@@ -29,6 +29,7 @@ json.years Year.all do |year|
 end
 
 if @plan.concentration
+  json.concentration @plan.concentration.name
   json.available_courses @plan.concentration.categories do |category|
     json.id  category.id
     json.name  category.name
@@ -53,6 +54,8 @@ if @plan.concentration
   json.elective_courses do
     json.array! @plan.electives do |elective|
       json.extract! elective.course, *elective.course.attributes.keys
+      json.term elective.course.term
+      json.sessions elective.course.sessions
       json.category_name elective.category_name
       json.elective_id elective.id
       json.completed elective.completed

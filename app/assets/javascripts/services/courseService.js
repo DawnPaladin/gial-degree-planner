@@ -1,4 +1,4 @@
-planner.factory('courseService', ['Restangular', '$q', '_', function(Restangular, $q, _) {
+planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Restangular, $q, _, Flash) {
 
   var _courses = [];
 
@@ -11,9 +11,12 @@ planner.factory('courseService', ['Restangular', '$q', '_', function(Restangular
     return Restangular.all('courses')
       .post(params)
       .then(function(course) {
+        _getCourseAttendance(course);
         _courses.push(course);
+        Flash.create("success", "Course created");
         return course;
       }, function(error) {
+        Flash.create("danger", "Course could not be created. See console for details.");
         console.error(error);
       });
   };
@@ -28,7 +31,11 @@ planner.factory('courseService', ['Restangular', '$q', '_', function(Restangular
           return session.id;
         });
         _getCourseAttendance(oldCourse);
+        Flash.create("success", "Course updated");
         return oldCourse;
+      }, function(error) {
+        Flash.create("danger", "Course could not be updated. See console for details.");
+        console.error(error);
       });
   };
 

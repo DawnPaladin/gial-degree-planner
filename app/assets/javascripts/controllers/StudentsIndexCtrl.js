@@ -51,11 +51,18 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'advisors', 's
       });
     };
 
+    $scope.closeForm = function() {
+      $scope.showNewStudentForm = false;
+      $scope.newStudent = {};
+    };
+
     $scope.createStudent = function() {
       Restangular.all('students').post($scope.newStudent)
         .then(function() {
           $scope.newStudent = {};
           $scope.students = Restangular.all('students').getList().$object;
+          Flash.create('success', "Student created");
+          $scope.closeForm();
         }, function(error) {
           var errorMessage = "";
           console.warn(error);

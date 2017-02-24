@@ -1,4 +1,4 @@
-planner.directive('meetingForm', ['Restangular', '$timeout', 'meetingService', function(Restangular, $timeout, meetingService) {
+planner.directive('meetingForm', ['Restangular', '$timeout', 'meetingService', 'Flash', function(Restangular, $timeout, meetingService, Flash) {
   return {
     restrict: 'E',
     templateUrl : '/directives/meeting-form.html',
@@ -13,10 +13,19 @@ planner.directive('meetingForm', ['Restangular', '$timeout', 'meetingService', f
       scope.updateMeeting = function(meeting) {
         meetingService.update(meeting)
           .then(function(meeting) {
-            // flash message
+            Flash.create('success', 'Class updated');
             angular.element('#edit-meeting').modal('hide');
           }, function(error) {
-            console.error(error);
+            var errorMessage = '';
+            if (error.statusText == "Unprocessable Entity" && error.data) {
+              for (var key in error.data) {
+                if (error.data.hasOwnProperty(key)) {
+                  errorMessage += key + ' ';
+                  errorMessage += error.data[key].join(',');
+                }
+              }
+              Flash.create('danger', errorMessage);
+            }
           });
       };
 
