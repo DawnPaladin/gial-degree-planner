@@ -1,63 +1,70 @@
+<form ng-submit='submitForm(courseForm.$valid)' name='courseForm' class='modal-form' novalidate autocomplete='off'>
 
-    <form ng-submit='createCourse(courseForm.$valid)' name='courseForm' class='modal-form'>
+  <div class="row">
+    <div class="col-xs-12">
 
-      <div class="row">
-        <div class="col-xs-12">
+      <div class="col-xs-8">
+        <div class="row">
 
-          <div class="col-xs-8">
-            <div class="row">
+          <div class="col-xs-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text"
+              id='name'
+              class="form-control"
+              placeholder='Applied Arts'
+              name='name'
+              required
+              ng-model='courseParams.name'>
+              <p ng-show="courseForm.name.$invalid && !courseForm.name.$pristine" class="help-block">Name is required</p>
+            </div>
+          </div>
 
-              <div class="col-xs-12">
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text"
-                  id='name'
-                  class="form-control"
-                  name='name'
-                  required
-                  ng-model='newCourse.name'>
-                </div>
-              </div>
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="number">Number</label>
+              <input type="text"
+              id='number'
+              class="form-control"
+              placeholder='AA5500'
+              name='number'
+              required
+              ng-minlength='6'
+              ng-maxlength='6'
+              ng-model='courseParams.number'>
+              <p ng-show="courseForm.number.$invalid && !courseForm.number.$pristine 
+                          && !courseForm.number.$error.minlength && !courseForm.number.$error.maxlength" 
+                 class="help-block">Number is required</p>
+              <p ng-show="courseForm.number.$error.minlength" class="help-block">Number too short</p>
+              <p ng-show="courseForm.number.$error.maxlength" class="help-block">Number too long</p>
+            </div>
+          </div>
 
-              <div class="col-xs-4">
-                <div class="form-group">
-                  <label for="number">Number</label>
-                  <input type="text"
-                  id='number'
-                  class="form-control"
-                  name='number'
-                  required
-                  ng-model='newCourse.number'>
-                </div>
-              </div>
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="units">Units</label>
+              <input type="number"
+              id=units
+              class="form-control"
+              name='units'
+              required
+              ng-min='0'
+              ng-model='courseParams.units'>
+              <p ng-show="courseForm.units.$invalid && !courseForm.units.$pristine" class="help-block">Units are required</p>
+              <p ng-show="courseForm.units.$error.min" class="help-block">Units can't be less than 0</p>
+            </div>
+          </div>
 
-              <div class="col-xs-4">
-                <div class="form-group">
-                  <label for="units">Units</label>
-                  <input type="number"
-                  id=units
-                  class="form-control"
-                  name='units'
-                  required
-                  ng-model='newCourse.units'>
-                </div>
-              </div>
-
-              <div class="col-xs-4">
-                <div class="form-group">
-                  <label for="">Level</label>
-<!--               <div ng-repeat='levelName in levels'>
-                <input type="radio"
-                ng-value='levelName'
-                name='level'
-                ng-model='newCourse.level'> {{ levelName }}
-              </div> -->
+          <div class="col-xs-4">
+            <div class="form-group">
+              <label for="">Level</label>
               <select name="level"
               class='form-control modal-select'
               name='level'
               required
-              ng-model='newCourse.level'
+              ng-model='courseParams.level'
               ng-options='level for level in levels'></select>
+              <p ng-show="courseForm.level.$invalid && !courseForm.level.$pristine" class="help-block">Level is required</p>
             </div>
           </div>
 
@@ -67,62 +74,63 @@
               <textarea id='description'
               class="form-control"
               name='description'
-              ng-model='newCourse.description'>
-            </textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-xs-4">
-
-      <div class="">
-        <div class="form-group">
-          <label class="barrier-label">Term</label>
-          <div ng-repeat='term in terms'>
-
-            <input type="radio"
-            ng-value='term.id'
-            required
-            name='term'
-            ng-model='newCourse.term_id'> {{ term.name }}
-
+              placeholder='Students will learn to work with a local community...'
+              ng-model='courseParams.description'>
+              </textarea>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="">
-        <div class="form-group">
-          <label class="">Sessions</label>
-          <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
-          <div ng-repeat='session in sessions'>
+      <div class="col-xs-4">
 
-            <input type="checkbox"
-            ng-value='session.id'
-            name='session'
-            ng-checked="selection.indexOf(session) > -1"
-            ng-required='!newCourse.sessions.length'
-            ng-click="toggleSelection(session.id)"> Session {{ session.name }}
+        <div class="">
+          <div class="form-group">
+            <label class="barrier-label">Term</label>
+            <div ng-repeat='term in terms'>
+              <input type="radio"
+              ng-value='term.id'
+              required
+              name='term'
+              ng-model='courseParams.term_id'> {{ term.name }}
+              <p ng-show="courseForm.term.$invalid && !courseForm.term.$pristine" class="help-block">Term is required</p>
+            </div>
+          </div>
+        </div>
 
+        <div class="sessions">
+          <div class="form-group">
+            <label class="">Sessions</label>
+            <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
+            <div ng-repeat='session in sessions'>
+
+              <input type="checkbox"
+              ng-value='session.id'
+              name='session'
+              ng-checked="courseParams.session_ids.indexOf(session.id) > -1"
+              ng-required='!courseParams.session_ids.length'
+              ng-click="toggleSelection(session.id)"> Session {{ session.name }}
+            </div>
+            <p ng-hide='courseParams.session_ids.length || courseParams.pristineSessions' class='help-block'>Session is required</p>
+            <p ng-show='continuousSessions === false && courseParams.session_ids.length' class='help-block'>Sessions must be continuous</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="col-xs-8">
-
-  <div class="row">
-    <div class="col-xs-12">
-      <input type="submit"
-      class='btn btn-success btn-block'
-      value='Create Course'>
+  <div class="col-xs-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <input type="submit"
+        class='btn btn-success btn-block'
+        ng-show='!courseParams.foreignCourse'
+        ng-value='buttonValue()'
+        ng-disabled='courseForm.$invalid || !courseParams.session_ids.length'>
+      </div>
     </div>
   </div>
-</div>
 
 </form>
 
-
-
+<a data-dismiss='modal'></a>

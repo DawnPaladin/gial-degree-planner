@@ -17,23 +17,23 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
 
       scope.addElective = function(course) {
 
-        if (course.id === 'newCourse') {
-          angular.element('.elective-input').val('');
-          scope.addingClass = false;
-          _displayCourseForm();
-        }
-        else { 
-          var electiveParams = {
-            category_name: scope.category.name,
-            course_id: course.id,
-            plan_id: scope.planInfo.plan.id
-          };
+        // if (course.id === 'newCourse') {
+        //   angular.element('.elective-input').val('');
+        //   scope.addingClass = false;
+        //   _displayCourseForm();
+        // }
+        // else { 
+        var electiveParams = {
+          category_name: scope.category.name,
+          course_id: course.id,
+          plan_id: scope.planInfo.plan.id
+        };
 
-          electiveService.create(electiveParams)
-            .then(function() {
-              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
-            });
-        }
+        electiveService.create(electiveParams)
+          .then(function() {
+            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+          });
+        // }
       };
 
       scope.deleteElective = function(course) {
@@ -49,13 +49,19 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
           });
       };
 
-      scope.newCourse = { 
-        name: "&#43; Add new course", 
-        id: 'newCourse'
+      scope.noneFound = {
+        name: 'No Course Found'
       };
-      var _displayCourseForm = function() {
-        angular.element('#new-course-form').modal('show');
-      };
+  
+      // Features for creating a course
+      // scope.newCourse = { 
+      //   name: "&#43; Add new course", 
+      //   id: 'newCourse'
+      // };
+      // var _displayCourseForm = function() {
+      //   angular.element('#new-course-form').modal('show');
+      // };
+      // scope.courseParams = {};
 
       scope.showClassInput = function() {
         scope.addingClass = true;

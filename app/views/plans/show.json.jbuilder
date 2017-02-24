@@ -45,7 +45,10 @@ if @plan.concentration
   if @plan.concentration.thesis_track
     json.thesis_track do
       json.extract! @plan.concentration.thesis_track, *@plan.concentration.thesis_track.attributes.keys
-      json.courses @plan.concentration.thesis_track.courses
+      json.courses @plan.concentration.thesis_track.courses do |course|
+        json.extract! course, *course.attributes.keys
+        json.term course.term
+      end
     end
   end
   json.non_thesis_track do
@@ -54,6 +57,8 @@ if @plan.concentration
   json.elective_courses do
     json.array! @plan.electives do |elective|
       json.extract! elective.course, *elective.course.attributes.keys
+      json.term elective.course.term
+      json.sessions elective.course.sessions
       json.category_name elective.category_name
       json.elective_id elective.id
       json.completed elective.completed

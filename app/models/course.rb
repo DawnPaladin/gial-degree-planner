@@ -38,6 +38,7 @@ class Course < ApplicationRecord
   belongs_to :term
 
   # lifecycle
+  before_save :upcase_number
   after_create :create_meetings
 
   #####
@@ -83,6 +84,10 @@ class Course < ApplicationRecord
         sessions: self.sessions.to_a
       })
     end
+  end
+
+  def upcase_number
+    self.number.upcase!
   end
 
   def full_name

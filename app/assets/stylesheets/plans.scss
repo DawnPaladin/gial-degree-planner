@@ -9,7 +9,7 @@
 }
 .bordered {
   border: 1px solid $medium-gray;
-  padding: 15px 20px;
+  padding: 20px;
   padding-top: -15px;
 }
 // header
@@ -27,11 +27,16 @@
   vertical-align: middle;
 }
 .degree-info {
+
   .registered-info {
     float: left;
   }
+  .concentration-info {
+    display: inline-block;
+    margin-right: 1em;
+  }
   .graduating-info {
-    float: left;
+    display: inline-block;
     line-height: 3.4em;
     .graduating {
       font-family: $serif;
@@ -43,9 +48,11 @@
     font-size: 1em;
   }
 
+
   .additional-info {
     display: inline-block;
-  }
+   }
+
 }
 
 
@@ -99,23 +106,6 @@
   }
   .category-info {
     margin: 5px 0;
-  }
-}
-
-.degree-edit {
-  .category {
-    padding-bottom: 26px;
-    padding-top: 0;
-    margin-bottom: 44px;;
-    h3 {
-      padding: 0 5px;
-      margin: 0;
-      display: inline-block;
-      position: relative;
-      top: -13px;
-      background-color: #FFF;
-      font-size: 1.4em;
-    }
   }
 }
 

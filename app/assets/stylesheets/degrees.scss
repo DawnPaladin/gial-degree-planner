@@ -3,8 +3,15 @@
   margin-top: 3em;
 }
 
+.category-name {
+  display: inline-block;
+}
+
 .category-table {
   width: 100%;
+  td {
+    padding: 3px 0;
+  }
   td:nth-child(1) { width: 20px; }
   td:nth-child(3) { width: 10px; }
   .credits-input {
@@ -13,22 +20,18 @@
 }
 
 .credits-input {
-  width: 2em;
-  background: #555;
+  width: 3em;
+  background: #736f6f;
+  padding: 2px;
   border: 0;
-}
-
-.category-name {
-  display: inline-block;
-  position: absolute;
-  top: -1em;
-  background-color: white;
-  padding: 0.25em;
-  font-size: 22px;
 }
 
 .add-to-list {
   display: inline-block;
   margin-left: -1.5em;
   margin-top: .25em;
+}
+
+.degree-edit {
+  margin-bottom: 1em;
 }

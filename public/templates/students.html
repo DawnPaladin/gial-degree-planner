@@ -2,7 +2,9 @@
   <flash-message></flash-message>
 </div>
 
-<button id="new-student-button" class="btn btn-default" ng-click="showNewStudentForm = true" ng-hide="showNewStudentForm">&#43; New student</button>
+  <button id="new-student-button" class="btn btn-default" ng-click="showNewStudentForm = true" ng-hide="showNewStudentForm || !currentAdvisor.is_admin">&#43; New student</button>
+  <button id="new-student-button" class="btn btn-danger" ng-click="closeForm()" ng-hide="!showNewStudentForm || !currentAdvisor.is_admin">Cancel</button>
+
 <h3 class="student-header">Students</h3>
 
 <section ng-if="!students" class="loading-container">
@@ -12,7 +14,8 @@
   </div>
 </section>
 
-<form id="new-student-form" class="form form-inline" ng-show="showNewStudentForm" ng-submit="createStudent()">
+<form id="new-student-form" class="form form-inline" ng-show="showNewStudentForm && currentAdvisor.is_admin" ng-submit="createStudent()">
+
   <label>First name <input ng-model="newStudent.first_name" class="form-control" required></label>
   <label>Last name <input ng-model="newStudent.last_name" class="form-control" required></label>
   <label>Email <input ng-model="newStudent.email" class="form-control" required></label>
@@ -42,14 +45,16 @@
   <tbody>
     <tr ng-repeat="student in students | orderBy: ['-pinned', property]">
       <td><span class="glyphicon glyphicon-star" ng-show="student.pinned"></span></td>
-      <td><a ui-sref="ips.choose({ student_id: student.id })">{{ student.first_name }}</a></td>
-      <td><a ui-sref="ips.choose({ student_id: student.id })">{{ student.last_name }}</a></td>
+      <td><a ui-sref="ips.choose({ student_id: student.id })" class='clickable'>{{ student.first_name }}</a></td>
+      <td><a ui-sref="ips.choose({ student_id: student.id })" class='clickable'>{{ student.last_name }}</a></td>
       <td>
         <select
           ng-model="student.advisor_id"
           ng-options="advisor.id as (advisor.first_name + ' ' + advisor.last_name) for advisor in advisors"
-          ng-change="updateAdvisor(student)">
+          ng-change="updateAdvisor(student)"
+          ng-if='currentAdvisor.is_admin'>
         </select>
+        <span ng-if='!currentAdvisor.is_admin'>{{ student.advisor.first_name + ' ' + student.advisor.last_name }}</span>
       </td>
       <td>{{ student.concentration }}</td>
       <td>{{ student.thesis_starts }}</td>

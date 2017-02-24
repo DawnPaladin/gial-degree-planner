@@ -67,6 +67,9 @@
   .barrier-label {
     display: block;
   }
+  .error-border {
+    border: 1px solid $brand-orange;
+  }
 }
 
 .meeting-form {
@@ -92,4 +95,20 @@
     width: 42%;
     display: inline-block;
   }
+  .add-teacher-options {
+    display: block;
+    height: 1em;
+    margin-bottom: 16px;
+  }
+}
+
+.modal-header{
+  background-color: $brand-purple;
+  color: #FFF;
+  .tagline {
+    color: $light-gray;
+  }
+}
+.modal-content {
+    overflow:hidden;
 }
