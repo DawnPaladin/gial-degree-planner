@@ -2,18 +2,10 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', 'Flash', 
 
   var _planInfo = {};
 
-  // This is called once from HeaderCtrl
-  // Would be better to use the IPS resolve,
-  // but changing it to do so,
-  // references were lost
-  // TODO: investigate
   var getPlanInfo = function() {
     return _planInfo;
   };
 
-  // This is called in the IPS resolve
-  // should probably be renamed to getplaninfo,
-  // but let's merge up first
   var getPlan = function(student_id) {
     return Restangular.one('students', student_id)
       .customGET('plan')
@@ -61,8 +53,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', 'Flash', 
 
   var addOrRemoveCompleted = function(course) {
     if (!course.elective) {
-      // rails controller configured to take completed_id
-      // and add or remove association conditionally
       _planInfo.plan.completed_id = course.id;
     }
 
@@ -72,7 +62,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', 'Flash', 
   };
 
   var enrollInMeeting = function(data) {
-
     return Restangular.one('students', _planInfo.plan.student_id).customPUT(_planInfo.plan, "enroll_in_meeting", data).then(function(plan) {
         _initializePlan(plan);
         angular.copy(plan, _planInfo.plan);
@@ -264,6 +253,7 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', 'Flash', 
 
   var _markOrCreateScheduled = function(course) {
     // `this` is the plan obj
+    // debugger
     var originalScheduled;
     if (this.coursesById[course.course_id]) {
       if (this.coursesById[course.course_id].scheduled ||
@@ -275,13 +265,6 @@ planner.factory('planService', ['Restangular', '_', 'electiveService', 'Flash', 
     }
 
     if (_.pluck(this.elective_courses, 'id').includes(course.course_id) && originalScheduled) {
-      var elective_courses = _.where(this.elective_courses, { id: course.course_id });
-      for (var i = 0; i < elective_courses.length; i++) {
-        if (elective_courses[i].scheduled) continue;
-        elective_courses[i].scheduled = true;
-        break;
-      }
-    } else if (_.pluck(this.elective_courses, 'id').includes(course.course_id)) {
       var elective_courses = _.where(this.elective_courses, { id: course.course_id });
       for (var i = 0; i < elective_courses.length; i++) {
         if (elective_courses[i].scheduled) continue;
