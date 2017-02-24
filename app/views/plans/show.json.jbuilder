@@ -12,7 +12,7 @@ end
 
 json.scheduled_classes @plan.scheduled_classes
 
-json.years Year.all do |year|
+json.years Year.includes({ terms: { courses: [:term, :sessions]}}) do |year|
   json.id year.id
   json.value year.value
   json.terms year.terms.get_all do |term|

@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show]
 
   def index
-    @courses = Course.all
+    @courses = Course.includes(meetings: :enrollments)
     render json: @courses.to_json(include: { meetings: { include: :enrollments }})
   end
 

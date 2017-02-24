@@ -5,7 +5,7 @@ class DegreesController < ApplicationController
   end
 
   def show
-    @degree = Degree.find_by_id(params[:id])
+    @degree = Degree.includes(:required_courses, { concentrations: [:non_thesis_track, :thesis_track, { categories: :courses }]}).find_by_id(params[:id])
     render json: @degree.to_json({ include: [
       :required_courses, concentrations: { include: [
         :non_thesis_track, { thesis_track: { include: :courses } }, { categories: { include: :courses } }]
