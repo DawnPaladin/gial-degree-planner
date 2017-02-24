@@ -11,8 +11,7 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', 
 
     Auth.currentUser()
       .then(function(advisor) {
-        $scope.advisor = advisor;
-        console.log($scope.advisor)
+        $scope.currentAdvisor = advisor;
       }, function(error) {
         console.error(error);
       });

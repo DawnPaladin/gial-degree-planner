@@ -10,7 +10,7 @@ class MeetingsController < ApplicationController
     if @meeting.update_attributes(meeting_params)
       render :show
     else
-      render json: @course.errors, status: :unprocessable_entity
+      render json: @meeting.errors, status: :unprocessable_entity
     end
   end
 
