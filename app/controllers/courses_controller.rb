@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
 
   before_action :set_course, only: [:update]
+  before_action :require_admin, only: [:update, :create]
 
   def index
     @courses = Course.all

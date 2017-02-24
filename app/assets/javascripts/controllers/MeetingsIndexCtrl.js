@@ -1,5 +1,5 @@
-planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', '_',
-  function($scope, courses, meetingService, _) {
+planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', '_', 'Auth',
+  function($scope, courses, meetingService, _, Auth) {
     $scope.courses = courses;
     var years = ["2017", "2018", "2019", "2020"];
     var terms = ["Spring", "Summer", "Fall"];
@@ -8,6 +8,14 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'courses', 'meetingService', 
       $scope.termHeader.push(year);
       $scope.termHeader.push.apply($scope.termHeader, terms);
     });
+
+    Auth.currentUser()
+      .then(function(advisor) {
+        $scope.advisor = advisor;
+        console.log($scope.advisor)
+      }, function(error) {
+        console.error(error);
+      });
 
     var meetings = [];
     courses.forEach(function getCourseAttendance(course) {

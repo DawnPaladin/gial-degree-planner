@@ -1,6 +1,7 @@
 class MeetingsController < ApplicationController
 
   before_action :set_meeting, only: [:show, :update]
+  before_action :require_admin, only: [:update]
 
   def show
   end
