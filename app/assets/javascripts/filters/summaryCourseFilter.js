@@ -3,18 +3,18 @@ planner.filter('summaryCourseFilter', ['planService', function(planService) {
   return function(course) {
 
     var planInfo = planService.getPlanInfo();
-    var intendedCourses = planInfo.plan.intended_courses;
-    var isIntended = false;
+    var scheduledClasses = planInfo.plan.scheduled_classes;
+    var scheduledClass;
 
-    for (var i = 0; i < intendedCourses.length; i++) {
-      if (intendedCourses[i].id == course.id) {
-        isIntended = true;
+    for (var i = 0; i < scheduledClasses.length; i++) {
+      if (scheduledClasses[i].course_id == course.id) {
+        scheduledClass = scheduledClasses[i];
         break;
       }
     }
 
-    if (isIntended) {
-      return "✓";
+    if (scheduledClass) {
+      return scheduledClass.term + " " + scheduledClass.year;
     } else {
       return "";
     }

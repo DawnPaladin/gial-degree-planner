@@ -8,11 +8,17 @@ planner.directive('draggable', function() {
     el.draggable = true;
 
     var doTheDragStartThings = function(e, attrs, that) {
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('Text', that.id);
-      that.classList.add('drag');
-
       // Get the term id off of the element being dragged
+      var thisYearId;
+      var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
+      if (e.target.getAttribute('data-year-id')) {
+        thisYearId = e.target.getAttribute('data-year-id');
+      }
+      
+      e.dataTransfer.effectAllowed = 'move';
+      var data = JSON.stringify({id: that.id, prevTerm: thisTermId, prevYear: thisYearId});
+      e.dataTransfer.setData('Text', data);
+      that.classList.add('drag');
 
       angular.element('.term')
           .addClass('unpermitted');
@@ -55,7 +61,7 @@ planner.directive('draggable', function() {
     el.addEventListener(
       'dragend',
       function(e) {
-        this.classList.remove('drag');
+        // this.classList.remove('drag');
         angular.element('.course-bubble-container')
           .removeClass('permitted');
         angular.element(".term")

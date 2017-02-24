@@ -28,10 +28,13 @@ planner.directive('droppable', function() {
           // if the term id on this session
           // does not match the term id on the bubble being dragged
           // do not allow the drop to execute
-
           that.classList.remove('over');
 
-          var item = document.getElementById(e.dataTransfer.getData('Text'));
+
+          // var item = document.getElementById((JSON.parse(e.dataTransfer.getData('Text'))).id);
+          var item = angular.element('.drag')[0];
+          item.classList.remove('drag');
+//           var termId = JSON.parse(item.getAttribute('term')).id;
 
           var termJSON = item.getAttribute('term');
           var termId;
@@ -67,16 +70,20 @@ planner.directive('droppable', function() {
             var meetingData = {
               id: that.id,
               meeting_year: year,
-              meeting_term: termId
+              meeting_term: termId,
+              prevTerm: JSON.parse(e.dataTransfer.getData('Text')).prevTerm,
+              prevYear: JSON.parse(e.dataTransfer.getData('Text')).prevYear
             };
 
 
           } else {
 
-            var meetingData = {
+            meetingData = {
               id: that.id,
               meeting_year: that.getAttribute('data-year-id'),
-              meeting_term: that.getAttribute('data-term-id')
+              meeting_term: that.getAttribute('data-term-id'),
+              prevTerm: JSON.parse(e.dataTransfer.getData('Text')).prevTerm,
+              prevYear: JSON.parse(e.dataTransfer.getData('Text')).prevYear
             };
 
             that.appendChild(item);
@@ -131,6 +138,6 @@ planner.directive('droppable', function() {
       }, false );
 
     }
-  }
+  };
 
 });
