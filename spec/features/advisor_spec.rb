@@ -91,7 +91,7 @@ feature 'Advisor creation' do
     end
 
     scenario 'it creates a new advisor', js: true do
-      expect { click_on('Sign up') }.to change(Advisor, :count).by(1)
+      expect { click_on('Create Advisor') }.to change(Advisor, :count).by(1)
     end
 
   end
@@ -105,8 +105,8 @@ feature 'Advisor creation' do
       sign_up(new_advisor)
     end
 
-    scenario 'it redirects to the root path', js: true do
-      expect(current_path).to eq(root_path)
+    scenario 'it redirects to the advisor path', js: true do
+      expect(current_path).to eq(advisors_path)
     end
 
     scenario 'it renders a flash message', js: true do
@@ -114,7 +114,7 @@ feature 'Advisor creation' do
     end
 
     scenario 'it does not log in as the newly signed up advisor', js: true do
-      click_on('Edit my account settings')
+      click_on('Edit Account')
       email = find_field('Email').value
       expect(email).to_not eq(new_advisor.email)
       expect(email).to eq(advisor.email)
@@ -131,8 +131,8 @@ feature 'Advisor creation' do
       sign_up(new_admin)
     end
 
-    scenario 'it redirects to the root path', js: true do
-      expect(current_path).to eq(root_path)
+    scenario 'it redirects to the advisor path', js: true do
+      expect(current_path).to eq(advisors_path)
     end
 
     scenario 'it renders a flash message', js: true do
@@ -157,7 +157,7 @@ feature 'Advisor logout' do
   context 'when logging out' do
 
     before do
-      click_on('Sign Out')
+      click_on('Log Out')
     end
 
     scenario 'it redirects to the log in page', js: true do
@@ -184,7 +184,7 @@ feature 'Advisor deletion' do
     before do
       sign_in(advisor)
       other_advisor
-      click_on('View advisors')
+      click_on('Edit Advisors')
       execute_script('$("a[data-confirm]").removeAttr("data-confirm")');
     end
 
@@ -210,7 +210,7 @@ feature 'Advisor deletion' do
 
     before do
       sign_in(advisor)
-      click_on('View advisors')
+      click_on('Edit Advisors')
     end
 
     scenario 'it does not display a delete link', js: true, test_me: true do
