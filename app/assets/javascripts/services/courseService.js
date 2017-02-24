@@ -11,6 +11,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     return Restangular.all('courses')
       .post(params)
       .then(function(course) {
+        _getCourseAttendance(course);
         _courses.push(course);
         Flash.create("success", "Course created");
         return course;
