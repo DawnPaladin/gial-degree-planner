@@ -19,11 +19,15 @@ class PlansController < ApplicationController
     @course = Course.find(params[:course_id])
     @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
-    @meeting = Meeting.find_meeting(@course, @year, @term)
+
+    if @course.name == "Thesis Writing" || @course.name == "Thesis"
+      @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
+    else
+      @meeting = Meeting.find_meeting(@course, @year, @term)
+    end
+
     @plan = Plan.find(params[:plan][:id])
-
     @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
-
     if @enrollment.save
       render :show
     else
@@ -37,7 +41,6 @@ class PlansController < ApplicationController
     @term = Term.find(params[:meeting_term])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
-
     @enrollment = Enrollment.find_by({meeting_id: @meeting.id, plan_id: @plan.id})
     @enrollment.delete
 

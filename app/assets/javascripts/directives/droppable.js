@@ -29,10 +29,26 @@ planner.directive('droppable', function() {
           // does not match the term id on the bubble being dragged
           // do not allow the drop to execute
 
-          var item = document.getElementById(e.dataTransfer.getData('Text'));
-          var termId = JSON.parse(item.getAttribute('term')).id;
-
           that.classList.remove('over');
+
+          var item = document.getElementById(e.dataTransfer.getData('Text'));
+
+          var termJSON = item.getAttribute('term');
+          var termId;
+
+          if (termJSON == "" || JSON.parse(termJSON).name == "Any") {
+            if (that.id == "sticky-container") {
+              // gets sticky container termId
+              termId = item.parentNode.getAttribute('data-term-id');
+            } else {
+              // gets parent bubble's termId
+              termId = that.getAttribute('data-term-id');
+            }
+          } else {
+            termId = JSON.parse(termJSON).id;            
+          }
+
+
 
           if (item.parentNode.id == 'sticky-container' && that.id == 'sticky-container') {
             return false;
@@ -44,16 +60,14 @@ planner.directive('droppable', function() {
             return false;
           }
 
-
           if (that.id == "sticky-container") {
 
             var year = item.getAttribute('data-year-id');
-            var term = JSON.parse(item.getAttribute('term')).id;
 
             var meetingData = {
               id: that.id,
               meeting_year: year,
-              meeting_term: term       
+              meeting_term: termId
             };
 
 
