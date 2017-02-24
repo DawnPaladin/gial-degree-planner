@@ -11,7 +11,6 @@ class StudentsController < ApplicationController
     @plan = @student.plan
     @degree = @plan.degree
     @term = @plan.graduation_term
-    # renders the jbuilder
   end
 
   def update
