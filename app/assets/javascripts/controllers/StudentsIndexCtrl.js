@@ -1,14 +1,14 @@
 planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash', 'studentService', 'advisorService',
   function($scope, Restangular, Auth, Flash, studentService, advisorService) {
 
-    studentService.getAll().then(function(students) {
+    studentService.getUnarchived().then(function(students) {
       $scope.students = students;
       getCurrentUser();
     });
 
     advisorService.getAll().then(function(advisors) {
       $scope.advisors = advisors;
-    });    
+    });
 
     $scope.property = "last_name";
     $scope.reverse = false;
@@ -20,7 +20,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
           updatePinned(student);
         });
       });
-    }
+    };
 
     var updatePinned = function(student) {
       student.pinned = student.advisor.id === $scope.currentAdvisor.id;
@@ -85,6 +85,14 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
             Flash.create('danger', errorMessage);
           }
         });
+    };
+
+    $scope.showArchived = function() {
+      studentService.getArchived().then(function(students) {
+        console.log("Showing archived...");
+        $scope.showArchivedStudents = true;
+        $scope.archivedStudents = students;
+      });
     };
 
   }

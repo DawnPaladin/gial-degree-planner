@@ -43,6 +43,7 @@
     <th class="sortable" ng-class="sortableClasses('graduation_date')" ng-click="alternate('graduation_date')">Graduation</th>
     <th class="sortable" ng-class="sortableClasses('currently_registered')" ng-click="alternate('currently_registered')">Now registered?</th>
     <th class="sortable" ng-class="sortableClasses('registration_date')" ng-click="alternate('registration_date')">Registration date</th>
+    <th></th>
   </thead>
   <tbody>
     <tr ng-repeat="student in students | orderBy: ['-pinned', property] | filter : filterStudents">
@@ -63,6 +64,55 @@
       <td>{{ student.graduation_date }}</td>
       <td>{{ student.currently_registered ? "Yes" : "" }}</td>
       <td>{{ student.registration_date }}</td>
+      <td><span class="clickable">Archive</span></td>
     </tr>
   </tbody>
 </table>
+
+<button class="btn btn-default" ng-click="showArchived()" ng-hide="showArchivedStudents">Show archived students</button>
+
+<div class="archived-students" ng-show="showArchivedStudents">
+
+  <button class="btn btn-default" ng-click="showArchivedStudents = false" ng-show="showArchivedStudents">Hide archived students</button>
+
+  <h4>Archived students
+    <input ng-model="filterArchivedStudents" placeholder="filter archived students" class="form-control filter-students">
+  </h4>
+
+  <table class="table" ng-if="students">
+    <thead>
+      <th></th>
+      <th class="sortable" ng-class="sortableClasses('first_name')" ng-click="alternate('first_name')">First name</th>
+      <th class="sortable" ng-class="sortableClasses('last_name')" ng-click="alternate('last_name')">Last name</th>
+      <th class="sortable" ng-class="sortableClasses('advisor')" ng-click="alternate('advisor')">Advisor</th>
+      <th class="sortable" ng-class="sortableClasses('concentration')" ng-click="alternate('concentration')">Concentration</th>
+      <th class="sortable" ng-class="sortableClasses('thesis_starts')" ng-click="alternate('thesis_starts')">Thesis starts</th>
+      <th class="sortable" ng-class="sortableClasses('graduation_date')" ng-click="alternate('graduation_date')">Graduation</th>
+      <th class="sortable" ng-class="sortableClasses('currently_registered')" ng-click="alternate('currently_registered')">Now registered?</th>
+      <th class="sortable" ng-class="sortableClasses('registration_date')" ng-click="alternate('registration_date')">Registration date</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="student in archivedStudents | orderBy: ['-pinned', property] | filter : filterArchivedStudents">
+        <td><span class="glyphicon glyphicon-star" ng-show="student.pinned"></span></td>
+        <td><a ui-sref="ips.choose({ student_id: student.id })" class='clickable'>{{ student.first_name }}</a></td>
+        <td><a ui-sref="ips.choose({ student_id: student.id })" class='clickable'>{{ student.last_name }}</a></td>
+        <td>
+          <select
+            ng-model="student.advisor_id"
+            ng-options="advisor.id as (advisor.first_name + ' ' + advisor.last_name) for advisor in advisors"
+            ng-change="updateAdvisor(student)"
+            ng-if='currentAdvisor.is_admin'>
+          </select>
+          <span ng-if='!currentAdvisor.is_admin'>{{ student.advisor.first_name + ' ' + student.advisor.last_name }}</span>
+        </td>
+        <td>{{ student.concentration }}</td>
+        <td>{{ student.thesis_starts }}</td>
+        <td>{{ student.graduation_date }}</td>
+        <td>{{ student.currently_registered ? "Yes" : "" }}</td>
+        <td>{{ student.registration_date }}</td>
+        <td><span class="clickable">Dearchive</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
