@@ -5,7 +5,9 @@
   <button id="new-student-button" class="btn btn-default" ng-click="showNewStudentForm = true" ng-hide="showNewStudentForm || !currentAdvisor.is_admin">&#43; New student</button>
   <button id="new-student-button" class="btn btn-danger" ng-click="closeForm()" ng-hide="!showNewStudentForm || !currentAdvisor.is_admin">Cancel</button>
 
-<h3 class="student-header">Students</h3>
+<h3 class="student-header">Students
+  <input ng-model="filterStudents" placeholder="filter students" class="form-control filter-students">
+</h3>
 
 <section ng-if="!students" class="loading-container">
   <div class="loading-items">
@@ -43,7 +45,7 @@
     <th class="sortable" ng-class="sortableClasses('registration_date')" ng-click="alternate('registration_date')">Registration date</th>
   </thead>
   <tbody>
-    <tr ng-repeat="student in students | orderBy: ['-pinned', property]">
+    <tr ng-repeat="student in students | orderBy: ['-pinned', property] | filter : filterStudents">
       <td><span class="glyphicon glyphicon-star" ng-show="student.pinned"></span></td>
       <td><a ui-sref="ips.choose({ student_id: student.id })" class='clickable'>{{ student.first_name }}</a></td>
       <td><a ui-sref="ips.choose({ student_id: student.id })" class='clickable'>{{ student.last_name }}</a></td>
