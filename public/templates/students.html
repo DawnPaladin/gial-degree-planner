@@ -64,7 +64,7 @@
       <td>{{ student.graduation_date }}</td>
       <td>{{ student.currently_registered ? "Yes" : "" }}</td>
       <td>{{ student.registration_date }}</td>
-      <td><span class="clickable">Archive</span></td>
+      <td><span class="clickable" ng-click="archiveStudent(student)">Archive</span></td>
     </tr>
   </tbody>
 </table>
@@ -111,7 +111,7 @@
         <td>{{ student.graduation_date }}</td>
         <td>{{ student.currently_registered ? "Yes" : "" }}</td>
         <td>{{ student.registration_date }}</td>
-        <td><span class="clickable">Dearchive</span></td>
+        <td><span class="clickable" ng-click="dearchiveStudent(student)">Dearchive</span></td>
       </tr>
     </tbody>
   </table>

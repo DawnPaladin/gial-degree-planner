@@ -1,10 +1,45 @@
 planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash', 'studentService', 'advisorService',
   function($scope, Restangular, Auth, Flash, studentService, advisorService) {
 
-    studentService.getUnarchived().then(function(students) {
-      $scope.students = students;
-      getCurrentUser();
-    });
+    var showUnarchived = function() {
+      return studentService.getUnarchived().then(function(students) {
+        $scope.students = students;
+        getCurrentUser();
+        return students;
+      });
+    };
+    showUnarchived();
+
+    var getArchived = function() {
+      return studentService.getArchived().then(function(students) {
+        $scope.archivedStudents = students;
+      });
+    };
+
+    $scope.showArchived = function() {
+    getArchived().then(function() {
+        $scope.showArchivedStudents = true;
+      });
+    };
+
+    var refreshAll = function() {
+      showUnarchived();
+      getArchived();
+    };
+
+    $scope.archiveStudent = function(student) {
+      student.archived = true;
+      student.put().then(function() {
+        refreshAll();
+      });
+    };
+
+    $scope.dearchiveStudent = function(student) {
+      student.archived = false;
+      student.put().then(function() {
+        refreshAll();
+      });
+    };
 
     advisorService.getAll().then(function(advisors) {
       $scope.advisors = advisors;
@@ -85,14 +120,6 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
             Flash.create('danger', errorMessage);
           }
         });
-    };
-
-    $scope.showArchived = function() {
-      studentService.getArchived().then(function(students) {
-        console.log("Showing archived...");
-        $scope.showArchivedStudents = true;
-        $scope.archivedStudents = students;
-      });
     };
 
   }
