@@ -4,7 +4,7 @@ by [Alexa Anderson](http://github.com/PopularDemand), [James Harris](http://gith
 
 This app helps students at [GIAL](http://www.gial.edu) plan which courses to take and provides their advisors with information about their plans. 
 
-**[Try it out!](http://gial-planner.herokuapp.com)** While this app is temporarily in **open-house** mode, you can log in with the email address **admin@gial.edu** and the password **adminpass**.
+**[Try it out!](https://gial-demo.herokuapp.com/)** You can log in with the email address **admin@gial.edu** and the password **adminpass**.
 
 ## Background
 
