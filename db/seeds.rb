@@ -99,7 +99,7 @@ end
 
 puts 'creating courses'
 require 'csv'
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'world-arts-courses.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'gial-courses.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
   term = Term.find_by(name: row['Course Term'].titleize)
@@ -291,7 +291,7 @@ conc = degree.concentrations.create({
   conc.create_non_thesis_track({
     elective_hours: 6
   })
-  
+
 conc = degree.concentrations.create({
   name: "Linguistics",
   description: LOREM
