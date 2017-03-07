@@ -102,20 +102,18 @@ require 'csv'
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'gial-courses.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
-  term = Term.find_by(name: row['Course Term'].titleize)
-  if term.nil?
-    term_name = row['Course Term'].titleize.split('/')[0]
-    term = Term.find_by(name: term_name)
-    next if term.nil?
-    # FIXME: Term should not be required, and a course can have more than one term.
-  end
   course = Course.new({
     number: row['Category'] + row['Number'],
     name: row['Name'],
     level: row['Course Level'],
     units: row['Credit Hours'],
-    term: term,
   })
+  term_names = row['Course Term'].titleize.split('/')
+  term_names.each do |term_name|
+    term = Term.find_by(name: term_name.titleize)
+    next if term.nil?
+    course.terms << term
+  end
   unless row['Sessions'].nil?
     session_names = row['Sessions'].split(',')
     session_names.each do |session_name|
@@ -129,7 +127,6 @@ csv.each do |row|
   else
     puts course.errors.full_messages
   end
-  puts course.term.name
 end
 
 puts 'creating degree'

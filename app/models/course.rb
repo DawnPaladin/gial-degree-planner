@@ -35,7 +35,8 @@ class Course < ApplicationRecord
 
   has_many :meetings
 
-  belongs_to :term
+  has_many :courses_terms
+  has_many :terms, through: :courses_terms
 
   # lifecycle
   before_save :upcase_number
@@ -52,7 +53,7 @@ class Course < ApplicationRecord
       description: 'Writing course required for thesis track',
       units: 1,
       level: 'graduate',
-      term_id: any_term.id
+      terms: [any_term]
     })
   end
 
@@ -64,7 +65,7 @@ class Course < ApplicationRecord
       description: 'Thesis Course',
       units: 1,
       level: 'graduate',
-      term_id: any_term.id
+      terms: [any_term]
     })
   end
 
@@ -78,11 +79,13 @@ class Course < ApplicationRecord
   def create_meetings(num = 10)
     num.times do |num|
       current_year = Date.today.year
-      self.meetings.create({
-        year: Date.new(current_year).advance(years: num).year,
-        term: self.term.name,
-        sessions: self.sessions.to_a
-      })
+      self.terms.each do |term|
+        self.meetings.create({
+          year: Date.new(current_year).advance(years: num).year,
+          term: term.name,
+          sessions: self.sessions.to_a
+        })
+      end
     end
   end
 
