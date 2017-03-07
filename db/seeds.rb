@@ -388,7 +388,7 @@ puts 'creating on-track student'
 on_track = Student.last.plan
 on_track.concentration = Concentration.last
 on_track.completed_courses << Course.thesis_writing
-on_track.scheduled_classes << Course.thesis_writing.meetings.first
+# on_track.scheduled_classes << Course.thesis_writing.meetings.first
 on_track.save
 
 puts 'seeds complete'
