@@ -1,6 +1,6 @@
 planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth', 'courseService',
   function($scope, meetingService, _, Auth, courseService) {
-    
+
     meetingService.getAll().then(function(courses) {
       $scope.courses = courses;
       courseService.setCourses($scope.courses);
@@ -30,14 +30,16 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
           };
           // find the course meeting for this year
           var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
-          var term = thisYearsMeeting.term.toLowerCase();
-          yearAttendance[term] = {
-            count: thisYearsMeeting.enrollments.length,
-            meeting_id: thisYearsMeeting.id,
-          };
-          course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+          if (thisYearsMeeting) {
+            var term = thisYearsMeeting.term.toLowerCase();
+            yearAttendance[term] = {
+              count: thisYearsMeeting.enrollments.length,
+              meeting_id: thisYearsMeeting.id,
+            };
+            course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+          }
         });
-      });      
+      });
     };
 
     Auth.currentUser()
