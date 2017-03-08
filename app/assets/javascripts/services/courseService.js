@@ -12,9 +12,11 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
   };
 
   var create = function(params) {
+    debugger;
     return Restangular.all('courses')
       .post(params)
       .then(function(course) {
+        debugger;
         _getCourseAttendance(course);
         _courses.push(course);
         Flash.create("success", "Course created");
@@ -33,6 +35,9 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         angular.copy(updatedCourse, oldCourse);
         oldCourse.session_ids = oldCourse.sessions.map(function(session) {
           return session.id;
+        });
+        oldCourse.term_ids = oldCourse.terms.map(function(term) {
+          return term.id;
         });
         _getCourseAttendance(oldCourse);
         Flash.create("success", "Course updated");

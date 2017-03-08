@@ -21,15 +21,19 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         .then(function(sessions) {
           scope.sessions = sessions;
         });
-      
+
       scope.$watch('course', function() {
         angular.copy(scope.course, scope.courseParams);
-        if (scope.courseParams && !scope.courseParams.sessions) {
+        if (scope.courseParams && (!scope.courseParams.sessions || !scope.courseParams.terms)) {
           scope.courseParams.session_ids = [];
+          scope.courseParams.term_ids = [];
           scope.courseParams.pristineSessions = true;
         } else {
           scope.courseParams.session_ids = scope.courseParams.sessions.map(function(session) {
             return session.id;
+          });
+          scope.courseParams.term_ids = scope.courseParams.terms.map(function(term) {
+            return term.id;
           });
         }
       }, true);
@@ -46,7 +50,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
           }
       });
 
-      scope.toggleSelection = function toggleSelection(sessionId) {
+      scope.toggleSessionSelection = function toggleSessionSelection(sessionId) {
         scope.courseParams.pristineSessions = false;
         var idx = scope.courseParams.session_ids.indexOf(sessionId);
         if (idx > -1) {
@@ -54,6 +58,17 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         }
         else {
           scope.courseParams.session_ids.push(sessionId);
+        }
+        scope.checkFormValidity();
+      };
+      scope.toggleTermSelection = function toggleTermSelection(termId) {
+        scope.courseParams.pristineTerms = false;
+        var idx = scope.courseParams.term_ids.indexOf(termId);
+        if (idx > -1) {
+          scope.courseParams.term_ids.splice(idx, 1);
+        }
+        else {
+          scope.courseParams.term_ids.push(termId);
         }
         scope.checkFormValidity();
       };
@@ -90,14 +105,14 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
       scope.checkFormValidity = function() {
         scope.continuousSessions = checkSessionsContinuous();
         var validFields = checkValidFields();
-        scope.courseForm.$valid = validFields && !!scope.courseParams.session_ids.length && scope.continuousSessions;
+        scope.courseForm.$valid = validFields && scope.continuousSessions;
         scope.courseForm.$invalid = !scope.courseForm.$valid;
       };
 
       var checkSessionsContinuous = function() {
         var sessions = scope.courseParams.session_ids;
         if (!sessions.length) {
-          return false;
+          return true;
         } else if (sessions.length === 1) {
           return true;
         }
