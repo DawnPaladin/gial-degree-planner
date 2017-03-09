@@ -1,14 +1,49 @@
 planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash', 'studentService', 'advisorService',
   function($scope, Restangular, Auth, Flash, studentService, advisorService) {
 
-    studentService.getAll().then(function(students) {
-      $scope.students = students;
-      getCurrentUser();
-    });
+    var showUnarchived = function() {
+      return studentService.getUnarchived().then(function(students) {
+        $scope.students = students;
+        getCurrentUser();
+        return students;
+      });
+    };
+    showUnarchived();
+
+    var getArchived = function() {
+      return studentService.getArchived().then(function(students) {
+        $scope.archivedStudents = students;
+      });
+    };
+
+    $scope.showArchived = function() {
+    getArchived().then(function() {
+        $scope.showArchivedStudents = true;
+      });
+    };
+
+    var refreshAll = function() {
+      showUnarchived();
+      getArchived();
+    };
+
+    $scope.archiveStudent = function(student) {
+      student.archived = true;
+      student.put().then(function() {
+        refreshAll();
+      });
+    };
+
+    $scope.dearchiveStudent = function(student) {
+      student.archived = false;
+      student.put().then(function() {
+        refreshAll();
+      });
+    };
 
     advisorService.getAll().then(function(advisors) {
       $scope.advisors = advisors;
-    });    
+    });
 
     $scope.property = "last_name";
     $scope.reverse = false;
@@ -20,7 +55,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
           updatePinned(student);
         });
       });
-    }
+    };
 
     var updatePinned = function(student) {
       student.pinned = student.advisor.id === $scope.currentAdvisor.id;
