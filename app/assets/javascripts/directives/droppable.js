@@ -36,7 +36,7 @@ planner.directive('droppable', function() {
           item.classList.remove('drag');
 //           var termId = JSON.parse(item.getAttribute('term')).id;
 
-          var termJSON = item.getAttribute('term');
+          var termJSON = item.getAttribute('terms');
           var termId;
 
           if (termJSON == "" || JSON.parse(termJSON).name == "Any") {

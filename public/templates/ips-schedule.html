@@ -4,12 +4,12 @@
 
   <div id="sticky-container" class="course-bubble-container" stickable droppable drop="handleDrop">
 
-    <div ng-repeat="course in planInfo.plan.intended_courses | unscheduledFilter" class="course-bubble" id="{{ course.id }}" term="{{ course.term }}" draggable draggable-course="course">
+    <div ng-repeat="course in planInfo.plan.intended_courses | unscheduledFilter" class="course-bubble" id="{{ course.id }}" terms="{{ course.terms }}" draggable draggable-course="course">
       {{ course.name }}<br>
       <span class="truncated">
         {{ course.number }}<br>
       </span>
-        {{ course.term.name }} {{ course.sessions | sessionFilter }}
+        {{ course.terms | termFilter }} {{ course.sessions | sessionFilter }}
     </div>
 
   </div>
@@ -28,12 +28,12 @@
 
         <p>{{ term.name }}</p>
 
-        <span ng-repeat="course in term.courses" class="course-bubble" id="{{ course.id }}" data-year-id="{{ year.id }}" term="{{ course.term }}" draggable draggable-course="course">
+        <span ng-repeat="course in term.courses" class="course-bubble" id="{{ course.id }}" data-year-id="{{ year.id }}" terms="{{ course.terms }}" draggable draggable-course="course">
           {{ course.name }}<br>
           <span class="truncated">
             {{ course.number }}<br>
           </span>
-            {{ course.term.name }} {{ course.sessions | sessionFilter }}
+            {{ course.terms.name }} {{ course.sessions | sessionFilter }}
         </span>
 
       </div>

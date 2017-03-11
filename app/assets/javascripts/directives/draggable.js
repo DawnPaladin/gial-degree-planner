@@ -10,7 +10,8 @@ planner.directive('draggable', function() {
     var doTheDragStartThings = function(e, attrs, that) {
       // Get the term id off of the element being dragged
       var thisYearId;
-      var thisTermId = JSON.parse(e.target.getAttribute('term')).id;
+      debugger;
+      var thisTermId = JSON.parse(e.target.getAttribute('terms')).id;
       if (e.target.getAttribute('data-year-id')) {
         thisYearId = e.target.getAttribute('data-year-id');
       }
