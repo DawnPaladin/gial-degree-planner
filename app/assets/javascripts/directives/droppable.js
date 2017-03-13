@@ -30,16 +30,21 @@ planner.directive('droppable', function() {
           // do not allow the drop to execute
           that.classList.remove('over');
 
-
-          // var item = document.getElementById((JSON.parse(e.dataTransfer.getData('Text'))).id);
           var item = angular.element('.drag')[0];
           item.classList.remove('drag');
-//           var termId = JSON.parse(item.getAttribute('term')).id;
 
-          var termJSON = item.getAttribute('terms');
+
+          var termsJSON = item.getAttribute('terms');
+          var terms = JSON.parse(termsJSON);
+          var termsIds = [];
+          for (var i = 0; i < terms.length; i++) {
+            termsIds.push(terms[i].id);
+          }
           var termId;
 
-          if (termJSON == "" || JSON.parse(termJSON).name == "Any") {
+
+
+          if (termsJSON == "" || terms[0].name == "Any") {
             if (that.id == "sticky-container") {
               // gets sticky container termId
               termId = item.parentNode.getAttribute('data-term-id');
@@ -48,9 +53,8 @@ planner.directive('droppable', function() {
               termId = that.getAttribute('data-term-id');
             }
           } else {
-            termId = JSON.parse(termJSON).id;            
+            termId = item.parentNode.getAttribute('data-term-id');      
           }
-
 
 
           if (item.parentNode.id == 'sticky-container' && that.id == 'sticky-container') {
@@ -59,13 +63,17 @@ planner.directive('droppable', function() {
             return false;
           } else if (that.id == 'sticky-container') {
 
-          } else if (termId != that.getAttribute('data-term-id')) {
+          } else if (terms[0].name == "Any") {
+
+          } else if (!termsIds.includes(parseInt(that.getAttribute('data-term-id')))) {
             return false;
           }
 
           if (that.id == "sticky-container") {
 
             var year = item.getAttribute('data-year-id');
+
+
 
             var meetingData = {
               id: that.id,

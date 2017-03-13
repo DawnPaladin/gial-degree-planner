@@ -21,7 +21,10 @@ class PlansController < ApplicationController
     @term = Term.find(params[:meeting_term])
 
     if @course.name == "Thesis Writing" || @course.name == "Thesis"
-      @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
+      @meeting = Meeting.find_meeting(@course, @year, @term)
+      if @meeting.nil?
+        @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
+      end
     else
       @meeting = Meeting.find_meeting(@course, @year, @term)
     end
@@ -29,9 +32,10 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:plan][:id])
     @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
     if @enrollment.save
-      if params[:prevYear] && params[:prevYear] != params[:meeting_year]
+      if params[:prevTerm] && params[:prevYear] && (params[:prevYear] != params[:meeting_year] || params[:prevTerm] != params[:meeting_term])
         prev_year = Year.find(params[:prevYear])
-        prev_meeting = Meeting.find_meeting(@course, prev_year, @term)
+        prev_term = Term.find(params[:prevTerm])
+        prev_meeting = Meeting.find_meeting(@course, prev_year, prev_term)
         Enrollment.find_by({meeting_id: prev_meeting.id, plan_id: @plan.id}).delete
       end
       render :show
@@ -43,7 +47,7 @@ class PlansController < ApplicationController
   def disenroll_from_meeting
     @course = Course.find(params[:course_id])
     @year = Year.find(params[:prevYear])
-    @term = Term.find(params[:meeting_term])
+    @term = Term.find(params[:prevTerm])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
     @enrollment = Enrollment.find_by({meeting_id: @meeting.id, plan_id: @plan.id})
