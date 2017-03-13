@@ -3,7 +3,13 @@ class StudentsController < ApplicationController
   before_action :require_admin, only: [:update, :create]
 
   def index
-    @students = Student.includes(:advisor, { plan: [:concentration]})
+    if params[:archived] == 'true'
+      @students = Student.where('archived = true').includes(:advisor, { plan: [:concentration]})
+    elsif params[:archived] == 'false'
+      @students = Student.where('archived = false').includes(:advisor, { plan: [:concentration]})
+    else
+      @students = Student.includes(:advisor, { plan: [:concentration]})
+    end
   end
 
   def show
@@ -33,7 +39,7 @@ class StudentsController < ApplicationController
 
   private
     def student_params
-      params.require(:student).permit(:id, :first_name, :last_name, :email, :advisor_id)
+      params.require(:student).permit(:id, :first_name, :last_name, :email, :advisor_id, :archived)
     end
 
 end

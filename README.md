@@ -4,11 +4,65 @@ by [Alexa Anderson](http://github.com/PopularDemand), [James Harris](http://gith
 
 This app helps students at [GIAL](http://www.gial.edu) plan which courses to take and provides their advisors with information about their plans. 
 
-**[Try it out!](http://gial-planner.herokuapp.com)** While this app is temporarily in **open-house** mode, you can log in with the email address **admin@gial.edu** and the password **adminpass**.
+**[Try it out!](https://gial-demo.herokuapp.com/)** You can log in with the email address **admin@gial.edu** and the password **adminpass**.
 
 ## Background
 
 Students at the [Graduate Institute of Applied Linguistics](http://www.gial.edu) are required to complete an Intended Plan of Study to help them plan which classes to take. This has historically been a labor-intensive process involving lots of spreadsheets; some tasks such as "finding out which students are enrolled in a particular class" are so time-intensive that they're usually left undone, which leads to scheduling problems. This app stores these plans in a relational database, accessed through a purpose-built web client. It dramatically accelerates the process of creating an Intended Plan of Study and instantly provides data that was previously time-prohibitive to collect.
+
+## Walkthrough
+
+### Advisor Log In
+
+![Advisor Log In](public/login.png)
+
+### The Student Dashboard
+
+Once logged in, the app takes you to the student dashboard. Students can be sorted by clicking on any column header. Clicking on a student takes you to their graduation planner.
+
+![Student Dashboard](public/students.png)
+
+### Building a Student’s Intended Plan of Study
+
+Here the advisor selects a concentration for the student, and chooses from the list of required courses on the right. Boxes turn green as requirements are met. Chosen courses are populated on the left.
+
+![Student Plan](public/student-plan.png)
+
+### Scheduling Classes
+
+Advisors can drag and drop courses onto a term to schedule them. Available terms are shaded purple while dragging.
+
+![Scheduling Classes](public/schedule.png)
+
+### Printing the Student’s Intended Plan of Study
+
+A summary document based on GIAL’s existing official documentation, with sections pre-filled based on their previous choices. Advisors select the “print” tab to save or print a PDF of the student’s intended plan of study.
+
+![Print Plan](public/print.png)
+
+### The Class Dashboard
+
+A comprehensive list of GIAL’s classes and the number of students enrolled in each class. Robin was ecstatic about this feature, as it will allow her to make sure her professors aren’t over or underbooked.
+
+![Class Dashboard](public/classes.png)
+
+### Examining a Class
+
+Clicking on a class brings up a modal with all the class’s information and list of enrolled students. Class details can also be edited here.
+
+![Class Information](public/new-class.png)
+
+### The Degree Dashboard
+
+Here an admin can create a degree from scratch, building a degree’s concentrations, categories within a concentration, and courses within a category. Our goal with this section was to make the app useful to any graduate institution.
+
+![Degree Dashboard](public/degree.png)
+
+### Managing the Advisors
+
+A simple dashboard for an admin to view and update advisor information.
+
+![Managing Advisors](public/advisors.png)
 
 ## Architecture
 
