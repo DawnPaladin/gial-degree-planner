@@ -19,6 +19,7 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
     var initializeMeetings = function() {
       var meetings = [];
       $scope.courses.forEach(function getCourseAttendance(course) {
+        // if (course.number == "AA5386") debugger;
         meetings.push.apply(meetings, course.meetings);
         course.attendance = [];
         years.forEach(function(year) {
@@ -29,15 +30,19 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
             any: {},
           };
           // find the course meeting for this year
-          var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
-          if (thisYearsMeeting) {
-            var term = thisYearsMeeting.term.toLowerCase();
-            yearAttendance[term] = {
-              count: thisYearsMeeting.enrollments.length,
-              meeting_id: thisYearsMeeting.id,
-            };
-            course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
-          }
+          var thisYearsMeetings = course.meetings.filter(function(meeting) { return meeting.year === Number(year); });
+          thisYearsMeetings.forEach(function(meeting) {
+            var term = meeting.term.toLowerCase();
+            if (yearAttendance[term].count) {
+              yearAttendance[term].count += meeting.enrollments.length;
+            } else {
+              yearAttendance[term] = {
+                count: meeting.enrollments.length,
+                meeting_id: meeting.id,
+              };
+            }
+          });
+          course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
         });
       });
     };
