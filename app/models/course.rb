@@ -76,19 +76,26 @@ class Course < ApplicationRecord
   # Instance Methods
   #####
 
-  # this will probably need work
-  # to determine the correct year/term
   def create_meetings(num = 10)
-    num.times do |num|
+    num.times do |i|
       current_year = Date.today.year
       self.terms.each do |term|
         self.meetings.create({
-          year: Date.new(current_year).advance(years: num).year,
+          year: Date.new(current_year).advance(years: i).year,
           term: term.name,
           sessions: self.sessions.to_a
         })
       end
     end
+  end
+
+  def find_future_meetings
+    current_year = Date.today.year
+    self.meetings.where('year >= ?', current_year)
+  end
+
+  def destroy_future_meetings
+    self.find_future_meetings.destroy_all
   end
 
   def upcase_number
