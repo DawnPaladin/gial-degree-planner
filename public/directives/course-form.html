@@ -85,54 +85,57 @@
       <div class="col-xs-4">
 
         <div class="taught-at">
-          <div class="form-gorup">
-            <label class="barrier-label">Is this course taught at GIAL?</label>
+          <div class="form-group">
+            <label class="barrier-label">Course taught at GIAL?</label>
             <input type="radio"
             ng-value='{{true}}'
             required
-            ng-click='clearSessionsTerms()'
             name='local'
+            ng-click='clearSessionsTerms()'
             ng-model='courseParams.localCourse' /> Yes
             <input type="radio"
             ng-value='{{false}}'
             required
-            ng-click='setForeignCourseAttrs()'
             name='local'
+            ng-click='setForeignCourseAttrs()'
             ng-model='courseParams.localCourse' /> No
+            <p ng-show="courseForm.local.$invalid && !courseForm.local.$pristine" class="help-block">Location is required</p>
           </div>
         </div>
         
-        <div class="term">
-          <div class="form-group">
-            <label class="barrier-label">Term</label>
-            <div ng-repeat='term in terms'>
-              <input type="radio"
-              ng-value='term.id'
-              required
-              ng-disabled='!courseParams.localCourse'
-              name='term'
-              ng-model='courseParams.term_id' /> {{ term.name }}
-              <p ng-show="courseForm.term.$invalid && !courseForm.term.$pristine" class="help-block">Term is required</p>
+        <div class="local-course-details" ng-if='courseParams.localCourse'>
+          <div class="term">
+            <div class="form-group">
+              <label class="barrier-label">Term</label>
+              <div ng-repeat='term in terms'>
+                <input type="radio"
+                ng-value='term.id'
+                required
+                ng-disabled='!courseParams.localCourse'
+                name='term'
+                ng-model='courseParams.term_id' /> {{ term.name }}
+                <p ng-show="courseForm.term.$invalid && !courseForm.term.$pristine" class="help-block">Term is required</p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="sessions">
-          <div class="form-group">
-            <label class="">Sessions</label>
-            <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
-            <div ng-repeat='session in sessions'>
-
-              <input type="checkbox"
-              ng-value='session.id'
-              name='session'
-              ng-checked="courseParams.session_ids.indexOf(session.id) > -1"
-              ng-required='!courseParams.session_ids.length'
-              ng-disabled='!courseParams.localCourse'
-              ng-click="toggleSelection(session.id)"> Session {{ session.name }}
+          
+          <div class="sessions">
+            <div class="form-group">
+              <label class="">Sessions</label>
+              <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
+              <div ng-repeat='session in sessions'>
+          
+                <input type="checkbox"
+                ng-value='session.id'
+                name='session'
+                ng-checked="courseParams.session_ids.indexOf(session.id) > -1"
+                ng-required='!courseParams.session_ids.length'
+                ng-disabled='!courseParams.localCourse'
+                ng-click="toggleSelection(session.id)"> Session {{ session.name }}
+              </div>
+              <p ng-hide='courseParams.session_ids.length || courseParams.pristineSessions' class='help-block'>Session is required</p>
+              <p ng-show='continuousSessions === false && courseParams.session_ids.length' class='help-block'>Sessions must be continuous</p>
             </div>
-            <p ng-hide='courseParams.session_ids.length || courseParams.pristineSessions' class='help-block'>Session is required</p>
-            <p ng-show='continuousSessions === false && courseParams.session_ids.length' class='help-block'>Sessions must be continuous</p>
           </div>
         </div>
       </div>
