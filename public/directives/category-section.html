@@ -56,10 +56,11 @@
 
 <modal id='new-course-form'
        category='category'
-       afterSave='addElective(course)'
+       after-save='addElective(course)'
        >
   <modal-title>New Course</modal-title>
   <modal-body>
-    <course-form course='courseParams'></course-form>
+    <course-form course='courseParams'
+                 after-save='addElective(course)'></course-form>
   </modal-body>
 </modal>

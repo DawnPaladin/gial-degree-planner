@@ -62,21 +62,9 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         var continuousSessions = checkSessionsContinuous();
         if (formValid && continuousSessions) {
           if (scope.courseParams.id) {
-            return courseService.update(scope.courseParams)
-              .then(function() {
-                angular.element("[data-dismiss=modal]").click();
-              });
+            _updateCourse();
           } else {
-            courseService.create(scope.courseParams)
-              .then(function(course) {
-                // example of afterSave: addElective which takes
-                // the created course and adds it as an elective
-                var result = scope.afterSave(course);
-                angular.element("[data-dismiss=modal]").click();
-                return result;
-              }, function(error) {
-                // Flash.create('warning', error);
-              });
+            _createCourse();
           }
         } else {
           if (!continuousSessions) {
@@ -85,6 +73,28 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
             angular.element('.sessions').removeClass('error-border');
           }
         }
+      };
+
+      var _updateCourse = function() {
+        return courseService.update(scope.courseParams)
+          .then(function() {
+            angular.element("[data-dismiss=modal]").click();
+          });
+      };
+
+      var _createCourse = function() {
+        var pertinentService;
+        // if (scope.courseParams.localCourse) {
+          pertinentService = courseService;
+        // }
+        pertinentService.create(scope.courseParams)
+          .then(function(course) {
+            var result = scope.afterSave({course: course});
+            angular.element("[data-dismiss=modal]").click();
+            return result;
+          }, function(error) {
+            // Flash.create('warning', error);
+          });
       };
 
       scope.checkFormValidity = function() {
