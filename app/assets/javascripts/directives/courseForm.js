@@ -111,6 +111,20 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         });
       };
 
+      scope.setForeignCourseAttrs = function() {
+        scope.courseParams.term_id = scope.terms.find(function(term) {
+          return term.name == 'Any';
+        }).id;
+        scope.courseParams.session_ids = scope.sessions.map(function(session) {
+          return session.id;
+        });
+      };
+
+      scope.clearSessionsTerms = function() {
+        scope.courseParams.session_ids = [];
+        scope.courseParams.term_id = [];
+      };
+
       scope.buttonValue = function() {
         return scope.courseParams.id ? 'Update Course' : 'Create Course';
       };
