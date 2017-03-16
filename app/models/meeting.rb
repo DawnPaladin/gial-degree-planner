@@ -20,7 +20,7 @@ class Meeting < ApplicationRecord
   end
 
   accepts_nested_attributes_for :teachers
-    
+
 
   def autosave_associated_records_for_teachers
     # Find or create the teacher by name
