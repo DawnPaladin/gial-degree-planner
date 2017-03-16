@@ -125,6 +125,26 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         scope.courseParams.session_ids = scope.sessions.map(function(session) {
           return session.id;
         });
+        _nextAvailableFCNumber()
+          .then(function(number) {
+            scope.courseParams.number = 'FC' + number;
+          });
+      };
+
+      var _nextAvailableFCNumber = function() {
+        return courseService.countOfForeignCourses()
+          .then(function(num) {
+            var nextAvailable = num + 1;
+            return _zeroPad(nextAvailable);
+          })
+      };
+
+      var _zeroPad = function(num) {
+        num = num.toString();
+        while (num.length != 4) {
+          num = '0'.concat(num);
+        }
+        return num;
       };
 
       scope.clearSessionsTerms = function() {
