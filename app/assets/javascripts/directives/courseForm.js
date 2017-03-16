@@ -27,7 +27,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         if (scope.courseParams && !scope.courseParams.sessions) {
           scope.courseParams.session_ids = [];
           scope.courseParams.pristineSessions = true;
-          scope.courseParams.localCourse = true;
+          scope.courseParams.local = true;
         } else {
           scope.courseParams.session_ids = scope.courseParams.sessions.map(function(session) {
             return session.id;
@@ -41,7 +41,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
 
       angular.element(document.body).on('hide.bs.modal', function () {
           if (!scope.courseParams.id) {
-            scope.courseParams = { pristineSessions: true, session_ids: [], localCourse: true };
+            scope.courseParams = { pristineSessions: true, session_ids: [], local: true };
             scope.courseForm.$setPristine();
             scope.courseForm.$setUntouched();
           }
@@ -84,11 +84,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
       };
 
       var _createCourse = function() {
-        var pertinentService;
-        // if (scope.courseParams.localCourse) {
-          pertinentService = courseService;
-        // }
-        pertinentService.create(scope.courseParams)
+        courseService.create(scope.courseParams)
           .then(function(course) {
             var result = scope.afterSave({course: course});
             angular.element("[data-dismiss=modal]").click();

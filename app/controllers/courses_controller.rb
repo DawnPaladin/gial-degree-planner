@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+    binding.pry
     if @course.save
       params[:session_ids].each do |session_id|
         @course.sessions << Session.find_by_id(session_id)
@@ -39,7 +40,7 @@ class CoursesController < ApplicationController
   private
 
     def course_params
-      params.require(:course).permit(:name, :number, :term_id, :description, :units, :level, :category_id, sessions: [])
+      params.require(:course).permit(:name, :number, :local, :term_id, :description, :units, :level, :category_id, sessions: [])
     end
 
     def set_course

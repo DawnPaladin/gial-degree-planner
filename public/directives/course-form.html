@@ -92,18 +92,18 @@
             required
             name='local'
             ng-click='clearSessionsTerms()'
-            ng-model='courseParams.localCourse' /> Yes
+            ng-model='courseParams.local' /> Yes
             <input type="radio"
             ng-value='{{false}}'
             required
             name='local'
             ng-click='setForeignCourseAttrs()'
-            ng-model='courseParams.localCourse' /> No
+            ng-model='courseParams.local' /> No
             <p ng-show="courseForm.local.$invalid && !courseForm.local.$pristine" class="help-block">Location is required</p>
           </div>
         </div>
         
-        <div class="local-course-details" ng-if='courseParams.localCourse'>
+        <div class="local-course-details" ng-if='courseParams.local'>
           <div class="term">
             <div class="form-group">
               <label class="barrier-label">Term</label>
@@ -111,7 +111,7 @@
                 <input type="radio"
                 ng-value='term.id'
                 required
-                ng-disabled='!courseParams.localCourse'
+                ng-disabled='!courseParams.local'
                 name='term'
                 ng-model='courseParams.term_id' /> {{ term.name }}
                 <p ng-show="courseForm.term.$invalid && !courseForm.term.$pristine" class="help-block">Term is required</p>
@@ -130,7 +130,7 @@
                 name='session'
                 ng-checked="courseParams.session_ids.indexOf(session.id) > -1"
                 ng-required='!courseParams.session_ids.length'
-                ng-disabled='!courseParams.localCourse'
+                ng-disabled='!courseParams.local'
                 ng-click="toggleSelection(session.id)"> Session {{ session.name }}
               </div>
               <p ng-hide='courseParams.session_ids.length || courseParams.pristineSessions' class='help-block'>Session is required</p>
