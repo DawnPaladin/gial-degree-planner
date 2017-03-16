@@ -29,7 +29,7 @@
       </thead>
 
     <tr ng-repeat="course in courses | filter: filteredCourses">
-      <td ng-if='currentAdvisor.is_admin'><span class="clickable" ng-click='showEditCourseModal(course)'>{{ course.number }} {{ course.name }}</span></td>
+      <td ng-if='currentAdvisor.is_admin'><span class="clickable" ng-click='showEditCourseModal(course)'>{{ course.number }} {{ course.name }} <span class="sm-text">{{ course.local ? '' : '(non-local)'}}</span></span></td>
       <td ng-if='!currentAdvisor.is_admin'><span>{{ course.number }} {{ course.name }}</span></td>
       <td ng-repeat="termAttendance in course.attendance track by $index" class="text-center">
         <span class='clickable'
