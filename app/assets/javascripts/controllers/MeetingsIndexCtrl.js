@@ -17,34 +17,7 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
 
 
     var initializeMeetings = function() {
-      var meetings = [];
-      $scope.courses.forEach(function getCourseAttendance(course) {
-        // if (course.number == "AA5386") debugger;
-        meetings.push.apply(meetings, course.meetings);
-        course.attendance = [];
-        years.forEach(function(year) {
-          var yearAttendance = {
-            spring: {},
-            summer: {},
-            fall: {},
-            any: {},
-          };
-          // find the course meeting for this year
-          var thisYearsMeetings = course.meetings.filter(function(meeting) { return meeting.year === Number(year); });
-          thisYearsMeetings.forEach(function(meeting) {
-            var term = meeting.term.toLowerCase();
-            if (yearAttendance[term].count) {
-              yearAttendance[term].count += meeting.enrollments.length;
-            } else {
-              yearAttendance[term] = {
-                count: meeting.enrollments.length,
-                meeting_id: meeting.id,
-              };
-            }
-          });
-          course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
-        });
-      });
+      $scope.courses.forEach(function(course) { courseService.getCourseAttendance(course); });
     };
 
     Auth.currentUser()

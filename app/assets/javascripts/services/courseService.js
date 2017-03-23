@@ -17,7 +17,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       .post(params)
       .then(function(course) {
         debugger;
-        _getCourseAttendance(course);
+        getCourseAttendance(course);
         _courses.push(course);
         Flash.create("success", "Course created");
         return course;
@@ -39,7 +39,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         oldCourse.term_ids = oldCourse.terms.map(function(term) {
           return term.id;
         });
-        _getCourseAttendance(oldCourse);
+        getCourseAttendance(oldCourse);
         Flash.create("success", "Course updated");
         return oldCourse;
       }, function(error) {
@@ -48,7 +48,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       });
   };
 
-  var _getCourseAttendance = function(course) {
+  var getCourseAttendance = function(course) {
     var years = ["2017", "2018", "2019", "2020"];
     var meetings = [];
     meetings.push.apply(meetings, course.meetings);
@@ -61,13 +61,18 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         any: {},
       };
       // find the course meeting for this year
-      var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
-      if (!thisYearsMeeting) { console.warn("Could not get meeting for course", course); return false; }
-      var term = thisYearsMeeting.term.toLowerCase();
-      yearAttendance[term] = {
-        count: thisYearsMeeting.enrollments.length,
-        meeting_id: thisYearsMeeting.id,
-      };
+      var thisYearsMeetings = course.meetings.filter(function(meeting) { return meeting.year === Number(year); });
+      thisYearsMeetings.forEach(function(meeting) {
+        var term = meeting.term.toLowerCase();
+        if (yearAttendance[term].count) {
+          yearAttendance[term].count += meeting.enrollments.length;
+        } else {
+          yearAttendance[term] = {
+            count: meeting.enrollments.length,
+            meeting_id: meeting.id,
+          };
+        }
+      });
       course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
     });
   };
@@ -82,6 +87,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
 
   return {
     getCourses: getCourses,
+    getCourseAttendance: getCourseAttendance,
     create: create,
     update: update,
     setCourses: setCourses
