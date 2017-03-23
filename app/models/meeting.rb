@@ -14,6 +14,7 @@ class Meeting < ApplicationRecord
 
   belongs_to :course
 
+  after_save :destroy_empty_canceled_meeting
 
   def self.find_meeting(course, year, term)
     Meeting.where(course: course, year: year.value, term: term.name).first
@@ -34,5 +35,12 @@ class Meeting < ApplicationRecord
       end
     end
   end
+
+  private
+    def destroy_empty_canceled_meeting
+      if self.canceled && self.enrollments.count == 0
+        self.destroy
+      end
+    end
 
 end

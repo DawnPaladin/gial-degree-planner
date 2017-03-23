@@ -41,6 +41,7 @@ class Course < ApplicationRecord
   # lifecycle
   before_save :upcase_number
   after_create :create_meetings
+  after_update :update_meetings
 
   #####
   # Class Methods
@@ -76,36 +77,55 @@ class Course < ApplicationRecord
   # Instance Methods
   #####
 
-  def create_meetings(num = 10)
-    num.times do |i|
-      current_year = Date.today.year
-      self.terms.each do |term|
-        self.meetings.create({
-          year: Date.new(current_year).advance(years: i).year,
-          term: term.name,
-          sessions: self.sessions.to_a
-        })
-      end
-    end
-  end
-
-  def find_future_meetings
-    current_year = Date.today.year
-    self.meetings.where('year >= ?', current_year)
-  end
-
-  def destroy_future_meetings
-    self.find_future_meetings.destroy_all
-  end
-
-  def upcase_number
-    self.number.upcase!
-  end
-
   def full_name
     "#{self.number} #{self.name}"
   end
 
+  private
+    def create_meetings(years = 10)
+      years.times do |i|
+        current_year = Date.today.year
+        self.terms.each do |term|
+          meeting = self.meetings.find_by({
+            year: Date.new(current_year).advance(years: i).year,
+            term: term.name,
+          })
+          if meeting.nil?
+            self.meetings.create({
+              year: Date.new(current_year).advance(years: i).year,
+              term: term.name,
+              sessions: self.sessions.to_a
+            })
+          end
+        end
+      end
+    end
 
+    def find_future_meetings
+      current_year = Date.today.year
+      self.meetings.where('year >= ?', current_year)
+    end
+
+    def cancel_disassociated_meetings
+      find_future_meetings.each do |meeting|
+        unless self.terms.include? meeting.term
+          meeting.canceled = true
+          meeting.save
+        end
+      end
+    end
+
+    def update_meetings(years = 10)
+      cancel_disassociated_meetings
+      create_meetings
+    end
+
+    # def destroy_future_meetings
+    #   self.find_future_meetings.destroy_all
+    # end
+
+    def upcase_number
+      self.number.upcase!
+    end
 
 end

@@ -62,6 +62,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       };
       // find the course meeting for this year
       var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
+      if (!thisYearsMeeting) { console.warn("Could not get meeting for course", course); return false; }
       var term = thisYearsMeeting.term.toLowerCase();
       yearAttendance[term] = {
         count: thisYearsMeeting.enrollments.length,
