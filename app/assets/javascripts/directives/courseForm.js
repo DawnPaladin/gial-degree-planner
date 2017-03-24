@@ -10,7 +10,6 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
     link: function(scope) {
 
       scope.courseParams = angular.copy(scope.course, {});
-
       scope.levels = ['Graduate', 'Undergrad'];
       termService.getTerms()
         .then(function(terms) {
@@ -44,7 +43,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
 
       angular.element(document.body).on('hide.bs.modal', function () {
           if (!scope.courseParams.id) {
-            scope.courseParams = { pristineSessions: true, session_ids: [] };
+            scope.courseParams = { pristineSessions: true, session_ids: [], term_ids: [] };
             scope.courseForm.$setPristine();
             scope.courseForm.$setUntouched();
           }
