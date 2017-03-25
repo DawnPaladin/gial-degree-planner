@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228033443) do
+ActiveRecord::Schema.define(version: 20170308205010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20170228033443) do
 
   create_table "courses", force: :cascade do |t|
     t.integer  "category_id"
-    t.integer  "term_id",     null: false
     t.string   "name",        null: false
     t.string   "number",      null: false
     t.text     "description"
@@ -88,7 +87,7 @@ ActiveRecord::Schema.define(version: 20170228033443) do
     t.datetime "updated_at",  null: false
     t.index ["category_id"], name: "index_courses_on_category_id", using: :btree
     t.index ["name"], name: "index_courses_on_name", using: :btree
-    t.index ["number"], name: "index_courses_on_number", unique: true, using: :btree
+    t.index ["number"], name: "index_courses_on_number", using: :btree
   end
 
   create_table "courses_sessions", force: :cascade do |t|
@@ -97,6 +96,13 @@ ActiveRecord::Schema.define(version: 20170228033443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id", "session_id"], name: "index_courses_sessions_on_course_id_and_session_id", using: :btree
+  end
+
+  create_table "courses_terms", force: :cascade do |t|
+    t.integer  "course_id"
+    t.integer  "term_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "degree_course_requirements", force: :cascade do |t|

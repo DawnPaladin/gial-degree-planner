@@ -99,23 +99,21 @@ end
 
 puts 'creating courses'
 require 'csv'
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'world-arts-courses.csv'))
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'gial-courses.csv'))
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
-  term = Term.find_by(name: row['Course Term'].titleize)
-  if term.nil?
-    term_name = row['Course Term'].titleize.split('/')[0]
-    term = Term.find_by(name: term_name)
-    next if term.nil?
-    # FIXME: Term should not be required, and a course can have more than one term.
-  end
   course = Course.new({
     number: row['Category'] + row['Number'],
     name: row['Name'],
     level: row['Course Level'],
     units: row['Credit Hours'],
-    term: term,
   })
+  term_names = row['Course Term'].titleize.split('/')
+  term_names.each do |term_name|
+    term = Term.find_by(name: term_name.titleize)
+    next if term.nil?
+    course.terms << term
+  end
   unless row['Sessions'].nil?
     session_names = row['Sessions'].split(',')
     session_names.each do |session_name|
@@ -129,7 +127,6 @@ csv.each do |row|
   else
     puts course.errors.full_messages
   end
-  puts course.term.name
 end
 
 puts 'creating degree'
@@ -291,7 +288,7 @@ conc = degree.concentrations.create({
   conc.create_non_thesis_track({
     elective_hours: 6
   })
-  
+
 conc = degree.concentrations.create({
   name: "Linguistics",
   description: LOREM
@@ -333,11 +330,6 @@ degree.required_courses << Course.find_by(number: 'AA5382')
 degree.required_courses << Course.find_by(number: 'AA5384')
 degree.required_courses << Course.find_by(number: 'AA5386')
 
-
-# puts 'creating meetings through courses'
-# Course.all.each do |course|
-#   course.create_meetings
-# end
 
 puts 'creating and adding teachers to meetings'
 NUM_TEACHERS.times do |num|
@@ -391,7 +383,7 @@ puts 'creating on-track student'
 on_track = Student.last.plan
 on_track.concentration = Concentration.last
 on_track.completed_courses << Course.thesis_writing
-on_track.scheduled_classes << Course.thesis_writing.meetings.first
+# on_track.scheduled_classes << Course.thesis_writing.meetings.first
 on_track.save
 
 puts 'seeds complete'

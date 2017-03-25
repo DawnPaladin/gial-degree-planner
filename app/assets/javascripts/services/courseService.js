@@ -15,7 +15,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     return Restangular.all('courses')
       .post(params)
       .then(function(course) {
-        _getCourseAttendance(course);
+        getCourseAttendance(course);
         _courses.push(course);
         Flash.create("success", "Course created");
         return course;
@@ -34,7 +34,10 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         oldCourse.session_ids = oldCourse.sessions.map(function(session) {
           return session.id;
         });
-        _getCourseAttendance(oldCourse);
+        oldCourse.term_ids = oldCourse.terms.map(function(term) {
+          return term.id;
+        });
+        getCourseAttendance(oldCourse);
         Flash.create("success", "Course updated");
         return oldCourse;
       }, function(error) {
@@ -43,7 +46,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       });
   };
 
-  var _getCourseAttendance = function(course) {
+  var getCourseAttendance = function(course) {
     var years = ["2017", "2018", "2019", "2020"];
     var meetings = [];
     meetings.push.apply(meetings, course.meetings);
@@ -56,13 +59,32 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         any: {},
       };
       // find the course meeting for this year
-      var thisYearsMeeting = course.meetings.filter(function(meeting) { return meeting.year === Number(year); })[0];
-      var term = thisYearsMeeting.term.toLowerCase();
-      yearAttendance[term] = {
-        count: thisYearsMeeting.enrollments.length,
-        meeting_id: thisYearsMeeting.id,
-      };
+      var thisYearsMeetings = course.meetings.filter(function(meeting) { return meeting.year === Number(year); });
+      thisYearsMeetings.forEach(function(meeting) {
+        var term = meeting.term.toLowerCase();
+        if (yearAttendance[term].count) {
+          yearAttendance[term].count += meeting.enrollments.length;
+        } else {
+          yearAttendance[term] = {
+            count: meeting.enrollments.length,
+            meeting_id: meeting.id,
+            canceled: meeting.canceled,
+          };
+        }
+      });
       course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+    });
+  };
+
+  var lookupCourse = function(id) {
+    return getCourses().then(function(courses) {
+      courses = courses.filter(function(course) { return course.id === id; });
+      if (courses.length === 1) {
+        return courses[0];
+      } else {
+        console.warn("Could not lookupCourse. Results:", courses);
+        return false;
+      }
     });
   };
 
@@ -76,9 +98,11 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
 
   return {
     getCourses: getCourses,
+    getCourseAttendance: getCourseAttendance,
     create: create,
     update: update,
-    setCourses: setCourses
+    setCourses: setCourses,
+    lookupCourse: lookupCourse,
   };
 
 }]);

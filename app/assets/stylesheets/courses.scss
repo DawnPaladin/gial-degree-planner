@@ -25,7 +25,7 @@
       margin: 0 auto;
       width: 80px;
       height: 80px;
-      animation: spin 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) infinite;    
+      animation: spin 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) infinite;
     }
   }
 }
@@ -47,6 +47,11 @@
 
 .zebra-col {
   background-color: hsl(0, 0%, 92%);
+}
+
+.disabled {
+  color: darkgray;
+  cursor: pointer;
 }
 
 .modal-form {
