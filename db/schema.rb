@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228033443) do
+ActiveRecord::Schema.define(version: 20170308205010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,15 +197,6 @@ ActiveRecord::Schema.define(version: 20170228033443) do
     t.index ["concentration_id"], name: "index_non_thesis_tracks_on_concentration_id", using: :btree
   end
 
-  create_table "plan_years", force: :cascade do |t|
-    t.integer  "plan_id"
-    t.integer  "year_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["plan_id"], name: "index_plan_years_on_plan_id", using: :btree
-    t.index ["year_id"], name: "index_plan_years_on_year_id", using: :btree
-  end
-
   create_table "plans", force: :cascade do |t|
     t.integer  "student_id",                        null: false
     t.integer  "concentration_id"
@@ -216,13 +207,6 @@ ActiveRecord::Schema.define(version: 20170228033443) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.integer  "degree_id"
-  end
-
-  create_table "plans_years", force: :cascade do |t|
-    t.integer "plan_id"
-    t.integer "year_id"
-    t.index ["plan_id"], name: "index_plans_years_on_plan_id", using: :btree
-    t.index ["year_id"], name: "index_plans_years_on_year_id", using: :btree
   end
 
   create_table "sessions", force: :cascade do |t|
