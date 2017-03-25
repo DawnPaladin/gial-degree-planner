@@ -108,8 +108,17 @@ class Course < ApplicationRecord
 
     def cancel_disassociated_meetings
       find_future_meetings.each do |meeting|
-        unless self.terms.include? meeting.term
+        unless self.terms.pluck(:name).include? meeting.term
           meeting.canceled = true
+          meeting.save
+        end
+      end
+    end
+
+    def uncancel_associated_meetings
+      find_future_meetings.each do |meeting|
+        if self.terms.pluck(:name).include? meeting.term
+          meeting.canceled = false
           meeting.save
         end
       end
@@ -117,7 +126,7 @@ class Course < ApplicationRecord
 
     def update_meetings(years = 10)
       cancel_disassociated_meetings
-      create_meetings
+      uncancel_associated_meetings
     end
 
     # def destroy_future_meetings

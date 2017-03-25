@@ -68,10 +68,23 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
           yearAttendance[term] = {
             count: meeting.enrollments.length,
             meeting_id: meeting.id,
+            canceled: meeting.canceled,
           };
         }
       });
       course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+    });
+  };
+
+  var lookupCourse = function(id) {
+    return getCourses().then(function(courses) {
+      courses = courses.filter(function(course) { return course.id === id; });
+      if (courses.length === 1) {
+        return courses[0];
+      } else {
+        console.warn("Could not lookupCourse. Results:", courses);
+        return false;
+      }
     });
   };
 
@@ -88,7 +101,8 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     getCourseAttendance: getCourseAttendance,
     create: create,
     update: update,
-    setCourses: setCourses
+    setCourses: setCourses,
+    lookupCourse: lookupCourse,
   };
 
 }]);

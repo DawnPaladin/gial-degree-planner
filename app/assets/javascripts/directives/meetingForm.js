@@ -13,7 +13,7 @@ planner.directive('meetingForm', ['Restangular', '$timeout', 'meetingService', '
       scope.updateMeeting = function(meeting) {
         meetingService.update(meeting)
           .then(function(meeting) {
-            Flash.create('success', 'Class updated');
+            Flash.create('success', 'Class updated. Please refresh the page.');
             angular.element('#edit-meeting').modal('hide');
           }, function(error) {
             var errorMessage = '';
