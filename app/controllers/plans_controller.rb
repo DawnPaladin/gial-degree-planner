@@ -20,16 +20,19 @@ class PlansController < ApplicationController
     @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
 
-    if @course.name == "Thesis Writing" || @course.name == "Thesis"
-      @meeting = Meeting.find_meeting(@course, @year, @term)
-      if @meeting.nil?
-        @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
-      end
-    else
-      @meeting = Meeting.find_meeting(@course, @year, @term)
-    end
+    # if @course.name == "Thesis Writing" || @course.name == "Thesis"
+    #   @meeting = Meeting.find_meeting(@course, @year, @term)
+    #   if @meeting.nil?
+    #     @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
+    #   end
+    # else
+    #   @meeting = Meeting.find_meeting(@course, @year, @term)
+    # end
 
-    binding.pry
+    # I have replaced the above commented code with this.
+    @meeting = Meeting.find_or_create_by({
+      course_id: @course.id, year: @year.value, term: @term.name   
+    })
 
     @plan = Plan.find(params[:plan][:id])
     @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
