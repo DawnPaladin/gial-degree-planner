@@ -14,13 +14,12 @@ class Meeting < ApplicationRecord
 
   belongs_to :course
 
-
   def self.find_meeting(course, year, term)
     Meeting.where(course: course, year: year.value, term: term.name).first
   end
 
   accepts_nested_attributes_for :teachers
-    
+
 
   def autosave_associated_records_for_teachers
     # Find or create the teacher by name
@@ -34,5 +33,12 @@ class Meeting < ApplicationRecord
       end
     end
   end
+
+  private
+    # def destroy_empty_canceled_meeting
+    #   if self.canceled && self.enrollments.count == 0
+    #     self.destroy
+    #   end
+    # end
 
 end

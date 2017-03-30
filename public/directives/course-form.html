@@ -33,8 +33,8 @@
               ng-minlength='6'
               ng-maxlength='6'
               ng-model='courseParams.number'>
-              <p ng-show="courseForm.number.$invalid && !courseForm.number.$pristine 
-                          && !courseForm.number.$error.minlength && !courseForm.number.$error.maxlength" 
+              <p ng-show="courseForm.number.$invalid && !courseForm.number.$pristine
+                          && !courseForm.number.$error.minlength && !courseForm.number.$error.maxlength"
                  class="help-block">Number is required</p>
               <p ng-show="courseForm.number.$error.minlength" class="help-block">Number too short</p>
               <p ng-show="courseForm.number.$error.maxlength" class="help-block">Number too long</p>
@@ -109,13 +109,10 @@
             <div class="form-group">
               <label class="barrier-label">Term</label>
               <div ng-repeat='term in terms'>
-                <input type="radio"
-                ng-value='term.id'
-                required
-                ng-disabled='!courseParams.local'
+                <input type="checkbox"
                 name='term'
-                ng-model='courseParams.term_id' /> {{ term.name }}
-                <p ng-show="courseForm.term.$invalid && !courseForm.term.$pristine" class="help-block">Term is required</p>
+                ng-checked="courseParams.term_ids.indexOf(term.id) > -1"
+                ng-click="toggleTermSelection(term.id)"> {{ term.name }}
               </div>
             </div>
           </div>
@@ -150,7 +147,7 @@
         class='btn btn-success btn-block'
         ng-show='!courseParams.foreignCourse'
         ng-value='buttonValue()'
-        ng-disabled='courseForm.$invalid || !courseParams.session_ids.length'>
+        ng-disabled='courseForm.$invalid'>
       </div>
     </div>
   </div>

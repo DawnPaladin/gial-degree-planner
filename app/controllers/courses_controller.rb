@@ -5,23 +5,19 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.includes(meetings: :enrollments)
-    render json: @courses.to_json(include: [{ meetings: { include: :enrollments }}, sessions: { only: :id }])
+    render json: @courses.to_json(include: [{ meetings: { include: :enrollments }}, { sessions: { only: :id }}, { terms: { only: [:id, :name]}}])
   end
 
   def show
     @course = Course.includes(:sessions).find(params[:id])
-    render json: @course.to_json(include: { sessions: @course.sessions.pluck(:id) })
+    render json: @course.to_json(include: { sessions: @course.sessions.pluck(:id), terms: @course.terms.pluck(:id) })
   end
 
   def create
     @course = Course.new(course_params)
     binding.pry
     if @course.save
-      params[:session_ids].each do |session_id|
-        @course.sessions << Session.find_by_id(session_id)
-      end
-
-      render json: @course.to_json(include: [{ meetings: { include: :enrollments }}, sessions: { only: :id }])
+      render json: @course.to_json(include: [{ meetings: { include: :enrollments }}, { terms: { only: :id }}, { sessions: { only: :id }}])
     else
       render json: { errors: @course.errors, status: :unprocessable_entity }
     end
@@ -29,9 +25,7 @@ class CoursesController < ApplicationController
 
   def update
     if @course.update_attributes(course_params)
-      sessions = params[:session_ids].map { |id| Session.find(id) }
-      @course.sessions = sessions
-      render json: @course.to_json(include: [{ meetings: { include: :enrollments }}, sessions: { only: :id }])
+      render json: @course.to_json(include: [{ meetings: { include: :enrollments }}, { terms: { only: :id }}, { sessions: { only: :id }}])
     else
       render json: @course.errors, status: :unprocessable_entity
     end
@@ -40,7 +34,7 @@ class CoursesController < ApplicationController
   private
 
     def course_params
-      params.require(:course).permit(:name, :number, :local, :term_id, :description, :units, :level, :category_id, sessions: [])
+      params.permit(:id, :name, :number, :local, :description, :units, :level, :category_id, session_ids: [], term_ids: [])
     end
 
     def set_course

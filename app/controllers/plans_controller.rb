@@ -2,7 +2,7 @@ class PlansController < ApplicationController
 
 
   def show
-    @plan = Student.includes(plan: [:intended_courses, :completed_courses, { required_courses: [:term, :sessions]}, :scheduled_classes, { concentration: [ { categories: { courses: [:term, :sessions]}}, :thesis_track, :non_thesis_track]}, :electives]).find(params[:student_id]).plan
+    @plan = Student.includes(plan: [:intended_courses, :completed_courses, { required_courses: [:terms, :sessions]}, :scheduled_classes, { concentration: [ { categories: { courses: [:terms, :sessions]}}, :thesis_track, :non_thesis_track]}, :electives]).find(params[:student_id]).plan
   end
 
   def update
@@ -19,23 +19,23 @@ class PlansController < ApplicationController
     @course = Course.find(params[:course_id])
     @year = Year.find(params[:meeting_year])
     @term = Term.find(params[:meeting_term])
-    
-    # if @course.term.name == "Any"
-    #   @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
-    # else
-    #   @meeting = Meeting.find_meeting(@course, @year, @term)
-    # end
 
-    @meeting = Meeting.find_or_create_by({
-      course_id: @course.id, year: @year.value, term: @term.name   
-    })
-    
+    if @course.name == "Thesis Writing" || @course.name == "Thesis"
+      @meeting = Meeting.find_meeting(@course, @year, @term)
+      if @meeting.nil?
+        @meeting = Meeting.create(course_id: @course.id, year: @year.value, term: @term.name)
+      end
+    else
+      @meeting = Meeting.find_meeting(@course, @year, @term)
+    end
+
     @plan = Plan.find(params[:plan][:id])
     @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
     if @enrollment.save
-      if params[:prevYear] && params[:prevYear] != params[:meeting_year]
-        prev_year = Year.find(params[:prevYear]) 
-        prev_meeting = Meeting.find_meeting(@course, prev_year, @term)
+      if params[:prevTerm] && params[:prevYear] && (params[:prevYear] != params[:meeting_year] || params[:prevTerm] != params[:meeting_term])
+        prev_year = Year.find(params[:prevYear])
+        prev_term = Term.find(params[:prevTerm])
+        prev_meeting = Meeting.find_meeting(@course, prev_year, prev_term)
         Enrollment.find_by({meeting_id: prev_meeting.id, plan_id: @plan.id}).delete
       end
       render :show
@@ -47,7 +47,7 @@ class PlansController < ApplicationController
   def disenroll_from_meeting
     @course = Course.find(params[:course_id])
     @year = Year.find(params[:prevYear])
-    @term = Term.find(params[:meeting_term])
+    @term = Term.find(params[:prevTerm])
     @meeting = Meeting.find_meeting(@course, @year, @term)
     @plan = Plan.find(params[:plan][:id])
     @enrollment = Enrollment.find_by({meeting_id: @meeting.id, plan_id: @plan.id})

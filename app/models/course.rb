@@ -35,37 +35,41 @@ class Course < ApplicationRecord
 
   has_many :meetings
 
-  belongs_to :term
+  has_many :courses_terms
+  has_many :terms, through: :courses_terms
 
   # lifecycle
   before_save :upcase_number
   after_create :create_meetings
+  after_update :update_meetings
 
   #####
   # Class Methods
   #####
   def self.thesis_writing
-    any_term = Term.find_by_name('Any')
-    self.find_or_create_by({
+    course = self.find_or_create_by({
       name: "Thesis Writing",
       number: 'AA5190',
       description: 'Writing course required for thesis track',
       units: 1,
       level: 'graduate',
-      term_id: any_term.id
     })
+    any_term = Term.find_by_name('Any')
+    course.terms << any_term unless course.terms.include? any_term
+    course
   end
 
   def self.thesis_course
-    any_term = Term.find_by_name('Any')
-    self.find_or_create_by({
+    course = self.find_or_create_by({
       name: "Thesis",
       number: 'AA5191',
       description: 'Thesis Course',
       units: 1,
       level: 'graduate',
-      term_id: any_term.id
     })
+    any_term = Term.find_by_name('Any')
+    course.terms << any_term unless course.terms.include? any_term
+    course
   end
 
 
@@ -73,27 +77,64 @@ class Course < ApplicationRecord
   # Instance Methods
   #####
 
-  # this will probably need work
-  # to determine the correct year/term
-  def create_meetings(num = 10)
-    num.times do |num|
-      current_year = Date.today.year
-      self.meetings.create({
-        year: Date.new(current_year).advance(years: num).year,
-        term: self.term.name,
-        sessions: self.sessions.to_a
-      })
-    end
-  end
-
-  def upcase_number
-    self.number.upcase!
-  end
-
   def full_name
     "#{self.number} #{self.name}"
   end
 
+  private
+    def create_meetings(years = 10)
+      years.times do |i|
+        current_year = Date.today.year
+        self.terms.each do |term|
+          meeting = self.meetings.find_by({
+            year: Date.new(current_year).advance(years: i).year,
+            term: term.name,
+          })
+          if meeting.nil?
+            self.meetings.create({
+              year: Date.new(current_year).advance(years: i).year,
+              term: term.name,
+              sessions: self.sessions.to_a
+            })
+          end
+        end
+      end
+    end
 
+    def find_future_meetings
+      current_year = Date.today.year
+      self.meetings.where('year >= ?', current_year)
+    end
+
+    def cancel_disassociated_meetings
+      find_future_meetings.each do |meeting|
+        unless self.terms.pluck(:name).include? meeting.term
+          meeting.canceled = true
+          meeting.save
+        end
+      end
+    end
+
+    def uncancel_associated_meetings
+      find_future_meetings.each do |meeting|
+        if self.terms.pluck(:name).include? meeting.term
+          meeting.canceled = false
+          meeting.save
+        end
+      end
+    end
+
+    def update_meetings(years = 10)
+      cancel_disassociated_meetings
+      uncancel_associated_meetings
+    end
+
+    # def destroy_future_meetings
+    #   self.find_future_meetings.destroy_all
+    # end
+
+    def upcase_number
+      self.number.upcase!
+    end
 
 end

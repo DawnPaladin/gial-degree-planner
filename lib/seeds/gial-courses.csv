@@ -1,142 +1,142 @@
-Category,Number,Name,"Course Level","Credit Hours","Course Term","Course Location",Prerequisites,Corequisites
-IS,3311,"Research Writing",Undergraduate,3,Fall,On-campus,None,None
-IS,4350,"Dynamics of Religious Experience",Undergraduate,3,Spring,On-campus,None,None
-IS,3351,"Dynamics of Cross-Cultural Service",Undergraduate,3,Fall,On-campus,None,None
-IS,3352,Globalization,Undergraduate,3,Spring,On-campus,None,None
-IS,3364,"Theory and Reality of Development",Undergraduate,3,Spring,On-campus,None,None
-IS,4320,"Cross-Cultural Experience",Undergraduate,3,Summer,On-campus,None,None
-IS,4321,"Cross-Cultural Internship",Undergraduate,3,Fall,On-campus,None,None
-IS,4361,"Cross-Cultural Communication",Undergraduate,3,Spring,On-campus,None,None
-IS,3325,Missiology,Undergraduate,3,Fall,On-campus,None,None
-AA,4202,"Audio and Video Techniques for Fieldworkers",Undergraduate,2,Spring,On-campus,None,None
-AA,4350,"Language and Society",Undergraduate,3,Spring/Fall,On-campus,None,None
-AA,4370,"Cultural Anthropology",Undergraduate,3,Spring/Fall,On-campus,None,None
-AA,4370a,"Cultural Anthropology (research supplement)",Undergraduate,1,Spring/Fall,On-campus,"Any introductory course in cultural anthropology from an accredited institution",None
-AA,4372,"Political and Social Systems",Undergraduate,3,Spring,On-campus,"AA4370 Cultural Anthropology",None
-AA,4387,"Training Across Cultures",Undergraduate,3,Spring/Fall,On-campus,"AA4370 Cultural Anthropology or AA4505 Second Language and Culture Acquisition",None
-AA,4505,"Second Language and Culture Acquisition",Undergraduate,5,Spring/Fall,On-campus,"Either AL4304 Introduction to Language Structure or both AL4302 Principles of Articulatory and Acoustic Phonetics and AL4410a Principles of Grammatical Analysis",None
-AA,5151,"Cross-Cultural Teaching Seminar",Graduate,1,Spring/Fall,On-campus,"AA4350 Language and Society or AA4505 Second Language and Culture Acquisition",None
-AA,5190,"Thesis Writing",Graduate,1,Spring/Fall,On-campus,"Completion of at least 5 graduate courses  ",None
-AA,5191,Thesis,Graduate,1,Spring/Fall,On-campus,None,None
-AC,5310,"Core Components of Islam",Graduate,3,Fall,On-campus,None,None
-AC,5312,"Islam in the 21st Century",Graduate,3,Spring/Fall,On-campus,None,None
-AC,5314,"Modern Islamic Religious and Political Movements",Graduate,3,Spring,Intensive,None,None
-AC,5316,"Contextualization Issues Among Muslim Peoples (Online)",Graduate,3,Spring,Online,None,None
-AC,5318,"Understanding the Qur'an",Graduate,3,Fall,On-campus,None,None
-AA,5321,"Multicultural Teamwork (Online)",Graduate,3,Fall,Online,"AA4370 Cultural Anthropology and AA4350 Language and Society or permission of instructor",None
-AA,5323,"Multicultural Leadership",Graduate,3,Fall,On-campus,"AA4370 Cultural Anthropology and AA4350 Language and Society",None
-AA,5325,"Foundations of Cross-Cultural Service",Graduate,3,Spring,On-campus,None,None
-AA,5333,"Principles of Literacy",Graduate,3,Fall,On-campus,"AA4350 Language and Society, and either AL4303 Principles of Phonological Analysis and  AL4410a Principles of Grammatical Analysis (a), or AL4304 Introduction to Language Structure ",None
-AA,5337,"Readings in Ethnology",Graduate,3,Spring/Fall,On-campus,"AA4370 Cultural Anthropology or permission of  instructor",None
-AA,5339,"Research Methods for World Arts",Graduate,3,Fall,On-campus,"AA4370 Cultural Anthropology or permission of the instructor",None
-AA,5340,"Ethnographic Research Methods",Graduate,3,Spring,On-campus,"AA4370 Cultural Anthropology",None
-AA,5341,"Social Science Research Design and Methods",Graduate,3,Fall,On-campus,"AA5342 Statistical Methods or permission of instructor",None
-AA,5342,"Statistical Methods",Graduate,3,Fall,On-campus,None,None
-AA,5343,"Principles of Multilingual Education",Graduate,3,Fall,On-campus,None,None
-AA,5344,"Comparative International Education",Graduate,3,TBD,On-campus,None,None
-AA,5349,"Readings in Literacy",Graduate,3,Spring/Fall,On-campus,None,None
-AA,5352,"Language Program Design and Management",Graduate,3,Spring,On-campus,"AA4350 Language and Society or permission of instructor",None
-AA,5353,"Language Development and Planning",Graduate,3,Spring,On-campus,"AA4350 Language and Society ",None
-AA,5354,"Language Contact",Graduate,3,Fall,On-campus,"AA4350 Language and Society ",None
-AA,5355,"Scripture Engagement Strategy and Methods",Graduate,3,Spring,On-campus,"AA4350 Language and Society or permission of instructor",None
-AA,5356,"Current Issues in Scripture Engagement (Online)",Graduate,3,Spring,Online,"AA5355 Scripture Engagement Strategy and Methods, plus one of the following: AA5373 Religion and Worldview, AA5374 Christianity across Cultures, or permission of instructor.",None
-AA,5357,"Oral Tradition and Literature",Graduate,3,Fall,On-campus,None,None
-AA,5361,"Principles of Language Survey",Graduate,3,Spring,On-campus,"AA4350 Language and Society ",None
-AA,5362,"Language Survey Methods",Graduate,3,Spring,On-campus,"AL4303 Principles of Phonological Analysis, AA5361 Principles of Language Survey",None
-AA,5364,"Theories and Practices in Community Development",Graduate,3,TBD,On-campus,None,None
-AA,5366,"Theory and Practice of Sociolinguistics",Graduate,3,Spring,On-campus,"AA4350 Language and Society",None
-AA,5368,"Seminar in Sociolinguistics",Graduate,3,Fall,On-campus,None,None
-AA,5369,"Readings in Sociolinguistics",Graduate,3,Spring/Fall,On-campus,None,None
-AA,5372,"Social and Political Organization",Graduate,3,Fall,On-campus,"AA4370 Cultural Anthropology",None
-AA,5373,"Religion and Worldview",Graduate,3,TBD,On-campus,"AA4370 Cultural Anthropology",None
-AA,5374,"Christianity Across Cultures",Graduate,3,Fall,On-campus,"AA4370 Cultural Anthropology",None
-AA,5375,"Culture Change & Minority Cultures",Graduate,3,Spring,On-campus,"AA4370 Cultural Anthropology or permission of instructor",None
-AA,5377,"Area Studies",Graduate,3,Fall,On-campus,"AA4370 Cultural Anthropology or permission of the instructor",None
-AA,5381,"Arts for a Better Future (Intensive)",Graduate,3,Summer,Intensive,None,None
-AA,5382,"Applied Arts",Graduate,3,Fall,On-campus,"AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or permission of instructor",None
-AA,5383,"Arts and Trauma Healing (Intensive)",Graduate,3,Spring,Intensive,None,None
-AA,5384,"Expressive Form Analysis",Graduate,3,Fall,On-campus,"AA4370 Cultural Anthropology or permission of instructor",None
-AA,5385,"Song Transcription and Analysis",Graduate,3,Spring,On-campus,"(1) Six semester hours of college level (western) music theory (or its equivalent) (2) AA5384 Expressive Form Analysis (or its equivalent)",None
-AA,5386,"Directed Practicum in World Arts (Online)",Graduate,3,Spring/Fall,Online,"AA5381 Arts for a Better Future or AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or AA5382 Applied Arts",None
-AA,5387,"Training Across Cultures",Graduate,3,Spring/Fall,On-campus,"AA4370 Cultural Anthropology or AA4505 Second Language and Culture Acquisition",None
-AA,5389,"Advanced Form Analysis (Online)",Graduate,3,Spring,Online,"AA5384 Expressive Form Analysis",None
-AA,5391,Thesis,Graduate,3,Spring/Fall,On-campus,None,None
-AA,5393,"Special Projects in Applied Anthropology",Graduate,3,TBD,On-campus,None,None
-AA,5395,"Readings in Applied Anthropology",Graduate,3,TBD,On-campus,None,None
-AA,5397,"Conference Course in Applied Anthropology",Graduate,3,TBD,On-campus,None,None
-AA,5399,"Seminar in Applied Anthropology",Graduate,3,TBD,On-campus,None,None
-AA,5934,"Literacy Megacourse",Graduate,9,Spring,On-campus,"AA4350 Language and Society, AL4303 Principles of Phonological Analysis, and AL4410a & b Principles of Grammatical Analysis or AA4350 Language and Society and AL4304 Introduction to Language Structure",None
-WA,3384,"Theory and Practice of Ethnodoxology",Undergraduate,3,Spring,On-campus,None,None
-WA,3386,"World Arts Practicum",Undergraduate,3,Spring,On-campus,None,None
-WA,4322,"Video Production and Editing",Undergraduate,3,Spring,On-campus,"AA4202 Audio and Video Techniques for Fieldworkers ",None
-WA,3381,"Arts for a Better Future (Intensive)",Undergraduate,3,Summer,Intensive,None,None
-WA,4382,"Survey of World Arts",Undergraduate,3,Spring,On-campus,None,None
-WA,4387,"Area Studies for World Arts",Undergraduate,3,Spring,On-campus,"AA4370 Cultural Anthropology or permission of the instructor",None
-AL,4207,"Field Data Management",Undergraduate,2,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition","AL4406 Field Methods and Linguistic Analysis"
-AL,4302,"Principles of Articulatory and Acoustic Phonetics",Undergraduate,3,Spring/Fall,On-campus,None,None
-AL,4303,"Principles of Phonological Analysis",Undergraduate,3,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics",None
-AL,4304,"Introduction to Language Structure",Undergraduate,3,Spring/Fall,On-campus,None,None
-AL,4406,"Field Methods and Linguistic Analysis",Undergraduate,4,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition","AL4207 Field Data Management"
-AL,4410a,"Principles of Grammatical Analysis (a)",Undergraduate,2,Spring/Fall,On-campus,None,None
-AL,4410b,"Principles of Grammatical Analysis (b)",Undergraduate,2,Spring/Fall,On-campus,"AL4410a Principles of Grammatical Analysis (a)",None
-AL,5190,"Thesis Writing",Graduate,1,Spring/Fall,On-campus,"Completion of at least 5 graduate courses ",None
-AL,5191,Thesis,Graduate,1,Spring/Fall,On-campus,None,None
-AL,5207,"Field Data Management",Graduate,2,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition","AL5406 Field Methods and Linguistic Analysis"
-AL,5304,"Advanced Phonological Analysis",Graduate,3,Spring,On-campus,"AL4303 Principles of Phonological Analysis ",None
-AL,5311,"Relevance Theory",Graduate,3,Fall,On-campus,None,None
-AL,5312,"Discourse Analysis",Graduate,3,Spring/Fall,On-campus,"AL4410b Principles of Grammatical Analysis (b)",None
-AL,5313,"Advanced Grammatical Analysis",Graduate,3,Spring,On-campus,"AL 4410b Principles of Grammatical Analysis (b)",None
-AL,5315,"Semantics and Pragmatics",Graduate,3,Spring/Fall,On-campus,"AL4410b Principles of Grammatical Analysis (b)",None
-AL,5316,"Theory and Practice of Translation",Graduate,3,Spring/Fall,On-campus,"Either AL5311 Relevance Theory or AL5315 Semantics and Pragmatics",None
-AL,5317,"Language Documentation",Graduate,3,Spring,On-campus,"AA4350 Language and Society",None
-AL,5318,"Applied Exegesis",Graduate,3,TBD,On-campus,"AL5322 New Testament Greek for Translators 2 and AL5324 Principles of New Testament Exegesis or AL5327 Biblical Hebrew for Translators 2 and AL5325 Principles of Old Testament Exegesis",None
-AL,5319,"Biblical Backgrounds",Graduate,3,Spring,On-campus,None,None
-AL,5320,"Translation Consulting Skills",Graduate,3,Spring,On-campus,"Permission of the instructor",None
-AL,5321,"New Testament Greek for Translators 1",Graduate,3,Fall,On-campus,None,None
-AL,5322,"New Testament Greek for Translators 2",Graduate,3,Spring,On-campus,"AL5321 New Testament Greek for Translators 1",None
-AL,5323,"Discourse Features of New Testament Greek",Graduate,3,Fall,On-campus,"AL5312 Discourse Analysis, AL5322 New Testament Greek for Translators 2",None
-AL,5324,"Principles of New Testament Exegesis",Graduate,3,Spring,On-campus,"AL5312 Discourse Analysis, AL5322 New Testament Greek for Translators 2",None
-AL,5325,"Principles of Old Testament Exegesis",Graduate,3,Fall,On-campus,"AL5312 Discourse Analysis, AL5327 Biblical Hebrew for Translators 2",None
-AL,5326,"Biblical Hebrew for Translators 1",Graduate,3,Spring,On-campus,None,None
-AL,5327,"Biblical Hebrew for Translators 2",Graduate,3,Fall,On-campus,"AL5326 Biblical Hebrew for Translators 1",None
-AL,5328,"Discourse Features of Biblical Hebrew",Graduate,3,Spring,On-campus,"AL5312 Discourse Analysis, AL5327 Biblical Hebrew for Translators 2",None
-AL,5329,"Readings in Biblical Texts and Translation Practicum",Graduate,3,TBD,On-campus,"AL5315 Semantics and Pragmatics, either (a) AL5327 Biblical Hebrew for Translators 2 (for Old Testament options) OR (b) AL5322 New Testament Greek for Translators 2 (for the New Testament options)",None
-AL,5333,"Tone Analysis",Graduate,3,Fall,On-campus,"AL5304 Advanced Phonological Analysis or permission of instructor",None
-AL,5391,Thesis,Graduate,3,Spring/Fall,On-campus,None,None
-AL,5392,"Special Projects in Applied Linguistics",Graduate,3,Spring/Fall,On-campus,None,None
-AL,5394,"Readings in Applied Linguistics",Graduate,3,TBD,On-campus,None,None
-AL,5395,"Current Issues in Descriptive Linguistics",Graduate,3,Fall,On-campus,"Either 1) AL5304 Advanced Phonological Analysis for phonology topics or 2) AL5312 Discourse Analysis plus AL5313 Advanced Grammatical Analysis for grammar topics, or by permission of instructor",None
-AL,5396,"Conference Course in Applied Linguistics",Graduate,3,TBD,On-campus,None,None
-AL,5398,"Seminar in Applied Linguistics",Graduate,3,TBD,On-campus,None,None
-AL,5406,"Field Methods and Linguistic Analysis",Graduate,4,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition","AL5207 Field Data Management"
-AC,4315,"Old Testament Survey",Undergraduate,3,Fall,On-campus,None,None
-AC,4316,"New Testament Survey",Undergraduate,3,Fall,On-campus,None,None
-AC,4317,"World Religions",Undergraduate,3,Spring,On-campus,None,None
-AC,4341,"Arabic 1",Undergraduate,3,Fall,On-campus,None,None
-AC,4342,"Arabic 2",Undergraduate,3,Spring,On-campus,"AC4341 Arabic I",None
-AC,4343,"Colloquial Arabic 1",Undergraduate,3,Spring,On-campus,"AC4341 Arabic 1 or permission of instructor",None
-AA,4370,"Cultural Anthropology (Online)",Undergraduate,3,Summer,Online,None,None
-AA,4350,"Language and Society (Online)",Undergraduate,3,TBD,Online,None,None
-AA,5355,"Scripture Engagement Strategy and Methods (Online)",Graduate,3,Fall,Online,None,"AA4350 Language and Society or permission of instructor"
-AL,5345,"Introduction to Bible Translator's Assistant",Graduate,3,TBD,Online,"AL4410b Principles of Grammatical Analysis (b) and permission of instructor",None
-AC,5315,"Abrahamic Monotheism: Abrahamic faiths, their origins and interactions",Graduate,3,Fall,On-campus,None,None
-AA,5392,"Scripture Engagement Practicum",Graduate,3,Spring,On-campus,"AA 5355 Scripture Engagement Strategy and Methods or permission of instructor. ",None
-AC,5319,"Abrahamic Messianism: Abrahamic perspectives on Messianic expectation",Graduate,3,Fall,On-campus,None,None
-AC,5341,"Arabic 1",Graduate,3,Fall,On-campus,None,None
-AC,5342,"Arabic 2",Graduate,3,Spring,On-campus,"AC5341 Arabic 1",None
-AC,5343,"Colloquial Arabic 1",Graduate,3,Spring,On-campus,"AC5341 Arabic 1 or permission of instructor",None
-AC,5309,"Theology of Translation",Graduate,3,Spring,On-campus,None,None
-AL,5309,"Theology of Translation",Graduate,3,Spring,On-campus,None,None
-AC,4310,"Introduction to Islam",Undergraduate,3,Fall,On-campus,None,None
-IS,3356,"Introduction to Orality and Storying",Undergraduate,3,Spring,On-campus,None,None
-IS,3370,"TESOL: Fundamentals and Methods of TESOL",Undergraduate,3,Spring,On-campus,None,None
-IS,3371,"TESOL: Curriculum and Program Design",Undergraduate,3,Spring,On-campus,None,None
-IS,4372,"TESOL: Reading and Writing",Undergraduate,3,Spring,On-campus,"IS3370, IS3371 ",None
-IS,4373,"TESOL: Speaking and Listening",Undergraduate,3,Spring,On-campus,"IS3370, IS3371",None
-AA,4150,"Introduction to Language Development",Undergraduate,1,Spring/Fall,On-campus,None,"AA 4350"
-IS,4344,"Chinese I",Undergraduate,3,Fall,On-campus,None,None
-IS,4345,"Chinese II",Undergraduate,3,Spring,On-campus,"IS 4344",None
-IS,4346,"Chinese III",Undergraduate,3,Fall,On-campus,"IS 4345",None
-AC,5310,"Core Components of Islam (Online)",Graduate,3,Spring/Fall,Online,None,None
-IS,4350-o,"Dynamics of Religious Experience (online)",Undergraduate,3,Spring,Online,None,None
-AC,5322,"Abrahamic Worldviews: Shared Stories",Graduate,3,Spring,On-campus,None,None
+Category,Number,Name,Course Level,Credit Hours,Course Term,Course Location,Prerequisites,Corequisites,Sessions
+IS,3311,Research Writing,Undergraduate,3,Fall,On-campus,None,None,
+IS,4350,Dynamics of Religious Experience,Undergraduate,3,Spring,On-campus,None,None,
+IS,3351,Dynamics of Cross-Cultural Service,Undergraduate,3,Fall,On-campus,None,None,
+IS,3352,Globalization,Undergraduate,3,Spring,On-campus,None,None,
+IS,3364,Theory and Reality of Development,Undergraduate,3,Spring,On-campus,None,None,
+IS,4320,Cross-Cultural Experience,Undergraduate,3,Summer,On-campus,None,None,
+IS,4321,Cross-Cultural Internship,Undergraduate,3,Fall,On-campus,None,None,
+IS,4361,Cross-Cultural Communication,Undergraduate,3,Spring,On-campus,None,None,
+IS,3325,Missiology,Undergraduate,3,Fall,On-campus,None,None,
+AA,4202,Audio and Video Techniques for Fieldworkers,Undergraduate,2,Spring,On-campus,None,None,
+AA,4350,Language and Society,Undergraduate,3,Spring/Fall,On-campus,None,None,
+AA,4370,Cultural Anthropology,Undergraduate,3,Spring/Fall,On-campus,None,None,
+AA,4370a,Cultural Anthropology (research supplement),Undergraduate,1,Spring/Fall,On-campus,Any introductory course in cultural anthropology from an accredited institution,None,
+AA,4372,Political and Social Systems,Undergraduate,3,Spring,On-campus,AA4370 Cultural Anthropology,None,
+AA,4387,Training Across Cultures,Undergraduate,3,Spring/Fall,On-campus,AA4370 Cultural Anthropology or AA4505 Second Language and Culture Acquisition,None,
+AA,4505,Second Language and Culture Acquisition,Undergraduate,5,Spring/Fall,On-campus,Either AL4304 Introduction to Language Structure or both AL4302 Principles of Articulatory and Acoustic Phonetics and AL4410a Principles of Grammatical Analysis,None,
+AA,5151,Cross-Cultural Teaching Seminar,Graduate,1,Spring/Fall,On-campus,AA4350 Language and Society or AA4505 Second Language and Culture Acquisition,None,
+AA,5190,Thesis Writing,Graduate,1,Spring/Fall,On-campus,Completion of at least 5 graduate courses  ,None,
+AA,5191,Thesis,Graduate,1,Spring/Fall,On-campus,None,None,
+AC,5310,Core Components of Islam,Graduate,3,Fall,On-campus,None,None,"2,3,4"
+AC,5312,Islam in the 21st Century,Graduate,3,Spring/Fall,On-campus,None,None,
+AC,5314,Modern Islamic Religious and Political Movements,Graduate,3,Spring,Intensive,None,None,4
+AC,5316,Contextualization Issues Among Muslim Peoples (Online),Graduate,3,Spring,Online,None,None,"3,4"
+AC,5318,Understanding the Qur'an,Graduate,3,Fall,On-campus,None,None,4
+AA,5321,Multicultural Teamwork (Online),Graduate,3,Fall,Online,AA4370 Cultural Anthropology and AA4350 Language and Society or permission of instructor,None,
+AA,5323,Multicultural Leadership,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology and AA4350 Language and Society,None,
+AA,5325,Foundations of Cross-Cultural Service,Graduate,3,Spring,On-campus,None,None,
+AA,5333,Principles of Literacy,Graduate,3,Fall,On-campus,"AA4350 Language and Society, and either AL4303 Principles of Phonological Analysis and  AL4410a Principles of Grammatical Analysis (a), or AL4304 Introduction to Language Structure ",None,"2,3"
+AA,5337,Readings in Ethnology,Graduate,3,Spring/Fall,On-campus,AA4370 Cultural Anthropology or permission of  instructor,None,
+AA,5339,Research Methods for World Arts,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None,"2,3"
+AA,5340,Ethnographic Research Methods,Graduate,3,Spring,On-campus,AA4370 Cultural Anthropology,None,
+AA,5341,Social Science Research Design and Methods,Graduate,3,Fall,On-campus,AA5342 Statistical Methods or permission of instructor,None,
+AA,5342,Statistical Methods,Graduate,3,Fall,On-campus,None,None,
+AA,5343,Principles of Multilingual Education,Graduate,3,Fall,On-campus,None,None,"2,3"
+AA,5344,Comparative International Education,Graduate,3,TBD,On-campus,None,None,
+AA,5349,Readings in Literacy,Graduate,3,Spring/Fall,On-campus,None,None,
+AA,5352,Language Program Design and Management,Graduate,3,Spring,On-campus,AA4350 Language and Society or permission of instructor,None,
+AA,5353,Language Development and Planning,Graduate,3,Spring,On-campus,AA4350 Language and Society ,None,4
+AA,5354,Language Contact,Graduate,3,Fall,On-campus,AA4350 Language and Society ,None,
+AA,5355,Scripture Engagement Strategy and Methods,Graduate,3,Spring,On-campus,AA4350 Language and Society or permission of instructor,None,1
+AA,5356,Current Issues in Scripture Engagement (Online),Graduate,3,Spring,Online,"AA5355 Scripture Engagement Strategy and Methods, plus one of the following: AA5373 Religion and Worldview, AA5374 Christianity across Cultures, or permission of instructor.",None,
+AA,5357,Oral Tradition and Literature,Graduate,3,Fall,On-campus,None,None,4
+AA,5361,Principles of Language Survey,Graduate,3,Spring,On-campus,AA4350 Language and Society ,None,
+AA,5362,Language Survey Methods,Graduate,3,Spring,On-campus,"AL4303 Principles of Phonological Analysis, AA5361 Principles of Language Survey",None,"2,3"
+AA,5364,Theories and Practices in Community Development,Graduate,3,TBD,On-campus,None,None,
+AA,5366,Theory and Practice of Sociolinguistics,Graduate,3,Spring,On-campus,AA4350 Language and Society,None,
+AA,5368,Seminar in Sociolinguistics,Graduate,3,Fall,On-campus,None,None,
+AA,5369,Readings in Sociolinguistics,Graduate,3,Spring/Fall,On-campus,None,None,
+AA,5372,Social and Political Organization,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology,None,
+AA,5373,Religion and Worldview,Graduate,3,TBD,On-campus,AA4370 Cultural Anthropology,None,4
+AA,5374,Christianity Across Cultures,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology,None,4
+AA,5375,Culture Change & Minority Cultures,Graduate,3,Spring,On-campus,AA4370 Cultural Anthropology or permission of instructor,None,"2,3"
+AA,5377,Area Studies,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None,
+AA,5381,Arts for a Better Future (Intensive),Graduate,3,Summer,Intensive,None,None,1
+AA,5382,Applied Arts,Graduate,3,Fall,On-campus,AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or permission of instructor,None,4
+AA,5383,Arts and Trauma Healing (Intensive),Graduate,3,Spring,Intensive,None,None,"1,2"
+AA,5384,Expressive Form Analysis,Graduate,3,Fall,On-campus,AA4370 Cultural Anthropology or permission of instructor,None,"2,3"
+AA,5385,Song Transcription and Analysis,Graduate,3,Spring,On-campus,(1) Six semester hours of college level (western) music theory (or its equivalent) (2) AA5384 Expressive Form Analysis (or its equivalent),None,"3,4"
+AA,5386,Directed Practicum in World Arts (Online),Graduate,3,Spring/Fall,Online,AA5381 Arts for a Better Future or AA5339 Research Methods for World Arts or AA5384 Expressive Form Analysis or AA5382 Applied Arts,None,"2,3,4"
+AA,5387,Training Across Cultures,Graduate,3,Spring/Fall,On-campus,AA4370 Cultural Anthropology or AA4505 Second Language and Culture Acquisition,None,4
+AA,5389,Advanced Form Analysis (Online),Graduate,3,Spring,Online,AA5384 Expressive Form Analysis,None,"3,4"
+AA,5391,Thesis,Graduate,3,Spring/Fall,On-campus,None,None,
+AA,5393,Special Projects in Applied Anthropology,Graduate,3,TBD,On-campus,None,None,
+AA,5395,Readings in Applied Anthropology,Graduate,3,TBD,On-campus,None,None,
+AA,5397,Conference Course in Applied Anthropology,Graduate,3,TBD,On-campus,None,None,
+AA,5399,Seminar in Applied Anthropology,Graduate,3,TBD,On-campus,None,None,
+AA,5934,Literacy Megacourse,Graduate,9,Spring,On-campus,"AA4350 Language and Society, AL4303 Principles of Phonological Analysis, and AL4410a & b Principles of Grammatical Analysis or AA4350 Language and Society and AL4304 Introduction to Language Structure",None,
+WA,3384,Theory and Practice of Ethnodoxology,Undergraduate,3,Spring,On-campus,None,None,
+WA,3386,World Arts Practicum,Undergraduate,3,Spring,On-campus,None,None,
+WA,4322,Video Production and Editing,Undergraduate,3,Spring,On-campus,AA4202 Audio and Video Techniques for Fieldworkers ,None,
+WA,3381,Arts for a Better Future (Intensive),Undergraduate,3,Summer,Intensive,None,None,1
+WA,4382,Survey of World Arts,Undergraduate,3,Spring,On-campus,None,None,
+WA,4387,Area Studies for World Arts,Undergraduate,3,Spring,On-campus,AA4370 Cultural Anthropology or permission of the instructor,None,
+AL,4207,Field Data Management,Undergraduate,2,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition",AL4406 Field Methods and Linguistic Analysis,"1,2"
+AL,4302,Principles of Articulatory and Acoustic Phonetics,Undergraduate,3,Spring/Fall,On-campus,None,None,
+AL,4303,Principles of Phonological Analysis,Undergraduate,3,Spring/Fall,On-campus,AL4302 Principles of Articulatory and Acoustic Phonetics,None,
+AL,4304,Introduction to Language Structure,Undergraduate,3,Spring/Fall,On-campus,None,None,
+AL,4406,Field Methods and Linguistic Analysis,Undergraduate,4,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition",AL4207 Field Data Management,
+AL,4410a,Principles of Grammatical Analysis (a),Undergraduate,2,Spring/Fall,On-campus,None,None,
+AL,4410b,Principles of Grammatical Analysis (b),Undergraduate,2,Spring/Fall,On-campus,AL4410a Principles of Grammatical Analysis (a),None,
+AL,5190,Thesis Writing,Graduate,1,Spring/Fall,On-campus,Completion of at least 5 graduate courses ,None,
+AL,5191,Thesis,Graduate,1,Spring/Fall,On-campus,None,None,
+AL,5207,Field Data Management,Graduate,2,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition",AL5406 Field Methods and Linguistic Analysis,
+AL,5304,Advanced Phonological Analysis,Graduate,3,Spring,On-campus,AL4303 Principles of Phonological Analysis ,None,
+AL,5311,Relevance Theory,Graduate,3,Fall,On-campus,None,None,
+AL,5312,Discourse Analysis,Graduate,3,Spring/Fall,On-campus,AL4410b Principles of Grammatical Analysis (b),None,"2,3"
+AL,5313,Advanced Grammatical Analysis,Graduate,3,Spring,On-campus,AL 4410b Principles of Grammatical Analysis (b),None,
+AL,5315,Semantics and Pragmatics,Graduate,3,Spring/Fall,On-campus,AL4410b Principles of Grammatical Analysis (b),None,"2,3"
+AL,5316,Theory and Practice of Translation,Graduate,3,Spring/Fall,On-campus,Either AL5311 Relevance Theory or AL5315 Semantics and Pragmatics,None,4
+AL,5317,Language Documentation,Graduate,3,Spring,On-campus,AA4350 Language and Society,None,
+AL,5318,Applied Exegesis,Graduate,3,TBD,On-campus,AL5322 New Testament Greek for Translators 2 and AL5324 Principles of New Testament Exegesis or AL5327 Biblical Hebrew for Translators 2 and AL5325 Principles of Old Testament Exegesis,None,
+AL,5319,Biblical Backgrounds,Graduate,3,Spring,On-campus,None,None,
+AL,5320,Translation Consulting Skills,Graduate,3,Spring,On-campus,Permission of the instructor,None,
+AL,5321,New Testament Greek for Translators 1,Graduate,3,Fall,On-campus,None,None,
+AL,5322,New Testament Greek for Translators 2,Graduate,3,Spring,On-campus,AL5321 New Testament Greek for Translators 1,None,
+AL,5323,Discourse Features of New Testament Greek,Graduate,3,Fall,On-campus,"AL5312 Discourse Analysis, AL5322 New Testament Greek for Translators 2",None,
+AL,5324,Principles of New Testament Exegesis,Graduate,3,Spring,On-campus,"AL5312 Discourse Analysis, AL5322 New Testament Greek for Translators 2",None,
+AL,5325,Principles of Old Testament Exegesis,Graduate,3,Fall,On-campus,"AL5312 Discourse Analysis, AL5327 Biblical Hebrew for Translators 2",None,
+AL,5326,Biblical Hebrew for Translators 1,Graduate,3,Spring,On-campus,None,None,
+AL,5327,Biblical Hebrew for Translators 2,Graduate,3,Fall,On-campus,AL5326 Biblical Hebrew for Translators 1,None,
+AL,5328,Discourse Features of Biblical Hebrew,Graduate,3,Spring,On-campus,"AL5312 Discourse Analysis, AL5327 Biblical Hebrew for Translators 2",None,
+AL,5329,Readings in Biblical Texts and Translation Practicum,Graduate,3,TBD,On-campus,"AL5315 Semantics and Pragmatics, either (a) AL5327 Biblical Hebrew for Translators 2 (for Old Testament options) OR (b) AL5322 New Testament Greek for Translators 2 (for the New Testament options)",None,
+AL,5333,Tone Analysis,Graduate,3,Fall,On-campus,AL5304 Advanced Phonological Analysis or permission of instructor,None,
+AL,5391,Thesis,Graduate,3,Spring/Fall,On-campus,None,None,
+AL,5392,Special Projects in Applied Linguistics,Graduate,3,Spring/Fall,On-campus,None,None,
+AL,5394,Readings in Applied Linguistics,Graduate,3,TBD,On-campus,None,None,
+AL,5395,Current Issues in Descriptive Linguistics,Graduate,3,Fall,On-campus,"Either 1) AL5304 Advanced Phonological Analysis for phonology topics or 2) AL5312 Discourse Analysis plus AL5313 Advanced Grammatical Analysis for grammar topics, or by permission of instructor",None,
+AL,5396,Conference Course in Applied Linguistics,Graduate,3,TBD,On-campus,None,None,
+AL,5398,Seminar in Applied Linguistics,Graduate,3,TBD,On-campus,None,None,
+AL,5406,Field Methods and Linguistic Analysis,Graduate,4,Spring/Fall,On-campus,"AL4302 Principles of Articulatory and Acoustic Phonetics, AL4303 Principles of Phonological Analysis, AL4410b Principles of Grammatical Analysis (b), AA4505 Second Language and Culture Acquisition",AL5207 Field Data Management,"1,2"
+AC,4315,Old Testament Survey,Undergraduate,3,Fall,On-campus,None,None,
+AC,4316,New Testament Survey,Undergraduate,3,Fall,On-campus,None,None,
+AC,4317,World Religions,Undergraduate,3,Spring,On-campus,None,None,
+AC,4341,Arabic 1,Undergraduate,3,Fall,On-campus,None,None,
+AC,4342,Arabic 2,Undergraduate,3,Spring,On-campus,AC4341 Arabic I,None,
+AC,4343,Colloquial Arabic 1,Undergraduate,3,Spring,On-campus,AC4341 Arabic 1 or permission of instructor,None,
+AA,4370,Cultural Anthropology (Online),Undergraduate,3,Summer,Online,None,None,
+AA,4350,Language and Society (Online),Undergraduate,3,TBD,Online,None,None,
+AA,5355,Scripture Engagement Strategy and Methods (Online),Graduate,3,Fall,Online,None,AA4350 Language and Society or permission of instructor,
+AL,5345,Introduction to Bible Translator's Assistant,Graduate,3,TBD,Online,AL4410b Principles of Grammatical Analysis (b) and permission of instructor,None,
+AC,5315,"Abrahamic Monotheism: Abrahamic faiths, their origins and interactions",Graduate,3,Fall,On-campus,None,None,3
+AA,5392,Scripture Engagement Practicum,Graduate,3,Spring,On-campus,AA 5355 Scripture Engagement Strategy and Methods or permission of instructor. ,None,
+AC,5319,Abrahamic Messianism: Abrahamic perspectives on Messianic expectation,Graduate,3,Fall,On-campus,None,None,1
+AC,5341,Arabic 1,Graduate,3,Fall,On-campus,None,None,"3,4"
+AC,5342,Arabic 2,Graduate,3,Spring,On-campus,AC5341 Arabic 1,None,"2,3"
+AC,5343,Colloquial Arabic 1,Graduate,3,Spring,On-campus,AC5341 Arabic 1 or permission of instructor,None,
+AC,5309,Theology of Translation,Graduate,3,Spring,On-campus,None,None,
+AL,5309,Theology of Translation,Graduate,3,Spring,On-campus,None,None,
+AC,4310,Introduction to Islam,Undergraduate,3,Fall,On-campus,None,None,
+IS,3356,Introduction to Orality and Storying,Undergraduate,3,Spring,On-campus,None,None,
+IS,3370,TESOL: Fundamentals and Methods of TESOL,Undergraduate,3,Spring,On-campus,None,None,
+IS,3371,TESOL: Curriculum and Program Design,Undergraduate,3,Spring,On-campus,None,None,
+IS,4372,TESOL: Reading and Writing,Undergraduate,3,Spring,On-campus,"IS3370, IS3371 ",None,
+IS,4373,TESOL: Speaking and Listening,Undergraduate,3,Spring,On-campus,"IS3370, IS3371",None,
+AA,4150,Introduction to Language Development,Undergraduate,1,Spring/Fall,On-campus,None,AA 4350,
+IS,4344,Chinese I,Undergraduate,3,Fall,On-campus,None,None,
+IS,4345,Chinese II,Undergraduate,3,Spring,On-campus,IS 4344,None,
+IS,4346,Chinese III,Undergraduate,3,Fall,On-campus,IS 4345,None,
+AC,5310,Core Components of Islam (Online),Graduate,3,Spring/Fall,Online,None,None,
+IS,4350-o,Dynamics of Religious Experience (online),Undergraduate,3,Spring,Online,None,None,
+AC,5322,Abrahamic Worldviews: Shared Stories,Graduate,3,Spring,On-campus,None,None,4
