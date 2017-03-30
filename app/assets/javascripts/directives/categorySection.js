@@ -4,6 +4,7 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
     templateUrl: '/directives/category-section.html',
     scope: true,
     link: function(scope) {
+      scope.courseParams = {};
 
       courseService.getCourses().then(function(courses) {
         scope.availableElectives =  courses.map(function(course) {
@@ -17,23 +18,23 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
 
       scope.addElective = function(course) {
 
-        // if (course.id === 'newCourse') {
-        //   angular.element('.elective-input').val('');
-        //   scope.addingClass = false;
-        //   _displayCourseForm();
-        // }
-        // else { 
-        var electiveParams = {
-          category_name: scope.category.name,
-          course_id: course.id,
-          plan_id: scope.planInfo.plan.id
-        };
+        if (course.id === 'newCourse') {
+          angular.element('.elective-input').val('');
+          scope.addingClass = false;
+          _displayCourseForm();
+        }
+        else { 
+          var electiveParams = {
+            category_name: scope.category.name,
+            course_id: course.id,
+            plan_id: scope.planInfo.plan.id
+          };
 
-        electiveService.create(electiveParams)
-          .then(function() {
-            planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
-          });
-        // }
+          electiveService.create(electiveParams)
+            .then(function() {
+              planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
+            });
+        }
       };
 
       scope.deleteElective = function(course) {
@@ -48,20 +49,15 @@ planner.directive('categorySection', ['Restangular', '$timeout', 'courseService'
               planService.update(scope.planInfo.plan, scope.planInfo.plan.latest_registered);
           });
       };
-
-      scope.noneFound = {
-        name: 'No Course Found'
-      };
   
       // Features for creating a course
-      // scope.newCourse = { 
-      //   name: "&#43; Add new course", 
-      //   id: 'newCourse'
-      // };
-      // var _displayCourseForm = function() {
-      //   angular.element('#new-course-form').modal('show');
-      // };
-      // scope.courseParams = {};
+      scope.newCourse = { 
+        name: "&#43; Add new course", 
+        id: 'newCourse'
+      };
+      var _displayCourseForm = function() {
+        angular.element('#new-course-form').modal('show');
+      };
 
       scope.showClassInput = function() {
         scope.addingClass = true;

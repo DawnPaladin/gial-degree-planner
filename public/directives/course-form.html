@@ -27,6 +27,7 @@
               id='number'
               class="form-control"
               placeholder='AA5500'
+              ng-disabled='!courseParams.local'
               name='number'
               required
               ng-minlength='6'
@@ -84,30 +85,55 @@
 
       <div class="col-xs-4">
 
-        <div class="">
+        <div class="taught-at">
           <div class="form-group">
-            <label class="barrier-label">Term</label>
-            <div ng-repeat='term in terms'>
-              <input type="checkbox"
-              name='term'
-              ng-checked="courseParams.term_ids.indexOf(term.id) > -1"
-              ng-click="toggleTermSelection(term.id)"> {{ term.name }}
-            </div>
+            <label class="barrier-label">Course taught at GIAL?</label>
+            <input type="radio"
+            ng-value='{{true}}'
+            required
+            name='local'
+            ng-click='clearSessionsTerms()'
+            ng-model='courseParams.local' /> Yes
+            <input type="radio"
+            ng-value='{{false}}'
+            required
+            name='local'
+            ng-click='setForeignCourseAttrs()'
+            ng-model='courseParams.local' /> No
+            <p ng-show="courseForm.local.$invalid && !courseForm.local.$pristine" class="help-block">Location is required</p>
           </div>
         </div>
-
-        <div class="sessions">
-          <div class="form-group">
-            <label class="">Sessions</label>
-            <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
-            <div ng-repeat='session in sessions'>
-              <input type="checkbox"
-              ng-value='session.id'
-              name='session'
-              ng-checked="courseParams.session_ids.indexOf(session.id) > -1"
-              ng-click="toggleSessionSelection(session.id)"> Session {{ session.name }}
+        
+        <div class="local-course-details" ng-if='courseParams.local'>
+          <div class="term">
+            <div class="form-group">
+              <label class="barrier-label">Term</label>
+              <div ng-repeat='term in terms'>
+                <input type="checkbox"
+                name='term'
+                ng-checked="courseParams.term_ids.indexOf(term.id) > -1"
+                ng-click="toggleTermSelection(term.id)"> {{ term.name }}
+              </div>
             </div>
-            <p ng-show='continuousSessions === false && courseParams.session_ids.length' class='help-block'>Sessions must be continuous</p>
+          </div>
+          
+          <div class="sessions">
+            <div class="form-group">
+              <label class="">Sessions</label>
+              <span class="tagline sm-text">(Select <span class="caps">all</span> that apply)</span>
+              <div ng-repeat='session in sessions'>
+          
+                <input type="checkbox"
+                ng-value='session.id'
+                name='session'
+                ng-checked="courseParams.session_ids.indexOf(session.id) > -1"
+                ng-required='!courseParams.session_ids.length'
+                ng-disabled='!courseParams.local'
+                ng-click="toggleSelection(session.id)"> Session {{ session.name }}
+              </div>
+              <p ng-hide='courseParams.session_ids.length || courseParams.pristineSessions' class='help-block'>Session is required</p>
+              <p ng-show='continuousSessions === false && courseParams.session_ids.length' class='help-block'>Sessions must be continuous</p>
+            </div>
           </div>
         </div>
       </div>

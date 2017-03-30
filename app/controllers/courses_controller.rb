@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
   private
 
     def course_params
-      params.permit(:id, :name, :number, :description, :units, :level, :category_id, session_ids: [], term_ids: [])
+      params.permit(:id, :name, :number, :local, :description, :units, :level, :category_id, session_ids: [], term_ids: [])
     end
 
     def set_course

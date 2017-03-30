@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170308205010) do
 
   # These are extensions that must be enabled in order to support this database
@@ -78,13 +79,15 @@ ActiveRecord::Schema.define(version: 20170308205010) do
 
   create_table "courses", force: :cascade do |t|
     t.integer  "category_id"
-    t.string   "name",        null: false
-    t.string   "number",      null: false
+    t.integer  "term_id",                    null: false
+    t.string   "name",                       null: false
+    t.string   "number",                     null: false
     t.text     "description"
-    t.integer  "units",       null: false
+    t.integer  "units",                      null: false
     t.string   "level"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "local",       default: true
     t.index ["category_id"], name: "index_courses_on_category_id", using: :btree
     t.index ["name"], name: "index_courses_on_name", using: :btree
     t.index ["number"], name: "index_courses_on_number", using: :btree

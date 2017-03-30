@@ -46,6 +46,15 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       });
   };
 
+  var countOfForeignCourses = function() {
+    return getCourses()
+      .then(function(courses) {
+        return courses.reduce(function(count, course) {
+          return !course.local ? count += 1 : count;
+        }, 0);
+      })
+  };
+
   var getCourseAttendance = function(course) {
     var years = ["2017", "2018", "2019", "2020"];
     var meetings = [];
@@ -102,6 +111,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     create: create,
     update: update,
     setCourses: setCourses,
+    countOfForeignCourses: countOfForeignCourses,
     lookupCourse: lookupCourse,
   };
 
