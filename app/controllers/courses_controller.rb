@@ -15,7 +15,6 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    binding.pry
     if @course.save
       render json: @course.to_json(include: [{ meetings: { include: :enrollments }}, { terms: { only: :id }}, { sessions: { only: :id }}])
     else
