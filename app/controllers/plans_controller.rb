@@ -29,6 +29,8 @@ class PlansController < ApplicationController
       @meeting = Meeting.find_meeting(@course, @year, @term)
     end
 
+    binding.pry
+
     @plan = Plan.find(params[:plan][:id])
     @enrollment = Enrollment.find_or_initialize_by({meeting_id: @meeting.id, plan_id: @plan.id})
     if @enrollment.save
