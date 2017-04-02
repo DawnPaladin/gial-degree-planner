@@ -1,12 +1,12 @@
 class Student < ApplicationRecord
   # validations
-  validates_presence_of :first_name, :last_name, :email
+  validates_presence_of :first_name, :last_name
   validates :email, uniqueness: true
 
   # associations
   has_one :plan
 
-  belongs_to :advisor
+  belongs_to :advisor, optional: true
 
   # lifecycle
   after_create :create_associated_plan
