@@ -104,7 +104,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
       Restangular.all('students').post($scope.newStudent)
         .then(function() {
           $scope.newStudent = {};
-          $scope.students = Restangular.all('students').getList().$object;
+          showUnarchived();
           Flash.create('success', "Student created");
           $scope.closeForm();
         }, function(error) {
