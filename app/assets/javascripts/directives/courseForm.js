@@ -45,8 +45,10 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
       angular.element(document.body).on('hide.bs.modal', function () {
           if (!scope.courseParams.id) {
             scope.courseParams = { pristineSessions: true, session_ids: [], term_ids: [], local: true };
-            scope.courseForm.$setPristine();
-            scope.courseForm.$setUntouched();
+            if (scope.courseForm) {
+              scope.courseForm.$setPristine();
+              scope.courseForm.$setUntouched();
+            }
           }
       });
 
