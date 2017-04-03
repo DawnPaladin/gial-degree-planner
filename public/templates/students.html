@@ -20,9 +20,9 @@
 
   <label>First name <input ng-model="newStudent.first_name" class="form-control" required></label>
   <label>Last name <input ng-model="newStudent.last_name" class="form-control" required></label>
-  <label>Email <input ng-model="newStudent.email" class="form-control" required></label>
+  <label>Email <input ng-model="newStudent.email" class="form-control"></label>
   <label>Advisor
-    <select class="form-control" required
+    <select class="form-control"
       ng-model="newStudent.advisor_id"
       ng-options="advisor.id as (advisor.first_name + ' ' + advisor.last_name) for advisor in advisors">
     </select>

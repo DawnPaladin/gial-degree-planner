@@ -51,7 +51,7 @@
         <p ng-if='!meeting.students.length' class='tagline'>No students enrolled yet.</p>
         <ul class='enrolled-students-list'>
           <li ng-repeat='student in meeting.students'>
-            {{ student.name }}, <span class="tagline">{{ student.email }}</span>
+            {{ student.name }}, <span class="tagline">{{ student.email ? student.email : 'no email on file' }}</span>
           </li>
         </ul>
       </div>
