@@ -7,11 +7,12 @@ feature 'Create student' do
 
   before do
     sign_in(advisor)
-    visit 'http://localhost:3000/#!/students'
+    visit angular_app_index_path
   end
 
   context 'on students page' do
     scenario 'open page', js: true do
+      expect(advisor.is_admin).to be_truthy
       save_and_open_page
     end
   end
