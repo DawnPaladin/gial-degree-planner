@@ -1,7 +1,7 @@
 class Student < ApplicationRecord
   # validations
   validates_presence_of :first_name, :last_name
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, allow_blank: true
 
   # associations
   has_one :plan
