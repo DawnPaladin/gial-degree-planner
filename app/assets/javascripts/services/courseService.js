@@ -87,13 +87,9 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
 
   var lookupCourse = function(id) {
     return getCourses().then(function(courses) {
-      courses = courses.filter(function(course) { return course.id === id; });
-      if (courses.length === 1) {
-        return courses[0];
-      } else {
-        console.warn("Could not lookupCourse. Results:", courses);
-        return false;
-      }
+      var course = courses.find(function(course) { return course.id === id; });
+      if (!course) { console.warn("Could not lookupCourse. Results:", courses); }
+      return course;
     });
   };
 

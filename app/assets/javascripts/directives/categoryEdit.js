@@ -21,9 +21,9 @@ planner.directive('categoryEdit', ['Restangular', '$timeout', 'courseService', '
       // fired on typeahead selection
       scope.addCourse = function(misnamedCourse) {
         courseService.getCourses().then(function(courses) {
-          var course = courses.filter(function(obj) {
+          var course = courses.find(function(obj) {
             return obj.id === misnamedCourse.id;
-          })[0];
+          });
           scope.category.courses.push(course);
           scope.hideClassInput(true);
         });
