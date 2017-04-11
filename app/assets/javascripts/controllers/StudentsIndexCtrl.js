@@ -58,7 +58,9 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
     };
 
     var updatePinned = function(student) {
-      student.pinned = student.advisor.id === $scope.currentAdvisor.id;
+      if (student.advisor) {
+        student.pinned = student.advisor.id === $scope.currentAdvisor.id;
+      }
     };
 
     $scope.alternate = function(property) {
@@ -95,6 +97,12 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
       });
     };
 
+    $scope.openForm = function() {
+      $scope.showNewStudentForm = true;
+      window.setTimeout(function() {
+        document.getElementById('first-name-input').focus();
+      });
+    };
     $scope.closeForm = function() {
       $scope.showNewStudentForm = false;
       $scope.newStudent = {};
