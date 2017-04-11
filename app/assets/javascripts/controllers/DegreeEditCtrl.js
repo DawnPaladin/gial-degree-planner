@@ -61,9 +61,9 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', '$window', 'degree',
         var id = response.id;
 
         // replace the old concentration with the new one
-        var oldConcentration = $scope.degree.concentrations.filter(function(concentration) {
+        var oldConcentration = $scope.degree.concentrations.find(function(concentration) {
           return concentration.id === id;
-        })[0];
+        });
         var oldConcentrationIndex = $scope.degree.concentrations.indexOf(oldConcentration);
         $scope.degree.concentrations.splice(oldConcentrationIndex, 1, response);
       });
@@ -92,9 +92,9 @@ planner.controller('DegreeEditCtrl', ['$scope', '$timeout', '$window', 'degree',
       }
     };
     $scope.addCoreCourse = function(courseName) {
-      var course = $scope.courses.filter(function(obj) {
+      var course = $scope.courses.find(function(obj) {
         return obj.id === courseName.id;
-      })[0];
+      });
       $scope.degree.required_courses.push(course);
       $scope.hideCourseInput();
     };

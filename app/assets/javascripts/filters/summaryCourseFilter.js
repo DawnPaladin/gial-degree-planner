@@ -19,6 +19,6 @@ planner.filter('summaryCourseFilter', ['planService', function(planService) {
       return "";
     }
 
-  }
+  };
 
 }]);
