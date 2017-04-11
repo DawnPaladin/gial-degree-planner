@@ -114,7 +114,7 @@ planner.controller('StudentsIndexCtrl', ['$scope', 'Restangular', 'Auth', 'Flash
           $scope.newStudent = {};
           showUnarchived();
           Flash.create('success', "Student created");
-          $scope.closeForm();
+          $scope.openForm();
         }, function(error) {
           var errorMessage = "";
           console.warn(error);

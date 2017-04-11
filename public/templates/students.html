@@ -3,7 +3,7 @@
 </div>
 
   <button id="new-student-button" class="btn btn-default" ng-click="openForm()" ng-hide="showNewStudentForm || !currentAdvisor.is_admin">&#43; New student</button>
-  <button id="new-student-button" class="btn btn-danger" ng-click="closeForm()" ng-hide="!showNewStudentForm || !currentAdvisor.is_admin">Cancel</button>
+  <button id="new-student-button" class="btn btn-default" ng-click="closeForm()" ng-hide="!showNewStudentForm || !currentAdvisor.is_admin">Cancel</button>
 
 <h3 class="student-header">Students
   <input ng-model="filterStudents" placeholder="filter students" class="form-control filter-students">
