@@ -21,6 +21,7 @@ planner.directive('droppable', function() {
 
       var dropEventHandler = function(e, attrs, that) {
           if (e.stopPropagation) e.stopPropagation();
+          e.preventDefault();
 
           // if this bubble is the 'sticky-bubble-container'
             // allow the function to continue normally
