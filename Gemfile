@@ -48,7 +48,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'jazz_fingers'
+  # gem 'jazz_fingers'
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
