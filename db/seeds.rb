@@ -7,7 +7,7 @@ NUM_CONCENTRATIONS = 2
 NUM_TEACHERS = 4
 NUM_FOREIGN_COURSES = 2
 NUM_YEARS = 10
-TERMS = ['Spring', 'Summer', 'Fall', 'Any']
+TERMS = ['Spring', 'Summer', 'Fall', 'Any', 'May', 'May Extended']
 LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos reiciendis doloremque, tenetur nulla illo eaque, qui excepturi assumenda aspernatur praesentium quo cumque sint repellat natus.'
 
 puts 'Destroying...'
