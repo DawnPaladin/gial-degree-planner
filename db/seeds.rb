@@ -9,6 +9,7 @@ NUM_FOREIGN_COURSES = 2
 NUM_YEARS = 10
 TERMS = ['Spring', 'Summer', 'Fall', 'Any', 'May', 'May Extended']
 LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos reiciendis doloremque, tenetur nulla illo eaque, qui excepturi assumenda aspernatur praesentium quo cumque sint repellat natus.'
+CSV_PATH = Rails.root.join('lib', 'seeds', '2020-world-arts-courses.csv')
 
 puts 'Destroying...'
 puts 'advisors'
@@ -58,15 +59,15 @@ TERMS.each do |term|
   end
 end
 
-puts 'creating sessions'
-['1', '2', '3', '4'].each_with_index do |session, index|
-  new_session = Session.create({ name: session })
-  terms.each do |term|
-    unless term.name == 'Summer' && index > 0
-      term.sessions << new_session
-    end
-  end
-end
+# puts 'creating sessions'
+# ['1', '2', '3', '4'].each_with_index do |session, index|
+#   new_session = Session.create({ name: session })
+#   terms.each do |term|
+#     unless term.name == 'Summer' && index > 0
+#       term.sessions << new_session
+#     end
+#   end
+# end
 
 puts 'creating admin'
 Advisor.create({
@@ -99,31 +100,38 @@ end
 
 puts 'creating courses'
 require 'csv'
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'gial-courses.csv'))
+csv_text = File.read(CSV_PATH)
 csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 csv.each do |row|
   course = Course.new({
-    number: row['Category'] + row['Number'],
-    name: row['Name'],
-    level: row['Course Level'],
-    units: row['Credit Hours'],
+    number: row['Course #'],
+    name: row['Course Name'],
+    level: 'Graduate',
+    units: 3,
   })
-  term_names = row['Course Term'].titleize.split('/')
-  term_names.each do |term_name|
-    term = Term.find_by(name: term_name.titleize)
-    next if term.nil?
-    course.terms << term
-  end
-  unless row['Sessions'].nil?
-    session_names = row['Sessions'].split(',')
-    session_names.each do |session_name|
-      course.sessions << Session.find_by(name: session_name)
-    end
-  end
+  course.terms << Term.find_by(name: 'Spring') if row['S'] == 'S'
+  course.terms << Term.find_by(name: 'Summer') if row['M'] == 'Sm'
+  course.terms << Term.find_by(name: 'Fall') if row['F'] == 'F'
+  course.terms << Term.find_by(name: 'May') if row['M'] == 'M'
+  course.terms << Term.find_by(name: 'May Extended') if row['M'] == 'ME'
+  
+  
+  # term_names = row['Course Term'].titleize.split('/')
+  # term_names.each do |term_name|
+  #   term = Term.find_by(name: term_name.titleize)
+  #   next if term.nil?
+  #   course.terms << term
+  # end
+  # unless row['Sessions'].nil?
+  #   session_names = row['Sessions'].split(',')
+  #   session_names.each do |session_name|
+  #     course.sessions << Session.find_by(name: session_name)
+  #   end
+  # end
   # it is important to save AFTER sessions are added
   # There is an after create callback that needs access to sessions
   if course.save
-    puts "Saved " + row['Name']
+    puts "Saved " + row['Course Name']
   else
     puts course.errors.full_messages
   end
@@ -323,12 +331,12 @@ conc = degree.concentrations.create({
     elective_hours: 6
   })
 
-puts 'adding required courses to degree'
-degree.required_courses << Course.find_by(number: 'AA5339')
-degree.required_courses << Course.find_by(number: 'AA5381')
-degree.required_courses << Course.find_by(number: 'AA5382')
-degree.required_courses << Course.find_by(number: 'AA5384')
-degree.required_courses << Course.find_by(number: 'AA5386')
+# puts 'adding required courses to degree'
+# degree.required_courses << Course.find_by(number: 'AA5339')
+# degree.required_courses << Course.find_by(number: 'AA5381')
+# degree.required_courses << Course.find_by(number: 'AA5382')
+# degree.required_courses << Course.find_by(number: 'AA5384')
+# degree.required_courses << Course.find_by(number: 'AA5386')
 
 
 puts 'creating and adding teachers to meetings'

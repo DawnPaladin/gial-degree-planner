@@ -1,0 +1,32 @@
+Course #,Dept,4-digit,Not current,Type,SL enrollment cap,Research  writing course,Joint course with,Prequisites & Co-requisites,Course Name,Offered this term,S,F,M
+WA 5190,WA,5190,,,,,,5 gsh,Thesis Writing,,S,,
+WA 5339,WA,5339,,,,R,,AA4370 or POI,Research Methods for World Arts,,,F,
+WA 5380-IN,WA,5380,,IN,,,WA3380-IN,none,Theory and Practice of Ethnodoxology,,,,M
+WA 5381-IN,WA,5381,,IN,,,WA3381-IN,none,Arts for a Better Future,,,,ME
+WA 5382,WA,5382,,,,,,WA5339 or WA5384 or POI,Applied Arts,,,F,
+WA 5382,WA,5382,,,,,,WA5339 or WA5384 or POI,Applied Arts - lab,,,F,
+WA 5382-SL,WA,5382,,SL,,,,WA5339 or WA5384 or POI,Applied Arts,,,F,
+WA 5383-IN,WA,5383,,IN,,,,none,"Arts and Trauma Healing (reading in May, 2-week intensive in June)",,,,ME
+WA 5384,WA,5384,,,,,,AA4370 or POI,Expressive Form Analysis,,,F,
+WA 5384,WA,5384,,,,,,AA4370 or POI,Expressive Form Analysis - lab,,,F,
+WA 5384-SL,WA,5384,,SL,,,,AA4370 or POI,Expressive Form Analysis,,,F,
+WA 5385,WA,5385,,,,,,6 ush in western music theory + WA5384,Song Transcription and Analysis,,S,,
+WA 5386,WA,5386,,,,,,WA5381-IN or WA5339 or WA5384 or WA5382 or POI,Directed Practicum in World Arts,,S,F,
+WA 5386-SL,WA,5386,,SL,,,WA3386-SL,WA5381-IN or WA5339 or WA5384 or WA5382 or POI,Directed Practicum in World Arts,,S,F,
+WA 5389-OL,WA,5389,,OL,,R,,WA5384,Advanced Form Analysis,,S,,
+WA6339-SL,WA,6339,,SL,,,,"admission to 
+PhD program",Advanced Theory for World Arts,,S,,
+WA6370-IN,WA,6370,,IN,,,,"admission to 
+PhD program",Current Issues,,,,F+
+WA6380-IN,WA,6380,,IN,,,,"admission to 
+PhD program",Advanced Theory of Ethnodoxology,,,,ME
+WA6381-IN,WA,6384,,IN,,,,"admission to 
+PhD program",Cross-cultural Education Methods,,,,ME
+WA6385,WA,6385,,,,,,"admission to 
+PhD program",World Arts & Religious Expression,,,F,
+WA6387,WA,6387,,,,,,"admission to 
+PhD program",Area Studies for World Arts,,,F,
+WA6389-OL,WA,6389,,OL,,,,"admission to 
+PhD program",Advanced Artistic Form Analysis,,S,,
+WA6390-OL,WA,6390,,SL,,R,,"admission to 
+PhD program",Research & Communication for World Arts,,S,,
