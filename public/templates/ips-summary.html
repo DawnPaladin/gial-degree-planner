@@ -1,6 +1,6 @@
 <section class="ips-summary">
 
-  <img src="gial-logo.png">
+  <img src="diu-logo.png">
 
   <p class="text-center"><strong>Intended Plan of Study (IPS) for Admission to the World Arts Degree<span ng-if="planInfo.plan.concentration">, <u>{{ planInfo.plan.concentration }} Concentration</u></span></strong></p>
 
@@ -52,7 +52,7 @@
   </div>
 
   <div class="transfer-credit">
-    <p><strong>Transfer Credit:</strong> <small>Transfer credit will not be granted for course work done more than 10 years before initial enrollment in GIAL. <u>In order to receive transfer credit you must submit a signed <strong><em>Petition Form</em></strong> to the Dean of Academic Affairs</u>. After transfer credit has been granted, list those courses below along with courses to be taken at GIAL toward your degree. No more than 15 semester hours of transfer credit will be granted toward a degree.</small></p>
+    <p><strong>Transfer Credit:</strong> <small>Transfer credit will not be granted for course work done more than 10 years before initial enrollment in Dallas Int'l. <u>In order to receive transfer credit you must submit a signed <strong><em>Petition Form</em></strong>, with all the necessary signatures, to the Dean of Academic Affairs</u>. After transfer credit has been granted, list those courses below along with courses to be taken at Dallas Int'l toward your degree. No more than 15 semester hours of transfer credit will be granted toward a degree.</small></p>
   </div>
 
   <p>List only the courses required for your degree. Include amount of transfer credit granted on your <em>Petition Form(s)</em>.</p>
@@ -71,6 +71,7 @@
     <tr>
       <td colspan="3">
         <strong>General Core</strong>
+        <div style="float: right;"><strong>[F=fall, S=spring, D=distance]</strong></div>
       </td>
       <td>
         {{ totalCoreCredits }} hours
@@ -141,6 +142,13 @@
             <small>Date</small>
           </div>
         </div>
+        <div class="approval">
+          <p></p>
+          <div class="line">
+            <small>Signature of International Student Coordinator <br>(if an international student)</small>
+            <small>Date</small>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -164,12 +172,12 @@
       </div>
     </div>
 
+    <small class="watermark">2020 WA Intended Plan of Study {{ planInfo.plan.concentration }}</small>
+    
     <h3>Comments</h3>
 
     <div class="comments">
     </div>
-
-    <small class="watermark">2016 WA Intended Plan of Study {{ planInfo.plan.concentration }}</small>
 
   </footer>
 
