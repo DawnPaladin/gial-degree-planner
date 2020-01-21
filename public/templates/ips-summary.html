@@ -71,7 +71,7 @@
     <tr>
       <td colspan="3">
         <strong>General Core</strong>
-        <div style="float: right;"><strong>[F=fall, S=spring, D=distance]</strong></div>
+        <div style="float: right;"><strong>[F=fall, S=spring, Su=summer, M=May, ME=May Extended]</strong></div>
       </td>
       <td>
         {{ totalCoreCredits }} hours
@@ -83,7 +83,7 @@
         <span class="summary-required-courses" ng-repeat="course in planInfo.plan.required_courses">
           {{ course.number }} {{ course.name }}
           <span class="summary-dates">
-            {{ course.term.name }} {{ course.sessions | sessionFilter }}
+            {{ course.term.abbreviation }}
           </span>
           <br>
         </span>
@@ -110,7 +110,7 @@
         <span ng-repeat="course in category.courses">
         <br>{{ course.number }} {{ course.name }} 
           <span class="summary-dates">
-            {{ course.term.name }} {{ course.sessions | sessionFilter }}
+            {{ course.term.abbreviation }}
           </span>
       </td>
       <td>

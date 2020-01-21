@@ -7,7 +7,14 @@ NUM_CONCENTRATIONS = 2
 NUM_TEACHERS = 4
 NUM_FOREIGN_COURSES = 2
 NUM_YEARS = 10
-TERMS = ['Spring', 'Summer', 'Fall', 'Any', 'May', 'May Extended']
+TERMS = [
+  { name: 'Spring', abbreviation: 'S' },
+  { name: 'Summer', abbreviation: 'Su' },
+  { name: 'Fall', abbreviation: 'F' },
+  { name: 'Any' },
+  { name: 'May', abbreviation: 'M' },
+  { name: 'May Extended', abbreviation: 'ME' },
+]
 LOREM = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos reiciendis doloremque, tenetur nulla illo eaque, qui excepturi assumenda aspernatur praesentium quo cumque sint repellat natus.'
 CSV_PATH = Rails.root.join('lib', 'seeds', '2020-world-arts-courses.csv')
 
@@ -52,7 +59,7 @@ end
 puts 'creating terms'
 terms = []
 TERMS.each do |term|
-  term = Term.create({ name: term })
+  term = Term.create({ name: term[:name], abbreviation: term[:abbreviation] })
   terms << term
   years.each do |year|
     year.terms << term
