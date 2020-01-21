@@ -71,7 +71,7 @@ end
 
 puts 'creating admin'
 Advisor.create({
-  email: 'admin@gial.edu',
+  email: 'admin@diu.edu',
   first_name: 'Admin',
   last_name: 'Admin',
   password: 'adminpass',
