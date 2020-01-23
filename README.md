@@ -8,7 +8,7 @@ This app helps students at [DIU](http://www.diu.edu) plan which courses to take 
 
 ## Background
 
-Students at the [Graduate Institute of Applied Linguistics](http://www.diu.edu) are required to complete an Intended Plan of Study to help them plan which classes to take. This has historically been a labor-intensive process involving lots of spreadsheets; some tasks such as "finding out which students are enrolled in a particular class" are so time-intensive that they're usually left undone, which leads to scheduling problems. This app stores these plans in a relational database, accessed through a purpose-built web client. It dramatically accelerates the process of creating an Intended Plan of Study and instantly provides data that was previously time-prohibitive to collect.
+Students at [Dallas International University](http://www.diu.edu) are required to complete an Intended Plan of Study to help them plan which classes to take. This has historically been a labor-intensive process involving lots of spreadsheets; some tasks such as "finding out which students are enrolled in a particular class" are so time-intensive that they're usually left undone, which leads to scheduling problems. This app stores these plans in a relational database, accessed through a purpose-built web client. It dramatically accelerates the process of creating an Intended Plan of Study and instantly provides data that was previously time-prohibitive to collect.
 
 ## Walkthrough
 
