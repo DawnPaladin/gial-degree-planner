@@ -77,9 +77,3 @@ The idea for this project came from Robin Harris, head of the World Arts Program
 James sat down with her, [mocked up the interface design in Figma](https://www.figma.com/file/S7BLhv0RpwEUCHf7D2kg6f98/DIU-IPS-mockups), and modeled how the database entities would interrelate. He pitched the idea to his cohort at Viking, and Alexa and Luke volunteered to tackle the project.
 
 We (Alexa, Luke, and James) built the app on GitHub over the next two weeks. We parceled out the work during brief daily Scrum meetings, tracking the status of each feature on [Pivotal Tracker](https://www.pivotaltracker.com/projects/1968955). We demonstrated the app to Robin twice during development (making feature adjustments after each demo) and again during Viking's Final Demo day at the end of the project.
-
-## Future
-
-After Demo Day, we'll reset the database to remove test data, change the admin password, and set up accounts for the advisors in DIU's World Arts Program. At that point they can start using the app with real students.
-
-Having reached Minimum Viable Product, we want to continue the app's development to make it more useful to the World Arts Program. In time this may develop into a commercial product which can be licensed to any university!
