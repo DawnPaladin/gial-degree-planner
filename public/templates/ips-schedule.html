@@ -24,19 +24,38 @@
 
     <div class="terms">
 
-      <div class="term" data-term-id="{{ term.id }}" data-year-id="{{ year.id }}" ng-repeat="term in year.terms" droppable drop="handleDrop">
+      <ips-schedule-term
+        year="year"
+        term="(year.terms | filter : {'name': 'Spring'})[0]">
+      </ips-schedule-term>
 
-        <p>{{ term.name }}</p>
+      <div class="flex-col">
+        <div class="flex-row may-and-summer">
 
-        <span ng-repeat="course in term.courses" class="course-bubble" id="{{ course.id }}" data-year-id="{{ year.id }}" terms="{{ course.terms }}" draggable draggable-course="course">
-          {{ course.name }}<br>
-          <span class="truncated">
-            {{ course.number }}<br>
-          </span>
-            {{ course.terms.name }} {{ course.sessions | sessionFilter }}
-        </span>
+          <ips-schedule-term
+            year="year"
+            term="(year.terms | filter : {'name': 'May'})[0]">
+          </ips-schedule-term>
+          <ips-schedule-term
+            year="year"
+            term="(year.terms | filter : {'name': 'Summer'})[0]">
+          </ips-schedule-term>
+
+        </div>
+
+        <ips-schedule-term
+          year="year"
+          term="(year.terms | filter : {'name': 'May Extended'})[0]"
+          class="may-extended">
+        </ips-schedule-term>
 
       </div>
+      
+      <ips-schedule-term
+        year="year"
+        term="(year.terms | filter : {'name': 'Fall'})[0]">
+      </ips-schedule-term>
+
 
     </div>
 

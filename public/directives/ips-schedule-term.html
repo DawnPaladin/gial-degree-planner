@@ -1,0 +1,13 @@
+<div class="term" data-term-id="{{ term.id }}" data-year-id="{{ year.id }}" droppable drop="handleDrop">
+	
+	<p>{{ term.name }}</p>
+	
+	<span ng-repeat="course in term.courses" class="course-bubble" id="{{ course.id }}" data-year-id="{{ year.id }}" terms="{{ course.terms }}" draggable draggable-course="course">
+		{{ course.name }}<br>
+		<span class="truncated">
+			{{ course.number }}<br>
+		</span>
+		{{ course.terms.name }} {{ course.sessions | sessionFilter }}
+	</span>
+	
+</div>
