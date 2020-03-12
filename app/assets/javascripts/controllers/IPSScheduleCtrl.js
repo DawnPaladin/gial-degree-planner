@@ -33,5 +33,4 @@ planner.controller('IPSScheduleCtrl', ['$scope', '$rootScope', 'planService', 'F
 
   };
 
-
 }]);

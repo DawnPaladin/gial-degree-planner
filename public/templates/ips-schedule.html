@@ -26,7 +26,8 @@
 
       <ips-schedule-term
         year="year"
-        term="(year.terms | filter : {'name': 'Spring'})[0]">
+        term="(year.terms | filter : {'name': 'Spring'})[0]"
+        handle-drop="handleDrop">
       </ips-schedule-term>
 
       <div class="flex-col">
@@ -34,11 +35,13 @@
 
           <ips-schedule-term
             year="year"
-            term="(year.terms | filter : {'name': 'May'})[0]">
+            term="(year.terms | filter : {'name': 'May'})[0]"
+            handle-drop="handleDrop">
           </ips-schedule-term>
           <ips-schedule-term
             year="year"
-            term="(year.terms | filter : {'name': 'Summer'})[0]">
+            term="(year.terms | filter : {'name': 'Summer'})[0]"
+            handle-drop="handleDrop">
           </ips-schedule-term>
 
         </div>
@@ -46,14 +49,16 @@
         <ips-schedule-term
           year="year"
           term="(year.terms | filter : {'name': 'May Extended'})[0]"
-          class="may-extended">
+          class="may-extended"
+          handle-drop="handleDrop">
         </ips-schedule-term>
 
       </div>
       
       <ips-schedule-term
         year="year"
-        term="(year.terms | filter : {'name': 'Fall'})[0]">
+        term="(year.terms | filter : {'name': 'Fall'})[0]"
+        handle-drop="handleDrop">
       </ips-schedule-term>
 
 

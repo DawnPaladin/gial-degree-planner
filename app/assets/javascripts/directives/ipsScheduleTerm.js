@@ -5,6 +5,7 @@ planner.directive('ipsScheduleTerm', function() {
 		scope: {
 			year: '=',
 			term: '=',
+			handleDrop: '<',
 		},
 	}
 });
