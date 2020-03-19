@@ -18,6 +18,7 @@ json.years Year.includes({ terms: { courses: [:terms, :sessions]}}) do |year|
   json.terms year.terms.get_all do |term|
     json.id term.id
     json.name term.name
+    json.abbreviation term.abbreviation
     json.courses do
       json.array! @plan.find_scheduled_classes(year, term) do |course|
         json.extract! course, *course.attributes.keys
