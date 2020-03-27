@@ -118,13 +118,13 @@
         <div class="local-course-details" ng-if='courseParams.local'>
           <div class="term">
             <div class="form-group">
-              <label class="barrier-label">Term</label>
-              <div ng-repeat='term in terms'>
+              <div>Term</div>
+              <label ng-repeat='term in terms' class="barrier-label">
                 <input type="checkbox"
                 name='term'
                 ng-checked="courseParams.term_ids.indexOf(term.id) > -1"
                 ng-click="toggleTermSelection(term.id)"> {{ term.name }}
-              </div>
+              </label>
             </div>
           </div>
 
