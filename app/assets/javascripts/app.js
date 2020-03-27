@@ -59,6 +59,11 @@ planner.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
           }]
       }
     })
+    .state('ips.studentInfo', {
+      url: '/student-info',
+      templateUrl: '/templates/ips-student-info.html',
+      controller: 'IPSStudentInfoCtrl'
+    })
     .state('ips.choose', {
       url: '/choose',
       templateUrl: '/templates/ips-choose.html',

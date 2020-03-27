@@ -11,11 +11,16 @@ planner.factory('studentService', ['Restangular', function(Restangular) {
   var getArchived = function() {
     return Restangular.all('students').customGETLIST('', { archived: true });
   };
+  
+  var saveStudent = function(student) {
+    return Restangular.one('students', student.id).patch(student);
+  }
 
   return {
     getAll: getAll,
     getUnarchived: getUnarchived,
     getArchived: getArchived,
+    saveStudent: saveStudent,
   };
 
 }]);

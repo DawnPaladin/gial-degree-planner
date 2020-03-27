@@ -1,0 +1,38 @@
+<section>
+  <form ng-submit='submitForm(student)' name='studentInfoForm' autocomplete="off">
+    <label>
+      First name:
+      <input type="text"
+      id="first_name"
+      class="form-control"
+      required
+      ng-model='student.first_name'>
+    </label>
+    <label>
+      Last name:
+      <input type="text"
+      id="last_name"
+      class="form-control"
+      required
+      ng-model='student.last_name'>
+    </label>
+    <label>
+      Email:
+      <input type="text"
+      id="email"
+      class="form-control"
+      required
+      ng-model='student.email'>
+    </label>
+    <label style="margin: 0 1em">
+      <input type="checkbox"
+      id="archived"
+      ng-model='student.archived'>
+      Archived
+    </label>
+
+    <button class="btn btn-primary">Save</button>
+    
+    <span class="submission-status">{{ submissionStatus }}</span>
+  </form>
+</section>
