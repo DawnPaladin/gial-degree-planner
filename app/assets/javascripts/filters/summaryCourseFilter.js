@@ -14,6 +14,7 @@ planner.filter('summaryCourseFilter', ['planService', function(planService) {
     }
 
     if (scheduledClass) {
+      if (scheduledClass.term == "May Extended") scheduledClass.term = "ME";
       return scheduledClass.term + " " + scheduledClass.year;
     } else {
       return "";

@@ -52,7 +52,7 @@
   </div>
 
   <div class="transfer-credit">
-    <p><strong>Transfer Credit:</strong> <small>Transfer credit will not be granted for course work done more than 10 years before initial enrollment in Dallas Int'l. <u>In order to receive transfer credit you must submit a signed <strong><em>Petition Form</em></strong>, with all the necessary signatures, to the Dean of Academic Affairs</u>. After transfer credit has been granted, list those courses below along with courses to be taken at Dallas Int'l toward your degree. No more than 15 semester hours of transfer credit will be granted toward a degree.</small></p>
+    <p><strong>Transfer Credit:</strong> <small>In order to apply toward your degree, all transferred credit must have been completed no earlier than 10 years prior to <u>completion</u> of the DIU graduate program. <u>In order to transfer credit, you must submit a <strong><em>Petition</em></strong>, with all the necessary signatures, to the Academic Affairs Office.</u> After transfer credit has been granted, list those courses below along with courses to be taken at DIU toward your degree. Up to 15 semester hours of transfer credits can be applied toward a degree.</small></p>
   </div>
 
   <p>List only the courses required for your degree. Include amount of transfer credit granted on your <em>Petition Form(s)</em>.</p>
@@ -61,10 +61,10 @@
 
     <tr>
       <td colspan="3">
-        Date of <em>Catalog</em> when plan of study submitted:______________________ <em>(Term and Year)</em>
+        <strong>Date of <em>Catalog</em> when plan of study submitted:______________________ <em>(Term and Year)</em></strong>
       </td>
       <td>
-        Term & Year
+        <strong>Term & Year</strong>
       </td>
     </tr>
 
@@ -74,19 +74,21 @@
         <div style="float: right;"><strong>[F=fall, S=spring, Su=summer, M=May, ME=May Extended]</strong></div>
       </td>
       <td>
-        {{ totalCoreCredits }} hours
+        <strong>{{ totalCoreCredits }} hours</strong>
       </td>
     </tr>
 
     <tr>
       <td colspan="3">
-        <span class="summary-required-courses" ng-repeat="course in planInfo.plan.required_courses">
-          {{ course.number }} {{ course.name }}
-          <span class="summary-dates">
-            {{ course.term.abbreviation }}
+        <div class="summary-required-courses dotted-line-container" ng-repeat="course in planInfo.plan.required_courses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
           </span>
           <br>
-        </span>
+        </div>
       </td>
       <td>
         <span class="summary-available-courses fill-in text-center" ng-repeat="course in planInfo.plan.required_courses">
@@ -107,13 +109,16 @@
           {{ category.name }}
           <span ng-if="category.required_units">(Required Units: {{ category.required_units }})</span>
         </strong>
-        <span ng-repeat="course in category.courses">
-        <br>{{ course.number }} {{ course.name }} 
-          <span class="summary-dates">
-            {{ course.term.abbreviation }}
+        <div class="dotted-line-container" ng-repeat="course in category.courses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
           </span>
+        </div>
       </td>
-      <td>
+      <td class="vertical-align-bottom">
         <span class="summary-available-courses fill-in text-center" ng-repeat="course in category.courses">
           {{ course | summaryCourseFilter }}
         </span>          

@@ -20,7 +20,7 @@
   background: #fff;
   font-family: $serif;
   padding: 20px 40px;
-  font-size: 0.85em;
+  font-size: 1.15em;
 
   p {
     margin: 0;
@@ -89,15 +89,47 @@
     td:last-child {
       width: 12%;
     }
+    .summary-required-courses {
+      height: 1.2em;
+      margin-bottom: .2em;
+      box-sizing: border-box;
+    }
     .summary-available-courses {
       display: block;
-      min-height: 1.4em;
-    }
+      height: 1.2em;
+      margin-bottom: .2em;
+      box-sizing: border-box;
+    }  
     .fill-in {
-      border-bottom: 1px dashed #555;
+      background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
+      background-position: bottom;
+      background-size: 5px 1px;
+      background-repeat: repeat-x;
     }
-    .summary-dates {
+
+    .dotted-line-container {
+      height: 1.2em;
+      clear: left;
+      margin-bottom: .2em;
+
+      /* dotted line */
+      background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
+      background-position: bottom;
+      background-size: 5px 1px;
+      background-repeat: repeat-x;
+    }
+    .dotted-line-left, .dotted-line-right {
+      background: white;
+      display: block;
+      height: 1.25em;
+    }
+    .dotted-line-left {
+      float: left;
+      padding-right: 2px;
+    }
+    .dotted-line-right {
       float: right;
+      padding-left: 2px;
     }
   }
 
@@ -140,4 +172,8 @@
 
 .tabs .tab.print-tab:hover {
   cursor: pointer;
+}
+
+.vertical-align-bottom {
+  vertical-align: bottom;
 }
