@@ -1,7 +1,8 @@
-planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope', function($scope, plan, student, $rootScope) {
+planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope', 'Restangular', '_', function($scope, plan, student, $rootScope, Restangular, _) {
 
   $scope.student = student;
   $scope.planInfo = plan;
+  $scope.requiredHoursByCategory = [];
 
   $rootScope.$broadcast('onSummary');
   $rootScope.$on('$stateChangeStart', function() {
@@ -16,8 +17,16 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
     return sum;
   }
 
-  $scope.totalCoreCredits = countCredits(plan.plan.required_courses);
+  function getCategoryHourTotals() {
+    Restangular.one('concentrations', $scope.planInfo.plan.concentration_id).get()
+    .then(function(concentrationInfo) {
+      var requiredHoursByCategory = _.pluck(concentrationInfo.categories, 'required_units');
+      angular.copy(requiredHoursByCategory, $scope.requiredHoursByCategory)
+    });
+  }
 
+  $scope.totalCoreCredits = countCredits(plan.plan.required_courses);
+  $scope.$watch('planInfo.plan.concentration', getCategoryHourTotals)
 
 
 }]);

@@ -98,9 +98,10 @@
     </tr>
 
     <tr>
-      <td colspan="4">
-        <strong>Specializations and Categories</strong>
+      <td colspan="3">
+        <strong>Specialization Options (choose at least two for each of the following categories):</strong>
       </td>
+      <td><strong>{{ requiredHoursByCategory[0] + requiredHoursByCategory[1] }} hours</strong></td>
     </tr>
 
     <tr ng-repeat="category in planInfo.plan.available_courses">
