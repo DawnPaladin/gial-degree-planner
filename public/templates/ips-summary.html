@@ -104,8 +104,8 @@
       <td><strong>{{ requiredHoursByCategory[0] + requiredHoursByCategory[1] }} hours</strong></td>
     </tr>
 
-    <tr ng-repeat="category in planInfo.plan.available_courses">
-      <td colspan="3">
+    <tr>
+      <td ng-repeat-start="category in planInfo.plan.available_courses | limitTo: 2" style="vertical-align: text-top;">
         <strong>
           {{ category.name }}
           <span ng-if="category.required_units">(Required Units: {{ category.required_units }})</span>
@@ -118,11 +118,43 @@
             </span>
           </span>
         </div>
+        <div ng-if="category.courses.length == 0">
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>  
+          <div style="height: 1.4em"></div>
+        </div>
       </td>
-      <td class="vertical-align-bottom">
+      <td class="vertical-align-bottom" ng-repeat-end>
         <span class="summary-available-courses fill-in text-center" ng-repeat="course in category.courses">
           {{ course | summaryCourseFilter }}
         </span>          
+        <div ng-if="category.courses.length == 0">
+          <div style="height: 1.4em"></div>
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>  
+          <div style="height: 1.4em"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="3">
+        <strong>3 Electives</strong> <em>(or)</em> <strong>1 Elective and 6 credits of Thesis</strong>
+      </td>
+      <td><strong>9 hours</strong></td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+      </td>
+      <td>
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
       </td>
     </tr>
 
