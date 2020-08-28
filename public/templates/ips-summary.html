@@ -125,16 +125,16 @@
           <div style="height: 1.4em"></div>
         </div>
       </td>
-      <td class="vertical-align-bottom" ng-repeat-end>
+      <td class="vertical-align-top" ng-repeat-end>
+        <div class="dotted-line-spacer" ng-if="category.required_units"></div>
         <span class="summary-available-courses fill-in text-center" ng-repeat="course in category.courses">
           {{ course | summaryCourseFilter }}
         </span>          
-        <div ng-if="category.courses.length == 0">
-          <div style="height: 1.4em"></div>
+        <div ng-if="category.courses.length == 0" class="vertical-align-top">
           <div class="dotted-line-container"></div>
           <div class="dotted-line-container"></div>
           <div class="dotted-line-container"></div>  
-          <div style="height: 1.4em"></div>
+          <div class="dotted-line-spacer"></div>
         </div>
       </td>
     </tr>
@@ -163,7 +163,7 @@
       </td>
       <td><strong>{{ requiredHoursByCategory[2] }} hours</strong></td>
     </tr>
-    <tr ng-if="!planInfo.plan.thesis_track">
+    <tr ng-if="!planInfo.plan.thesis_track && planInfo.plan.concentration != 'Arts & Scripture Engagement'">
       <td colspan="3">
         <div class="summary-required-courses dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
           <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
@@ -187,6 +187,41 @@
         </span>        
         <span class="summary-available-courses fill-in text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
         <span class="summary-available-courses fill-in text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
+      </td>
+    </tr>
+    <tr ng-if="planInfo.plan.concentration == 'Arts & Scripture Engagement'">
+      <td class="vertical-align-bottom">
+        <div class="summary-required-courses dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+          <br>
+        </div>
+      </td>
+      <td class="vertical-align-bottom">
+        <div class="dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
+          {{ course | summaryCourseFilter }}
+        </div>
+      </td>
+      <td>
+        <strong>Choose One</strong> <em>(May also serve as application options)</em>
+        <div ng-repeat="course in chooseOne.courses" class="dotted-line-container">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+          <br>
+        </div>
+      </td>
+      <td class="vertical-align-bottom">
+        <div ng-repeat="course in chooseOne.courses" class="dotted-line-container">
+          {{ course | summaryCourseFilter }}
+        </div>
       </td>
     </tr>
 

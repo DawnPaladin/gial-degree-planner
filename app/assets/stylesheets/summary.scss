@@ -131,6 +131,9 @@
       float: right;
       padding-left: 2px;
     }
+    .dotted-line-spacer {
+      height: 1.4em;
+    }
   }
 
   .signatures {
@@ -174,6 +177,9 @@
   cursor: pointer;
 }
 
+.vertical-align-top {
+  vertical-align: top;
+}
 .vertical-align-bottom {
   vertical-align: bottom;
 }
