@@ -98,13 +98,14 @@
     </tr>
 
     <tr>
-      <td colspan="4">
-        <strong>Specializations and Categories</strong>
+      <td colspan="3">
+        <strong>Specialization Options (choose at least two for each of the following categories):</strong>
       </td>
+      <td><strong>{{ requiredHoursByCategory[0] + requiredHoursByCategory[1] }} hours</strong></td>
     </tr>
 
-    <tr ng-repeat="category in planInfo.plan.available_courses">
-      <td colspan="3">
+    <tr>
+      <td ng-repeat-start="category in planInfo.plan.available_courses | limitTo: 2" style="vertical-align: text-top;">
         <strong>
           {{ category.name }}
           <span ng-if="category.required_units">(Required Units: {{ category.required_units }})</span>
@@ -117,11 +118,110 @@
             </span>
           </span>
         </div>
+        <div ng-if="category.courses.length == 0">
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>  
+          <div style="height: 1.4em"></div>
+        </div>
       </td>
-      <td class="vertical-align-bottom">
+      <td class="vertical-align-top" ng-repeat-end>
+        <div class="dotted-line-spacer" ng-if="category.required_units"></div>
         <span class="summary-available-courses fill-in text-center" ng-repeat="course in category.courses">
           {{ course | summaryCourseFilter }}
         </span>          
+        <div ng-if="category.courses.length == 0" class="vertical-align-top">
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>
+          <div class="dotted-line-container"></div>  
+          <div class="dotted-line-spacer"></div>
+        </div>
+      </td>
+    </tr>
+
+    <tr ng-if="planInfo.plan.thesis_track">
+      <td colspan="3">
+        <strong>{{ planInfo.plan.non_thesis_track.required_units / 3 }} Elective<span ng-if="planInfo.plan.non_thesis_track.required_units / 3 > 1">s</span></strong> <em>(or)</em> <strong>{{ planInfo.plan.thesis_track.elective_hours / 3 }} Elective<span ng-if="planInfo.plan.thesis_track.elective_hours / 3 > 1">s</span> and {{ planInfo.plan.thesis_track.thesis_hours }} credit<span ng-if="planInfo.plan.thesis_track.thesis_hours > 1">s</span> of Thesis</strong>
+      </td>
+      <td><strong>{{ planInfo.plan.non_thesis_track.required_units }} hours</strong></td>
+    </tr>
+    <tr ng-if="planInfo.plan.thesis_track">
+      <td colspan="3">
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+      </td>
+      <td>
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+        <div class="dotted-line-container"></div>
+      </td>
+    </tr>
+    <tr ng-if="!planInfo.plan.thesis_track">
+      <td colspan="3">
+        <strong>Concentration in {{ planInfo.plan.concentration }}:</strong>
+      </td>
+      <td><strong>{{ requiredHoursByCategory[2] }} hours</strong></td>
+    </tr>
+    <tr ng-if="!planInfo.plan.thesis_track && planInfo.plan.concentration != 'Arts & Scripture Engagement'">
+      <td colspan="3">
+        <div class="summary-required-courses dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+          <br>
+        </div>
+        <div class="summary-required-courses dotted-line-container" ng-if="planInfo.plan.concentration == 'Arts & Islam'">
+          <span class="dotted-line-left">Select elective from Abraham Center:</span>
+        </div>
+        <div class="summary-required-courses dotted-line-container" ng-if="planInfo.plan.concentration == 'Arts & Islam'">
+          <span class="dotted-line-left">Select elective from Abraham Center:</span>
+        </div>
+      </td>
+      <td>
+        <span class="summary-available-courses fill-in text-center" ng-repeat="course in concentrationSpecificCourses">
+          {{ course | summaryCourseFilter }}          
+        </span>        
+        <span class="summary-available-courses fill-in text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
+        <span class="summary-available-courses fill-in text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
+      </td>
+    </tr>
+    <tr ng-if="planInfo.plan.concentration == 'Arts & Scripture Engagement'">
+      <td class="vertical-align-bottom">
+        <div class="summary-required-courses dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+          <br>
+        </div>
+      </td>
+      <td class="vertical-align-bottom">
+        <div class="dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
+          {{ course | summaryCourseFilter }}
+        </div>
+      </td>
+      <td>
+        <strong>Choose One</strong> <em>(May also serve as application options)</em>
+        <div ng-repeat="course in chooseOne.courses" class="dotted-line-container">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+          <br>
+        </div>
+      </td>
+      <td class="vertical-align-bottom">
+        <div ng-repeat="course in chooseOne.courses" class="dotted-line-container">
+          {{ course | summaryCourseFilter }}
+        </div>
       </td>
     </tr>
 
