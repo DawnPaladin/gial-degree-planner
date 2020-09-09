@@ -79,7 +79,7 @@
     </tr>
 
     <tr>
-      <td colspan="3">
+      <td colspan="3" class="course-names">
         <div class="summary-required-courses dotted-line-container" ng-repeat="course in planInfo.plan.required_courses">
           <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
           <span class="dotted-line-right">
@@ -87,13 +87,12 @@
               {{ term.abbreviation }}<span ng-show="!$last">,</span>
             </span>
           </span>
-          <br>
         </div>
       </td>
-      <td>
-        <span class="summary-available-courses fill-in text-center" ng-repeat="course in planInfo.plan.required_courses">
+      <td class="course-dates">
+        <div class="summary-available-courses dotted-line-container course-dates" ng-repeat="course in planInfo.plan.required_courses">
           {{ course | summaryCourseFilter }}          
-        </span>        
+        </div>        
       </td>
     </tr>
 
@@ -105,11 +104,11 @@
     </tr>
 
     <tr>
-      <td ng-repeat-start="category in planInfo.plan.available_courses | limitTo: 2" style="vertical-align: text-top;">
-        <strong>
+      <td ng-repeat-start="category in planInfo.plan.available_courses | limitTo: 2" class="course-names">
+        <div class="cell-header">
           {{ category.name }}
           <span ng-if="category.required_units">(Required Units: {{ category.required_units }})</span>
-        </strong>
+        </div>
         <div class="dotted-line-container" ng-repeat="course in category.courses">
           <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
           <span class="dotted-line-right">
@@ -125,12 +124,12 @@
           <div style="height: 1.4em"></div>
         </div>
       </td>
-      <td class="vertical-align-top" ng-repeat-end>
+      <td class="course-dates" ng-repeat-end>
         <div class="dotted-line-spacer" ng-if="category.required_units"></div>
-        <span class="summary-available-courses fill-in text-center" ng-repeat="course in category.courses">
+        <span class="summary-available-courses text-center dotted-line-container" ng-repeat="course in category.courses">
           {{ course | summaryCourseFilter }}
         </span>          
-        <div ng-if="category.courses.length == 0" class="vertical-align-top">
+        <div ng-if="category.courses.length == 0">
           <div class="dotted-line-container"></div>
           <div class="dotted-line-container"></div>
           <div class="dotted-line-container"></div>  
@@ -164,7 +163,7 @@
       <td><strong>{{ requiredHoursByCategory[2] }} hours</strong></td>
     </tr>
     <tr ng-if="!planInfo.plan.thesis_track && planInfo.plan.concentration != 'Arts & Scripture Engagement'">
-      <td colspan="3">
+      <td colspan="3" class="course-names">
         <div class="summary-required-courses dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
           <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
           <span class="dotted-line-right">
@@ -172,7 +171,6 @@
               {{ term.abbreviation }}<span ng-show="!$last">,</span>
             </span>
           </span>
-          <br>
         </div>
         <div class="summary-required-courses dotted-line-container" ng-if="planInfo.plan.concentration == 'Arts & Islam'">
           <span class="dotted-line-left">Select elective from Abraham Center:</span>
@@ -181,16 +179,16 @@
           <span class="dotted-line-left">Select elective from Abraham Center:</span>
         </div>
       </td>
-      <td>
-        <span class="summary-available-courses fill-in text-center" ng-repeat="course in concentrationSpecificCourses">
+      <td class="course-dates">
+        <span class="summary-available-courses dotted-line-container text-center" ng-repeat="course in concentrationSpecificCourses">
           {{ course | summaryCourseFilter }}          
         </span>        
-        <span class="summary-available-courses fill-in text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
-        <span class="summary-available-courses fill-in text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
+        <span class="summary-available-courses dotted-line-container text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
+        <span class="summary-available-courses dotted-line-container text-center" ng-if="planInfo.plan.concentration == 'Arts & Islam'"></span>        
       </td>
     </tr>
     <tr ng-if="planInfo.plan.concentration == 'Arts & Scripture Engagement'">
-      <td class="vertical-align-bottom">
+      <td class="course-names">
         <div class="summary-required-courses dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
           <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
           <span class="dotted-line-right">
@@ -198,16 +196,17 @@
               {{ term.abbreviation }}<span ng-show="!$last">,</span>
             </span>
           </span>
-          <br>
         </div>
       </td>
-      <td class="vertical-align-bottom">
+      <td class="course-dates">
         <div class="dotted-line-container" ng-repeat="course in concentrationSpecificCourses">
           {{ course | summaryCourseFilter }}
         </div>
       </td>
-      <td>
-        <strong>Choose One</strong> <em>(May also serve as application options)</em>
+      <td class="course-names">
+        <div class="cell-header">
+          <strong>Choose One</strong> <em>(May also serve as application options)</em>
+        </div>
         <div ng-repeat="course in chooseOne.courses" class="dotted-line-container">
           <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
           <span class="dotted-line-right">
@@ -215,10 +214,10 @@
               {{ term.abbreviation }}<span ng-show="!$last">,</span>
             </span>
           </span>
-          <br>
         </div>
       </td>
-      <td class="vertical-align-bottom">
+      <td class="course-dates">
+        <div class="dotted-line-spacer"></div>
         <div ng-repeat="course in chooseOne.courses" class="dotted-line-container">
           {{ course | summaryCourseFilter }}
         </div>

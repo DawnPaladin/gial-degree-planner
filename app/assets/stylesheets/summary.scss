@@ -86,11 +86,10 @@
       border: 1px solid #555;
       padding: 3px 6px;
     }
-    td:last-child {
+    td:nth-of-type(even) {
       width: 12%;
     }
     .summary-required-courses {
-      height: 1.2em;
       margin-bottom: .2em;
       box-sizing: border-box;
     }
@@ -100,35 +99,36 @@
       margin-bottom: .2em;
       box-sizing: border-box;
     }  
-    .fill-in {
-      background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
-      background-position: bottom;
-      background-size: 5px 1px;
-      background-repeat: repeat-x;
+    .course-dates {
+      min-width: 7em;
     }
 
     .dotted-line-container {
-      height: 1.2em;
-      clear: left;
+      min-height: 1.2em;
+      width: 100%;
       margin-bottom: .2em;
+      padding-bottom: 1px;
 
       /* dotted line */
       background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
       background-position: bottom;
       background-size: 5px 1px;
       background-repeat: repeat-x;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      box-sizing: content-box;
     }
+
     .dotted-line-left, .dotted-line-right {
       background: white;
       display: block;
-      height: 1.25em;
     }
     .dotted-line-left {
-      float: left;
       padding-right: 2px;
     }
     .dotted-line-right {
-      float: right;
       padding-left: 2px;
     }
     .dotted-line-spacer {
@@ -182,4 +182,8 @@
 }
 .vertical-align-bottom {
   vertical-align: bottom;
+}
+
+.cell-header {
+  font-weight: bold;
 }
