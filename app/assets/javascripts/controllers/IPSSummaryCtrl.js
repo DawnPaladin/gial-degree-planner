@@ -23,7 +23,7 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
     .then(getCategoryHourTotals)
     .then(getConcentrationSpecificCourses)
     .then(getCoursesForChooseOne)
-    .then(window.setTimeout(alignDottedLines, 100))
+    .then(window.setTimeout(alignDottedLines, 3000))
   }
 
   function getCategoryHourTotals(concentrationInfo) {
