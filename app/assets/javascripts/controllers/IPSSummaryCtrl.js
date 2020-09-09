@@ -20,10 +20,12 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
 
   function getConcentrationInfo() {
     Restangular.one('concentrations', $scope.planInfo.plan.concentration_id).get()
-    .then(getCategoryHourTotals)
-    .then(getConcentrationSpecificCourses)
-    .then(getCoursesForChooseOne)
-    .then(window.setTimeout(alignDottedLines, 3000))
+    .then(function(concentrationInfo) {
+      getCategoryHourTotals(concentrationInfo);
+      getConcentrationSpecificCourses(concentrationInfo);
+      getCoursesForChooseOne();
+      alignDottedLines();
+    })
   }
 
   function getCategoryHourTotals(concentrationInfo) {
@@ -41,15 +43,14 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
   }
 
   // The "Arts & Scripture Engagement" concentration needs to show the courses available in the category named "Choose One of the Following"
-  function getCoursesForChooseOne(concentrationInfo) {
+  function getCoursesForChooseOne() {
     $scope.chooseOne = $scope.planInfo.plan.available_courses.find(function(category) {
       return category.name == "Choose one of the following";
     });
-    return concentrationInfo;
   }
 
   // If a course's name is long enough that it wraps to two lines, make the date lines in the next cell line up
-  function alignDottedLines(concentrationInfo) {
+  function alignDottedLines() {
     $('.course-names').each(function(index, cell) {
       var sourceHeights = $(cell).find('.dotted-line-container .dotted-line-left').map(function(index, element) { 
         return $(element).outerHeight();
@@ -69,7 +70,6 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
       var $target = $(element).parent().next().find('.dotted-line-spacer');
       $target.css('height', sourceHeight);
     });
-    return concentrationInfo;
   }
 
   $scope.totalCoreCredits = countCredits(plan.plan.required_courses);
