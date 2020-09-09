@@ -24,7 +24,7 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
       getCategoryHourTotals(concentrationInfo);
       getConcentrationSpecificCourses(concentrationInfo);
       getCoursesForChooseOne();
-      alignDottedLines();
+      window.setTimeout(alignDottedLines, 300);
     })
   }
 
