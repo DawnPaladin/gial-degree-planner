@@ -99,10 +99,11 @@
       padding-bottom: 1px;
 
       /* dotted line */
-      background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%);
-      background-position: bottom;
-      background-size: 5px 1px;
-      background-repeat: repeat-x;
+      /* !important is required to override a Bootstrap @media print !important */
+      background-image: linear-gradient(to right, black 33%, rgba(255,255,255,0) 0%) !important;
+      background-position: bottom !important;
+      background-size: 5px 1px !important;
+      background-repeat: repeat-x !important;
 
       display: flex;
       justify-content: space-between;
