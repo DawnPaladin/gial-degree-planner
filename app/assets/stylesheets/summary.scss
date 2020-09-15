@@ -15,12 +15,17 @@
 
 }
 
+@media screen {
+  .ips-summary {
+    font-size: 1.15em;
+    padding: 20px 40px;
+  }
+}
+
 .ips-summary {
 
   background: #fff;
   font-family: $serif;
-  padding: 20px 40px;
-  font-size: 1.15em;
   
   .summary-concentration {
     text-decoration: underline;
