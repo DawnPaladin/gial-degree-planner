@@ -18,14 +18,14 @@
     <table class="table">
       <colgroup>
         <col>
-        <col span="4" class="zebra-col">
-        <col span="4">
-        <col span="4" class="zebra-col">
-        <col span="4">
+        <col span="6" class="zebra-col">
+        <col span="6">
+        <col span="6" class="zebra-col">
+        <col span="6">
       </colgroup>
       <thead>
         <th><input placeholder="Filter courses" ng-model="filteredCourses" class="form-control"></th>
-        <th ng-repeat="term in termHeader track by $index" ng-class="{noBold: $index % 4 !== 0}" class="text-center">{{ term }}</th>
+        <th ng-repeat="term in termHeader track by $index" ng-class="{noBold: $index % 6 !== 0}" class="text-center">{{ term }}</th>
       </thead>
 
     <tr ng-repeat="course in courses | filter: filteredCourses | orderBy: 'number':true">

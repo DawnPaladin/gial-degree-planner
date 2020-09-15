@@ -7,17 +7,8 @@ planner.controller('MeetingsIndexCtrl', ['$scope', 'meetingService', '_', 'Auth'
       initializeMeetings();
     });
 
-    var nextSeveralYears = function(howMany) {
-      var currentYear = new Date().getFullYear();
-      var years = [];
-      for (var i = 0; i < howMany; i++) {
-        years.push(String(currentYear + i));
-      }
-      return years;
-    };
-
-    var years = nextSeveralYears(4);
-    var terms = ["Spring", "Summer", "Fall"];
+    var years = courseService.nextSeveralYears(4);
+    var terms = ["Spring", "Summer", "Fall", "May", "ME"];
     $scope.termHeader = [];
     years.forEach(function(year) {
       $scope.termHeader.push(year);

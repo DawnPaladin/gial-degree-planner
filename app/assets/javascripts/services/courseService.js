@@ -55,8 +55,17 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       })
   };
 
+  var nextSeveralYears = function(howMany) {
+    var currentYear = new Date().getFullYear();
+    var years = [];
+    for (var i = 0; i < howMany; i++) {
+      years.push(String(currentYear + i));
+    }
+    return years;
+  };
+
   var getCourseAttendance = function(course) {
-    var years = ["2017", "2018", "2019", "2020"];
+    var years = nextSeveralYears(4);
     var meetings = [];
     meetings.push.apply(meetings, course.meetings);
     course.attendance = [];
@@ -66,6 +75,8 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         summer: {},
         fall: {},
         any: {},
+        may: {},
+        "may extended": {},
       };
       // find the course meeting for this year
       var thisYearsMeetings = course.meetings.filter(function(meeting) { return meeting.year === Number(year); });
@@ -81,7 +92,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
           };
         }
       });
-      course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall);
+      course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall, yearAttendance.may, yearAttendance["may extended"]);
     });
   };
 
@@ -109,6 +120,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     setCourses: setCourses,
     countOfForeignCourses: countOfForeignCourses,
     lookupCourse: lookupCourse,
+    nextSeveralYears: nextSeveralYears,
   };
 
 }]);
