@@ -1,9 +1,13 @@
 .classes-index {
-  overflow-x: scroll;
   .table {
     .form-control {
       width: auto;
     }
+  }
+  thead th {
+    position: sticky;
+    top: 0;
+    background: #eeeeee;
   }
 }
 
