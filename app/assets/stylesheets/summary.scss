@@ -21,10 +21,6 @@
   font-family: $serif;
   padding: 20px 40px;
   font-size: 1.15em;
-
-  p {
-    margin: 0;
-  }
   
   .summary-concentration {
     text-decoration: underline;
@@ -62,21 +58,6 @@
     .summary-grad-date {
       float: right;
     }
-  }
-
-  .summary-prerequisites {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #555;
-
-    .prereq-underline {
-      border-bottom: 1px solid #555;
-      margin: 20px 5px 0 0;
-    }
-  }
-
-  .transfer-credit {
-    margin-bottom: 5px;
   }
 
   .summary-plan {

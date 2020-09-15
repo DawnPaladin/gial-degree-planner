@@ -2,21 +2,7 @@
 
   <img src="diu-logo.png">
 
-  <p class="text-center"><strong>Intended Plan of Study (IPS) for Admission to the World Arts Degree<span ng-if="planInfo.plan.concentration">, <u>{{ planInfo.plan.concentration }} Concentration</u></span></strong></p>
-
-  <div class="info-underline">
-    <p>{{ student.last_name }}, {{ student.first_name }}</p>
-    <small>Name (Last, First Middle)</small>
-  </div>
-
-  <div class="info-underline">
-    <p></p>
-    <div class="captions">
-      <small class="">Permanent Street Address</small>
-      <small class="">City, State ZIP</small>
-      <small class="">Phone Number</small>
-    </div>
-  </div>
+  <p class="text-center"><strong>{{ student.first_name }} {{ student.last_name }}'s Intended Plan of Study (IPS) Worksheet</strong></p>
 
   <div class="graduation-summary">
 
@@ -34,26 +20,7 @@
     </div>
   </div>
 
-  <p class="text-center">Students admitted under this IPS will take Comprehensive Exams <strong>unless</strong> they have an approved <em>Petition to Write a Thesis for the World Arts Degree</em> on file with the Registrar.</p>
-
-  <div class="summary-prerequisites">
-    <p><strong>Departmental Prerequisites:</strong> Required prerequisites for admission to the WA Degree have been met.</p>
-
-    <div class="row">
-      <div class="col-sm-8">
-        <p class="prereq-underline"></p>
-        <small>Signature of Advisor</small>
-      </div>
-      <div class="col-sm-4">
-        <p class="prereq-underline"></p>
-        <small>Date</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="transfer-credit">
-    <p><strong>Transfer Credit:</strong> <small>In order to apply toward your degree, all transferred credit must have been completed no earlier than 10 years prior to <u>completion</u> of the DIU graduate program. <u>In order to transfer credit, you must submit a <strong><em>Petition</em></strong>, with all the necessary signatures, to the Academic Affairs Office.</u> After transfer credit has been granted, list those courses below along with courses to be taken at DIU toward your degree. Up to 15 semester hours of transfer credits can be applied toward a degree.</small></p>
-  </div>
+  <p>Students admitted under this IPS will take Comprehensive Exams <strong>unless</strong> they have an approved <em>Petition to Write a Thesis for the World Arts Degree</em> on file with the Registrar.</p>
 
   <p>List only the courses required for your degree. Include amount of transfer credit granted on your <em>Petition Form(s)</em>.</p>
 
@@ -225,66 +192,5 @@
     </tr>
 
   </table>
-
-  <footer class="signatures">
-    <h3>Authorization of Study Plan</h3>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="approval">
-          <p></p>
-          <div class="line">
-            <small>Signature of Student</small>
-            <small>Date</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="approval">
-          <p></p>
-          <div class="line">
-            <small>Signature of Graduate Advisor</small>
-            <small>Date</small>
-          </div>
-        </div>
-        <div class="approval">
-          <p></p>
-          <div class="line">
-            <small>Signature of International Student Coordinator <br>(if an international student)</small>
-            <small>Date</small>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h3>Approval for admission to the WA Degree</h3>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="approval">
-          <p></p>
-          <div class="line">
-            <small>Signature of Department Header</small>
-            <small>Date</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="approval">
-          <p></p>
-          <small>Signature of Dean of Academic Affairs</small>
-          <small>Date</small>
-        </div>
-      </div>
-    </div>
-
-    <small class="watermark">2020 WA Intended Plan of Study {{ planInfo.plan.concentration }}</small>
-    
-    <h3>Comments</h3>
-
-    <div class="comments">
-    </div>
-
-  </footer>
-
-
 
 </section>
