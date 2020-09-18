@@ -129,6 +129,19 @@
           </div>
 
         </div>
+        <div class="enrolled-students" ng-if="course.enrolled_students.length == 0">
+          <p><em>No students enrolled</em></p>
+          <button class='btn btn-danger btn-block' ng-click="deleteCourse($event, course)">Delete Course</button>
+        </div>
+        <div class="enrolled-students" ng-if="course.enrolled_students.length > 0">
+          <em>Enrolled students:</em>
+          <ul>
+            <li ng-repeat='student in course.enrolled_students'>
+              <a ui-sref="ips.choose({ student_id: student.id })" class='clickable' data-dismiss="modal">{{ student.name }}</a>
+            </li>
+          </ul>
+          <button class='btn btn-disabled btn-block' disabled>Delete Course</button>
+        </div>
       </div>
     </div>
   </div>

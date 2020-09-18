@@ -22,7 +22,7 @@ Rails.application.routes.draw do
       resources :concentrations, only: [:index, :create, :show, :update, :delete]
       resources :terms, only: [:index]
       resources :degrees, only: [:index, :show, :update, :delete]
-      resources :courses, only: [:index, :create, :show, :update]
+      resources :courses, only: [:index, :create, :show, :update, :destroy]
       resources :sessions, only: [:index]
       resources :meetings, only: [:show, :update, :destroy]
 

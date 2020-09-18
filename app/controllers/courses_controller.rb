@@ -1,11 +1,11 @@
 class CoursesController < ApplicationController
 
-  before_action :set_course, only: [:update]
-  before_action :require_admin, only: [:update, :create]
+  before_action :set_course, only: [:update, :destroy]
+  before_action :require_admin, only: [:update, :create, :destroy]
 
   def index
     @courses = Course.includes(meetings: :enrollments)
-    render json: @courses.to_json(include: [{ meetings: { include: :enrollments }}, { sessions: { only: :id }}, { terms: { only: [:id, :name]}}])
+    render json: @courses.to_json(include: [{ meetings: { include: :enrollments }}, { sessions: { only: :id }}, { terms: { only: [:id, :name]}}], methods: :enrolled_students)
   end
 
   def show
@@ -27,6 +27,20 @@ class CoursesController < ApplicationController
       render json: @course.to_json(include: [{ meetings: { include: :enrollments }}, { terms: { only: :id }}, { sessions: { only: :id }}])
     else
       render json: @course.errors, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    enrolled_students = @course.enrolled_students
+    if enrolled_students.length == 0
+      if @course.destroy
+        render json: @course
+      else
+        render json: { errors: @course.errors }
+      end
+    else
+      names = enrolled_students.map {|student| student[:name]}.join(', ')
+      render json: { errors: "Course has #{enrolled_students.length} enrolled student(s): #{names}. Disenroll them before deleting this course."}
     end
   end
 

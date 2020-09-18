@@ -33,7 +33,7 @@ class Course < ApplicationRecord
   has_many :electives
   has_many :electing_plans, through: :electives, source: :plan
 
-  has_many :meetings
+  has_many :meetings, dependent: :destroy
 
   has_many :courses_terms
   has_many :terms, through: :courses_terms
@@ -79,6 +79,20 @@ class Course < ApplicationRecord
 
   def full_name
     "#{self.number} #{self.name}"
+  end
+
+  def enrolled_students
+    enrollments = []
+    self.meetings.includes(enrollments: { plan: :student }).each do |meeting|
+      enrollments << meeting.enrollments
+    end
+    enrollments.flatten.map do |enrollment| 
+      student = enrollment.plan.student
+      {
+        id: student.id,
+        name: student.full_name,
+      }
+    end.uniq
   end
 
   private

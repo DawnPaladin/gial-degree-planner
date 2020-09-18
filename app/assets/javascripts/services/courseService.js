@@ -46,6 +46,11 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
       });
   };
 
+  var deleteCourseFromScope = function(id) {
+    var index = _.findIndex(_courses, { id: id });
+    if (index > -1) _courses.splice(index, 1);
+}
+
   var countOfForeignCourses = function() {
     return getCourses()
       .then(function(courses) {
@@ -93,6 +98,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         }
       });
       course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall, yearAttendance.may, yearAttendance["may extended"]);
+      course.enrolled_students = [];
     });
   };
 
@@ -117,6 +123,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
     getCourseAttendance: getCourseAttendance,
     create: create,
     update: update,
+    deleteCourseFromScope: deleteCourseFromScope,
     setCourses: setCourses,
     countOfForeignCourses: countOfForeignCourses,
     lookupCourse: lookupCourse,

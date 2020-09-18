@@ -172,6 +172,21 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
         return scope.courseParams.id ? 'Update Course' : 'Create Course';
       };
 
+      scope.deleteCourse = function(event, course) {
+        event.preventDefault();
+        if (confirm(`Delete course ${course.number} ${course.name}?`)) {
+          Restangular.one("courses", course.id).remove()
+            .then(function(response) {
+              angular.element("[data-dismiss=modal]").click();
+              if (response.errors) {
+                Flash.create('error', response.errors)
+              } else {
+                Flash.create('warning', 'Course "' + response.name + '" deleted.');
+                courseService.deleteCourseFromScope(response.id);
+              }
+            });
+          }
+        }    
     }
   };
 }]);
