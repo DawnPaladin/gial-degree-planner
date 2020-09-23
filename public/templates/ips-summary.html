@@ -57,7 +57,7 @@
       <td class="course-dates">
         <div class="summary-available-courses dotted-line-container course-dates" ng-repeat="course in planInfo.plan.required_courses">
           {{ course | summaryCourseFilter }}          
-        </div>        
+        </div>
       </td>
     </tr>
 
@@ -110,15 +110,31 @@
       <td><strong>{{ planInfo.plan.non_thesis_track.required_units }} hours</strong></td>
     </tr>
     <tr ng-if="planInfo.plan.thesis_track">
-      <td colspan="3">
-        <div class="dotted-line-container"></div>
-        <div class="dotted-line-container"></div>
-        <div class="dotted-line-container"></div>
+      <td colspan="3" class="course-names">
+        <div class="dotted-line-container" ng-repeat="course in planInfo.plan.thesis_track.courses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+        </div>
+        <div class="dotted-line-container" ng-repeat="course in planInfo.plan.non_thesis_track.courses">
+          <span class="dotted-line-left">{{ course.number }} {{ course.name }}</span>
+          <span class="dotted-line-right">
+            <span ng-repeat="term in course.terms">
+              {{ term.abbreviation }}<span ng-show="!$last">,</span>
+            </span>
+          </span>
+        </div>
       </td>
-      <td>
-        <div class="dotted-line-container"></div>
-        <div class="dotted-line-container"></div>
-        <div class="dotted-line-container"></div>
+      <td class="course-dates">
+        <div class="dotted-line-container" ng-repeat="course in planInfo.plan.thesis_track.courses">
+          {{ course | summaryCourseFilter }}          
+        </div>
+        <div class="dotted-line-container" ng-repeat="course in planInfo.plan.non_thesis_track.courses">
+          {{ course | summaryCourseFilter }}          
+        </div>
       </td>
     </tr>
     <tr ng-if="!planInfo.plan.thesis_track">
