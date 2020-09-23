@@ -61,7 +61,7 @@ planner.controller('IPSSummaryCtrl', ['$scope', 'plan', 'student', '$rootScope',
           $(targets[index]).css('height', sourceHeights[index]);
           // console.log('Adjusted', targets[index], 'to', sourceHeights[index])
         }
-      } else {
+      } else if (sourceHeights.length) {
         console.warn('Mismatch in number of courses for', cell, sourceHeights, targets);
       }
     });
