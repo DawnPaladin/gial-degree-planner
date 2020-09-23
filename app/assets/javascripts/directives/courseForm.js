@@ -174,7 +174,7 @@ planner.directive('courseForm', ['Restangular', '$timeout', 'courseService', 'te
 
       scope.deleteCourse = function(event, course) {
         event.preventDefault();
-        if (confirm(`Delete course ${course.number} ${course.name}?`)) {
+        if (confirm("Delete course " + course.number + ' ' + course.name + "?")) {
           Restangular.one("courses", course.id).remove()
             .then(function(response) {
               angular.element("[data-dismiss=modal]").click();
