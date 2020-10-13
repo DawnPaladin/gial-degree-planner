@@ -98,7 +98,7 @@ planner.factory('courseService', ['Restangular', '$q', '_', 'Flash', function(Re
         }
       });
       course.attendance.push("", yearAttendance.spring, yearAttendance.summer, yearAttendance.fall, yearAttendance.may, yearAttendance["may extended"]);
-      course.enrolled_students = [];
+      if (!Array.isArray(course.enrolled_students)) { course.enrolled_students = [] };
     });
   };
 
