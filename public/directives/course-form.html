@@ -137,7 +137,7 @@
           <em>Enrolled students:</em>
           <ul>
             <li ng-repeat='student in course.enrolled_students'>
-              <a ui-sref="ips.choose({ student_id: student.id })" class='clickable' data-dismiss="modal">{{ student.name }}</a>
+              <a ui-sref="ips.choose({ student_id: student.id })" class='clickable' data-dismiss="modal">{{ student.name }}</a>, {{ student.year }}
             </li>
           </ul>
           <button class='btn btn-disabled btn-block' disabled>Delete Course</button>

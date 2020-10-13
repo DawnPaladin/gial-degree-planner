@@ -83,7 +83,7 @@ class Course < ApplicationRecord
 
   def enrolled_students
     enrollments = []
-    self.meetings.includes(enrollments: { plan: :student }).each do |meeting|
+    self.meetings.includes(enrollments: [{ plan: :student }, :scheduled_class]).each do |meeting|
       enrollments << meeting.enrollments
     end
     enrollments.flatten.map do |enrollment| 
@@ -91,6 +91,7 @@ class Course < ApplicationRecord
       {
         id: student.id,
         name: student.full_name,
+        year: enrollment.scheduled_class.year,
       }
     end.uniq
   end
