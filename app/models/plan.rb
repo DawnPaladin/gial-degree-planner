@@ -79,7 +79,4 @@ class Plan < ApplicationRecord
       self.intended_courses = self.degree.required_courses
     end
 
-
-
-
 end
